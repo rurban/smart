@@ -45,7 +45,7 @@ int search_rawsse(unsigned char *x, int m, unsigned char *y, int n)
 
     while (y != steps_end) { // full 16 bytes 
         __m128i haystack_reg = _mm_loadu_si128((__m128i *)y);
-        __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, 16, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_ORDERED);
+        __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, 16, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
         occurences += _mm_popcnt_u32(*(int *)&mask_reg & result_mask);
         y += step;
     }
@@ -53,7 +53,7 @@ int search_rawsse(unsigned char *x, int m, unsigned char *y, int n)
     n -= steps_size; // remainder under 16 bytes
     if (n >= m) {
         __m128i haystack_reg = _mm_loadu_si128((__m128i *)y);
-        __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, n, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_ORDERED);
+        __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, n, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
         step = n - m + 1;
         result_mask = (1 << step) - 1;
         occurences += _mm_popcnt_u32(*(int *)&mask_reg & result_mask);
@@ -204,8 +204,8 @@ loop:  // optimize further !
 	if (haystack_length > 16)
 		haystack_length = 16; 
 
-        int idx = _mm_cmpestri(needle_reg, needle_length, haystack_reg, haystack_length, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_ORDERED);
-	if (!_mm_cmpestrc(needle_reg, needle_length, haystack_reg, haystack_length, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_ORDERED)) {
+        int idx = _mm_cmpestri(needle_reg, needle_length, haystack_reg, haystack_length, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
+	if (!_mm_cmpestrc(needle_reg, needle_length, haystack_reg, haystack_length, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED)) {
 		y += haystack_length;
 		n -= haystack_length;
 
@@ -237,8 +237,8 @@ loop1:
 
 		unsigned int b = m - head;
 
-		unsigned int idx = _mm_cmpestri(b0, b, b1, b, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_EACH | SIDD_NEGATIVE_POLARITY);
-		if (_mm_cmpestrc(b0, b, b1, b, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_EACH | SIDD_NEGATIVE_POLARITY)) {
+		unsigned int idx = _mm_cmpestri(b0, b, b1, b, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH | _SIDD_NEGATIVE_POLARITY);
+		if (_mm_cmpestrc(b0, b, b1, b, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH | _SIDD_NEGATIVE_POLARITY)) {
  		          // mismatch 
 			head += idx + 1;
 			int step = head - mu;
@@ -265,8 +265,8 @@ loop2:
 
 		unsigned int b = mu - head0;
 
-		unsigned int idx = _mm_cmpestri(b0, b, b1, b, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_EACH | SIDD_NEGATIVE_POLARITY);
-		if (_mm_cmpestrc(b0, b, b1, b, SIDD_UBYTE_OPS | SIDD_CMP_EQUAL_EACH | SIDD_NEGATIVE_POLARITY)) {
+		unsigned int idx = _mm_cmpestri(b0, b, b1, b, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH | _SIDD_NEGATIVE_POLARITY);
+		if (_mm_cmpestrc(b0, b, b1, b, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH | _SIDD_NEGATIVE_POLARITY)) {
  		          // mismatch 
 			goto loop3;
 		}
