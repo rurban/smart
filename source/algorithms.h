@@ -37,8 +37,8 @@
 #0 #bxs6 
 #0 #bxs8 
 #0 #col 
-#0 #dbww 
-#0 #dbww2 
+#1 #dbww 
+#1 #dbww2 
 #0 #dfdm 
 #0 #ebom 
 #0 #epsm 
@@ -86,11 +86,11 @@
 #0 #ioh 
 #0 #iom 
 #0 #jom 
-#0 #kbndm 
+#1 #kbndm 
 #0 #kmp 
 #0 #kmpskip 
 #0 #kr 
-#0 #ksa 
+#1 #ksa 
 #0 #lbndm 
 #0 #ldm 
 #0 #lwfr 
@@ -124,6 +124,7 @@
 #0 #qs 
 #0 #raita 
 #0 #rcol 
+#1 #sabp 
 #0 #sbdm 
 #0 #sbndm 
 #0 #sbndm-bmh 
@@ -150,7 +151,7 @@
 #0 #smoa 
 #0 #so 
 #0 #ssabs 
-#0 #ssecp 
+#1 #ssecp 
 #0 #ssef 
 #0 #ssm 
 #0 #svm0 
