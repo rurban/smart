@@ -130,7 +130,7 @@
 #0 #sbndm-w2 
 #0 #sbndm-w4 
 #0 #sbndm-w6 
-#1 #sbndm2 
+#0 #sbndm2 
 #0 #sbndmq2 
 #0 #sbndmq4 
 #0 #sbndmq6 
