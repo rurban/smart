@@ -39,8 +39,16 @@ typedef struct GRASPmList {
   struct GRASPmList *next;
 } GList;
 
-void ADD_LIST(GList **l, int e) {
-  GList *t = (GList *)malloc(sizeof(GList));
+static GList s_z[M_CUTOFF * SIGMA];
+
+// max (SIGMA * m-1) times
+void ADD_LIST(GList **l, int e, int i, int m) {
+  GList *t;
+  if (m > M_CUTOFF) {
+    t = (GList *)malloc(sizeof(GList));
+  } else {
+    t = &s_z[i];
+  }
   t->k = e;
   t->next = *l;
   *l = t;
@@ -61,10 +69,10 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
     z[i] = NULL;
   if (p[0] == p[m - 1])
     for (i = 0; i < SIGMA; i++)
-      ADD_LIST(&z[i], 0);
+      ADD_LIST(&z[i], 0, i, m);
   for (i = 0; i < m - 1; i++)
     if (p[i + 1] == p[m - 1])
-      ADD_LIST(&z[p[i]], (i + 1));
+      ADD_LIST(&z[p[i]], (i + 1), (int)p[i], m);
   /* Preprocessing of horspool bc */
   for (i = 0; i < SIGMA; i++)
     hbc[i] = m;
@@ -81,39 +89,30 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
   while (j < n) {
     while ((k = hbc[t[j]]))
       j += k;
-    {
-      assert(j - 1 >= 0);
-      //if (j - 1 >= n) fprintf(stderr, "%s %d %s %d\n", p, m, t, n);
-      // added j - 1 < n check
-      while (j - 1 < n && (pos = z[t[j - 1]]) != NULL) {
-        k = pos->k;
-        i = 0;
-        // added to break the loop
-        if (j - k == first) {
-          j++;
-          break;
-        }
-        first = j - k;
-        assert(first + i >= 0);
-        // added first + i < n check
-        while (i < m && first + i < n && p[i] == t[first + i])
-          i++;
-        if (i == m && first <= n - m)
-          OUTPUT(first);
-        pos = pos->next;
-      }
+    pos = z[t[j - 1]];
+    while (pos != NULL) {
+      k = pos->k;
+      i = 0;
+      first = j - k;
+      while (i < m && p[i] == t[first + i])
+        i++;
+      if (i == m && first <= n - m)
+        OUTPUT(first);
+      pos = pos->next;
     }
     j += m;
   }
 
   /* Freeing */
-  for (unsigned i = 0; i < SIGMA; i++) {
-    if (z[i]) {
-      pos = z[i];
-      while (pos) {
-        GList *next = pos->next;
-        free(pos);
-        pos = next;
+  if (m > M_CUTOFF) {
+    for (unsigned i=0; i<SIGMA; i++) {
+      if (z[i]) {
+        pos = z[i];
+        while(pos) {
+          GList *next = pos->next;
+          free(pos);
+          pos = next;
+        }
       }
     }
   }
