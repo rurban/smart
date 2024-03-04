@@ -36,22 +36,18 @@
 
 typedef struct GRASPmList {
   int k;
-  struct GRASPmList *next;
+  int next;
 } GList;
 
-static GList s_z[M_CUTOFF * SIGMA];
-
 // max (SIGMA * m-1) times
-void ADD_LIST(GList **l, int e, int i, int m) {
-  GList *t;
-  if (m > M_CUTOFF) {
-    t = (GList *)malloc(sizeof(GList));
+void ADD_LIST(GList *z, int pos, int e, int *j) {
+  GList *t = z[pos];
+  if (t->k == UNDEFINED) {
+    t->k = e;
+    t->next = i;
   } else {
-    t = &s_z[i];
+    // ..
   }
-  t->k = e;
-  t->next = *l;
-  *l = t;
 }
 
 int search(unsigned char *p, int m, unsigned char *t, int n) {
@@ -65,14 +61,17 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
 
   /* Preprocessing of the list */
   BEGIN_PREPROCESSING
-  for (i = 0; i < SIGMA; i++)
-    z[i] = NULL;
+  //memset(z, 0, (XSIZE + SIGMA) * sizeof(GList));
+  for (i = 0; i < SIGMA; i++) {
+    z[i].k = UNDEFINED;
+    z[i].next = UNDEFINED;
+  }
   if (p[0] == p[m - 1])
     for (i = 0; i < SIGMA; i++)
-      ADD_LIST(&z[i], 0, i, m);
+      ADD_LIST(z, i, 0, j++);
   for (i = 0; i < m - 1; i++)
     if (p[i + 1] == p[m - 1])
-      ADD_LIST(&z[p[i]], (i + 1), (int)p[i], m);
+      ADD_LIST(z, p[i], (i + 1), j++);
   /* Preprocessing of horspool bc */
   for (i = 0; i < SIGMA; i++)
     hbc[i] = m;
@@ -89,8 +88,8 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
   while (j < n) {
     while ((k = hbc[t[j]]))
       j += k;
-    pos = z[t[j - 1]];
-    while (pos != NULL) {
+    pos = &z[t[j - 1]];
+    while (pos->k != UNDEFINED) {
       k = pos->k;
       i = 0;
       first = j - k;
@@ -98,23 +97,9 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
         i++;
       if (i == m && first <= n - m)
         OUTPUT(first);
-      pos = pos->next;
+      pos = &z[pos->next];
     }
     j += m;
-  }
-
-  /* Freeing */
-  if (m > M_CUTOFF) {
-    for (unsigned i=0; i<SIGMA; i++) {
-      if (z[i]) {
-        pos = z[i];
-        while(pos) {
-          GList *next = pos->next;
-          free(pos);
-          pos = next;
-        }
-      }
-    }
   }
   END_SEARCHING
   return count;
