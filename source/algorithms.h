@@ -78,6 +78,7 @@ enum algo_id {
   _SFBOM, // Simplified Forward Backward Oracle Matching
   _SBDM,  // Succint Backward DAWG Matching
   _BSOM,  // Backward Set Oracle Matching
+  //_MAG  // Multi AOSO on q-Gram
   _SKIP2, // Skip Search with lookahead
   _SKIP3, // Skip Search with lookahead
   _SKIP4, // Skip Search with lookahead
@@ -329,6 +330,7 @@ const struct algo ALGOS[] = {
   [_GRASPm] = {_GRASPm, FAIL, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0},
   [_SSEF] = {_SSEF, X64_ONLY, "ssef", "SSEF (K=7)", 32, 0},
   // Algorithms based on automata
+<<<<<<< HEAD
   [_AUT] = {_AUT, OK, "aut", "Automaton Matcher", 0, 0},
   [_RF] = {_RF, OK, "rf", "Reverse-Factor", 0, 0},
   [_TRF] = {_TRF, OK, "trf", "Turbo Reverse factor", 0, 0},
@@ -354,6 +356,60 @@ const struct algo ALGOS[] = {
   [_SKIP6] = {_SKIP6, OK, "skip6", "Skip Search with lookahead", 6, 0},
   [_SKIP7] = {_SKIP7, OK, "skip7", "Skip Search with lookahead", 7, 0},
   [_SKIP8] = {_SKIP8, OK, "skip8", "Skip Search with lookahead", 8, 0},
+||||||| parent of 3c73fcb (WIP mag)
+  [_AUT] = {_AUT, 1, "aut", "Automaton Matcher", 0, 0},
+  [_RF] = {_RF, 1, "rf", "Reverse-Factor", 0, 0},
+  [_TRF] = {_TRF, 1, "trf", "Turbo Reverse factor", 0, 0},
+  [_Simon] = {_Simon, 0, "simon", "Simon", 0, 0},
+  [_FDM] = {_FDM, 1, "fdm", "Forward-DAWG-Match", 0, 0},
+  [_BOM] = {_BOM, 1, "bom", "BOM", 0, 0},
+  [_BOM2] = {_BOM2, 1, "bom2", "BOM2", 0, 0},
+  [_DFDM] = {_DFDM, 0, "dfdm", "Double Forward DAWG Matching", 0, 0}, // in work
+  [_WW] = {_WW, 1, "ww", "Wide Window", 0, 0},
+  [_LDM] = {_LDM, 0, "ldm", "Linear DAWG Matching", 0, 0},
+  [_ILDM1] = {_ILDM1, 1, "ildm1", "ILDM1", 0, 0},
+  [_ILDM2] = {_ILDM2, 1, "ildm2", "ILDM2", 0, 0},
+  [_EBOM] = {_EBOM, 1, "ebom", "Extended Backward Oracle Matching", 0, 0},
+  [_FBOM] = {_FBOM, 1, "fbom", "Forward Backward Oracle Matching", 0, 0},
+  [_SEBOM] = {_SEBOM, 1, "sebom", "Simplified Extended Backward Oracle Matching", 0, 0},
+  [_SFBOM] = {_SFBOM, 1, "sfbom", "Simplified Forward Backward Oracle Matching", 0, 0},
+  [_SBDM] = {_SBDM, 0, "sbdm", "Succint Backward DAWG Matching", 0, 1},
+  [_BSOM] = {_BSOM, 0, "bsom", "Backward Set Oracle Matching", 0, 1},
+  [_SKIP2] = {_SKIP2, 1, "skip2", "Skip Search with lookahead", 2, 0},
+  [_SKIP3] = {_SKIP3, 1, "skip3", "Skip Search with lookahead", 3, 0},
+  [_SKIP4] = {_SKIP4, 1, "skip4", "Skip Search with lookahead", 4, 0},
+  [_SKIP5] = {_SKIP5, 1, "skip5", "Skip Search with lookahead", 5, 0},
+  [_SKIP6] = {_SKIP6, 1, "skip6", "Skip Search with lookahead", 6, 0},
+  [_SKIP7] = {_SKIP7, 1, "skip7", "Skip Search with lookahead", 7, 0},
+  [_SKIP8] = {_SKIP8, 1, "skip8", "Skip Search with lookahead", 8, 0},
+=======
+  [_AUT] = {_AUT, 1, "aut", "Automaton Matcher", 0, 0},
+  [_RF] = {_RF, 1, "rf", "Reverse-Factor", 0, 0},
+  [_TRF] = {_TRF, 1, "trf", "Turbo Reverse factor", 0, 0},
+  [_Simon] = {_Simon, 0, "simon", "Simon", 0, 0},
+  [_FDM] = {_FDM, 1, "fdm", "Forward-DAWG-Match", 0, 0},
+  [_BOM] = {_BOM, 1, "bom", "BOM", 0, 0},
+  [_BOM2] = {_BOM2, 1, "bom2", "BOM2", 0, 0},
+  [_DFDM] = {_DFDM, 0, "dfdm", "Double Forward DAWG Matching", 0, 0}, // in work
+  [_WW] = {_WW, 1, "ww", "Wide Window", 0, 0},
+  [_LDM] = {_LDM, 0, "ldm", "Linear DAWG Matching", 0, 0},
+  [_ILDM1] = {_ILDM1, 1, "ildm1", "ILDM1", 0, 0},
+  [_ILDM2] = {_ILDM2, 1, "ildm2", "ILDM2", 0, 0},
+  [_EBOM] = {_EBOM, 1, "ebom", "Extended Backward Oracle Matching", 0, 0},
+  [_FBOM] = {_FBOM, 1, "fbom", "Forward Backward Oracle Matching", 0, 0},
+  [_SEBOM] = {_SEBOM, 1, "sebom", "Simplified Extended Backward Oracle Matching", 0, 0},
+  [_SFBOM] = {_SFBOM, 1, "sfbom", "Simplified Forward Backward Oracle Matching", 0, 0},
+  [_SBDM] = {_SBDM, 0, "sbdm", "Succint Backward DAWG Matching", 0, 1},
+  [_BSOM] = {_BSOM, 0, "bsom", "Backward Set Oracle Matching", 0, 1},
+  //[_MAG] = {_MAG, 0, "mag", "Multi AOSO on q-Gram", 0, 1},
+  [_SKIP2] = {_SKIP2, 1, "skip2", "Skip Search with lookahead", 2, 0},
+  [_SKIP3] = {_SKIP3, 1, "skip3", "Skip Search with lookahead", 3, 0},
+  [_SKIP4] = {_SKIP4, 1, "skip4", "Skip Search with lookahead", 4, 0},
+  [_SKIP5] = {_SKIP5, 1, "skip5", "Skip Search with lookahead", 5, 0},
+  [_SKIP6] = {_SKIP6, 1, "skip6", "Skip Search with lookahead", 6, 0},
+  [_SKIP7] = {_SKIP7, 1, "skip7", "Skip Search with lookahead", 7, 0},
+  [_SKIP8] = {_SKIP8, 1, "skip8", "Skip Search with lookahead", 8, 0},
+>>>>>>> 3c73fcb (WIP mag)
   // Algorithms based on bit-parallelism
   [_SO] = {_SO, OK, "so", "Shift-Or", 0, 0},
   //[_SOG] = {_SOG, OK, "sog", "Parallel Shift-Or", 0, MISSING},
