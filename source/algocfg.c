@@ -342,6 +342,7 @@ const struct algocfg ALGOCFGS[] = {
   [_MUSL]  = {_MUSL,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
   [_MUSL1] = {_MUSL1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, //7s, upto d=820 ok
   [_MUSL2] = {_MUSL2, FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_KR_SIMD] = {_KR_SIMD, FAIL, FAIL, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_EPSM]  = {_EPSM,  GOOD, FAIL, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no cbmc simd support yet
     // clang-format on
 };
@@ -360,6 +361,12 @@ int main(int argc, char **argv) {
       int value = (argc == 3) ? atoi(argv[2]) : 1;
       for (unsigned i = 0; i < NumAlgo; i++)
         if (ALGOCFGS[i].id == i && ALGOCFGS[i].good == value)
+          printf("%s ", ALGOS[i].name);
+      printf("\n");
+    }
+    else if (strcmp(cfg, "fail") == 0) { // or just good 0
+      for (unsigned i = 0; i < NumAlgo; i++)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].good == FAIL)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "asan") == 0) {

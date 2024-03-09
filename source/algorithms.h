@@ -257,6 +257,7 @@ enum algo_id {
   _MUSL1,  // musl memmem
   _MUSL2,  // musl memmem with horspool
   _SIMDKR, // SIMD generic Rabin-Karp variants (SSE2, AVX2 and NEON)
+  _KR_SIMD,// Karp-Rabin SIMD https://mattsills.github.io/2024/03/02/rabin-karp/
   _EPSM,   // SSE4 Exact Packed String Matching
 } ALGO_POS;
 
@@ -544,6 +545,7 @@ const struct algo ALGOS[] = {
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem Two-way string-matching", 0, 0},
   [_MUSL2] = {_MUSL2, FAIL, "musl2", "musl memmem with horspool", 0, 0},
   [_SIMDKR] = {_SIMDKR, FAIL, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
+  [_KR_SIMD] = {_KR_SIMD, FAIL, "kr_simd", "Karp-Rabin SIMD", 0, 0},
   [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
     // clang-format on
 };
