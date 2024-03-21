@@ -163,12 +163,12 @@ int main(int argc, char *argv[]) {
   _timer = (TIMER *)malloc(sizeof(TIMER));
 #endif
 
-  if (argc > 1 && strncmp("shared", argv[1], 6) == 0) {
+  if (argc > 1 && strcmp("shared", argv[1]) == 0) {
 #ifndef HAVE_SHM
     return 1;
 #endif
     if (argc < 7) {
-      printf("error in input parameter\nseven parameters needed when used with "
+      printf("error in input parameters\nseven parameters needed when used with "
              "shared memory\n");
       return 1;
     }
@@ -200,7 +200,7 @@ int main(int argc, char *argv[]) {
   } else {
 
     if (argc < 5) {
-      printf("error in input parameter\nfour parameters needed in standard "
+      printf("error in input parameters\nfour parameters needed in standard "
              "mode\n");
       return 1;
     }

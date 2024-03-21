@@ -22,6 +22,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32
+#include <signal.h>
+#include <sys/wait.h>
+#endif
+#include <errno.h>
 #include <sys/stat.h>
 #include <time.h>
 
@@ -58,6 +63,15 @@ struct options {
   int limit;
 } options;
 
+#ifdef HAVE_SHM
+//static int timed_out;
+static pid_t monitored_pid;
+//#define EXIT_TIMEDOUT      124      //job timed out
+#define EXIT_CANCELED      125      //fork failed
+#define EXIT_CANNOT_INVOKE 126      //error executing job
+#define EXIT_ENOENT        127      //couldn't find job to exec
+#endif
+
 //NOLINTBEGIN(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
 void printManual() {
@@ -90,7 +104,7 @@ void printManual() {
          "searching times\n");
   printf("\t-all          ignore minlen restrictions, running search_small and "
          "search_large fallbacks\n");
-  printf("\t-tb L         set to L the upper bound for any wort case running "
+  printf("\t-tb L         set to L the upper bound for any worst case running "
          "time (in ms). The default value is 300 ms\n");
   printf(
       "\t-dif          prints the number the best and the worst running time "
@@ -138,17 +152,96 @@ int execute(enum algo_id algo, unsigned char *P, int m, unsigned char *T,
   return system(command);
 }
 #else
-int execute(enum algo_id algo, int m, int n, int *count) {
-  char command[100];
-  snprintf(command, sizeof(command), "./%s/%s shared %d %d %d %d %d %d %d",
-           BINDIR, ALGO_NAME[algo], shmids[shm_P].key, m, shmids[shm_T].key, n,
-           shmids[shm_r].key, shmids[shm_e].key, shmids[shm_pre].key);
-  // TODO fork/exec with timeout
-  int res = system(command);
-  if (!res)
-    return (*count);
+
+/* Block all signals which were registered with cleanup() as the signal
+   handler, so we never kill processes after waitpid() returns.
+   Also block SIGCHLD to ensure it doesn't fire between
+   waitpid() polling and sigsuspend() waiting for a signal.
+   Return original mask in OLD_SET.  */
+static void
+block_cleanup_and_chld (int sigterm, sigset_t *old_set)
+{
+  sigset_t block_set;
+  sigemptyset (&block_set);
+
+  sigaddset (&block_set, SIGALRM);
+  sigaddset (&block_set, SIGINT);
+  sigaddset (&block_set, SIGQUIT);
+  sigaddset (&block_set, SIGHUP);
+  sigaddset (&block_set, SIGTERM);
+  sigaddset (&block_set, sigterm);
+
+  sigaddset (&block_set, SIGCHLD);
+
+  if (sigprocmask (SIG_BLOCK, &block_set, old_set) != 0)
+    perror("warning: sigprocmask");
+}
+
+int execute(enum algo_id algo, int m, int n, int *count, unsigned timeout_ms) {
+  // fork/exec with timeout
+  sigset_t orig_set;
+  block_cleanup_and_chld (SIGKILL, &orig_set);
+  monitored_pid = fork();
+  if (monitored_pid == -1)
+    {
+      perror("fork system call failed");
+      return EXIT_CANCELED;
+    }
+  else if (monitored_pid == 0)  /* child */
+    {
+      char argv0[64];
+      char argv[9][12];
+      snprintf(argv0, sizeof(argv0), "%s/%s", BINDIR, ALGO_NAME[algo]);
+      snprintf(argv[1], 12, "%s", "shared");
+      snprintf(argv[2], 12, "%d", shmids[shm_P].key);
+      snprintf(argv[3], 12, "%d", m);
+      snprintf(argv[4], 12, "%d", shmids[shm_T].key);
+      snprintf(argv[5], 12, "%d", n);
+      snprintf(argv[6], 12, "%d", shmids[shm_r].key);
+      snprintf(argv[7], 12, "%d", shmids[shm_e].key);
+      snprintf(argv[8], 12, "%d", shmids[shm_pre].key);
+      char *args[] = { argv0, argv[1], argv[2], argv[3], argv[4],
+                       argv[5], argv[6], argv[7], argv[8], NULL};
+      execv(argv0, args);
+      int status = errno == ENOENT ? EXIT_ENOENT : EXIT_CANNOT_INVOKE;
+      perror("failed to run command");
+      return status;
+    }
   else
-    return -1;
+    {
+      pid_t wait_result;
+      int status;
+      if (timeout_ms) {
+        /* setitimer() has microsecond resolution. alarm() only seconds. */
+        struct timeval tv;
+        tv.tv_sec = timeout_ms / 1000;
+        tv.tv_usec = timeout_ms * 1000;
+        if (tv.tv_usec >= 1000 * 1000) {
+          tv.tv_sec++;
+          tv.tv_usec -= 1000 * 1000;
+        }
+        struct itimerval it = {.it_interval = {0}, .it_value = tv };
+        if (setitimer (ITIMER_REAL, &it, NULL) == 0)
+          return -1;
+        else if (errno != ENOSYS)
+          perror("warning: setitimer");
+      }
+      while ((wait_result = waitpid(monitored_pid, &status, WNOHANG)) == 0)
+        sigsuspend(&orig_set);  /* Wait with cleanup signals unblocked. */
+      if (WIFEXITED(status)) {
+        status = WEXITSTATUS(status);
+        if (!status)
+          return *count;
+        else
+          return status;
+      }
+      return *count;
+    }
+  //int res = system(command);
+  //if (!res)
+  //  return (*count);
+  //else
+  //  return -1;
 }
 #endif
 
@@ -276,7 +369,7 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
 #ifndef HAVE_SHM
             occur = execute(algo, P, m, T, n);
 #else
-            occur = execute(algo, m, n, count);
+            occur = execute(algo, m, n, count, (unsigned)options.limit);
 #endif
             if (!options.pre)
               (*e_time) += (*pre_time);
@@ -401,6 +494,10 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
   return 0;
 }
 
+void close_stdout(void) {
+  fclose(stdout);
+}
+
 /**************************************************/
 int FREQ[SIGMA]; // frequency of alphabet characters
 
@@ -420,8 +517,10 @@ int main(int argc, const char *argv[]) {
   char parameter[1000];
 
   memset(&options, 0, sizeof(options));
-  options.limit = 300; // running time bound
+  options.limit = 300; // ms, running time bound
   srand(time(NULL));
+  //initialize_exit_failure (EXIT_CANCELED);
+  atexit (close_stdout);
 
   /* processing of input parameters */
   if (argc == 1) {
@@ -490,6 +589,10 @@ int main(int argc, const char *argv[]) {
         goto end;
       }
       options.limit = string2decimal(parameter);
+      if (options.limit < 0) {
+        printf("Error in input parameters. Use -h for help.\n\n");
+        goto end;
+      }
     }
     if (par < argc && !strcmp("-text", argv[par])) {
       par++;
@@ -766,16 +869,6 @@ end_shm:
   // free other allocated memory
 end:
   return 0;
-
-#ifndef HAVE_SHM
-  //end_1:
-#ifdef SHMDEBUG
-  fprintf(stderr, "shmdt T %p id=%d\n", T, shmids[shm_T].id);
-#endif
-  shmdt(T);
-  shmctl(shmids[shm_T].id, IPC_RMID, 0);
-  return 1;
-#endif
 }
 
 //NOLINTEND(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
