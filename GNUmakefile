@@ -161,11 +161,11 @@ check: all $(DATA_RAND)
 	$(DRV) ./$(SELECTBIN) -add br1
 	-rm $(BINDIR)/br1
 	$(DRV) ./$(SELECTBIN) -none $(TESTS)
-	$(DRV) ./$(SMARTBIN) -text rand4:rand32 -plen 2 4
+	$(DRV) ./$(SMARTBIN) -text rand4:rand32 -plen 2:4:16
 	$(DRV) ./$(SMARTBIN) -simple abab chbjhxsscsjndwkjnjdnwelabakdlkewdkklewlkdewlkdnewknabdewab
 	for t in $(TESTS); do echo $$t -nv; $(DRV) ./$(TESTBIN) $$t -nv; done
 	for t in $(TESTS); do echo $$t -nv rand2 2; $(DRV) ./$(TESTBIN) $$t -nv rand2 2; done
-	$(DRV) ./$(SELECTBIN) -all block bmh2 bmh4 dfdm sbdm faoso2 blim ssecp
+	$(DRV) ./$(SELECTBIN) -all
 	@-test -f algorithms.lst.bak && mv algorithms.lst.bak algorithms.lst
 lint: algocfg cppcheck clang-tidy sanitizer.log
 # for newer cppcheck
