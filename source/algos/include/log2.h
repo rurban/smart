@@ -40,12 +40,16 @@
 
 #define FIRSTBIT(x)                                                            \
   ((x)&MSK1616                                                                 \
-       ? ((x)&MSK0824 ? leftbit[((x) >> 24) & 0xFF] : 8 + leftbit[(x) >> 16])  \
-       : ((x)&MSK0808 ? 16 + leftbit[(x) >> 8] : 24 + leftbit[x]))
+   ? ((x)&MSK0824 ? leftbit[((x) >> 24) & 0xFF] : 8 + leftbit[((x) >> 16) & 0xFF]) \
+   : ((x)&MSK0808 ? 16 + leftbit[((x) >> 8) & 0xFF] : 24 + leftbit[x & 0xFF]))
+#if _WORDSIZE == 32
 #define LOG2(x) (31 - FIRSTBIT(x))
+#else
+#define LOG2(x) (31 - __builtin_clz(x))
+#endif
 
 /* array giving position (1..7) of high-order 1-bit in byte: */
-int leftbit[] = {
+const int leftbit[] = {
     8, 7, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,

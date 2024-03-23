@@ -25,13 +25,14 @@
  */
 
 #define MIN_M 7
+#include <stdint.h>
 #include "include/define.h"
 #include "include/log2.h"
 #include "include/main.h"
 #include "include/search_small.h"
 
 void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q,
-            unsigned int D, unsigned int mm, int *count) {
+            uint32_t D, uint32_t mm, int *count) {
   unsigned int s;
   int c, k, i;
   D = (D & mm) ^ mm;
@@ -52,7 +53,8 @@ void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q,
 int search_large(unsigned char *x, int m, unsigned char *y, int n, int q);
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  unsigned int B[SIGMA], D, h, mm, tmp;
+  unsigned int B[SIGMA], h, tmp;
+  uint32_t D, mm;
   int i, j, count;
   const int q = 6;
 
@@ -99,7 +101,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  */
 
 void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
-                  int q, unsigned int D, unsigned int mm, int *count,
+                  int q, uint32_t D, uint32_t mm, int *count,
                   int p_len) {
   unsigned int s;
   int c, k, i;
@@ -119,7 +121,8 @@ void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
 }
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
-  unsigned int B[SIGMA], D, h, mm, tmp;
+  unsigned int B[SIGMA], h, tmp;
+  uint32_t D, mm;
   int i, j, count, p_len;
   p_len = m;
   m = 32;

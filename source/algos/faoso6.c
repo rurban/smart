@@ -32,8 +32,9 @@
 #include "include/search_small.h"
 
 void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q,
-            int u, unsigned int D, unsigned int mm, int *count) {
-  int s, c, mq, v, z, i, k;
+            int u, uint32_t D, uint32_t mm, int *count) {
+  int c, mq, v, z, i, k;
+  unsigned s;
 
   D = (D & mm) ^ mm;
   mq = m / q - 1;
@@ -57,8 +58,8 @@ void verify(unsigned char *y, int j, int n, unsigned char *x, int m, int q,
 int search_large(unsigned char *x, int m, unsigned char *y, int n, int q);
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  unsigned int B[SIGMA], D, h, mm;
-  unsigned int masq;
+  unsigned int B[SIGMA], h;
+  uint32_t D, mm, masq;
   int i, j, u, count;
   int uq, uq1, mq;
   const int q = 6;
@@ -123,7 +124,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  */
 
 void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
-                  int q, int u, uint64_t D, uint64_t mm, int *count,
+                  int q, int u, uint32_t D, uint32_t mm, int *count,
                   int p_len) {
   int s, c, mq, v, z, i, k;
 
@@ -147,8 +148,8 @@ void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
 }
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
-  uint64_t B[SIGMA], mm, D;
-  uint64_t masq;
+  uint32_t B[SIGMA], mm, D;
+  uint32_t masq;
   unsigned h;
   int i, j, u, count, p_len;
   int uq, uq1, mq;
