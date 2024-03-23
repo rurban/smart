@@ -25,6 +25,7 @@
  * Constraints: requires m>=3. inexact m>32
  */
 
+#define MIN_M 3
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
@@ -68,13 +69,13 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       do {
         j--;
         if (D >= mask) {
-          if (j - first)
+          if (j > first)
             i = j;
           else {
-            for (k = m; y[first + k] == x[k - 1] && (k); k--)
+            for (k = m; k && (y[k + first] == x[k - 1]); k--)
               ;
             if (k == 0)
-              count++;
+              OUTPUT(first + 1);
           }
           D = ((D << 1) | 1) & B[y[j]];
         } else

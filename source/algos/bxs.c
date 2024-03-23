@@ -26,6 +26,8 @@
  * Note: Original crashed with m=2: bin/asan/bxs aa 2 aa 2
  */
 
+#define MIN_M 2
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
@@ -34,7 +36,7 @@
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA] = {0}, D, set;
   int i, j, first, k, count;
-  if (m <= 2)
+  if (m <= Q)
     return search_small(x, m, y, n);
   int len = m;
   if (m > WORD)
@@ -57,11 +59,13 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
   BEGIN_SEARCHING
   /* Searching */
-  for (i = mq1; i < nq1; i += mq1) {
+  for (i = mq1 - 1; i <= nq1; i += mq1) {
+    assert(i >= 0);
+    assert(i <= n);
     D = B[y[i]];
     if (D) {
       j = i;
-      first = i - mq1;
+      first = i - mq1; // -1
       do {
         j--;
         if (D >= mask) {
@@ -73,9 +77,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
             if (k == 0)
               OUTPUT(first + 1);
           }
-          D = ((D << 1) | 1) & B[y[j]];
+          D = ((D << 1) | 1) & B[y[j + 1]];
         } else
-          D = (D << 1) & B[y[j]];
+          D = (D << 1) & B[y[j + 1]];
       } while (D && j > first);
     }
   }

@@ -405,9 +405,9 @@ const struct algo ALGOS[] = {
   [_BSDM6] = {_BSDM6, OK, "bsdm6", "Backward SNR DAWG Matching (m>=6)", 6, 0},
   [_BSDM7] = {_BSDM7, OK, "bsdm7", "Backward SNR DAWG Matching (m>=7)", 7, 0},
   [_BSDM8] = {_BSDM8, OK, "bsdm8", "Backward SNR DAWG Matching (m>=8)", 8, 0},
-  [_BXS] = {_BXS, FAIL, "bxs", "BNDMq with eXtended Shift", 0, 0}, // m>=2
-  [_BXS1] = {_BXS1, OK, "bxs1", "BXS with q-grams limit", 1, 0},
-  [_BXS2] = {_BXS2, OK, "bxs2", "BXS with q-grams limit", 2, 0},
+  [_BXS] = {_BXS, FAIL, "bxs", "BNDMq with eXtended Shift", 2, 0}, // m>=2
+  [_BXS1] = {_BXS1, OK, "bxs1", "BXS with q-grams limit", 0, 0},
+  [_BXS2] = {_BXS2, OK, "bxs2", "BXS with q-grams limit", 3, 0},
   [_BXS3] = {_BXS3, OK, "bxs3", "BXS with q-grams limit", 3, 0},
   [_BXS4] = {_BXS4, OK, "bxs4", "BXS with q-grams limit", 4, 0},
   [_BXS6] = {_BXS6, OK, "bxs6", "BXS with q-grams limit", 6, 0},

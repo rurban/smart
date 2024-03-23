@@ -26,6 +26,7 @@
  * Note: Original crashed with m=2: bin/asan/bxs2 aa 2 aa 2
  */
 
+#define MIN_M 3
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
@@ -69,7 +70,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       do {
         j--;
         if (D >= mask) {
-          if (j - first)
+          if (j > first)
             i = j;
           else {
             //assert(first + len < n);

@@ -25,6 +25,8 @@
  * Constraints: requires m>=8
  */
 
+#define MIN_M 8
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
@@ -75,7 +77,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       do {
         j--;
         if (D >= mask) {
-          if (j - first)
+          if (j > first)
             i = j;
           else {
             for (k = len; k && (y[first + k] == x[k - 1]); k--)
