@@ -21,7 +21,8 @@
  * Journal of Computer and System Science 26(3):280-294.
  *
  * TODO: sometimes tripping over
- *       gs.c:96: newP1: Assertion `s + p1 + q1 <= m' failed
+ *       gs.c:97: newP1: Assertion `s + p1 + q1 <= m' failed
+ * with m=2,4,8,16
  */
 
 #include "include/define.h"
@@ -93,6 +94,8 @@ void newP2() {
 }
 
 void newP1() {
+  if (s + p1 + q1 > m)
+    fprintf(stderr, "%s %d %s %d (s=%d, p1=%d, q1=%d)\n", x, m, y, n, s, p1, q1);
   assert(s + p1 + q1 <= m);
   while (x[s + q1] == x[s + p1 + q1])
     ++q1;
