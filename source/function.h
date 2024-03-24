@@ -300,7 +300,8 @@ int getText(unsigned char *T, char *path, int FREQ[SIGMA], int TSIZE) {
 }
 
 void setOfRandomPatterns(unsigned char **setP, int m, unsigned char *T, int n,
-                         int numpatt, unsigned char *simplePattern) {
+                         int numpatt, unsigned char *simplePattern,
+                         int alpha /* unused */) {
   int i, j, k;
   for (i = 0; i < numpatt; i++) {
     if (strcmp((char *)simplePattern, ""))
@@ -311,7 +312,7 @@ void setOfRandomPatterns(unsigned char **setP, int m, unsigned char *T, int n,
       k = rand() % (n - m); // pos between 0 and n-m
       for (j = 0; j < m; j++)
         setP[i][j] = T[k + j]; // creates the pattern
-      setP[i][j] = '\0';
+      setP[i][m] = '\0';
     }
   }
 }

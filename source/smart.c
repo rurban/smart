@@ -66,8 +66,7 @@ void printManual() {
   if (system("./logo"))
     exit(1);
   printf("\tThis is a basic help guide for using the tool\n\n");
-  // printf("\t-alpha S      sets to S the size of the alphabet (default
-  // 256)\n");
+  printf("\t-alpha S      sets to S the size of the alphabet (default 256)\n");
   printf("\t-pset N       computes running times as the mean of N runs "
          "(default 500)\n");
   printf("\t-tsize S      set the upper bound dimension (in Mb) of the text "
@@ -461,8 +460,8 @@ int main(int argc, const char *argv[]) {
         goto end;
       }
       alpha = string2decimal(parameter);
-      if (alpha > 255 || alpha <= 0) {
-        printf("Error in alpha input parameter. 0 > alpha < 256.\n\n");
+      if (alpha > 256 || alpha <= 0) {
+        printf("Error in alpha input parameter. 0 > alpha <= 256.\n\n");
         goto end;
       }
     }
