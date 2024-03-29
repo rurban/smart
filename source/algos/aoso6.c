@@ -21,7 +21,7 @@
  * Practical and Optimal String Matching. SPIRE, Lecture Notes in Computer
  * Science, vol.3772, pp.376--387, Springer-Verlag, Berlin, (2005).
  *
- * Constraints: requires m>=6
+ * Constraints: requires m>6
  */
 
 #define MIN_M 7

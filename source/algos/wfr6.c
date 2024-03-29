@@ -40,6 +40,7 @@
  * Constraints: requires m>=6
  */
 
+#define MIN_M 6
 #include "include/define.h"
 #include "include/main.h"
 #include "include/GRAPH.h"

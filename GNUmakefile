@@ -116,18 +116,15 @@ CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
 # UNSATISFIABLE. passes, but needs more depth
 UNSATISFIABLE  = ac akc aoso2 aoso4 aoso6 bf bfs blim bmh-sbndm bndml bndmq2 bndmq4 \
 	bndmq6 br bsdm6 bsdm7 bsdm8
-FAIL_VERIFY    = bsdm bww bxs faoso4
+FAIL_VERIFY    = bsdm bww bxs faoso4 ksa fs-w4 ssecp libc
 FAIL = gs tunbm gg rcolussi graspm simon ldm bmh-sbndm faoso4 faoso6 blim \
        bsdm4 bxs fs-w2 fs-w4 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 fsbndmq64 \
        fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 \
        tvsbs-w6 tvsbs-w8 ssecp libc
-TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 
+TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 gg gs simon ldm
 NON_CBMC_SRC   =
 # $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
 verify:
-	@echo unsatisfiable $(UNSATISFIABLE)
-	@echo fail verfify $(FAIL_VERIFY)
-	@echo timeout skipped $(TIMEOUT_VERIFY)
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
 	  echo $$c; \
 	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \

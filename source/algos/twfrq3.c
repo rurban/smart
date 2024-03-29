@@ -26,6 +26,7 @@
  * Constraints: requires m>=3
  */
 
+#define MIN_M 3
 #include "include/define.h"
 #include "include/main.h"
 #include "include/GRAPH.h"

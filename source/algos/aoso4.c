@@ -21,7 +21,7 @@
  * Practical and Optimal String Matching. SPIRE, Lecture Notes in Computer
  * Science, vol.3772, pp.376--387, Springer-Verlag, Berlin, (2005).
  *
- * Constraints: requires m>=4
+ * Constraints: requires m>4
  */
 
 #define MIN_M 5
@@ -54,7 +54,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q);
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], D, h, mm, tmp;
   int i, j, count;
-  int q = 4;
+  const int q = 4;
 
   if (m <= q)
     return search_small(x, m, y, n);

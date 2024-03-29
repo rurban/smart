@@ -68,7 +68,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   for (k = 1; k < end; ++k) {
     /* Left to right scanning */
     r = pre = left = 0;
-    R = ~0;
+    R = ~0U;
     cur = s;
     while (R != 0 && k * m - 1 + r < n) {
       R &= B[y[k * m - 1 + r]];
@@ -81,7 +81,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       cur >>= 1;
     }
     /* Right to left scanning */
-    L = ~0;
+    L = ~0U;
     cur = 1;
     ell = 0;
     while (L != 0 && left > ell) {
@@ -112,11 +112,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  */
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n) {
-  int i, k, left, r, ell, end, count, p_len, first, j;
+  int i, k, left, r, ell, end, count, first, j;
   unsigned int B[SIGMA], C[SIGMA], s, t, R, L;
   unsigned int pre, cur;
-
-  p_len = m;
+  const int p_len = m;
   m = 30;
 
   /* Preprocessing */
@@ -151,7 +150,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   for (k = 1; k < end; ++k) {
     /* Left to right scanning */
     r = pre = left = 0;
-    R = ~0;
+    R = ~0U;
     cur = s;
     while (R != 0 && k * m - 1 + r < n) {
       R &= B[y[k * m - 1 + r]];
@@ -164,7 +163,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       cur >>= 1;
     }
     /* Right to left scanning */
-    L = ~0;
+    L = ~0U;
     cur = 1;
     ell = 0;
     while (L != 0 && left > ell) {

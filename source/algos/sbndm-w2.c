@@ -48,6 +48,7 @@
  *       e.g. sbndm-w2 aba 3 ababababab 10
  */
 
+#define MIN_M 2
 #include <assert.h>
 #include "include/define.h"
 #include "include/main.h"

@@ -23,9 +23,10 @@
  * character of the window. Otherwise we stop scanning (w is not a
  * factor of the pattern) and jump to the right, like in BOM.
  *
- * Constraints: requires m>=2
+ * Constraints: requires m>=7
  */
 
+#define MIN_M 7
 #include "include/define.h"
 #include "include/main.h"
 #include "include/GRAPH.h"

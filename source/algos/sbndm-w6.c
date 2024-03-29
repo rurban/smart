@@ -40,10 +40,9 @@
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
-
- * Note: inexact m>32
  */
 
+#define MIN_M 6
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_large.h"

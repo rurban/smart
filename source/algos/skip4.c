@@ -27,6 +27,7 @@
  * Constraints: requires m>=4
  */
 
+#define MIN_M 4
 #include "include/define.h"
 #include "include/main.h"
 #include "include/AUTOMATON.h"

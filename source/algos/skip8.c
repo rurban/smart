@@ -27,6 +27,7 @@
  * Constraints: requires m>=8
  */
 
+#define MIN_M 8
 #include "include/define.h"
 #include "include/main.h"
 #include "include/AUTOMATON.h"

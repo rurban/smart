@@ -19,6 +19,7 @@
  * Optimized TVSBS algorithm.
  */
 
+//#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 

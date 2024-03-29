@@ -25,6 +25,7 @@
  * Constraints: requires m>=5
  */
 
+#define MIN_M 5
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

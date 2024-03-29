@@ -20,6 +20,7 @@
  * Constraints: requires n >= m + 2, and m>=2 and m<XSIZE
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

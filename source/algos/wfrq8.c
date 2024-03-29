@@ -47,6 +47,7 @@
  * Constraints: requires m>=8
  */
 
+#define MIN_M 8
 #include "include/define.h"
 #include "include/main.h" // defines the search interface for time and statistics.
 #include "include/GRAPH.h"

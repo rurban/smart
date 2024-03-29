@@ -16,8 +16,11 @@
  * we scanned. If F[hash(w)]=TRUE we continue scanning the next
  * character of the window. Otherwise we stop scanning (w is not a
  * factor of the pattern) and jump to the right, like in BOM.
+ *
+ * Constraints: requires m>=5
  */
 
+#define MIN_M 5
 #include "include/define.h"
 #include "include/main.h"
 #include "include/GRAPH.h"

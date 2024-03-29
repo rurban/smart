@@ -24,6 +24,7 @@
  * Constraints: requires m>2
  */
 
+#define MIN_M 3
 #include "include/define.h"
 #include "include/log2.h"
 #include "include/main.h"
