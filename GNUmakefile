@@ -3,7 +3,13 @@ MACHINE := $(shell uname -m)
 ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
 # to detect mingw
 TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
-BINDIR  := bin
+TIMEOUT_1m := timeout 1m
+TIMEOUT_3m := timeout 3m
+ifeq (, $(shell which timeout))
+  TIMEOUT_1m =
+  TIMEOUT_3m =
+endif
+BINDIR   := bin
 ALGOSINC := $(wildcard source/algos/include/*.h)
 SRCINC   := $(wildcard source/*.h)
 ifneq ($(ARCH),x86_64)
@@ -101,15 +107,41 @@ sanitizer.log: $(ALLSRC)
 	-rm -f sanitizer.log 2>/dev/null
 	-./sanitizer.sh 2>sanitizer.log
 
+CBMC_ARGS_0 = -DCBMC --depth 256 --unwind 256 --unwinding-assertions --slice-formula
 CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
+# UNSATISFIABLE. passes, but needs more depth
+UNSATISFIABLE  = ac akc aoso2 aoso4 aoso6 bf bfs blim bmh-sbndm bndml bndmq2 bndmq4 \
+	bndmq6 br bsdm6 bsdm7 bsdm8
+FAIL_VERIFY    = bsdm bww bxs faoso4
+FAIL = gs tunbm gg rcolussi graspm simon ldm bmh-sbndm faoso4 faoso6 blim \
+       bsdm4 bxs fs-w2 fs-w4 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 fsbndmq64 \
+       fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 \
+       tvsbs-w6 tvsbs-w8 ssecp libc
+TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 
+NON_CBMC_SRC   =
+# $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
 verify:
+	@echo unsatisfiable $(UNSATISFIABLE)
+	@echo fail verfify $(FAIL_VERIFY)
+	@echo timeout skipped $(TIMEOUT_VERIFY)
+	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
+	  echo $$c; \
+	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_1m)  cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c || \
+            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
+	done
+# prints the violations
+CBMC_ARGS_1 = -DCBMC --depth 1024 --unwind 256 --unwinding-assertions --slice-formula --trace
+verify-trace:
 	for c in $(ALGOSRC); do \
-	  echo cbmc -DCBMC --depth 64 $(CBMC_CHECKS) $$c; \
-	  cbmc -DCBMC --depth 64 $(CBMC_CHECKS) $$c; \
+	  echo $$c; \
+	  echo $(TIMEOUT_3m) cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_3m) cbmc $(CBMC_ARGS_1)  $(CBMC_CHECKS) $$c || \
+            (echo cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) " $$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
 	done
 fmt:
 	clang-format -i `find source -name \*.c -o -name \*.h`

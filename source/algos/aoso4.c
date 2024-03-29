@@ -24,6 +24,7 @@
  * Constraints: requires m>=4
  */
 
+#define MIN_M 5
 #include "include/define.h"
 #include "include/log2.h"
 #include "include/main.h"
@@ -63,7 +64,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_PREPROCESSING
   /* Preprocessing */
   for (i = 0; i < SIGMA; ++i)
-    B[i] = ~0;
+    B[i] = ~0U;
   h = mm = 0;
   for (j = 0; j < q; ++j) {
     for (i = 0; i < m / q; ++i) {
@@ -78,7 +79,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   /* Searching */
   count = 0;
-  D = ~0;
+  D = ~0U;
   j = 0;
   while (j < n) {
     D = ((D & ~mm) << 1) | B[y[j]];
@@ -126,7 +127,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
   BEGIN_PREPROCESSING
   /* Preprocessing */
   for (i = 0; i < SIGMA; ++i)
-    B[i] = ~0;
+    B[i] = ~0U;
   h = mm = 0;
   for (j = 0; j < q; ++j) {
     for (i = 0; i < m / q; ++i) {
@@ -141,7 +142,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
   BEGIN_SEARCHING
   /* Searching */
   count = 0;
-  D = ~0;
+  D = ~0U;
   j = 0;
   while (j < n) {
     D = ((D & ~mm) << 1) | B[y[j]];

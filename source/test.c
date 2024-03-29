@@ -50,15 +50,17 @@ int *count;
 
 /* the brute force algorithm used for comparing occurrences */
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  int i, count, j;
+  int count, j;
 
   /* Searching */
   count = 0;
   for (j = 0; j <= n - m; ++j) {
-    for (i = 0; i < m && x[i] == y[i + j]; ++i)
-      ;
-    if (i >= m)
+    if (memcmp(x, &y[j], m) == 0)
       count++;
+    //for (i = 0; i < m && x[i] == y[i + j]; ++i)
+    //  ;
+    //if (i >= m)
+    //  count++;
   }
   return count;
 }

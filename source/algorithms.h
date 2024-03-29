@@ -277,7 +277,7 @@ const struct algo ALGOS[] = {
   [_KMP] = {_KMP, OK, "kmp", "Knuth-Morris Pratt", 0, 0},
   [_BM] = {_BM, OK, "bm", "Boyer-Moore", 0, 0},
   [_HOR] = {_HOR, OK, "hor", "Hoorspool", 0, 0},
-  [_GS] = {_GS, FAIL, "gs", "Galil Seiferas", 0, 0},
+  [_GS] = {_GS, FAIL, "gs", "Galil Seiferas", 0, 0}, // UNSATISFIABLE
   [_AG] = {_AG, OK, "ag", "Apostolico-Giancarlo", 0, 0},
   [_KR] = {_KR, OK, "kr", "Karp-Rabin", 0, 0},
   [_ZT] = {_ZT, OK, "zt", "Zhu-Takaoka", 0, 0}, //m>=2
@@ -286,15 +286,15 @@ const struct algo ALGOS[] = {
   [_OM] = {_OM, OK, "om", "Optimal Mismatch", 0, 0},
   [_MS] = {_MS, OK, "ms", "Maximal shift", 0, 0},
   [_QS] = {_QS, OK, "qs", "Quick-Search", 0, 0},
-  [_TunBM] = {_TunBM, FAIL, "tunbm", "Tuned Boyer-Moore", 0, 0},
+  [_TunBM] = {_TunBM, FAIL, "tunbm", "Tuned Boyer-Moore", 0, 0}, // UNSATISFIABLE
   [_NSN] = {_NSN, OK, "nsn", "not so naive", 2, 0},
   [_TBM] = {_TBM, OK, "tbm", "Turbo Boyer-Moore", 0, 0},
   [_Colussi] = {_Colussi, OK, "colussi", "Colussi", 0, 0},
   [_Smith] = {_Smith, OK, "smith", "Smith", 0, 0},
-  [_GG] = {_GG, FAIL, "gg", "Galil-Giancarlo", 0, 0},
+  [_GG] = {_GG, FAIL, "gg", "Galil-Giancarlo", 0, 0}, // TIMEOUT
   [_Raita] = {_Raita, OK, "raita", "Raita", 0, 0},
   [_SMOA] = {_SMOA, OK, "smoa", "String Matching on Ordered Alphabets", 0, 0},
-  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0},
+  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0}, // UNSATISFIABLE
   [_Skip] = {_Skip, OK, "skip", "Skip Search", 0, 0},
   [_KMPSkip] = {_KMPSkip, OK, "kmpskip", "KMP Skip Search", 0, 0},
   [_ASkip] = {_ASkip, OK, "askip", "Alpha Skip Search", 0, 0},
@@ -322,19 +322,19 @@ const struct algo ALGOS[] = {
   [_TSW] = {_TSW, OK, "tsw", "Two-Sliding-Window", 0, 0}, // m < n - 3
   [_BMH2] = {_BMH2, 0, "bmh2", "Boyer-Moore-Horspool with q-grams (BMH2)", 2, MISSING},
   [_BMH4] = {_BMH4, 0, "bmh4", "Boyer-Moore-Horspool with q-grams (BMH4)", 4, MISSING},
-  [_GRASPm] = {_GRASPm, FAIL, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0},
+  [_GRASPm] = {_GRASPm, FAIL, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0}, // UNSATISFIABLE
   [_SSEF] = {_SSEF, X64_ONLY, "ssef", "SSEF (K=7)", 32, 0},
   // Algorithms based on automata
   [_AUT] = {_AUT, OK, "aut", "Automaton Matcher", 0, 0},
   [_RF] = {_RF, OK, "rf", "Reverse-Factor", 0, 0},
   [_TRF] = {_TRF, OK, "trf", "Turbo Reverse factor", 0, 0},
-  [_Simon] = {_Simon, FAIL, "simon", "Simon", 0, 0},
+  [_Simon] = {_Simon, FAIL, "simon", "Simon", 0, 0}, // TIMEOUT
   [_FDM] = {_FDM, OK, "fdm", "Forward-DAWG-Match", 0, 0},
   [_BOM] = {_BOM, OK, "bom", "BOM", 0, 0},
   [_BOM2] = {_BOM2, OK, "bom2", "BOM2", 0, 0},
   [_DFDM] = {_DFDM, OK, "dfdm", "Double Forward DAWG Matching", 0, 0},
   [_WW] = {_WW, OK, "ww", "Wide Window", 0, 0},
-  [_LDM] = {_LDM, FAIL, "ldm", "Linear DAWG Matching", 0, 0},
+  [_LDM] = {_LDM, FAIL, "ldm", "Linear DAWG Matching", 0, 0},  // TIMEOUT
   [_ILDM1] = {_ILDM1, OK, "ildm1", "ILDM1", 0, 0},
   [_ILDM2] = {_ILDM2, OK, "ildm2", "ILDM2", 0, 0},
   [_EBOM] = {_EBOM, OK, "ebom", "Extended Backward Oracle Matching", 0, 0},
@@ -369,15 +369,15 @@ const struct algo ALGOS[] = {
   [_SVM4] = {_SVM4, OK, "svm4", "shift vector matching (version 4)", 0, 0},
   [_SBNDM2] = {_SBNDM2, OK, "sbndm2", "simplified bndm with loop-unrolling", 0, 0},
   [_SBNDM_BMH] = {_SBNDM_BMH, OK, "sbndm-bmh", "sbndm with horspool shift", 2, 0},
-  [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0},
+  [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0}, // UNSATISFIABLE
   [_FNDM] = {_FNDM, OK, "fndm", "forward nondeterministic dawg matching", 0, 0},
   [_BWW] = {_BWW, OK, "bww", "bit parallel wide window", 0, 0},
   [_FAOSO2] = {_FAOSO2, OK, "faoso2", "fast average optimal shift-or (u=2,m>2)", 3, 0},
-  [_FAOSO4] = {_FAOSO4, FAIL, "faoso4", "fast average optimal shift-or (u=2,m>4)", 5, 0},
-  [_FAOSO6] = {_FAOSO6, FAIL, "faoso6", "fast average optimal shift-or (u=2,m>6)", 7, 0},
-  [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 2, 0},
-  [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 4, 0},
-  [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 6, 0},
+  [_FAOSO4] = {_FAOSO4, FAIL, "faoso4", "fast average optimal shift-or (u=2,m>4)", 5, 0}, // UNSATISFIABLE
+  [_FAOSO6] = {_FAOSO6, FAIL, "faoso6", "fast average optimal shift-or (u=2,m>6)", 7, 0}, // UNSATISFIABLE
+  [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
+  [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
+  [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
   [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0},
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
@@ -394,7 +394,7 @@ const struct algo ALGOS[] = {
   [_SABP] = {_SABP, OK, "sabp", "Small Alphabet Bit Parallel", 0, 0},
   [_DBWW] = {_DBWW, OK, "dbww", "Double BWW", 0, 0},
   [_DBWW2] = {_DBWW2, OK, "dbww2", "Double BWW", 0, 0},
-  [_KSA] = {_KSA, OK, "ksa", "Factorized Shift-And", 0, 0},
+  [_KSA] = {_KSA, OK, "ksa", "Factorized Shift-And", 0, 0},VERIFICATION FAILED
   [_KBNDM] = {_KBNDM, OK, "kbndm", "Factorized BNDM", 0, 0},
   // new algorithms
   [_BSDM] = {_BSDM, OK, "bsdm", "Backward SNR DAWG Matching", 0, 0},
@@ -405,7 +405,7 @@ const struct algo ALGOS[] = {
   [_BSDM6] = {_BSDM6, OK, "bsdm6", "Backward SNR DAWG Matching (m>=6)", 6, 0},
   [_BSDM7] = {_BSDM7, OK, "bsdm7", "Backward SNR DAWG Matching (m>=7)", 7, 0},
   [_BSDM8] = {_BSDM8, OK, "bsdm8", "Backward SNR DAWG Matching (m>=8)", 8, 0},
-  [_BXS] = {_BXS, FAIL, "bxs", "BNDMq with eXtended Shift", 0, 0}, // inexact>32, m>=2
+  [_BXS] = {_BXS, FAIL, "bxs", "BNDMq with eXtended Shift", 0, 0}, // m>=2
   [_BXS1] = {_BXS1, OK, "bxs1", "BXS with q-grams limit", 1, 0},
   [_BXS2] = {_BXS2, OK, "bxs2", "BXS with q-grams limit", 2, 0},
   [_BXS3] = {_BXS3, OK, "bxs3", "BXS with q-grams limit", 3, 0},
