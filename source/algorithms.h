@@ -478,8 +478,8 @@ const struct algo ALGOS[] = {
   [_QF62] = {_QF62, OK, "qf62", "Q-gram Filtering q=6 s=2", 7, 0},
   [_QF63] = {_QF63, OK, "qf63", "Q-gram Filtering q=6 s=3", 7, 0},
   [_QLQS] = {_QLQS, OK, "qlqs", "Quantum Leap Quick Search", 0, 0},
-  [_SBNDM_W2] = {_SBNDM_W2, RNDCRASH, "sbndm-w2", "SBNDM with lookahead", 2, 0},
-  [_SBNDM_W4] = {_SBNDM_W4, RNDCRASH, "sbndm-w4", "SBNDM with lookahead", 4, 0},
+  [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0},
+  [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0},
   [_SBNDM_W6] = {_SBNDM_W6, RNDCRASH, "sbndm-w6", "SBNDM with lookahead", 6, 0},
   [_SSM] = {_SSM, OK, "ssm", "SSM", 0, 0},
   [_TSA] = {_TSA, FAIL, "tsa", "word-wise popcount", 2, 0}, // 2<=m<64

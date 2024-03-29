@@ -41,9 +41,9 @@
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
  
- * Note: inexact m>32
  */
 
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_large.h"
@@ -81,48 +81,76 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
   /* Searching phase */
   BEGIN_SEARCHING
-  int q = n / 2;
+  const int q = n / 2;
   s1 = m - 1;
   s2 = q - m;
   s3 = q;
   s4 = n - m;
   count = 0;
   while (s1 <= s2 + m1 || s3 <= s4 + m1) {
-    while ((d = (B[y[s1]] | W[y[s2]] | B[y[s3]] | W[y[s4]])) == 0) {
+    assert(s1 <= n);
+    //assert(s2 >= 0);
+    assert(s2 <= n);
+    assert(s3 >= 0);
+    assert(s3 <= n);
+    assert(s4 >= 0);
+    assert(s4 <= n);
+    while ((d = (B[y[s1]] | (s2 >= 0 ? W[y[s2]] : 0) | B[y[s3]] | W[y[s4]])) == 0) {
+      assert(s1 + m <= n);
+      assert(s2 - m <= n);
+      assert(s2 - m >= 0);
+      assert(s3 + m <= n);
+      assert(s4 - m >= 0);
       s1 += hbcr[y[s1 + m]];
       s2 -= hbcl[y[s2 - m]];
       s3 += hbcr[y[s3 + m]];
       s4 -= hbcl[y[s4 - m]];
+      assert(s1 < n);
+      assert(s2 >= 0);
+      assert(s3 < n);
+      assert(s4 >= 0);
     }
     first = s1 - m1;
-    do
-      d = (d << 1) & (B[y[--s1]] | W[y[++s2]] | B[y[--s3]] | W[y[++s4]]);
-    while (d);
+    //assert(s2 + 1 >= 0);
+    do {
+      d = (d << 1U) &
+        ((s1 <= 0 ? 1 : B[y[--s1]]) | (s2 < n && s2 + 1 >= 0 ? W[y[++s2]] : 0) |
+         (s3 <= 0 ? 1 : B[y[--s3]]) | (s4 < n ? W[y[++s4]] : 0));
+    } while (d);
     if (s1 < first) {
       s1++;
       s2--;
       s3++;
       s4--;
       i = 0;
+      assert(s1 + m <= n);
       while (i < m && x[i] == y[s1 + i])
         i++;
       if (i == m && s1 + m1 < s2)
         OUTPUT(s1);
-      i = 0;
-      while (i < m && x[i] == y[s2 - m1 + i])
-        i++;
+      if (s2 - m1 >= 0) {
+        i = 0;
+        assert(s2 - m1 >= 0);
+        assert(s2 - m1 + m <= n);
+        while (i < m && x[i] == y[s2 - m1 + i])
+          i++;
+      }
       if (i == m && s1 + m1 <= s2)
         OUTPUT(s1);
       i = 0;
+      assert(s3 + m <= n);
       while (i < m && x[i] == y[s3 + i])
         i++;
       if (i == m && s3 + m1 < s4)
         OUTPUT(s3);
-      i = 0;
-      while (i < m && x[i] == y[s4 - m1 + i])
-        i++;
-      if (i == m && s3 + m1 <= s4)
-        OUTPUT(s3);
+      if (s4 - m1 >= 0) {
+        i = 0;
+        assert(s4 - m1 + m <= n);
+        while (i < m && x[i] == y[s4 - m1 + i])
+          i++;
+        if (i == m && s3 + m1 <= s4)
+          OUTPUT(s3);
+      }
     }
     s1 += m;
     s2 -= m;

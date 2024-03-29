@@ -116,27 +116,30 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 #ifdef DEBUG
       if (s1 - 1 < 0) fprintf(stderr, "sbndm-w2 %s %d %s %d\n", x, m, y, n);
 #endif
-      assert(s1 - 1 >= 0);
+      //assert(s1 - 1 >= 0);
       assert(s2 + 1 <= n);
       assert(s2 + 1 >= 0);
-      d = (d << 1U) & (B[y[--s1]] | W[y[++s2]]);
+      d = (d << 1U) & ((s1 <= 0 ? 1 : B[y[--s1]]) | W[y[++s2]]);
     } while (d);
     if (s1 < first) {
       s1++;
       s2--;
-      i = 0;
       assert(s1 + m <= n);
+      i = 0;
       while (i < plen && x[i] == y[s1 + i])
         i++;
-      if (i == plen && s1 + m1 < s2)
+      if (i == plen && s1 + m1 < s2) {
         OUTPUT(s1);
-      i = 0;
-      assert(s2 - m1 <= n);
-      assert(s2 - m1 >= 0);
-      while (i < plen && x[i] == y[s2 - m1 + i])
-        i++;
-      if (i == plen && s1 + m1 <= s2)
-        OUTPUT(s1);
+      }
+      else {
+        assert(s2 - m1 <= n);
+        assert(s2 - m1 >= 0);
+        i = 0;
+        while (i < plen && x[i] == y[s2 - m1 + i])
+          i++;
+        if (i == plen && s1 + m1 <= s2)
+          OUTPUT(s1);
+      }
     }
     s1 += m;
     s2 -= m;
