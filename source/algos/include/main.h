@@ -162,7 +162,8 @@ int main(int argc, char *argv[]) {
     //NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.strcpy)
     strcpy((char *)p, argv[1]);
     m = atoi(argv[2]);
-    // boyer-moore requires space at the end of t. (tunbm)
+    // we always guarantee zero-termination (+1)
+    // and boyer-moore requires space at the end of t. (+m: tunbm)
     t = (unsigned char *)calloc(PAD_16(lt + m + 1), 1);
     //NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.strcpy)
     strcpy((char *)t, argv[3]);

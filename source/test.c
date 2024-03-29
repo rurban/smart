@@ -238,7 +238,7 @@ int main(int argc, char *argv[]) {
 #endif
   srand(seed);
   // allocate in shared memory to be used between 2 processes
-  P = shmalloc(shm_P, MAX(m, XSIZE));  // pattern
+  P = shmalloc(shm_P, MAX(m + 1, XSIZE));  // pattern
   count = shmalloc(shm_r, sizeof(int)); // number of occurrences
   e_time = shmalloc(shm_e, sizeof(double)); // running time
   pre_time = shmalloc(shm_pre, sizeof(double)); // preprocessing
@@ -497,7 +497,7 @@ int main(int argc, char *argv[]) {
             int j;
             for (j = 0; j <= m; j++)
               P[j] = setP[k - 1][j];
-            P[j] = '\0'; // creates the pattern
+            P[m] = '\0'; // ensure zero-termination and valid x[m]
             if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha))
               goto free_shm1;
           }
@@ -515,7 +515,7 @@ int main(int argc, char *argv[]) {
         int j;
         for (j = 0; j <= m; j++)
           P[j] = setP[k - 1][j];
-        P[j] = '\0'; // creates the pattern
+        P[m] = '\0'; // ensure zero-termination and valid x[m]
         if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha))
           goto free_shm1;
       }
