@@ -61,7 +61,7 @@ else
 endif
 TESTS := $(shell shuf -n 6 good.lst)
 ifeq ($(TESTS),)
-  TESTS = bm mp kmp tbm bom so
+  TESTS = hor mp kmp tbm so ssm
 endif
 
 all: $(BINS) $(HELPERS)
@@ -121,11 +121,19 @@ FAIL = gs tunbm gg rcolussi graspm simon ldm bmh-sbndm faoso4 faoso6 blim \
        bsdm4 bxs fs-w2 fs-w4 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 fsbndmq64 \
        fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 \
        tvsbs-w6 tvsbs-w8 ssecp libc
-TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 gg gs simon ldm
+TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 gg gs simon ldm lbndm
 NON_CBMC_SRC   =
 # $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
 verify:
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
+	  echo $$c; \
+	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_1m)  cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c || \
+            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
+	done
+check-verify:
+	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
+	do \
 	  echo $$c; \
 	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_1m)  cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c || \

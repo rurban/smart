@@ -359,7 +359,7 @@ const struct algo ALGOS[] = {
   [_SBNDM] = {_SBNDM, OK, "sbndm", "Simplified BNDM", 0, 0},
   [_TNDM] = {_TNDM, OK, "tndm", "Two-Way Nondeterministic DAWG Matching", 0, 0},
   [_TNDMa] = {_TNDMa, OK, "tndma", "Two-Way Nondeterministic DAWG Matching (version 2)", 0, 0},
-  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 0, 0},
+  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 0, 0}, // TIMEOUT
   // hg BNDM with q-grams
   // bg BNDM with q-grams, and parallel search
   [_SVM0] = {_SVM0, OK, "svm0", "shift vector matching (version 0)", 0, 0},
