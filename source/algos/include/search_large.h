@@ -128,7 +128,9 @@ static unsigned char *twoway_memmem(const unsigned char *h,
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
-  //const unsigned char *orig_y = y;
+#ifdef DEBUG
+  const unsigned char *orig_y = y;
+#endif
   int count = 0;
   unsigned char *p;
   while ((p = twoway_memmem(y, y + n, x, (size_t)m))) {

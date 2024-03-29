@@ -33,13 +33,13 @@
 #ifdef DEBUG
 #define OUTPUT(j)                                                              \
   {                                                                            \
-    fprintf(stderr, "found at y[%d] %.*s line:%u\n", (int)j, m, &y[(j)],       \
+    fprintf(stderr, "found at y[%d] %.*s line:%u\n", (int)(j), m, &y[(j)],     \
             (unsigned)__LINE__);                                               \
     count++;                                                                   \
   }
 #define OUTPUTP(j)                                                             \
   {                                                                            \
-    fprintf(stderr, "found at y[%d]\n", (int)j);                               \
+    fprintf(stderr, "found at y[%d]\n", (int)(j));                             \
     (*count)++;                                                                \
   }
 #else
