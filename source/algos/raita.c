@@ -20,10 +20,13 @@
  * in T. Raita.
  * Tuning the Boyer-Moore-Horspool string searching algorithm. Softw. Pract.
  * Exp., vol.22, n.10, pp.879--884, (1992).
+ *
+ * Constraints: requires m>=2
  */
 
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 void preBmBc(unsigned char *x, int m, int bmBc[]) {
   int i;
@@ -37,7 +40,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int j, bmBc[SIGMA], count;
   unsigned char c, firstCh, *secondCh, middleCh, lastCh;
   if (m < 2)
-    return -1;
+    return search_small(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
