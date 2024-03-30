@@ -59,9 +59,9 @@ else
   SELECTBIN = select
   HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm show textgen
 endif
-TESTS := $(shell shuf -n 6 good.lst)
+TESTS := $(shell shuf -n 10 good.lst)
 ifeq ($(TESTS),)
-  TESTS = hor mp kmp tbm so ssm
+  TESTS = hor mp kmp musl1 tbm so ssm qf33 twfr3 fndm
 endif
 
 all: $(BINS) $(HELPERS)
