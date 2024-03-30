@@ -24,7 +24,9 @@
 #include "include/main.h"
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  //const unsigned char *orig_y = y;
+#ifdef DEBUG
+  const char *orig_y = (char *)y;
+#endif
   BEGIN_PREPROCESSING
   END_PREPROCESSING
 

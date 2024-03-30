@@ -16,15 +16,17 @@
  * contact the authors at: faro@dmi.unict.it, thierry.lecroq@univ-rouen.fr
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  *
- * Constraints: no NUL values in pattern and text allowed.
+ * Constraints: no NUL values in pattern and text allowed. Requires zero-termination.
  */
 
 #include "include/define.h"
 #include "include/main.h"
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  //const unsigned char *orig_y = y;
-  (void)m; (void)n;
+#ifdef DEBUG
+  const char *orig_y = (char *)y;
+#endif
+  (void)m;
   BEGIN_PREPROCESSING
   END_PREPROCESSING
 
@@ -32,8 +34,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   int count = 0;
   unsigned char *p;
-  while ((p = (unsigned char *)strstr((char *)y, (char *)x))) {
+  while (n > 0 && (p = (unsigned char *)strstr((char *)y, (char *)x))) {
     OUTPUT(p - orig_y);
+    n -= (p + 1) - y;
     y = p + 1; // can be optimized
   }
   END_SEARCHING
