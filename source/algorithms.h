@@ -280,7 +280,7 @@ const struct algo ALGOS[] = {
   [_GS] = {_GS, FAIL, "gs", "Galil Seiferas", 0, 0}, // UNSATISFIABLE
   [_AG] = {_AG, OK, "ag", "Apostolico-Giancarlo", 0, 0},
   [_KR] = {_KR, OK, "kr", "Karp-Rabin", 0, 0},
-  [_ZT] = {_ZT, OK, "zt", "Zhu-Takaoka", 0, 0}, //m>=2
+  [_ZT] = {_ZT, OK, "zt", "Zhu-Takaoka", 2, 0},
   [_AC] = {_AC, OK, "ac", "Apostolico-Crochemore", 0, 0},
   [_TW] = {_TW, OK, "tw", "Two-Way", 0, 0},
   [_OM] = {_OM, OK, "om", "Optimal Mismatch", 0, 0},

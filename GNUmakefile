@@ -52,12 +52,12 @@ ifeq ($(SANITIZE),1)
   TESTBIN = test-asan
   SMARTBIN = smart-asan
   SELECTBIN = select-asan
-  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-asan show textgen
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-asan show textgen algocfg
 else
   TESTBIN = test
   SMARTBIN = smart
   SELECTBIN = select
-  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm show textgen
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm show textgen algocfg
 endif
 TESTS := $(shell shuf -n 10 good.lst)
 ifeq ($(TESTS),)
@@ -114,17 +114,21 @@ CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE. passes, but needs more depth
-UNSATISFIABLE  = ac akc aoso2 aoso4 aoso6 bf bfs blim bmh-sbndm bndml bndmq2 bndmq4 \
-	bndmq6 br bsdm6 bsdm7 bsdm8
-FAIL_VERIFY    = bsdm bww bxs faoso4 ksa fs-w4 ssecp libc
-FAIL = gs tunbm gg rcolussi graspm simon ldm bmh-sbndm faoso4 faoso6 blim \
-       bsdm4 bxs fs-w2 fs-w4 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 fsbndmq64 \
-       fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 \
-       tvsbs-w6 tvsbs-w8 ssecp libc
-TIMEOUT_VERIFY = ag askip aut bsdm2 bm bom2 bom bsdm3 bsdm4 bsdm5 gg gs simon ldm lbndm
-NON_CBMC_SRC   =
-# $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
+UNSATISFIABLE  = bf ac tunbm smith br akc bfs graspm ssef skip5 skip6 skip7 skip8 bndml \
+	bmh-sbndm aoso2 aoso4 aoso6 blim bndmq2 bndmq4 bndmq6 bsdm bsdm6 bsdm7 bsdm8 fsbndm-w8 ssm 
+FAIL_VERIFY    = smoa fs ssabs hash3 hash5 hash8 so sbndm svm0 svm3 svm4 bww faoso2 faoso4 ufndmq4 \
+	ufndmq6 ufndmq8 ksa kbndm bsdm2 fs-w4 fs-w6 ssecp libc libc1 musl simdkr
+FAIL = gs tunbm gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso4 faoso6 blim ksa \
+	bsdm4 bxs fs-w2 fs-w4 fsbndm-w2 fsbndm-w4 fsbndm-w6 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 \
+	fsbndmq64 fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 tvsbs-w6 \
+	tvsbs-w8 hpbm ssecp libc libc1 simdkr
+TIMEOUT_VERIFY = bm gs ag colussi gg skip askip ffs aut simon fdm bom bom2 dfdm ww ldm ebom fbom \
+	sebom sfbom skip2 skip3 skip4 bndm tndm lbndm dbww dbww2 bsdm3 bsdm4 bsdm5 bxs fsbndmq20 \
+	fsbndmq21 fsbndmq31 fsbndmq32 fsbndmq41 fsbndmq42 fsbndmq43 fsbndmq61 fsbndmq62 fsbndmq64 \
+	fsbndmq81 fsbndmq82 fsbndmq84 fsbndmq86 tsa tsa-q2 tso5 epsm
+NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify:
+	$(MAKE) algocfg
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
 	  echo $$c; \
 	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
