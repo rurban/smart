@@ -149,6 +149,12 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
   return 1;
 }
 
+void free_setP(unsigned char **setP, const int VOLTE) {
+  for (int i = 0; i < VOLTE; i++)
+    free(setP[i]);
+  free(setP);
+}
+
 #ifdef PRETTY_RANDCH
 #define RANDCH(c)                                                              \
   do {                                                                         \
@@ -490,6 +496,7 @@ int main(int argc, char *argv[]) {
           m = PATT_SIZE[il];
           if (m > XSIZE || m < 1 || m > n) {
             fprintf(stderr, "Invalid m %d\n", m);
+            free_setP(setP, VOLTE);
             goto free_shm1;
           }
           setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
@@ -500,14 +507,17 @@ int main(int argc, char *argv[]) {
             for (j = 0; j <= m; j++)
               P[j] = setP[k - 1][j];
             P[m] = '\0'; // ensure zero-termination and valid x[m]
-            if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha))
+            if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha)) {
+              free_setP(setP, VOLTE);
               goto free_shm1;
+            }
           }
         }
       }
     } else {
       if (m > XSIZE || m < 1 || m > n) {
         fprintf(stderr, "Invalid m %d\n", m);
+        free_setP(setP, VOLTE);
         goto free_shm1;
       }
       setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
@@ -518,13 +528,13 @@ int main(int argc, char *argv[]) {
         for (j = 0; j <= m; j++)
           P[j] = setP[k - 1][j];
         P[m] = '\0'; // ensure zero-termination and valid x[m]
-        if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha))
+        if (!attempt(&rip, count, P, m, T, n, algoname, verbose, alpha)) {
+          free_setP(setP, VOLTE);
           goto free_shm1;
+        }
       }
     }
-    for (int i = 0; i < VOLTE; i++)
-      free(setP[i]);
-    free(setP);
+    free_setP(setP, VOLTE);
   }
   //NOLINTEND(clang-analyzer-security.insecureAPI.strcpy)
 
