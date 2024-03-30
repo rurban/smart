@@ -22,11 +22,18 @@ else
     BINDIR = bin/asan
     CFLAGS += -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
   endif
+  ifeq ($(FUZZ),1)
+    CC = /usr/bin/afl-clang-lto
+    BINDIR = bin/fuzz
+    CFLAGS = -O1 -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
+  endif
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
 ifneq ($(ASSERT),1)
   ifneq ($(SANITIZE),1)
-    CFLAGS += -DNDEBUG
+    ifneq ($(FUZZ),1)
+      CFLAGS += -DNDEBUG
+    endif
   endif
 endif
 ifneq ($(ARCH),$(MACHINE))
@@ -54,10 +61,17 @@ ifeq ($(SANITIZE),1)
   SELECTBIN = select-asan
   HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-asan show textgen algocfg
 else
+ifeq ($(FUZZ),1)
+  TESTBIN = test-fuzz
+  SMARTBIN = smart-fuzz
+  SELECTBIN = select
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-fuzz show textgen algocfg
+else
   TESTBIN = test
   SMARTBIN = smart
   SELECTBIN = select
   HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm show textgen algocfg
+endif
 endif
 TESTS := $(shell shuf -n 10 good.lst)
 ifeq ($(TESTS),)
@@ -69,6 +83,8 @@ all: $(BINS) $(HELPERS)
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC)
 	@test -d $(BINDIR) || mkdir $(BINDIR)
 	$(CC) $(CFLAGS) $< -o $@
+./%-fuzz: source/%.c $(SRCINC) source/algos/include/shmids.h
+	$(CC) $(CFLAGS) -DFUZZ $< -std=gnu99 -o $@ -lm
 ./%-asan: source/%.c $(SRCINC) source/algos/include/shmids.h
 	$(CC) $(CFLAGS) $< -std=gnu99 -o $@ -lm
 ./%: source/%.c $(SRCINC) source/algos/include/shmids.h
@@ -76,7 +92,7 @@ $(BINDIR)/%: source/algos/%.c $(ALGOSINC)
 $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
 
-.PHONY: check clean all lint verify fmt cppcheck clang-tidy
+.PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
 check: all
 	-cp source/algorithms.lst source/algorithms.lst.bak
 	$(DRV) ./$(SELECTBIN) -all
@@ -152,6 +168,13 @@ verify-trace:
 	  $(TIMEOUT_3m) cbmc $(CBMC_ARGS_1)  $(CBMC_CHECKS) $$c || \
             (echo cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) " $$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
 	done
+fuzz: test-fuzz
+	for c in $(ALGOSRC); do \
+	  b="`basename $$c .c`"; \
+	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
+	  $(TIMEOUT_1m) afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
+	done
+
 fmt:
 	clang-format -i `find source -name \*.c -o -name \*.h`
 clean:

@@ -67,7 +67,87 @@ clock_t start, end;
 TIMER *_timer;
 int search(unsigned char *p, int m, unsigned char *t, int n);
 
-#ifndef CBMC
+#if defined FUZZ
+
+__AFL_FUZZ_INIT();
+#pragma clang optimize off
+#pragma GCC optimize("O0")
+int main(void) {
+  int m, n;
+  unsigned char *p = NULL, *t = NULL;
+  __AFL_INIT();
+  p = __AFL_FUZZ_TESTCASE_BUF;
+  n = (rand() % 5000) + 32;
+  t = malloc(n + 1);
+  for (int i = 0; i < n; i++)
+    t[i] = rand() % 256;
+  t[n] = '\0';
+  while (__AFL_LOOP(10000)) {
+    m = __AFL_FUZZ_TESTCASE_LEN;
+    if (m > 1 && m < 64)
+      search(p, m, t, n);
+  }
+  free(t);
+  return 0;
+}
+
+#elif defined CBMC
+
+#include <assert.h>
+
+/* the brute force algorithm used for comparing occurrences */
+int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
+  assert(m < 34);
+  assert(n < 36);
+  int count = 0;
+  for (int j = 0; j <= n - m; ++j) {
+    if (memcmp(x, &y[j], m) == 0)
+      count++;
+    //for (i = 0; i < m && x[i] == y[i + j]; ++i)
+    //  ;
+    //if (i >= m)
+    //  count++;
+  }
+  return count;
+}
+
+unsigned char nondet_uchar();
+int nondet_int();
+
+int main(void) {
+#define RANDCH(c) { c = nondet_uchar(); __CPROVER_assume(c > 0 && c <= 255); }
+  int m = nondet_int();
+#ifdef MIN_M
+  __CPROVER_assume(m > MIN_M && m < 34);
+#else
+  __CPROVER_assume(m > 0 && m < 34);
+#endif
+  int n = nondet_int();
+  __CPROVER_assume(n > 0 && n < 36);
+  __CPROVER_assume(m <= n);
+  unsigned char P[34];
+  unsigned char T[36];
+  for (int i = 0; i < m; i++)
+    RANDCH(P[i]);
+  P[m] = '\0';
+  for (int i = 0; i < n; i++)
+    RANDCH(T[i]);
+  T[n] = '\0';
+  __CPROVER_input("P", P);
+  __CPROVER_input("m", m);
+  __CPROVER_input("T", T);
+  __CPROVER_input("n", n);
+
+  int occ = search(P, m, T, n);
+  __CPROVER_output("occ", occ);
+
+  int ref = bf_search(P, m, T, n);
+  __CPROVER_output("ref", ref);
+
+  __CPROVER_assert(ref == occ, "ref == occ");
+}
+
+#else
 
 int main(int argc, char *argv[]) {
   int m, n;
@@ -75,6 +155,7 @@ int main(int argc, char *argv[]) {
 #ifndef __AVR__
   _timer = (TIMER *)malloc(sizeof(TIMER));
 #endif
+  
   if (argc > 1 && strncmp("shared", argv[1], 6) == 0) {
 #ifndef HAVE_SHM
     return 1;
@@ -149,59 +230,4 @@ int main(int argc, char *argv[]) {
   }
 }
 
-#else // CBMC
-
-#include <assert.h>
-
-/* the brute force algorithm used for comparing occurrences */
-int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
-  assert(m < 34);
-  assert(n < 36);
-  int count = 0;
-  for (int j = 0; j <= n - m; ++j) {
-    if (memcmp(x, &y[j], m) == 0)
-      count++;
-    //for (i = 0; i < m && x[i] == y[i + j]; ++i)
-    //  ;
-    //if (i >= m)
-    //  count++;
-  }
-  return count;
-}
-
-unsigned char nondet_uchar();
-int nondet_int();
-
-int main(void) {
-#define RANDCH(c) { c = nondet_uchar(); __CPROVER_assume(c > 0 && c <= 255); }
-  int m = nondet_int();
-#ifdef MIN_M
-  __CPROVER_assume(m > MIN_M && m < 34);
-#else
-  __CPROVER_assume(m > 0 && m < 34);
-#endif
-  int n = nondet_int();
-  __CPROVER_assume(n > 0 && n < 36);
-  __CPROVER_assume(m <= n);
-  unsigned char P[34];
-  unsigned char T[36];
-  for (int i = 0; i < m; i++)
-    RANDCH(P[i]);
-  P[m] = '\0';
-  for (int i = 0; i < n; i++)
-    RANDCH(T[i]);
-  T[n] = '\0';
-  __CPROVER_input("P", P);
-  __CPROVER_input("m", m);
-  __CPROVER_input("T", T);
-  __CPROVER_input("n", n);
-
-  int occ = search(P, m, T, n);
-  __CPROVER_output("occ", occ);
-
-  int ref = bf_search(P, m, T, n);
-  __CPROVER_output("ref", ref);
-
-  __CPROVER_assert(ref == occ, "ref == occ");
-}
 #endif
