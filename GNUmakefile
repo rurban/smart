@@ -113,9 +113,9 @@ CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
-# UNSATISFIABLE. passes, but needs more depth
+# UNSATISFIABLE. passes, but needs more depth or builtins (nested loops => memset)
 UNSATISFIABLE  = bf ac tunbm smith br akc bfs graspm ssef skip5 skip6 skip7 skip8 bndml \
-	bmh-sbndm aoso2 aoso4 aoso6 blim bndmq2 bndmq4 bndmq6 bsdm bsdm6 bsdm7 bsdm8 fsbndm-w8 ssm 
+	bmh-sbndm aoso2 aoso4 aoso6 blim bndmq2 bndmq4 bndmq6 bsdm bsdm6 bsdm8 fsbndm-w8 ssm 
 FAIL_VERIFY    = smoa fs ssabs hash3 hash5 hash8 so sbndm svm0 svm3 svm4 bww faoso2 faoso4 ufndmq4 \
 	ufndmq6 ufndmq8 ksa kbndm bsdm2 fs-w4 fs-w6 ssecp libc libc1 musl simdkr
 FAIL = gs tunbm gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso4 faoso6 blim ksa \
@@ -123,7 +123,7 @@ FAIL = gs tunbm gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso
 	fsbndmq64 fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 tvsbs-w6 \
 	tvsbs-w8 hpbm ssecp libc libc1 simdkr
 TIMEOUT_VERIFY = bm gs ag colussi gg skip askip ffs aut simon fdm bom bom2 dfdm ww ldm ebom fbom \
-	sebom sfbom skip2 skip3 skip4 bndm tndm lbndm dbww dbww2 bsdm3 bsdm4 bsdm5 bxs fsbndmq20 \
+	sebom sfbom skip2 skip3 skip4 bndm tndm lbndm dbww dbww2 bsdm3 bsdm4 bsdm5 bsdm7 bxs fsbndmq20 \
 	fsbndmq21 fsbndmq31 fsbndmq32 fsbndmq41 fsbndmq42 fsbndmq43 fsbndmq61 fsbndmq62 fsbndmq64 \
 	fsbndmq81 fsbndmq82 fsbndmq84 fsbndmq86 tsa tsa-q2 tso5 epsm
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
