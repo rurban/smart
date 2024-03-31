@@ -47,7 +47,7 @@ jobs:
     - uses: actions/checkout@v4
     - run: |
         sudo apt-get -y install cbmc
-    - run: make check-verify
+    - run: make algocfg check-verify
   windows:
     runs-on: windows-latest
     timeout-minutes: 10

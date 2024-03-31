@@ -10,6 +10,9 @@
 /select-asan
 /smart-asan
 /test-asan
+/compilesm-fuzz
+/smart-fuzz
+/test-fuzz
 algorithms.lst
 /data/rand128/rand128.txt
 /data/rand16/rand16.txt
@@ -28,3 +31,4 @@ algorithms.lst
 /source/3rd/
 /source/algos/new/
 /fuzz/
+/verify/

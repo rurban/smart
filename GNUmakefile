@@ -91,6 +91,10 @@ $(BINDIR)/%: source/algos/%.c $(ALGOSINC)
 	$(CC) $(CFLAGS) $< -std=gnu99 -o $@ -lm
 $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
+verify/%.vfy: source/algos/%.c $(ALGOSINC)
+	$(TIMEOUT_3m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $< >$@
+verify/%.vfy-trace: source/algos/%.c $(ALGOSINC)
+	$(TIMEOUT_3m) cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) $< >$@
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
 check: all
@@ -123,7 +127,8 @@ sanitizer.log: $(ALLSRC)
 	-rm -f sanitizer.log 2>/dev/null
 	-./sanitizer.sh 2>sanitizer.log
 
-CBMC_ARGS_0 = -DCBMC --depth 256 --unwind 256 --unwinding-assertions --slice-formula
+DEPTH_0 := --depth 256
+CBMC_ARGS_0 = -DCBMC $(DEPTH_0) --unwind 256 --unwinding-assertions --slice-formula
 CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
@@ -160,7 +165,9 @@ check-verify:
             (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
 	done
 # prints the violations
-CBMC_ARGS_1 = -DCBMC --depth 1024 --unwind 256 --unwinding-assertions --slice-formula --trace
+# 1024 = 32 * 32 (double-nested m loop)
+DEPTH_1 := --depth 1024
+CBMC_ARGS_1 = -DCBMC $(DEPTH_1) --unwind 256 --unwinding-assertions --slice-formula --trace
 verify-trace:
 	for c in $(ALGOSRC); do \
 	  echo $$c; \
