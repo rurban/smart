@@ -566,8 +566,8 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
   fprintf(fp, "<script src=\"../js/RGraph.common.effects.js\"></script>");
   fprintf(fp, "<script src=\"../js/RGraph.line.js\"></script>");
   fprintf(fp, "<script src=\"../js/RGraph.bar.js\"></script>");
-  fprintf(fp, "<script src=\"../RGraph.common.dynamic.js\"></script>");
-  fprintf(fp, "<script src=\"../RGraph.common.tooltips.js\"></script>");
+  fprintf(fp, "<script src=\"../js/RGraph.common.dynamic.js\"></script>");
+  fprintf(fp, "<script src=\"../js/RGraph.common.tooltips.js\"></script>");
   fprintf(fp, "<script src=\"../js/Smart.TimeResultFormatting.js\"></script>");
   fprintf(fp, "<link href='https://fonts.googleapis.com/css?family=Dosis:300' "
               "rel='stylesheet' type='text/css'>");
