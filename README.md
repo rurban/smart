@@ -71,7 +71,7 @@ And some implementations didn't free their temp. buffers.
 
 ## Benchmarks
 
-* [Best](https://rurban.github.io/smart/results/best25/)
+* [Best](https://rurban.github.io/smart/results/best20/)
 * [All](https://rurban.github.io/smart/results/all/)
 
 ## Reference
