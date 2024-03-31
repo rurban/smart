@@ -69,7 +69,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     j2 = (k + 1) * m - 1;
     /* Left to right scanning */
     l = suf = left = 0;
-    D = ~0;
+    D = ~0U;
     while (D) {
       D &= (B[y[j1 + l]] << 16) | B[y[j2 + l]];
       H = D & M;
@@ -82,7 +82,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       D <<= 1;
     }
     /* Right to left scanning */
-    D = ~0;
+    D = ~0U;
     l = 0;
     while (D != 0 && left > l) {
       D &= (C[y[j1 - l]] << 16) | C[y[j2 - l]];

@@ -52,7 +52,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   while (j <= n - m) {
     i = m - 1;
     last = m;
-    D = ~0;
+    D = ~0U;
     while (i >= 0 && D != 0) {
       D &= B[y[j + i]];
       i--;
@@ -102,7 +102,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   while (j <= n - m) {
     i = m - 1;
     last = m;
-    D = ~0;
+    D = ~0U;
     while (i >= 0 && D != 0) {
       D &= B[y[j + i]];
       i--;

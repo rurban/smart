@@ -29,7 +29,7 @@ int preSo(unsigned char *x, int m, unsigned int S[]) {
   unsigned int j, lim;
   int i;
   for (i = 0; i < SIGMA; ++i)
-    S[i] = ~0;
+    S[i] = ~0U;
   for (lim = i = 0, j = 1; i < m; ++i, j <<= 1) {
     S[x[i]] &= ~j;
     lim |= j;
@@ -55,7 +55,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   /* Searching */
   BEGIN_SEARCHING
   count = 0;
-  for (D = ~0, j = 0; j < n; ++j) {
+  for (D = ~0U, j = 0; j < n; ++j) {
     D = (D << 1) | S[y[j]];
     if (D < lim)
       OUTPUT(j - m + 1);
@@ -87,7 +87,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   /* Searching */
   BEGIN_SEARCHING
   count = 0;
-  for (D = ~0, j = 0; j < n; ++j) {
+  for (D = ~0U, j = 0; j < n; ++j) {
     D = (D << 1) | S[y[j]];
     if (D < lim) {
       k = 0;

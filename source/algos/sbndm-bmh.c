@@ -129,7 +129,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
     hbc[x[i]] = (2 * m) - i - 1;
   last = m;
   s = ~0U << (WORD - m);
-  //s = (unsigned int)(~0);
+  //s = (unsigned int)(~0U);
   for (i = m - 1; i >= 0; i--) {
     s &= B[x[i]];
     if (s & (1U << (WORD - 1))) {

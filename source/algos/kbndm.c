@@ -85,7 +85,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     int k = 1;
     int l = y[j] == x[0];
     unsigned char c = y[j];
-    WORD_TYPE D = ~0;
+    WORD_TYPE D = ~0U;
     WORD_TYPE D_;
     do {
       D = D & B[c][y[j - k]];

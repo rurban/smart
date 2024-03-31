@@ -80,7 +80,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     ++h;
   }
   for (i = 0; i < SIGMA; ++i)
-    B[i] = ~0;
+    B[i] = ~0U;
   h = mm = 0;
   for (j = 0; j < q; ++j) {
     for (i = 0; i < mq; ++i) {
@@ -167,7 +167,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
     ++h;
   }
   for (i = 0; i < SIGMA; ++i)
-    B[i] = ~0;
+    B[i] = ~0U;
   h = mm = 0;
   for (j = 0; j < q; ++j) {
     for (i = 0; i < mq; ++i) {
