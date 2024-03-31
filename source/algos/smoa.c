@@ -17,6 +17,7 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  */
 
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 
@@ -25,7 +26,9 @@ void nextMaximalSuffix(unsigned char *x, int m, int *i, int *j, int *k,
                        int *p) {
   char a, b;
 
+  // m = i + 1, k = 1, j <= n - m
   while (*j + *k < m) {
+    assert(*i + *k < m);
     a = x[*i + *k];
     b = x[*j + *k];
     if (a == b)
@@ -52,6 +55,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
   BEGIN_PREPROCESSING
   END_PREPROCESSING
+
   BEGIN_SEARCHING
   count = 0;
   /* Searching */
