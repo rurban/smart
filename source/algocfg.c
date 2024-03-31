@@ -57,7 +57,7 @@ struct algocfg {
 const struct algocfg ALGOCFGS[] = {
     // clang-format off
   // Comparison based Algorithms
-  [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256}, // 7m with 1024 but still UNSAT,
+  [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 0, 256}, // 7m with 1024 but still UNSAT,
   // needs memcmp for SAT as in main.h
   [_MP] = {_MP, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_KMP] = {_KMP, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},

@@ -31,10 +31,15 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   count = 0;
   for (j = 0; j <= n - m; ++j) {
+#ifndef CBMC
     for (i = 0; i < m && x[i] == y[i + j]; ++i)
       ;
     if (i >= m)
       OUTPUT(j);
+#else // verify would timeout without the builtin
+    if (memcmp(x, &y[j], m) == 0)
+      OUTPUT(j);
+#endif
   }
   END_SEARCHING
   return count;
