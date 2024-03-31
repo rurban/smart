@@ -4,10 +4,10 @@ ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
 # to detect mingw
 TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
 TIMEOUT_1m := timeout 1m
-TIMEOUT_3m := timeout 3m
+TIMEOUT_4m := timeout 4m
 ifeq (, $(shell which timeout))
   TIMEOUT_1m =
-  TIMEOUT_3m =
+  TIMEOUT_4m =
 endif
 BINDIR   := bin
 ALGOSINC := $(wildcard source/algos/include/*.h)
@@ -92,9 +92,15 @@ $(BINDIR)/%: source/algos/%.c $(ALGOSINC)
 $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
 verify/%.vfy: source/algos/%.c $(ALGOSINC)
-	$(TIMEOUT_3m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $< >$@
+	@$(MAKE) -s algocfg
+	b=`basename $@ .vfy`; args=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
+	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC)
-	$(TIMEOUT_3m) cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) $< >$@
+	@$(MAKE) -s algocfg
+	b=`basename $@ .vfy-trace`; args=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
+	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
 check: all
@@ -127,14 +133,14 @@ sanitizer.log: $(ALLSRC)
 	-rm -f sanitizer.log 2>/dev/null
 	-./sanitizer.sh 2>sanitizer.log
 
-DEPTH_0 := --depth 256
-CBMC_ARGS_0 = -DCBMC $(DEPTH_0) --unwind 256 --unwinding-assertions --slice-formula
+# MAX_M 10 * MAX_N 36
+CBMC_ARGS = -DCBMC --slice-formula
 CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
-# UNSATISFIABLE. passes, but needs more depth or builtins (nested loops => memset)
+# UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
 UNSATISFIABLE  = bf ac tunbm smith br akc bfs graspm ssef skip5 skip6 skip7 skip8 bndml \
 	bmh-sbndm aoso2 aoso4 aoso6 blim bndmq2 bndmq4 bndmq6 bsdm bsdm6 bsdm8 fsbndm-w8 ssm 
 FAIL_VERIFY    = smoa fs ssabs hash3 hash5 hash8 so sbndm svm0 svm3 svm4 bww faoso2 faoso4 ufndmq4 \
@@ -148,33 +154,33 @@ TIMEOUT_VERIFY = bm gs ag colussi gg skip askip ffs aut simon fdm bom bom2 dfdm 
 	fsbndmq21 fsbndmq31 fsbndmq32 fsbndmq41 fsbndmq42 fsbndmq43 fsbndmq61 fsbndmq62 fsbndmq64 \
 	fsbndmq81 fsbndmq82 fsbndmq84 fsbndmq86 tsa tsa-q2 tso5 epsm
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
-verify:
-	$(MAKE) algocfg
+verify: verify/verify.log
+verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
-	  echo $$c; \
-	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
-	  $(TIMEOUT_1m)  cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c || \
-            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
-	done
+	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
+            (echo cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; grep "^$$b.c" good.lst && exit 1); \
+	done | tee verify/verify.log
 check-verify:
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \
-	  echo $$c; \
-	  echo $(TIMEOUT_1m) cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c; \
-	  $(TIMEOUT_1m)  cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) $$c || \
-            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
+	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
+            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; \
+	     grep "^$$b.c" good.lst && exit 1); \
 	done
 # prints the violations
-# 1024 = 32 * 32 (double-nested m loop)
-DEPTH_1 := --depth 1024
-CBMC_ARGS_1 = -DCBMC $(DEPTH_1) --unwind 256 --unwinding-assertions --slice-formula --trace
-verify-trace:
-	for c in $(ALGOSRC); do \
-	  echo $$c; \
-	  echo $(TIMEOUT_3m) cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) $$c; \
-	  $(TIMEOUT_3m) cbmc $(CBMC_ARGS_1)  $(CBMC_CHECKS) $$c || \
-            (echo cbmc $(CBMC_ARGS_1) $(CBMC_CHECKS) " $$c FAILED"; b=`basename $$c .c`; grep "^$$b.c" good.lst && exit 1); \
-	done
+verify-trace: verify/trace.log
+verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
+	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
+	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
+	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
+            (echo cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) " $$c FAILED"; \
+	     grep "^$$b.c" good.lst && exit 1); \
+	done | tee verify/trace.log
 fuzz: test-fuzz
 	for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; \

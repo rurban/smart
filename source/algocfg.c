@@ -58,8 +58,8 @@ const struct algocfg ALGOCFGS[] = {
     // clang-format off
   // Comparison based Algorithms
   [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 0, 256}, // 7m with 1024 but still UNSAT,
-  // needs memcmp for SAT as in main.h
-  [_MP] = {_MP, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
+          // needs memcmp for SAT as in main.h
+  [_MP] = {_MP, GOOD, ASAN, VFY_PASS, 0, 0, 512, 0}, // 3m
   [_KMP] = {_KMP, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_BM] = {_BM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
   [_HOR] = {_HOR, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
@@ -383,6 +383,13 @@ int main(int argc, char **argv) {
       printf("%d\n", ALGOCFGS[id].depth);
     else if (strcmp(cfg, "unwind") == 0)
       printf("%d\n", ALGOCFGS[id].unwind);
+    else if (strcmp(cfg, "cbmc") == 0) {
+      if (ALGOCFGS[id].depth)
+        printf("--depth %d ", ALGOCFGS[id].depth);
+      if (ALGOCFGS[id].unwind)
+        printf("--unwind %d ", ALGOCFGS[id].unwind);
+      printf("\n");
+    }
     else if (strcmp(cfg, "minlen") == 0)
       printf("%d\n", ALGOCFGS[id].minlen);
     else if (strcmp(cfg, "maxlen") == 0)

@@ -54,7 +54,7 @@
 #define ATTRIBUTE_MALLOC
 #endif
 
-#if !(defined(_WIN32) || defined(__AVR__))
+#if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC))
 #define HAVE_SHM
 #endif
 

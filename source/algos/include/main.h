@@ -21,9 +21,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef CBMC
-#undef HAVE_SHM
-#endif
 #include "shmids.h"
 #include <sys/types.h>
 
@@ -94,11 +91,17 @@ int main(void) {
 #elif defined CBMC
 
 #include <assert.h>
+#define MAX_M 10
+#define MAX_N 36
+#undef XSIZE
+#undef YSIZE
+#define XSIZE MAX_M
+#define YSIZE MAX_N
 
 /* the brute force algorithm used for comparing occurrences */
 int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
-  assert(m < 34);
-  assert(n < 36);
+  assert(m < MAX_M);
+  assert(n < MAX_N);
   int count = 0;
   for (int j = 0; j <= n - m; ++j) {
     if (memcmp(x, &y[j], m) == 0)
@@ -118,15 +121,15 @@ int main(void) {
 #define RANDCH(c) { c = nondet_uchar(); __CPROVER_assume(c > 0 && c <= 255); }
   int m = nondet_int();
 #ifdef MIN_M
-  __CPROVER_assume(m > MIN_M && m < 34);
+  __CPROVER_assume(m > MIN_M && m < MAX_M);
 #else
-  __CPROVER_assume(m > 0 && m < 34);
+  __CPROVER_assume(m > 0 && m < MAX_M);
 #endif
   int n = nondet_int();
-  __CPROVER_assume(n > 0 && n < 36);
+  __CPROVER_assume(n > 0 && n < MAX_N);
   __CPROVER_assume(m <= n);
-  unsigned char P[34];
-  unsigned char T[36];
+  unsigned char P[MAX_M];
+  unsigned char T[MAX_N];
   for (int i = 0; i < m; i++)
     RANDCH(P[i]);
   P[m] = '\0';
