@@ -33,6 +33,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   //NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
   memset(B, 0, 256 * 8);
   mask = ~UINT64_C(0) >> (64 - m);
+  //uint64_t def = ~UINT64_C(0) & mask;
   for (j = 0; j < 256; B[j++] = ~UINT64_C(0))
     ;
   for (j = 0; j < m; ++j)
@@ -58,13 +59,14 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
               (B1[T[i + 1]] >> 1) |
               ((i + 2 <= n) ? (B1[T[i + 2]] >> 2) : 0))) != ~UINT64_C(0)) {
       j = 3;
-      assert(i - j >= 0);
-      assert(i + j < n);
-      while ((j < m) && ((D |= ((B1[T[i - j]] << j) | (B1[T[i + j]] >> j))) !=
-                         (~UINT64_C(0)))) {
+      //assert(i - j >= 0);
+      //assert(i + j < n);
+      while ((j < m) &&
+             ((D |= ((i - j >= 0 ? B1[T[i - j]] << j : 0) |
+                     (i + j < n ? B1[T[i + j]] >> j : 0))) != (~UINT64_C(0)))) {
         j++;
-        assert(j < m && i - j >= 0);
-        assert(j < m && i + j < n);
+        //assert(j < m && i - j >= 0);
+        //assert(j < m && i + j < n);
       }
 
       // TODO: OUTPUT
