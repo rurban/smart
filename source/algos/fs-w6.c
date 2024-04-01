@@ -47,6 +47,7 @@
 
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
   int i, j, p, f[XSIZE];
@@ -75,8 +76,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   int l1, l2, l3, l4, l5, l6;
   int count, hbcr[SIGMA], hbcl[SIGMA], gsR[XSIZE], gsL[XSIZE];
   unsigned char Pr[XSIZE];
-  if (n < 8)
-    return -1; // todo search_large
+  if (n < 6)
+    return search_small(P, m, T, n);
 
   /* proprocessing */
   BEGIN_PREPROCESSING

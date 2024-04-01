@@ -282,7 +282,7 @@ const struct algo ALGOS[] = {
   [_KMP] = {_KMP, OK, "kmp", "Knuth-Morris Pratt", 0, 0},
   [_BM] = {_BM, OK, "bm", "Boyer-Moore", 0, 0},
   [_HOR] = {_HOR, OK, "hor", "Hoorspool", 0, 0},
-  [_GS] = {_GS, FAIL, "gs", "Galil Seiferas", 0, 0}, // UNSATISFIABLE
+  [_GS] = {_GS, OK, "gs", "Galil Seiferas", 0, 0}, // highly recursive with globals
   [_AG] = {_AG, OK, "ag", "Apostolico-Giancarlo", 0, 0},
   [_KR] = {_KR, OK, "kr", "Karp-Rabin", 0, 0},
   [_ZT] = {_ZT, OK, "zt", "Zhu-Takaoka", 2, 0},
@@ -295,10 +295,10 @@ const struct algo ALGOS[] = {
   [_TBM] = {_TBM, OK, "tbm", "Turbo Boyer-Moore", 0, 0},
   [_Colussi] = {_Colussi, OK, "colussi", "Colussi", 0, 0},
   [_Smith] = {_Smith, OK, "smith", "Smith", 0, 0},
-  [_GG] = {_GG, FAIL, "gg", "Galil-Giancarlo", 0, 0}, // TIMEOUT
+  [_GG] = {_GG, OK, "gg", "Galil-Giancarlo", 0, 0},
   [_Raita] = {_Raita, OK, "raita", "Raita", 2, 0},
   [_SMOA] = {_SMOA, OK, "smoa", "String Matching on Ordered Alphabets", 0, 0},
-  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0}, // UNSATISFIABLE
+  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0},
   [_Skip] = {_Skip, OK, "skip", "Skip Search", 0, 0},
   [_KMPSkip] = {_KMPSkip, OK, "kmpskip", "KMP Skip Search", 0, 0},
   [_ASkip] = {_ASkip, OK, "askip", "Alpha Skip Search", 0, 0},
@@ -326,19 +326,19 @@ const struct algo ALGOS[] = {
   [_TSW] = {_TSW, OK, "tsw", "Two-Sliding-Window", 0, 0}, // m < n - 3
   [_BMH2] = {_BMH2, 0, "bmh2", "Boyer-Moore-Horspool with q-grams (BMH2)", 2, MISSING},
   [_BMH4] = {_BMH4, 0, "bmh4", "Boyer-Moore-Horspool with q-grams (BMH4)", 4, MISSING},
-  [_GRASPm] = {_GRASPm, FAIL, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0}, // UNSATISFIABLE
+  [_GRASPm] = {_GRASPm, FAIL, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0},
   [_SSEF] = {_SSEF, X64_ONLY, "ssef", "SSEF (K=7)", 32, 0},
   // Algorithms based on automata
   [_AUT] = {_AUT, OK, "aut", "Automaton Matcher", 0, 0},
   [_RF] = {_RF, OK, "rf", "Reverse-Factor", 0, 0},
   [_TRF] = {_TRF, OK, "trf", "Turbo Reverse factor", 0, 0},
-  [_Simon] = {_Simon, FAIL, "simon", "Simon", 0, 0}, // TIMEOUT
+  [_Simon] = {_Simon, FAIL, "simon", "Simon", 0, 0},
   [_FDM] = {_FDM, OK, "fdm", "Forward-DAWG-Match", 0, 0},
   [_BOM] = {_BOM, OK, "bom", "BOM", 0, 0},
   [_BOM2] = {_BOM2, OK, "bom2", "BOM2", 0, 0},
   [_DFDM] = {_DFDM, OK, "dfdm", "Double Forward DAWG Matching", 0, 0},
   [_WW] = {_WW, OK, "ww", "Wide Window", 0, 0},
-  [_LDM] = {_LDM, FAIL, "ldm", "Linear DAWG Matching", 0, 0},  // TIMEOUT
+  [_LDM] = {_LDM, FAIL, "ldm", "Linear DAWG Matching", 0, 0},
   [_ILDM1] = {_ILDM1, OK, "ildm1", "ILDM1", 0, 0},
   [_ILDM2] = {_ILDM2, OK, "ildm2", "ILDM2", 0, 0},
   [_EBOM] = {_EBOM, OK, "ebom", "Extended Backward Oracle Matching", 0, 0},
@@ -363,7 +363,7 @@ const struct algo ALGOS[] = {
   [_SBNDM] = {_SBNDM, OK, "sbndm", "Simplified BNDM", 0, 0},
   [_TNDM] = {_TNDM, OK, "tndm", "Two-Way Nondeterministic DAWG Matching", 0, 0},
   [_TNDMa] = {_TNDMa, OK, "tndma", "Two-Way Nondeterministic DAWG Matching (version 2)", 0, 0},
-  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 0, 0}, // TIMEOUT
+  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 0, 0},
   // hg BNDM with q-grams
   // bg BNDM with q-grams, and parallel search
   [_SVM0] = {_SVM0, OK, "svm0", "shift vector matching (version 0)", 0, 0},
@@ -373,16 +373,16 @@ const struct algo ALGOS[] = {
   [_SVM4] = {_SVM4, OK, "svm4", "shift vector matching (version 4)", 0, 0},
   [_SBNDM2] = {_SBNDM2, OK, "sbndm2", "simplified bndm with loop-unrolling", 0, 0},
   [_SBNDM_BMH] = {_SBNDM_BMH, OK, "sbndm-bmh", "sbndm with horspool shift", 2, 0},
-  [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0}, // UNSATISFIABLE
+  [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0},
   [_FNDM] = {_FNDM, OK, "fndm", "forward nondeterministic dawg matching", 0, 0},
   [_BWW] = {_BWW, OK, "bww", "bit parallel wide window", 0, 0},
   [_FAOSO2] = {_FAOSO2, OK, "faoso2", "fast average optimal shift-or (u=2,m>2)", 3, 0},
-  [_FAOSO4] = {_FAOSO4, FAIL, "faoso4", "fast average optimal shift-or (u=2,m>4)", 5, 0}, // UNSATISFIABLE
-  [_FAOSO6] = {_FAOSO6, FAIL, "faoso6", "fast average optimal shift-or (u=2,m>6)", 7, 0}, // UNSATISFIABLE
+  [_FAOSO4] = {_FAOSO4, FAIL, "faoso4", "fast average optimal shift-or (u=2,m>4)", 5, 0},
+  [_FAOSO6] = {_FAOSO6, FAIL, "faoso6", "fast average optimal shift-or (u=2,m>6)", 7, 0},
   [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
   [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
   [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
-  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0}, // UNSATISFIABLE
+  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0},
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
   [_BNDMq4] = {_BNDMq4, OK, "bndmq4", "bndm with q-grams", 4, 0},
@@ -398,13 +398,13 @@ const struct algo ALGOS[] = {
   [_SABP] = {_SABP, OK, "sabp", "Small Alphabet Bit Parallel", 0, 0},
   [_DBWW] = {_DBWW, OK, "dbww", "Double BWW", 0, 0},
   [_DBWW2] = {_DBWW2, OK, "dbww2", "Double BWW", 0, 0},
-  [_KSA] = {_KSA, FAIL, "ksa", "Factorized Shift-And", 0, 0}, // VERIFICATION FAILED occ
+  [_KSA] = {_KSA, OK, "ksa", "Factorized Shift-And", 0, 0},
   [_KBNDM] = {_KBNDM, OK, "kbndm", "Factorized BNDM", 0, 0},
   // new algorithms
   [_BSDM] = {_BSDM, OK, "bsdm", "Backward SNR DAWG Matching", 0, 0},
   [_BSDM2] = {_BSDM2, OK, "bsdm2", "Backward SNR DAWG Matching (m>=2)", 2, 0},
   [_BSDM3] = {_BSDM3, OK, "bsdm3", "Backward SNR DAWG Matching (m>=3)", 3, 0},
-  [_BSDM4] = {_BSDM4, FAIL, "bsdm4", "Backward SNR DAWG Matching (m>=4)", 4, 0}, // TIMEOUT
+  [_BSDM4] = {_BSDM4, OK, "bsdm4", "Backward SNR DAWG Matching (m>=4)", 4, 0},
   [_BSDM5] = {_BSDM5, OK, "bsdm5", "Backward SNR DAWG Matching (m>=5)", 5, 0},
   [_BSDM6] = {_BSDM6, OK, "bsdm6", "Backward SNR DAWG Matching (m>=6)", 6, 0},
   [_BSDM7] = {_BSDM7, OK, "bsdm7", "Backward SNR DAWG Matching (m>=7)", 7, 0},
@@ -418,18 +418,18 @@ const struct algo ALGOS[] = {
   [_BXS8] = {_BXS8, OK, "bxs8", "BXS with q-grams limit", 8, 0},
   // _BQL = {_BQL,  OK, "bql", "BNDMq Long", 8, MISSING},
   [_FS_W1] = {_FS_W1, OK, "fs-w1", "Multiple Sliding Windows", 0, 0},
-  [_FS_W2] = {_FS_W2, FAIL, "fs-w2", "Multiple Sliding Windows", 0, 0},
-  [_FS_W4] = {_FS_W4, FAIL, "fs-w4", "Multiple Sliding Windows", 0, 0}, // n>=6
-  [_FS_W6] = {_FS_W6, OK, "fs-w6", "Multiple Sliding Windows", 0, 0}, // n>=8
-  [_FS_W8] = {_FS_W8, OK, "fs-w8", "Multiple Sliding Windows", 0, 0},
+  [_FS_W2] = {_FS_W2, RNDCRASH, "fs-w2", "Multiple Sliding Windows", 0, 0},
+  [_FS_W4] = {_FS_W4, RNDCRASH, "fs-w4", "Multiple Sliding Windows", 0, 0}, // n>=6, needs m space at the end of T
+  [_FS_W6] = {_FS_W6, RNDCRASH, "fs-w6", "Multiple Sliding Windows", 0, 0}, // n>=8, needs m space at the end of T
+  [_FS_W8] = {_FS_W8, RNDCRASH, "fs-w8", "Multiple Sliding Windows", 0, 0}, // needs m space at the end of T
   [_FSBNDM_W1] =
         {_FSBNDM_W1, OK, "fsbndm-w1", "fsbndm with multiple sliding windows", 0, 0},
-  [_FSBNDM_W2] =
+  [_FSBNDM_W2] = // n > m
         {_FSBNDM_W2, RNDCRASH, "fsbndm-w2", "fsbndm with multiple sliding windows", 2, 0},
   [_FSBNDM_W4] =
-        {_FSBNDM_W4, RNDCRASH, "fsbndm-w4", "fsbndm with multiple sliding windows", 0, 0},
+        {_FSBNDM_W4, RNDCRASH, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
   [_FSBNDM_W6] =
-        {_FSBNDM_W6, RNDCRASH, "fsbndm-w6", "fsbndm with multiple sliding windows", 0, 0},
+        {_FSBNDM_W6, RNDCRASH, "fsbndm-w6", "fsbndm with multiple sliding windows", 6, 0},
   [_FSBNDM_W8] =
         {_FSBNDM_W8, OK, "fsbndm-w8", "fsbndm with multiple sliding windows", 11, 0},
   [_FSBNDMQ20] =
@@ -471,7 +471,7 @@ const struct algo ALGOS[] = {
   [_LWFR8] = {_LWFR8, OK, "lwfr8", "Weak Factor Recognizer, Linear Version", 8, 0},
   [_QF23] = {_QF23, OK, "qf23", "Q-gram Filtering q=2 s=3", 3, 0},
   [_QF24] = {_QF24, OK, "qf24", "Q-gram Filtering q=2 s=4", 3, 0},
-  [_QF26] = {_QF26, FAIL, "qf26", "Q-gram Filtering q=2 s=6", 3, 0},
+  [_QF26] = {_QF26, OK, "qf26", "Q-gram Filtering q=2 s=6", 3, 0},
   [_QF28] = {_QF28, OK, "qf28", "Q-gram Filtering q=2 s=8", 3, 0},
   [_QF33] = {_QF33, OK, "qf33", "Q-gram Filtering q=3 s=3", 4, 0},
   [_QF34] = {_QF34, OK, "qf34", "Q-gram Filtering q=3 s=4", 4, 0},
@@ -536,7 +536,7 @@ const struct algo ALGOS[] = {
   // state of the art:
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
   [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
-  [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0}, // broken
+  [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0},
   [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
   [_LIBC] = {_LIBC, FAIL, "libc", "strstr", 0, 0}, // no \0
   [_LIBC1] = {_LIBC1, RNDCRASH, "libc1", "memmem", 0, 0},
