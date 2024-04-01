@@ -245,6 +245,9 @@ enum algo_id {
   _WC,  // Tailed Substring algorithm
   _WOM, // Worst Occurrence Matcher
   _DOUBLEHASH, // Bicer-Zhang 2019
+  _BRAM3,
+  _BRAM5,
+  _BRAM7,
   // state of the art:
   _FT3,   // Parallel Boyer-Moore with goodsuff, Lecroq 2024
   _HPBM,  // HP Parallel Boyer-Moore, Jeong et al 2015
@@ -529,6 +532,9 @@ const struct algo ALGOS[] = {
   [_WC] = {_WC, OK, "wc", "Tailed Substring algorithm", 0, 0},
   [_WOM] = {_WOM, OK, "wom", "Worst Occurrence Matcher", 0, 0},
   [_DOUBLEHASH] = {_DOUBLEHASH, OK, "doublehash", "Double-Hash hybrid", 0, 0},
+  [_BRAM3] = {_BRAM3, OK, "bram3", "bram3", 3, 0},
+  [_BRAM5] = {_BRAM5, OK, "bram5", "bram5", 5, 0},
+  [_BRAM7] = {_BRAM7, OK, "bram7", "bram7", 7, 0},
   // state of the art:
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
   [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
