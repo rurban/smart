@@ -94,12 +94,10 @@ $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 verify/%.vfy: source/algos/%.c $(ALGOSINC)
 	@$(MAKE) -s algocfg
 	b=`basename $@ .vfy`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
 	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC)
 	@$(MAKE) -s algocfg
 	b=`basename $@ .vfy-trace`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
 	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
@@ -163,7 +161,6 @@ verify: verify/verify.log
 verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
             (echo cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; \
 	    test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
@@ -171,18 +168,16 @@ verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 check-verify:
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \
-	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
-            (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; \
+            (echo cbmc $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done
 # prints the violations
 verify-trace: verify/trace.log
 verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
-	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
             (echo cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) " $$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
