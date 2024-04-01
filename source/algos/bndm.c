@@ -99,7 +99,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   j = 0;
   count = 0;
-  while (j <= n - m) {
+  while (j <= n - p_len) {
     i = m - 1;
     last = m;
     D = ~0U;
@@ -114,7 +114,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
           while (k < p_len && x[k] == y[j + k])
             k++;
           if (k == p_len)
-            count++;
+            OUTPUT(j);
         }
       }
       D <<= 1;
