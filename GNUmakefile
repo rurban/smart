@@ -141,11 +141,11 @@ CBMC_CHECKS=--bounds-check --pointer-check --memory-leak-check            \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
-UNSATISFIABLE  = bf ac tunbm smith br akc bfs graspm ssef skip5 skip6 skip7 skip8 bndml \
+UNSATISFIABLE  = bf ac smith br akc bfs graspm ssef skip5 skip6 skip7 skip8 bndml \
 	bmh-sbndm aoso2 aoso4 aoso6 blim bndmq2 bndmq4 bndmq6 bsdm bsdm6 bsdm8 fsbndm-w8 ssm 
 FAIL_VERIFY    = smoa fs ssabs hash3 hash5 hash8 so sbndm svm0 svm3 svm4 bww faoso2 faoso4 ufndmq4 \
 	ufndmq6 ufndmq8 ksa kbndm bsdm2 fs-w4 fs-w6 ssecp libc libc1 musl simdkr
-FAIL = gs tunbm gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso4 faoso6 blim ksa \
+FAIL = gs gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso4 faoso6 blim ksa \
 	bsdm4 bxs fs-w2 fs-w4 fsbndm-w2 fsbndm-w4 fsbndm-w6 fsbndmq32 fsbndmq42 fsbndmq43 fsbndmq62 \
 	fsbndmq64 fsbndmq82 fsbndmq84 fsbndmq86 qf26 sbndm-w2 sbndm-w4 tsa tsa-q2 tvsbs-w4 tvsbs-w6 \
 	tvsbs-w8 hpbm ssecp libc libc1 simdkr

@@ -27,7 +27,6 @@ enum algo_id {
   _OM,       // Optimal Mismatch
   _MS,       // Maximal shift
   _QS,       // Quick-Search
-  _TunBM,    // Tuned Boyer-Moore
   _NSN,      // not so naive
   _TBM,      // Turbo Boyer-Moore
   _Colussi,  // Colussi
@@ -292,7 +291,6 @@ const struct algo ALGOS[] = {
   [_OM] = {_OM, OK, "om", "Optimal Mismatch", 0, 0},
   [_MS] = {_MS, OK, "ms", "Maximal shift", 0, 0},
   [_QS] = {_QS, OK, "qs", "Quick-Search", 0, 0},
-  [_TunBM] = {_TunBM, FAIL, "tunbm", "Tuned Boyer-Moore", 0, 0}, // UNSATISFIABLE
   [_NSN] = {_NSN, OK, "nsn", "not so naive", 2, 0},
   [_TBM] = {_TBM, OK, "tbm", "Turbo Boyer-Moore", 0, 0},
   [_Colussi] = {_Colussi, OK, "colussi", "Colussi", 0, 0},

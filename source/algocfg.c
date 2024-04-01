@@ -72,7 +72,6 @@ const struct algocfg ALGOCFGS[] = {
   [_OM] = {_OM, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_MS] = {_MS, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_QS] = {_QS, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
-  [_TunBM] = {_TunBM, FAIL, FAIL, UNSATISFIABLE, 0, 0, 256, 256},
   [_NSN] = {_NSN, GOOD, ASAN, VFY_PASS, 2, 0, 256, 256},
   [_TBM] = {_TBM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
   [_Colussi] = {_Colussi, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
