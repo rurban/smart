@@ -93,12 +93,12 @@ $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
 verify/%.vfy: source/algos/%.c $(ALGOSINC)
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy`; args=`./algocfg $$b cbmc`; \
+	b=`basename $@ .vfy`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
 	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC)
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy-trace`; args=`./algocfg $$b cbmc`; \
+	b=`basename $@ .vfy-trace`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $<; \
 	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $< | tee $@
 
@@ -157,7 +157,7 @@ NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
 verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
-	  echo $$c; b=`basename $$c .c`; args=`./algocfg $$b cbmc`; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
             (echo cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; grep "^$$b.c" good.lst && exit 1); \

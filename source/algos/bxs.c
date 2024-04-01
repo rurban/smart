@@ -59,7 +59,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
   BEGIN_SEARCHING
   /* Searching */
-  for (i = mq1 - 1; i <= nq1; i += mq1) {
+  for (i = mq1 - 1; i < nq1; i += mq1) {
     assert(i >= 0);
     assert(i <= n);
     D = B[y[i]];
@@ -72,14 +72,15 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
           if (j > first)
             i = j;
           else {
-            for (k = len; k && (y[first + k] == x[k - 1]); k--)
+            assert(first + len < n);
+            for (k = len; k > 0 && (y[first + k] == x[k - 1]); k--)
               ;
             if (k == 0)
               OUTPUT(first + 1);
           }
-          D = ((D << 1) | 1) & B[y[j + 1]];
+          D = ((D << 1) | 1) & (j >= 0 ? B[y[j]] : 0);
         } else
-          D = (D << 1) & B[y[j + 1]];
+          D = (D << 1) & (j >= 0 ? B[y[j]] : 0);
       } while (D && j > first);
     }
   }
