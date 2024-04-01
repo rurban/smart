@@ -194,8 +194,11 @@ enum algo_id {
   _QF42,  // Q-gram Filtering q=4 s=2
   _QF43,  // Q-gram Filtering q=4 s=3
   _QF44,  // Q-gram Filtering q=4 s=4
+  _QF53,  // Q-gram Filtering q=5 s=3
   _QF62,  // Q-gram Filtering q=6 s=2
   _QF63,  // Q-gram Filtering q=6 s=3
+  _QF72,  // Q-gram Filtering q=7 s=2
+  _QF82,  // Q-gram Filtering q=8 s=2
   _QLQS,  // Quantum Leap Quick Search
   _SBNDM_W2,
   _SBNDM_W4,
@@ -475,8 +478,11 @@ const struct algo ALGOS[] = {
   [_QF42] = {_QF42, OK, "qf42", "Q-gram Filtering q=4 s=2", 5, 0},
   [_QF43] = {_QF43, OK, "qf43", "Q-gram Filtering q=4 s=3", 5, 0},
   [_QF44] = {_QF44, OK, "qf44", "Q-gram Filtering q=4 s=4", 5, 0},
+  [_QF53] = {_QF53, OK, "qf53", "Q-gram Filtering q=5 s=3", 6, 0},
   [_QF62] = {_QF62, OK, "qf62", "Q-gram Filtering q=6 s=2", 7, 0},
   [_QF63] = {_QF63, OK, "qf63", "Q-gram Filtering q=6 s=3", 7, 0},
+  [_QF72] = {_QF72, OK, "qf72", "Q-gram Filtering q=7 s=2", 8, 0},
+  [_QF82] = {_QF82, OK, "qf82", "Q-gram Filtering q=8 s=2", 9, 0},
   [_QLQS] = {_QLQS, OK, "qlqs", "Quantum Leap Quick Search", 0, 0},
   [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0},
   [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0},
