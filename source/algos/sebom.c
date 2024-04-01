@@ -17,6 +17,7 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

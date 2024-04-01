@@ -45,11 +45,11 @@
  * Buffer overflows: bin/asan/fsbndm-w6 aaaaaa 6 aaaaaaaaaa 10
  */
 
-#include <assert.h>
+#define MIN_M 6
 #include "include/define.h"
 #include "include/main.h"
-//#include "include/search_large.h"
 #include "include/search_small.h"
+#include <assert.h>
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], W[SIGMA], d, set, hbcr[SIGMA], hbcl[SIGMA];
@@ -59,7 +59,6 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int plen = m;
   if (m > 31)
     m = 31;
-    //return search_large(x, m, y, n);;
   if (m < 6)
     return search_small(x, m, y, n);;
   BEGIN_PREPROCESSING

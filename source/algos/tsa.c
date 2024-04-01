@@ -1,6 +1,8 @@
 // Note: Does not support OUTPUT with the found pos yet, only the count
 // Constraints: requires 2<=m<=64
 
+#define MIN_M 2
+#define MAX_M 64
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_large.h"

@@ -22,16 +22,17 @@
  * Appl., vol.5, n.4, pp.385--401, Inderscience Publishers, Inderscience
  * Publishers, Geneva, SWITZERLAND, (2009).
  *
- * Constraints: m>1
+ * Constraints: m>=2
  * Note: Needed to add more checks to avoid overflows and skip an
  *       endless loop when found.
  * Still broken.
  */
 
-#include <assert.h>
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include <assert.h>
 
 typedef struct GRASPmList {
   int k;

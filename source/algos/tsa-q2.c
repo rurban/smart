@@ -2,6 +2,8 @@
 // Note: Broken!
 // Constraints: requires m>=2, m<=64. requires T[n + 1] to be accessable.
 
+#define MIN_M 2
+#define MAX_M 64
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

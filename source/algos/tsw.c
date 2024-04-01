@@ -24,6 +24,7 @@
  * Undocumented constraints: m < n - 3
  */
 
+#define MIN_M 3
 #include <assert.h>
 #include "include/define.h"
 #include "include/main.h"

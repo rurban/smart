@@ -20,6 +20,7 @@
  * Constraints: requires m > ?, may access past the haystack.
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/log2.h"
 #include "include/main.h"

@@ -18,9 +18,11 @@
  * Constraints: requires m>=8
  */
 
+#define MIN_M 8
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+
 #define Q 8
 #define HASH(j)                                                                \
   (y[j] << 14) + (y[j - 1] << 12) + (y[j - 2] << 10) + (y[j - 3] << 8) +       \

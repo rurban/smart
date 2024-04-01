@@ -23,13 +23,13 @@
  * q-grams F is the number of forward characters
  *
  * Note: Broken!
- * Constraints: requires m>=4, inexact for m>29
+ * Constraints: requires m>=4
  */
 
+#define MIN_M 4
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
-#include "include/search_large.h"
 
 #define Q 4
 #define F 3
@@ -42,8 +42,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int plen = m;
   int larger = m + F > WORD ? 1 : 0;
   if (larger)
-    //m = WORD - F;
-    return search_large(x, m, y, n);;
+    m = WORD - F;
 
   BEGIN_PREPROCESSING
   /* Preprocessing */

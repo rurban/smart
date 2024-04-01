@@ -27,6 +27,7 @@
  * Crashes with rand2 m=1024
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

@@ -45,11 +45,11 @@
  * Broken: Overflow at bin/asan/fsbndm-w2 aa 2 aaaaaaaaaa 10
  */
 
-#include <assert.h>
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
-//#include "include/search_large.h"
 #include "include/search_small.h"
+#include <assert.h>
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], W[SIGMA], d, set, hbcr[SIGMA], hbcl[SIGMA];
