@@ -54,6 +54,21 @@
 #define ATTRIBUTE_MALLOC
 #endif
 
+#if _GNUC_VERSION >= 303 && !defined(__cplusplus)
+#  undef __nonnull
+#  define __nonnull(params) __attribute__ ((__nonnull__ params))
+#  define __nonnull_all __attribute__ ((__nonnull__))
+#  define HAVE_NONNULL
+#else
+#  ifndef __nonnull
+#    define __nonnull(params)
+#    undef HAVE_NONNULL
+#  else
+#    define HAVE_NONNULL
+#  endif
+#  define __nonnull_all
+#endif
+
 #if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC))
 #define HAVE_SHM
 #endif

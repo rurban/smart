@@ -24,14 +24,18 @@
 
 #include "include/define.h"
 #include "include/main.h"
+#include <assert.h>
 
 void preKmp(unsigned char *x, int m, int kmpNext[]) {
   int i, j;
   i = 0;
-  j = kmpNext[0] = UNDEFINED;
+  j = kmpNext[0] = -1; // UNDEFINED
   while (i < m) {
-    while (j > -1 && x[i] != x[j])
+    assert(j < 0 || j < m);
+    while (j > -1 && x[i] != x[j]) {
       j = kmpNext[j];
+      assert(j < m);
+    }
     i++;
     j++;
     if (i < m && x[i] == x[j])

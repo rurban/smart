@@ -62,7 +62,7 @@ clock_t start, end;
 #endif
 
 TIMER *_timer;
-int search(unsigned char *p, int m, unsigned char *t, int n);
+static inline int search(unsigned char *p, int m, unsigned char *t, int n);
 
 #if defined FUZZ
 
@@ -99,7 +99,7 @@ int main(void) {
 #define YSIZE MAX_N
 
 /* the brute force algorithm used for comparing occurrences */
-int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
+static inline int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   assert(m < MAX_M);
   assert(n < MAX_N);
   int count = 0;
@@ -134,10 +134,10 @@ int main(void) {
   __CPROVER_assume(m <= n);
   unsigned char P[MAX_M];
   unsigned char T[MAX_N];
-  for (int i = 0; i < m; i++)
+  for (int i = 0; i < MAX_M; i++)
     RANDCH(P[i]);
   P[m] = '\0';
-  for (int i = 0; i < n; i++)
+  for (int i = 0; i < MAX_N; i++)
     RANDCH(T[i]);
   T[n] = '\0';
   __CPROVER_input("P", P);

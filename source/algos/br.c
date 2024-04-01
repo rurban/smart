@@ -28,9 +28,14 @@
 
 void preBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
   int a, b, i;
+#ifdef CBMC
+  //__CPROVER_assume(m > 0 && m < MAX_M);
+  memset(brBc, m + 2, SIGMA * SIGMA * sizeof(int));
+#else
   for (a = 0; a < SIGMA; ++a)
     for (b = 0; b < SIGMA; ++b)
       brBc[a][b] = m + 2;
+#endif
   for (a = 0; a < SIGMA; ++a)
     brBc[a][x[0]] = m + 1;
   for (i = 0; i < m - 1; ++i)
