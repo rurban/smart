@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
   char filename[300], command[1024], binary[100];
   char destdir[100] = "bin/";
   char gcc[100] = "gcc source/algos/";
+  int istty = getenv("CI") ? 0 : 1;
   char options[100] = " -O3 -DNDEBUG";
 #ifndef _WIN32
   strncat(options, " -Wall", SZNCAT(options));
@@ -142,10 +143,14 @@ int main(int argc, char **argv) {
           printf("\tCompiling %s.c ...........", filename);
         for (i = 0; i < 15 - (int)strlen(filename); i++)
           printf(".");
-        printf("(%.3d/%.3d) [000%%]", current, n_algo);
+        if (istty)
+          printf("(%.3d/%.3d) [000%%]", current, n_algo);
+        else
+          printf("(%.3d/%.3d) ", current, n_algo);
         fflush(stdout);
 
-        printf("\b\b\b\b\b\b[%.3d%%]", current * 100 / n_algo);
+        if (istty)
+          printf("\b\b\b\b\b\b[%.3d%%]", current * 100 / n_algo);
         fflush(stdout);
 
         stream = freopen("warning", "a", stderr); // redirect of stderr
@@ -172,17 +177,24 @@ int main(int argc, char **argv) {
               if (system(command)) {
                 testing_error++;
                 failed = 1;
-                printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b....[TEST FAILED]");
-                printf("\n");
+                if (istty)
+                  printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b....");
+                printf("[TEST FAILED]\n");
               }
             }
             if (!failed) {
-              printf("\b\b\b\b\b\b..[OK]");
-              for (int j = 0; j < 63; j++)
-                printf("\b");
+              if (istty) {
+                printf("\b\b\b\b\b\b..[OK]");
+                for (int j = 0; j < 63; j++)
+                  printf("\b");
+              } else {
+                printf("[OK]\n");
+              }
             }
           } else {
-            printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b.[COMPILING ERROR]\n");
+            if (istty)
+              printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b.");
+            printf("[COMPILING ERROR]\n");
             compiling_error++;
           }
           fflush(stdout);
@@ -192,8 +204,9 @@ int main(int argc, char **argv) {
     }
     closedir(d);
   }
-  for (i = 0; i < 33; i++)
-    printf("\b");
+  if (istty)
+    for (i = 0; i < 33; i++)
+      printf("\b");
   printf("\tAll algorithms have been compiled and tested.......\n");
   printf("\tCompiling errors .................................[%.3d]\n",
          compiling_error);
