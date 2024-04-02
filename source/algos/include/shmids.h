@@ -60,7 +60,10 @@ void *shmalloc(shmids_e e, size_t size) {
     key = rand() % 1000;
     id = shmget(key, size, IPC_CREAT | 0666);
   } while (++try < ATTEMPT && id < 0);
-  //fprintf(stderr, "shmalloc %s %zu, key=%d (id=%d)\n", name, size, (int)key, id);
+#ifdef SHMDEBUG
+  fprintf(stderr, "shmalloc %s %zu, key=%d (id=%d)\n", name, size, (int)key,
+          id);
+#endif
   if (id < 0) {
     fprintf(stderr, "%s: shmget: %d\n", name, id);
     perror("shmget");
@@ -84,15 +87,19 @@ void *shmalloc(shmids_e e, size_t size) {
 void *shmretrieve(shmids_e e, key_t key, size_t size) {
   void *buf;
   int id;
+#ifdef SHMDEBUG
+  fprintf(stderr, "shmretrieve %s: key: %d size: %zu\n", shmids[e].name,
+          (int)key, size);
+#endif
   if ((id = shmget(key, size, 0666)) < 0) {
-    fprintf(stderr, "shmretrieve %s: key: %d size: %zu\n", shmids[e].name,
+    fprintf(stderr, "shmretrieve get %s: key: %d size: %zu\n", shmids[e].name,
             (int)key, size);
     perror("shmget");
     return NULL;
   }
   /* Now we attach the segment to our data space. */
   if ((buf = shmat(id, NULL, 0)) == (unsigned char *)-1) {
-    fprintf(stderr, "shmretrieve %s: key: %d, size: %zu, id: %d\n",
+    fprintf(stderr, "shmretrieve at %s: key: %d, size: %zu, id: %d\n",
             shmids[e].name, (int)key, size, id);
     perror("shmat");
     return NULL;
@@ -109,13 +116,22 @@ void free_shm(unsigned char *T, unsigned char *P, int *count, double *e_time,
 #ifdef HAVE_SHM
   // T is shared between test and smart
   if (T) {
+#ifdef SHMDEBUG
+    fprintf(stderr, "shmdt T %p id=%d\n", T, shmids[shm_T].id);
+#endif
     shmdt(T);
     shmctl(shmids[shm_T].id, IPC_RMID, 0);
   }
   if (P) {
+#ifdef SHMDEBUG
+    fprintf(stderr, "shmdt P %p id=%d\n", P, shmids[shm_P].id);
+#endif
     shmdt(P);
     shmctl(shmids[shm_P].id, IPC_RMID, 0);
   }
+#ifdef SHMDEBUG
+  fprintf(stderr, "shmdt count, e_time, pre_time\n");
+#endif
   shmdt(count);
   shmdt(e_time);
   shmdt(pre_time);

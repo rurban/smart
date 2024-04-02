@@ -629,7 +629,7 @@ int main(int argc, const char *argv[]) {
     run_setting("", T, n, alpha, FREQ, VOLTE, options, expcode, simplePattern,
                 time_format);
     // no output is given for the simple case;
-  } else if (strcmp(filename, "all")) {
+  } else if (strcmp(filename, "all") != 0) {
     // experimental results on a list of text buffers
     if (system("./logo"))
       perror("logo");
@@ -704,7 +704,9 @@ int main(int argc, const char *argv[]) {
   // free shared memory. only T is remaining
 end_shm:
 #ifdef HAVE_SHM
-  //fprintf(stderr, "shmdt T %p\n", T);
+#ifdef SHMDEBUG
+  fprintf(stderr, "shmdt T %p id=%d\n", T, shmids[shm_T].id);
+#endif
   shmdt(T);
   shmctl(shmids[shm_T].id, IPC_RMID, 0);
 #else
@@ -716,7 +718,9 @@ end:
 
 #ifndef HAVE_SHM
   //end_1:
-  //fprintf(stderr, "shmdt T %p\n", T);
+#ifdef SHMDEBUG
+  fprintf(stderr, "shmdt T %p id=%d\n", T, shmids[shm_T].id);
+#endif
   shmdt(T);
   shmctl(shmids[shm_T].id, IPC_RMID, 0);
   return 1;
