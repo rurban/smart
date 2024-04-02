@@ -45,6 +45,7 @@ unsigned char printable(unsigned char c, const int sigma) {
 int main(void) {
   FILE *stream = NULL;
   unsigned char c;
+  int istty = getenv("CI") ? 0 : 1;
 
   for (int sigma = 2; sigma <= 256; sigma *= 2) {
     switch (sigma) {
@@ -88,12 +89,14 @@ int main(void) {
       //if (sigma < 256)
       //  assert(c < 123);
       fputc(c, stream);
-      if (i % 1000 == 0)
+      if (istty && i % 1000 == 0)
         printf("\b\b\b\b\b\b[%.3d%%]", i * 100 / 5000000);
       fflush(stdout);
     }
     fclose(stream);
-    printf("\b\b\b\b\b\b..[OK]\n");
+    if (istty)
+      printf("\b\b\b\b\b\b..");
+    printf("[OK]\n");
   }
   return 0;
 }
