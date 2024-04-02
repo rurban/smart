@@ -49,6 +49,7 @@ struct options {
   unsigned pre :1;
   unsigned txt :1;
   unsigned std :1;
+  unsigned all :1;
   unsigned _short :1;
   unsigned vshort :1;
   unsigned php :1;
@@ -86,6 +87,8 @@ void printManual() {
   printf("\t-occ          prints the average number of occurrences\n");
   printf("\t-pre          computes separately preprocessing times and "
          "searching times\n");
+  printf("\t-all          ignore minlen restrictions, running search_small and "
+         "search_large fallbacks\n");
   printf("\t-tb L         set to L the upper bound for any wort case running "
          "time (in ms). The default value is 300 ms\n");
   printf(
@@ -231,7 +234,8 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
 
       int current_running = 0;
       for (algo = 0; algo < NumAlgo; algo++) {
-        if (EXECUTE[algo] && (!ALGOS[algo].minlen || m >= ALGOS[algo].minlen)) {
+        if (EXECUTE[algo] &&
+            (options.all || !ALGOS[algo].minlen || m >= ALGOS[algo].minlen)) {
           char *upname = str2upper(ALGO_NAME[algo]);
           current_running++;
           if (!options.simple)
@@ -542,6 +546,10 @@ int main(int argc, const char *argv[]) {
       par++;
       options.std = 1;
     }
+    if (par < argc && !strcmp("-all", argv[par])) {
+      par++;
+      options.all = 1;
+    }
     if (par < argc && !strcmp("-tex", argv[par])) {
       par++;
       options.tex = 1;
@@ -566,7 +574,7 @@ int main(int argc, const char *argv[]) {
         strcmp("-simple", argv[par]) != 0 && strcmp("-tex", argv[par]) != 0 &&
         strcmp("-std", argv[par]) != 0 && strcmp("-php", argv[par]) != 0 &&
         strcmp("-pset", argv[par]) != 0 && strcmp("-vshort", argv[par]) != 0 &&
-        strcmp("-short", argv[par]) != 0) {
+        strcmp("-short", argv[par]) != 0 && strcmp("-all", argv[par]) != 0) {
       printf("Error in input parameters. Use -h for help.\n\n");
       goto end;
     }

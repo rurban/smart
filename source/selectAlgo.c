@@ -118,7 +118,7 @@ int main(int argc, const char *argv[]) {
         if (ALGO_NAME[i] && execute[i]) {
           char buf[100];
           struct stat st;
-          printf("\t-%s", ALGO_NAME[i]);
+          printf("\t%s", ALGO_NAME[i]);
           if (desc)
             printf("\t\"%s\"", ALGOS[i].desc);
 
