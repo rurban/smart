@@ -22,15 +22,17 @@
  * (2007).
  */
 
+#define MIN_M 8
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 #define RANK8 8
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int i, j, sh, shift[WSIZE], sh1, mMinus1, mMinus7, count;
   unsigned int h;
   if (m < 8)
-    return -1;
+    return search_small(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING

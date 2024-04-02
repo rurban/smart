@@ -22,15 +22,17 @@
  * (2007).
  */
 
+#define MIN_M 3
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 #define RANK3 3
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int count, j, i, sh, sh1, mMinus1, mMinus2, shift[WSIZE];
   unsigned char h;
   if (m < 3)
-    return -1;
+    return search_small(x, m, y, n);
   count = 0;
   mMinus1 = m - 1;
   mMinus2 = m - 2;

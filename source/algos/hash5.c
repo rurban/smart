@@ -22,15 +22,17 @@
  * (2007).
  */
 
+#define MIN_M 5
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 #define RANK5 5
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int count, i, j, sh, shift[WSIZE], sh1, mMinus1, mMinus4;
   unsigned int h;
   if (m < 5)
-    return -1;
+    return search_small(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
