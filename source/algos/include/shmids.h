@@ -48,17 +48,33 @@ struct shmids {
     [shm_r] = {"r", 0, 0, sizeof(int)},
 };
 
+static int shmvalidkey(key_t key) {
+  for (unsigned e = shm_T; e <= shm_r; e++) {
+    if (key != 0 && key == shmids[e].key)
+      return 0;
+  }
+  return 1;
+}
+
 void *shmalloc(shmids_e e, size_t size) {
 #ifdef HAVE_SHM
   char *buf;
   int try = 0;
   const char *name = shmids[e].name;
   int id = shmids[e].id;
-  key_t key = shmids[e].key;
+  key_t key;
   shmids[e].size = size;
   do {
     key = rand() % 1000;
-    id = shmget(key, size, IPC_CREAT | 0666);
+    if (shmvalidkey(key))
+      id = shmget(key, size, IPC_CREAT | 0666);
+    else {
+      id = -1;
+#ifdef SHMDEBUG
+      fprintf(stderr, "shmalloc %s already have key=%d, trying again\n", name,
+              (int)key);
+#endif
+    }
   } while (++try < ATTEMPT && id < 0);
 #ifdef SHMDEBUG
   fprintf(stderr, "shmalloc %s %zu, key=%d (id=%d)\n", name, size, (int)key,
