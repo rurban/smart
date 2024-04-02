@@ -178,7 +178,7 @@ void getAlgo(const char *ALGO_NAME[], int EXECUTE[]) {
       getc(fp);
       n = (char *)malloc(sizeof(char) * 20);
       unsigned int j = 0;
-      while ((c = getc(fp)) != ' ')
+      while ((c = getc(fp)) != ' ' && c != EOF && c != '\n')
         n[j++] = c;
       n[j] = '\0';
       i = search_ALGO(ALGO_NAME, n);

@@ -174,6 +174,7 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
   char buf[40] = {0};
   double *e_time = NULL, *pre_time = NULL;
   int *count = NULL;
+  int istty = getenv("CI") ? 0 : 1;
 
   if (!SIMPLE) {
     char logfile[100];
@@ -250,21 +251,26 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
           total_occur = 0;
           if ((algo == _MUSL || algo == _LIBC) &&
               (memchr(P, 0, m) || memchr(T, 0, n))) {
-            printf("\b\b\b\b\b.[SKIP] \n");
+            if (istty)
+              printf("\b\b\b\b\b.[SKIP] \n");
+            else
+              printf("[SKIP] \n");
             continue;
           }
           for (k = 1; k <= VOLTE; k++) {
             for (j = 0; j <= (unsigned)m; j++)
               P[j] = setP[k - 1][j];
             P[j] = '\0'; // creates the pattern
-            int perc = (int)((100 * k) / VOLTE);
-            if (perc < 10)
-              printf("\b\b\b\b[%d%%]", perc);
-            else if (perc < 100)
-              printf("\b\b\b\b\b[%d%%]", perc);
-            else
-              printf("\b\b\b\b[%d%%]", perc);
-            fflush(stdout);
+            if (istty) {
+              int perc = (int)((100 * k) / VOLTE);
+              if (perc < 10)
+                printf("\b\b\b\b[%d%%]", perc);
+              else if (perc < 100)
+                printf("\b\b\b\b\b[%d%%]", perc);
+              else
+                printf("\b\b\b\b[%d%%]", perc);
+              fflush(stdout);
+            }
 
             (*e_time) = (*pre_time) = 0.0;
 #ifndef HAVE_SHM
@@ -315,7 +321,10 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
               nchar += 15;
             */
             unsigned i;
-            printf("\b\b\b\b\b\b\b.[OK]  ");
+            if (istty)
+              printf("\b\b\b\b\b\b\b.[OK]  ");
+            else
+              printf("[OK]  ");
             if (options.pre)
               snprintf(buf, sizeof(buf), "\t\%.2f + \%.2f ms",
                        PRE_TIME[algo][il], TIME[algo][il]);
@@ -340,12 +349,23 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
             if (options.occ)
               printf("\tocc \%u", total_occur / VOLTE);
             printf("\n");
-          } else if (total_occur == 0)
-            printf("\b\b\b\b\b\b\b\b.[ERROR] \n");
-          else if (total_occur == -1)
-            printf("\b\b\b\b\b.[--]  \n");
-          else if (total_occur == -2)
-            printf("\b\b\b\b\b\b.[OUT]  \n");
+          } else if (total_occur == 0) {
+            if (istty)
+              printf("\b\b\b\b\b\b\b\b.[ERROR] \n");
+            else
+              printf("[ERROR] \n");
+          } else if (total_occur == -1) {
+            if (istty)
+              printf("\b\b\b\b\b.[--]  \n");
+            else
+              printf("[--]  \n");
+          }
+          else if (total_occur == -2) {
+            if (istty)
+              printf("\b\b\b\b\b\b.[OUT]  \n");
+            else
+              printf("[OUT]  \n");
+          }
         }
       }
 #ifdef HAVE_SHM
