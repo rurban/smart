@@ -24,8 +24,8 @@
 #include "shmids.h"
 #include <sys/types.h>
 
-double *run_time,    // searching time
-       *pre_time;    // preprocessing time
+double *run_time, // searching time
+    *pre_time;    // preprocessing time
 double m_run_time, m_pre_time;
 
 #if !defined __AVR__ && !defined CBMC
@@ -118,7 +118,11 @@ unsigned char nondet_uchar();
 int nondet_int();
 
 int main(void) {
-#define RANDCH(c) { c = nondet_uchar(); __CPROVER_assume(c > 0 && c <= 255); }
+#define RANDCH(c)                                                              \
+  {                                                                            \
+    c = nondet_uchar();                                                        \
+    __CPROVER_assume(c > 0 && c <= 255);                                       \
+  }
   int m = nondet_int();
 #ifdef MIN_M
   __CPROVER_assume(m > MIN_M && m < MAX_M);
@@ -158,7 +162,7 @@ int main(int argc, char *argv[]) {
 #ifndef __AVR__
   _timer = (TIMER *)malloc(sizeof(TIMER));
 #endif
-  
+
   if (argc > 1 && strncmp("shared", argv[1], 6) == 0) {
 #ifndef HAVE_SHM
     return 1;

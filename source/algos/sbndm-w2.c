@@ -106,7 +106,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       s1 += hbcr[y[s1 + m]];
       s2 -= hbcl[y[s2 - m]];
 #ifdef DEBUG
-      if (s2 < 0) fprintf(stderr, "sbndm-w2 %s %d %s %d\n", x, m, y, n);
+      if (s2 < 0)
+        fprintf(stderr, "sbndm-w2 %s %d %s %d\n", x, m, y, n);
 #endif
       assert(s2 >= 0);
       assert(s1 <= n);
@@ -115,7 +116,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     do {
       assert(s1 - 1 <= n);
 #ifdef DEBUG
-      if (s1 - 1 < 0) fprintf(stderr, "sbndm-w2 %s %d %s %d\n", x, m, y, n);
+      if (s1 - 1 < 0)
+        fprintf(stderr, "sbndm-w2 %s %d %s %d\n", x, m, y, n);
 #endif
       //assert(s1 - 1 >= 0);
       assert(s2 + 1 <= n);
@@ -131,8 +133,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
         i++;
       if (i == plen && s1 + m1 < s2) {
         OUTPUT(s1);
-      }
-      else {
+      } else {
         assert(s2 - m1 <= n);
         assert(s2 - m1 >= 0);
         i = 0;

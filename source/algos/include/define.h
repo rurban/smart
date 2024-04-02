@@ -59,30 +59,30 @@
 #endif
 
 #ifdef __GNUC__
-# define HAVE_POPCOUNT
-# if __SIZEOF_LONG_LONG__ >= 8
-#  define HAVE_POPCOUNT64
-# endif
+#define HAVE_POPCOUNT
+#if __SIZEOF_LONG_LONG__ >= 8
+#define HAVE_POPCOUNT64
+#endif
 #elif defined _MSC_VER
-# define HAVE_POPCOUNT
-# if _INTEGRAL_MAX_BITS >= 64
-#  define HAVE_POPCOUNT64
-# endif
+#define HAVE_POPCOUNT
+#if _INTEGRAL_MAX_BITS >= 64
+#define HAVE_POPCOUNT64
+#endif
 #endif
 
 #ifdef HAVE_POPCOUNT
-# ifndef _MSC_VER
-#  define POPCOUNT16(x) __builtin_popcount(x)
-# else
-#  define POPCOUNT16(x) __popcount16(x)
-# endif
+#ifndef _MSC_VER
+#define POPCOUNT16(x) __builtin_popcount(x)
 #else
-# define POPCOUNT16(x) PopCount[x]
+#define POPCOUNT16(x) __popcount16(x)
+#endif
+#else
+#define POPCOUNT16(x) PopCount[x]
 #endif
 #ifdef HAVE_POPCOUNT64
-# ifndef _MSC_VER
-#  define POPCOUNT64(x) __builtin_popcountll(x)
-# else
-#  define POPCOUNT64(x) _popcount64(x)
-# endif
+#ifndef _MSC_VER
+#define POPCOUNT64(x) __builtin_popcountll(x)
+#else
+#define POPCOUNT64(x) _popcount64(x)
+#endif
 #endif

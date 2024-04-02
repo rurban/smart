@@ -82,8 +82,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int diff = plen - m;
   j = mm1;
   while (j < n - diff) {
-    while (j + 1 <= n &&
-           (d = (j + 1 < n ? B[y[j + 1]] << 1 : 2) & (j >= 0 ? B[y[j]] : 1)) == 0) {
+    while (j + 1 <= n && (d = (j + 1 < n ? B[y[j + 1]] << 1 : 2) &
+                              (j >= 0 ? B[y[j]] : 1)) == 0) {
       if (j + m < n)
         j += hbc[y[j + m]];
       else

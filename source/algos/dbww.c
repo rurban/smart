@@ -35,9 +35,11 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   p_len = m;
   if (m > 16)
     //m = 16;
-    return search_large(x, m, y, n);;
+    return search_large(x, m, y, n);
+  ;
   if ((n / m) < 2)
-    return search_large(x, m, y, n);;
+    return search_large(x, m, y, n);
+  ;
 
   /* Preprocessing */
   BEGIN_PREPROCESSING

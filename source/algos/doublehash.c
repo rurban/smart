@@ -35,7 +35,7 @@ void preBmBc(unsigned char *x, int m, int bmBc[]) {
 unsigned int BPHashHalf(unsigned char *str, unsigned int len) {
   unsigned int hash = 0;
   unsigned int i = 0;
-  for (i = 0; i < len/2; str++, i++) {
+  for (i = 0; i < len / 2; str++, i++) {
     hash = hash << 7 ^ (*str);
   }
 
@@ -68,9 +68,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   s = 0;
   while (s <= n - m) {
-    if (*x == y[s]
-        && h1 == BPHashHalf(&y[s], (unsigned)m)
-        && h2 == BKDRHash(&y[s], (unsigned)m))
+    if (*x == y[s] && h1 == BPHashHalf(&y[s], (unsigned)m) &&
+        h2 == BKDRHash(&y[s], (unsigned)m))
       OUTPUT(s);
     s += bmBc[y[s + m - 1]];
   }

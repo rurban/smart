@@ -43,8 +43,9 @@
 #include <stdint.h>
 #define FORCE_INLINE inline __attribute__((always_inline))
 
-static FORCE_INLINE int
-avx2_strstr_generic(const unsigned char *s, int n, const unsigned char *needle, int m) {
+static FORCE_INLINE int avx2_strstr_generic(const unsigned char *s, int n,
+                                            const unsigned char *needle,
+                                            int m) {
   BEGIN_PREPROCESSING
   int count = 0;
   assert(m > 1);
@@ -100,16 +101,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 #include <stdint.h>
 #define FORCE_INLINE inline __attribute__((always_inline))
 
-static FORCE_INLINE int
-sse2_strstr_generic(const unsigned char *s, int n,
-                    const unsigned char *needle, int m) {
+static FORCE_INLINE int sse2_strstr_generic(const unsigned char *s, int n,
+                                            const unsigned char *needle,
+                                            int m) {
   BEGIN_PREPROCESSING
   int count = 0;
   assert(m > 1);
   assert(n > 0);
 
   const __m128i first = _mm_set1_epi8(needle[0]); // first byte, extended to 16
-  const __m128i last = _mm_set1_epi8(needle[m - 1]); // last byte, extended to 16
+  const __m128i last =
+      _mm_set1_epi8(needle[m - 1]); // last byte, extended to 16
   END_PREPROCESSING
 
   BEGIN_SEARCHING
@@ -117,7 +119,8 @@ sse2_strstr_generic(const unsigned char *s, int n,
     // first byte (extended)
     const __m128i block_first = _mm_loadu_si128((const __m128i *)(s + i));
     // last byte
-    const __m128i block_last = _mm_loadu_si128((const __m128i *)(s + i + m - 1));
+    const __m128i block_last =
+        _mm_loadu_si128((const __m128i *)(s + i + m - 1));
     // compare packed 8-bit integers for equality.
     const __m128i eq_first = _mm_cmpeq_epi8(first, block_first);
     const __m128i eq_last = _mm_cmpeq_epi8(last, block_last);
@@ -188,9 +191,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 #include <stdint.h>
 #define FORCE_INLINE inline __attribute__((always_inline))
 
-static FORCE_INLINE int
-neon_strstr_generic(const unsigned char *needle, int m,
-                    const unsigned char *s, int n) {
+static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
+                                            const unsigned char *s, int n) {
   BEGIN_PREPROCESSING
   int count = 0;
   assert(m > 1);

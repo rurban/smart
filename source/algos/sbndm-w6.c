@@ -54,7 +54,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   //int plen = m;
   if (m > 32)
     //m = 32;
-    return search_large(x, m, y, n);;
+    return search_large(x, m, y, n);
+  ;
   int m1 = m - 1;
   //int mp1 = m + 1;
 

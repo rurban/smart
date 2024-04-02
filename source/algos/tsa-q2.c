@@ -58,7 +58,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
     assert(i + j + 1 <= n);
     while ((j < m - Q + 1) &&
            (D &= (((B[HS(T, i - j)] + 1) << j) - 1) &
-            ((B[HS(T, i + j)] >> j) | (~UINT64_C(0) << (m - j))))) {
+                 ((B[HS(T, i + j)] >> j) | (~UINT64_C(0) << (m - j))))) {
       j++;
       assert((j < m - Q + 1) || (i + j + 1 <= n));
     }

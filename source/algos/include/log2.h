@@ -39,9 +39,10 @@
 #define MSK16 0xFFFFU
 
 #define FIRSTBIT(x)                                                            \
-  ((x)&MSK1616                                                                 \
-   ? ((x)&MSK0824 ? leftbit[((x) >> 24) & 0xFF] : 8 + leftbit[((x) >> 16) & 0xFF]) \
-   : ((x)&MSK0808 ? 16 + leftbit[((x) >> 8) & 0xFF] : 24 + leftbit[x & 0xFF]))
+  ((x) & MSK1616 ? ((x) & MSK0824 ? leftbit[((x) >> 24) & 0xFF]                \
+                                  : 8 + leftbit[((x) >> 16) & 0xFF])           \
+                 : ((x) & MSK0808 ? 16 + leftbit[((x) >> 8) & 0xFF]            \
+                                  : 24 + leftbit[x & 0xFF]))
 #if _WORDSIZE == 32
 #define LOG2(x) (31 - FIRSTBIT(x))
 #else

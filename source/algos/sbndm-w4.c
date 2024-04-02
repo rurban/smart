@@ -55,7 +55,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int i, s1, s2, s3, s4, first, count;
   //int plen = m;
   if (m > 32)
-    return search_large(x, m, y, n);;
+    return search_large(x, m, y, n);
+  ;
   int m1 = m - 1;
   //int mp1 = m + 1;
 
@@ -96,7 +97,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     assert(s3 <= n);
     assert(s4 >= 0);
     assert(s4 <= n);
-    while ((d = (B[y[s1]] | (s2 >= 0 ? W[y[s2]] : 0) | B[y[s3]] | W[y[s4]])) == 0) {
+    while ((d = (B[y[s1]] | (s2 >= 0 ? W[y[s2]] : 0) | B[y[s3]] | W[y[s4]])) ==
+           0) {
       assert(s1 + m <= n);
       assert(s2 - m <= n);
       assert(s2 - m >= 0);
@@ -114,9 +116,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     first = s1 - m1;
     //assert(s2 + 1 >= 0);
     do {
-      d = (d << 1U) &
-        ((s1 <= 0 ? 1 : B[y[--s1]]) | (s2 < n && s2 + 1 >= 0 ? W[y[++s2]] : 0) |
-         (s3 <= 0 ? 1 : B[y[--s3]]) | (s4 < n ? W[y[++s4]] : 0));
+      d = (d << 1U) & ((s1 <= 0 ? 1 : B[y[--s1]]) |
+                       (s2 < n && s2 + 1 >= 0 ? W[y[++s2]] : 0) |
+                       (s3 <= 0 ? 1 : B[y[--s3]]) | (s4 < n ? W[y[++s4]] : 0));
     } while (d);
     if (s1 < first) {
       s1++;

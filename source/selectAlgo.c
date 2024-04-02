@@ -45,7 +45,8 @@ void printManual() {
   // a single algorithm named D\n");
   printf("\t-add ALGO       add the new alorithm ALGO to the set\n");
   printf("\t                the executable file of the new algorithm must be "
-         "in %s\n", BINDIR);
+         "in %s\n",
+         BINDIR);
   printf("\t-h              gives this help list\n");
   printf("\n\n");
 }
@@ -166,7 +167,8 @@ int main(int argc, const char *argv[]) {
           printf("\tTesting the algorithm for correctness....");
           fflush(stdout);
           // testing correctness of the algorithm
-          snprintf(command, sizeof(command), "./test%s %s -nv", strcmp(BINDIR, "bin") ? "-asan" : "", algo);
+          snprintf(command, sizeof(command), "./test%s %s -nv",
+                   strcmp(BINDIR, "bin") ? "-asan" : "", algo);
           fflush(stdout);
           if (system(command)) {
             printf("\n%s failed!\n", command);
@@ -275,8 +277,7 @@ int main(int argc, const char *argv[]) {
   // store only the changes from the default
   FILE *fp = fopen("algorithms.lst", "w");
   for (j = 0; j < numalgo; j++)
-    if (ALGO_NAME[j] &&
-        (j >= NumAlgo || !ALGOS[j].missing) &&
+    if (ALGO_NAME[j] && (j >= NumAlgo || !ALGOS[j].missing) &&
         (j >= NumAlgo || ALGOS[j].execute != execute[j]))
       fprintf(fp, "#%d #%s \n", execute[j], ALGO_NAME[j]);
   fclose(fp);

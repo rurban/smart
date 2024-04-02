@@ -26,8 +26,8 @@
 #include "include/main.h"
 #include "include/AUTOMATON.h"
 
-#define setTarget(p, c, q) ttrans[(p)*SIGMA + (c)] = (q)
-#define getTarget(p, c) ttrans[(p)*SIGMA + (c)]
+#define setTarget(p, c, q) ttrans[(p) * SIGMA + (c)] = (q)
+#define getTarget(p, c) ttrans[(p) * SIGMA + (c)]
 #define setLength(p, q) tlength[(p)] = (q)
 #define getLength(p) tlength[(p)]
 #define setSuffixLink(p, q) tsuffix[(p)] = (q)
@@ -35,8 +35,8 @@
 #define setTerminal(p) tterminal[(p)] = 1
 #define isTerminal(p) tterminal[(p)]
 #define newState() counter++
-#define setSMA(p, c, q) ttransSMA[(p)*SIGMA + (c)] = (q)
-#define getSMA(p, c) ttransSMA[(p)*SIGMA + (c)]
+#define setSMA(p, c, q) ttransSMA[(p) * SIGMA + (c)] = (q)
+#define getSMA(p, c) ttransSMA[(p) * SIGMA + (c)]
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int k, i, R, L, count, l;

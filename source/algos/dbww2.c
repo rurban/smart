@@ -27,7 +27,7 @@
 #include "include/main.h"
 #include "include/search_large.h"
 
-#define COUNTBIT(v, c)                                                  \
+#define COUNTBIT(v, c)                                                         \
   v = v - ((v >> 1) & 0x55555555);                                             \
   v = (v & 0x33333333) + ((v >> 2) & 0x33333333);                              \
   c = ((v + (v >> 4) & 0xF0F0F0F) * 0x1010101) >> 24
@@ -40,7 +40,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   p_len = m;
   if (m > 16)
     //m = 16;
-    return search_large(x, m, y, n);;
+    return search_large(x, m, y, n);
+  ;
   if (n / m < 2)
     return -1;
 

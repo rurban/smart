@@ -253,9 +253,11 @@ int outputXML(double TIME[NumAlgo][NumPatt], int alpha, char *filename,
   for (algo = 0; algo < NumAlgo; algo++) {
     if (EXECUTE[algo]) {
       char *upname = str2upper(ALGO_NAME[algo]);
-      fprintf(fp, "\t<ALGO>\n"
-                  "\t\t<NAME>%s</NAME>\n"
-                  "\t\t<DESCRIPTION>%s</DESCRIPTION>\n", upname, ALGOS[algo].desc);
+      fprintf(fp,
+              "\t<ALGO>\n"
+              "\t\t<NAME>%s</NAME>\n"
+              "\t\t<DESCRIPTION>%s</DESCRIPTION>\n",
+              upname, ALGOS[algo].desc);
       // for(i=0; i<20-strlen(ALGO_NAME[algo]); i++) fprintf(fp," ");
       for (il = 0; il < NumPatt; il++)
         if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {

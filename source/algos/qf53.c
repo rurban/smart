@@ -28,8 +28,8 @@
 #include "include/main.h"
 #include "include/search_small.h"
 
-#define	Q	5
-#define	S	3
+#define Q 5
+#define S 3
 
 #define ASIZE (1 << (Q * S))
 #define AMASK (ASIZE - 1)

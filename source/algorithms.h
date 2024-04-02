@@ -134,21 +134,21 @@ enum algo_id {
   _KBNDM,   // Factorized BNDM
 
   // new algorithms, yet uncategorized
-  _BSDM,      // Backward SNR DAWG Matching
-  _BSDM2,     // Backward SNR DAWG Matching (m>=2)
-  _BSDM3,     // Backward SNR DAWG Matching (m>=3)
-  _BSDM4,     // Backward SNR DAWG Matching (m>=4)
-  _BSDM5,     // Backward SNR DAWG Matching (m>=5)
-  _BSDM6,     // Backward SNR DAWG Matching (m>=6)
-  _BSDM7,     // Backward SNR DAWG Matching (m>=7)
-  _BSDM8,     // Backward SNR DAWG Matching (m>=8)
-  _BXS,       // BNDMq with eXtended Shift
-  _BXS1,      // BXS with q-grams limit
-  _BXS2,      // BXS with q-grams limit
-  _BXS3,      // BXS with q-grams limit
-  _BXS4,      // BXS with q-grams limit
-  _BXS6,      // BXS with q-grams limit
-  _BXS8,      // BXS with q-grams limit
+  _BSDM,  // Backward SNR DAWG Matching
+  _BSDM2, // Backward SNR DAWG Matching (m>=2)
+  _BSDM3, // Backward SNR DAWG Matching (m>=3)
+  _BSDM4, // Backward SNR DAWG Matching (m>=4)
+  _BSDM5, // Backward SNR DAWG Matching (m>=5)
+  _BSDM6, // Backward SNR DAWG Matching (m>=6)
+  _BSDM7, // Backward SNR DAWG Matching (m>=7)
+  _BSDM8, // Backward SNR DAWG Matching (m>=8)
+  _BXS,   // BNDMq with eXtended Shift
+  _BXS1,  // BXS with q-grams limit
+  _BXS2,  // BXS with q-grams limit
+  _BXS3,  // BXS with q-grams limit
+  _BXS4,  // BXS with q-grams limit
+  _BXS6,  // BXS with q-grams limit
+  _BXS8,  // BXS with q-grams limit
   // _BQL,    // BNDMq Long (see BXS)
   _FS_W1,     // Multiple Sliding Windows
   _FS_W2,     // Multiple Sliding Windows
@@ -241,21 +241,21 @@ enum algo_id {
   _TWFRQ6,
   _TWFRQ7,
   _TWFRQ8,
-  _WC,  // Tailed Substring algorithm
-  _WOM, // Worst Occurrence Matcher
+  _WC,         // Tailed Substring algorithm
+  _WOM,        // Worst Occurrence Matcher
   _DOUBLEHASH, // Bicer-Zhang 2019
   _BRAM3,
   _BRAM5,
   _BRAM7,
   // state of the art:
-  _FT3,   // Parallel Boyer-Moore with goodsuff, Lecroq 2024
-  _HPBM,  // HP Parallel Boyer-Moore, Jeong et al 2015
-  _SSECP, // SSE Crochemore-Perrin
-  _EPSM,  // SSE4 Exact Packed String Matching
-  _LIBC,  // strstr
-  _LIBC1, // memmem
-  _MUSL,  // musl strstr
-  _MUSL1, // musl memmem
+  _FT3,    // Parallel Boyer-Moore with goodsuff, Lecroq 2024
+  _HPBM,   // HP Parallel Boyer-Moore, Jeong et al 2015
+  _SSECP,  // SSE Crochemore-Perrin
+  _EPSM,   // SSE4 Exact Packed String Matching
+  _LIBC,   // strstr
+  _LIBC1,  // memmem
+  _MUSL,   // musl strstr
+  _MUSL1,  // musl memmem
   _SIMDKR, // SIMD generic Rabin-Karp variants (SSE2, AVX2 and NEON)
 } ALGO_POS;
 

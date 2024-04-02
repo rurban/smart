@@ -41,11 +41,11 @@ struct shmids {
   key_t key;
   size_t size;
 } shmids[5] = {
-  [shm_T] = {"T", 0, 0, 0},
-  [shm_P] = {"P", 0, 0, 0},
-  [shm_e] = {"e", 0, 0, sizeof(double)},
-  [shm_pre] = {"pre", 0, 0, sizeof(double)},
-  [shm_r] = {"r", 0, 0, sizeof(int)},
+    [shm_T] = {"T", 0, 0, 0},
+    [shm_P] = {"P", 0, 0, 0},
+    [shm_e] = {"e", 0, 0, sizeof(double)},
+    [shm_pre] = {"pre", 0, 0, sizeof(double)},
+    [shm_r] = {"r", 0, 0, sizeof(int)},
 };
 
 void *shmalloc(shmids_e e, size_t size) {
@@ -73,7 +73,7 @@ void *shmalloc(shmids_e e, size_t size) {
     perror("shmat");
     exit(1);
   }
-  return (void*)buf;
+  return (void *)buf;
 #else
   shmids[e].size = size;
   return malloc(size);
@@ -85,14 +85,15 @@ void *shmretrieve(shmids_e e, key_t key, size_t size) {
   void *buf;
   int id;
   if ((id = shmget(key, size, 0666)) < 0) {
-    fprintf(stderr, "shmretrieve %s: key: %d size: %zu\n", shmids[e].name, (int)key, size);
+    fprintf(stderr, "shmretrieve %s: key: %d size: %zu\n", shmids[e].name,
+            (int)key, size);
     perror("shmget");
     return NULL;
   }
   /* Now we attach the segment to our data space. */
   if ((buf = shmat(id, NULL, 0)) == (unsigned char *)-1) {
-    fprintf(stderr, "shmretrieve %s: key: %d, size: %zu, id: %d\n", shmids[e].name,
-            (int)key, size, id);
+    fprintf(stderr, "shmretrieve %s: key: %d, size: %zu, id: %d\n",
+            shmids[e].name, (int)key, size, id);
     perror("shmat");
     return NULL;
   }
@@ -122,10 +123,10 @@ void free_shm(unsigned char *T, unsigned char *P, int *count, double *e_time,
   shmctl(shmids[shm_e].id, IPC_RMID, 0);
   shmctl(shmids[shm_pre].id, IPC_RMID, 0);
 #else
-  free (T);
-  free (P);
-  free (count);
-  free (e_time);
-  free (pre_time);
+  free(T);
+  free(P);
+  free(count);
+  free(e_time);
+  free(pre_time);
 #endif
 }

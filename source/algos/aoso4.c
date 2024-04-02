@@ -101,8 +101,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  */
 
 void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
-                  int q, uint32_t D, uint32_t mm, int *count,
-                  int p_len) {
+                  int q, uint32_t D, uint32_t mm, int *count, int p_len) {
   unsigned int s;
   int c, k, i;
   D = (D & mm) ^ mm;

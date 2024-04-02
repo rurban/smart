@@ -27,7 +27,8 @@
 #include "include/define.h"
 #include "include/main.h"
 
-int verify(unsigned char *y, int left, unsigned char *x, int m, int k, int pos) {
+int verify(unsigned char *y, int left, unsigned char *x, int m, int k,
+           int pos) {
   int j, i;
   int count = 0;
   (void)pos; // if the OUTPUT macro is empty

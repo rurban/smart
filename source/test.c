@@ -87,8 +87,8 @@ int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
   (void)T;
   (void)alpha;
   sprintf(command, "./%s/%s shared %d %d %d %d %d %d %d", BINDIR, algoname,
-          shmids[shm_P].key, m, shmids[shm_T].key, n, shmids[shm_r].key, shmids[shm_e].key,
-          shmids[shm_pre].key);
+          shmids[shm_P].key, m, shmids[shm_T].key, n, shmids[shm_r].key,
+          shmids[shm_e].key, shmids[shm_pre].key);
   //fprintf(stderr, "%s\n", command);
 #endif
   // TODO fork/exec with timeout
@@ -224,8 +224,7 @@ int main(int argc, char *argv[]) {
       n = getText(T, fullpath, FREQ, TSIZE);
     }
     argn++;
-  }
-  else
+  } else
     n = YSIZE;
   if (argc > argn) { // m=%d
     m = string2decimal(argv[argn]);
@@ -233,8 +232,7 @@ int main(int argc, char *argv[]) {
       fprintf(stderr, "Invalid m %d\n", m);
       goto free_shm1;
     }
-  }
-  else
+  } else
     m = 0; // loop over PATT_SIZE
   unsigned long seed = time(NULL);
   //NOLINTBEGIN(clang-analyzer-security.insecureAPI.strcpy)
@@ -246,9 +244,9 @@ int main(int argc, char *argv[]) {
 #endif
   srand(seed);
   // allocate in shared memory to be used between 2 processes
-  P = shmalloc(shm_P, MAX(m + 1, XSIZE));  // pattern
-  count = shmalloc(shm_r, sizeof(int)); // number of occurrences
-  e_time = shmalloc(shm_e, sizeof(double)); // running time
+  P = shmalloc(shm_P, MAX(m + 1, XSIZE));       // pattern
+  count = shmalloc(shm_r, sizeof(int));         // number of occurrences
+  e_time = shmalloc(shm_e, sizeof(double));     // running time
   pre_time = shmalloc(shm_pre, sizeof(double)); // preprocessing
 
   // begin testing
@@ -486,7 +484,7 @@ int main(int argc, char *argv[]) {
     // now do the same as smart
     const int VOLTE = 500;
     unsigned char **setP =
-      (unsigned char **)malloc(sizeof(unsigned char *) * VOLTE);
+        (unsigned char **)malloc(sizeof(unsigned char *) * VOLTE);
     for (int i = 0; i < VOLTE; i++)
       setP[i] = (unsigned char *)malloc(sizeof(unsigned char) * (XSIZE + 1));
     if (!m) {
@@ -501,7 +499,8 @@ int main(int argc, char *argv[]) {
           }
           setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
           if (verbose)
-            printf("Searching for a set of %u patterns with m=%d in n=%d\n", VOLTE, m, n);
+            printf("Searching for a set of %u patterns with m=%d in n=%d\n",
+                   VOLTE, m, n);
           for (int k = 1; k <= VOLTE; k++) {
             int j;
             for (j = 0; j <= m; j++)
@@ -522,7 +521,8 @@ int main(int argc, char *argv[]) {
       }
       setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
       if (verbose)
-        printf("Searching for a set of %u patterns with m=%d in n=%d\n", VOLTE, m, n);
+        printf("Searching for a set of %u patterns with m=%d in n=%d\n", VOLTE,
+               m, n);
       for (int k = 1; k <= VOLTE; k++) {
         int j;
         for (j = 0; j <= m; j++)
@@ -544,7 +544,7 @@ int main(int argc, char *argv[]) {
   // free shared memory
   free_shm(T, P, count, e_time, pre_time);
   return 0;
- free_shm1:
+free_shm1:
   free_shm(T, P, count, e_time, pre_time);
   exit(1);
 }

@@ -27,8 +27,8 @@
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
-#define	Q	7
-#define	S	2
+#define Q 7
+#define S 2
 
 #define ASIZE (1 << (Q * S))
 #define AMASK (ASIZE - 1)

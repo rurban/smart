@@ -43,18 +43,18 @@ unsigned int MINLEN = 1,
 #endif
 
 struct options {
-  unsigned simple :1;
-  unsigned dif :1;
-  unsigned occ :1;
-  unsigned pre :1;
-  unsigned txt :1;
-  unsigned std :1;
-  unsigned all :1;
-  unsigned _short :1;
-  unsigned vshort :1;
-  unsigned php :1;
-  unsigned tex :1;
-  unsigned tb :1;
+  unsigned simple : 1;
+  unsigned dif : 1;
+  unsigned occ : 1;
+  unsigned pre : 1;
+  unsigned txt : 1;
+  unsigned std : 1;
+  unsigned all : 1;
+  unsigned _short : 1;
+  unsigned vshort : 1;
+  unsigned php : 1;
+  unsigned tex : 1;
+  unsigned tb : 1;
   int limit;
 } options;
 
@@ -72,8 +72,9 @@ void printManual() {
          "used for experimental results (default 1Mb)\n");
   printf("\t-plen L U     test only patterns with a length between L and U "
          "(included).\n");
-  printf("\t-text F[:F...] performs experimental results using text buffer(s) F "
-         "(mandatory unless you use the -simple parameter)\n");
+  printf(
+      "\t-text F[:F...] performs experimental results using text buffer(s) F "
+      "(mandatory unless you use the -simple parameter)\n");
   printf("\t              Use option \"all\" to performe experimental results "
          "using all text buffers.\n");
   printf("\t              Use the style A:B:C to performe experimental results "
@@ -129,7 +130,8 @@ void generateCode(char *code) {
 }
 
 #ifndef HAVE_SHM
-int execute(enum algo_id algo, unsigned char *P, int m, unsigned char *T, int n) {
+int execute(enum algo_id algo, unsigned char *P, int m, unsigned char *T,
+            int n) {
   char command[100];
   snprintf(command, sizeof(command), "./%s/%s %s %d %s %d", BINDIR,
            ALGO_NAME[algo], P, m, T, n);
@@ -152,10 +154,9 @@ int execute(enum algo_id algo, int m, int n, int *count) {
 
 /********************************************************/
 
-int run_setting(char *filename, unsigned char *T, int n, int alpha,
-                int *FREQ, unsigned VOLTE, struct options options,
-                char *code, unsigned char *simplePattern,
-                char *time_format) {
+int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
+                unsigned VOLTE, struct options options, char *code,
+                unsigned char *simplePattern, char *time_format) {
   // performs experiments on a text
   int m, occur, total_occur;
   unsigned int i, j, k, il;
@@ -189,10 +190,10 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
   // allocate space for running time in shared memory
   srand(time(NULL));
   // allocate in shared memory
-  count = shmalloc(shm_r, sizeof(int)); // number of occurrences
-  e_time = shmalloc(shm_e, sizeof(double)); // running time
+  count = shmalloc(shm_r, sizeof(int));         // number of occurrences
+  e_time = shmalloc(shm_e, sizeof(double));     // running time
   pre_time = shmalloc(shm_pre, sizeof(double)); // preprocessing
-  
+
   memset(FREQ, 0, SIGMA * sizeof(int));
 
   // initializes the vector which will contain running times
@@ -211,8 +212,7 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
 
   // i=system("./logo");
   for (il = 0; PATT_SIZE[il] > 0; il++) {
-    if (PATT_SIZE[il] >= MINLEN &&
-        PATT_SIZE[il] <= MAXLEN &&
+    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN &&
         PATT_SIZE[il] <= (unsigned)n) {
       m = PATT_SIZE[il];
       if (m > XSIZE || m < 1 || m > n) {
@@ -228,7 +228,8 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
         printf("\tExperimental results on %s: %s\n", filename, code);
       else
         printf("\tExperimental results on %s\n", T);
-      printf("\tSearching for a set of %u patterns with m=%d in n=%d\n", VOLTE, m, n);
+      printf("\tSearching for a set of %u patterns with m=%d in n=%d\n", VOLTE,
+             m, n);
       printf("\tTesting %d algorithms\n", num_running);
       printf("\n");
 
@@ -316,15 +317,16 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
             unsigned i;
             printf("\b\b\b\b\b\b\b.[OK]  ");
             if (options.pre)
-              snprintf(buf, sizeof(buf), "\t\%.2f + \%.2f ms", PRE_TIME[algo][il],
-                      TIME[algo][il]);
+              snprintf(buf, sizeof(buf), "\t\%.2f + \%.2f ms",
+                       PRE_TIME[algo][il], TIME[algo][il]);
             else
               snprintf(buf, sizeof(buf), "\t\%.2f ms", TIME[algo][il]);
             printf("%s", buf);
             for (i = 0; i < 20 - strlen(buf); i++)
               printf(" ");
             if (options.dif) {
-              snprintf(buf, sizeof(buf), " [%.2f, %.2f]", BEST[algo][il], WORST[algo][il]);
+              snprintf(buf, sizeof(buf), " [%.2f, %.2f]", BEST[algo][il],
+                       WORST[algo][il]);
               printf("%s", buf);
               for (i = 0; i < 20 - strlen(buf); i++)
                 printf(" ");
@@ -361,14 +363,15 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha,
     fclose(stream);
     printf("\tOUTPUT RUNNING TIMES %s\n", code);
     outputXML(TIME, alpha, filename, code);
-    outputHTML2(PRE_TIME, TIME, BEST, WORST, STD, options.pre, options.dif, alpha, n, VOLTE,
-                filename, code, time_format);
+    outputHTML2(PRE_TIME, TIME, BEST, WORST, STD, options.pre, options.dif,
+                alpha, n, VOLTE, filename, code, time_format);
     if (options.txt)
       outputTXT(TIME, alpha, filename, code, time_format);
     if (options.tex)
       outputLatex(TIME, alpha, filename, code, time_format);
     if (options.php)
-      outputPHP(TIME, BEST, WORST, STD, alpha, filename, code, options.dif, options.std);
+      outputPHP(TIME, BEST, WORST, STD, alpha, filename, code, options.dif,
+                options.std);
   }
   // free memory allocated for patterns
   for (i = 0; i < VOLTE; i++)
@@ -393,7 +396,7 @@ int main(int argc, const char *argv[]) {
   unsigned char simpleText[1000];   // used for the simple run of SMART
   /* useful variables */
   unsigned char *T = NULL; // text
-  int n;           // length of the text
+  int n;                   // length of the text
   char parameter[1000];
 
   memset(&options, 0, sizeof(options));
@@ -608,7 +611,7 @@ int main(int argc, const char *argv[]) {
     PATT_CUSTOM_SIZE[0] = m;
     PATT_CUSTOM_SIZE[1] = 0;
     PATT_SIZE = PATT_CUSTOM_SIZE;
-    
+
     textStats(T, n, FREQ);
     srand(time(NULL));
     char expcode[32];
@@ -623,8 +626,8 @@ int main(int argc, const char *argv[]) {
     printf("\tExperimental tests started on %s\n", time_format);
 
     printf("\tStarting experimental tests with code %s\n", expcode);
-    run_setting("", T, n, alpha, FREQ, VOLTE, options, expcode,
-                simplePattern, time_format);
+    run_setting("", T, n, alpha, FREQ, VOLTE, options, expcode, simplePattern,
+                time_format);
     // no output is given for the simple case;
   } else if (strcmp(filename, "all")) {
     // experimental results on a list of text buffers

@@ -209,9 +209,10 @@ int split_filelist(char *filename, char list_of_filenames[NumSetting][50]) {
   return (k + 1);
 }
 
-static int u8_cmp(const void* a, const void* b) {
-  return *(uint8_t*)a < *(uint8_t*)b ? -1 :
-    *(uint8_t*)a > *(uint8_t*)b ? 1 : 0;
+static int u8_cmp(const void *a, const void *b) {
+  return *(uint8_t *)a < *(uint8_t *)b   ? -1
+         : *(uint8_t *)a > *(uint8_t *)b ? 1
+                                         : 0;
 }
 
 // display the frequency of characters and the dimension of the alphabet
@@ -238,13 +239,13 @@ void textStats(unsigned char *T, int n, int FREQ[SIGMA]) {
   for (j = 0; j < SIGMA; j++)
     if (maxfreq < FREQ[j])
       maxfreq = j;
-  median = (n % 2) ? (n+1)/2 : n/2;
+  median = (n % 2) ? (n + 1) / 2 : n / 2;
   sorted = malloc(n);
   memcpy(sorted, T, n);
   qsort(sorted, n, 1, u8_cmp);
   printf("\t%d characters [%d-%d], median: %d, alpha: %d, highest freq: %d\n",
          n, mincode, maxcode,
-         n % 2 ? sorted[median] : (sorted[median] + sorted[(n + 2)/2]) / 2,
+         n % 2 ? sorted[median] : (sorted[median] + sorted[(n + 2) / 2]) / 2,
          nalpha, maxfreq);
   //printf("\n\tText of %d chars : %s\n", n, T);
   //printf("\tPattern of %d chars : %s, alpha = %d\n", m, simplePattern, alpha);

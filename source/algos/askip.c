@@ -30,8 +30,8 @@
 
 #define getZ(i) z[(i)]
 #define NIL 0
-#define delta(q, a) automaton->trans[(q)*SIGMA + (a)]
-#define primary(q, a) automaton->prim[(q)*SIGMA + (a)]
+#define delta(q, a) automaton->trans[(q) * SIGMA + (a)]
+#define primary(q, a) automaton->prim[(q) * SIGMA + (a)]
 #define failure(q) automaton->fail[(q)]
 #define terminal(q) automaton->term[(q)]
 #define shift(q) automaton->sh[(q)]

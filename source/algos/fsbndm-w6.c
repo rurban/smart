@@ -60,7 +60,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   if (m > 31)
     m = 31;
   if (m < 6)
-    return search_small(x, m, y, n);;
+    return search_small(x, m, y, n);
+  ;
   BEGIN_PREPROCESSING
   count = 0;
   mm1 = m - 1;

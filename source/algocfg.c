@@ -394,8 +394,7 @@ int main(int argc, char **argv) {
       if (ALGOCFGS[id].unwind)
         printf("--unwind %d ", ALGOCFGS[id].unwind);
       printf("\n");
-    }
-    else if (strcmp(cfg, "minlen") == 0)
+    } else if (strcmp(cfg, "minlen") == 0)
       printf("%d\n", ALGOCFGS[id].minlen);
     else if (strcmp(cfg, "maxlen") == 0)
       printf("%d\n", ALGOCFGS[id].maxlen);
