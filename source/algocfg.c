@@ -284,12 +284,12 @@ const struct algocfg ALGOCFGS[] = {
   [_FT3]  = {_FT3, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   //[_HPBM] = {_HPBM, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_SSECP] = {_SSECP, FAIL, ASAN, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
-  [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256}, // no cbmc simd support yet
   [_LIBC]  = {_LIBC, FAIL, FAIL, VFY_FAIL, 0, 0, 256, 256}, // no \0
-  [_LIBC1] = {_LIBC1, RNDCRASH, RNDCRASH, VFY_FAIL, 0, 0, 256, 256},
   [_MUSL]  = {_MUSL, GOOD, ASAN, VFY_FAIL, 0, 0, 256, 256}, // no \0
+  [_LIBC1] = {_LIBC1, RNDCRASH, RNDCRASH, VFY_FAIL, 0, 0, 256, 256},
   [_MUSL1] = {_MUSL1, GOOD, RNDCRASH, VFY_PASS, 0, 0, 256, 256},
   [_SIMDKR] = {_SIMDKR, RNDCRASH, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
+  [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256}, // no cbmc simd support yet
     // clang-format on
 };
 

@@ -251,12 +251,12 @@ enum algo_id {
   _FT3,    // Parallel Boyer-Moore with goodsuff, Lecroq 2024
   _HPBM,   // HP Parallel Boyer-Moore, Jeong et al 2015
   _SSECP,  // SSE Crochemore-Perrin
-  _EPSM,   // SSE4 Exact Packed String Matching
   _LIBC,   // strstr
-  _LIBC1,  // memmem
   _MUSL,   // musl strstr
+  _LIBC1,  // memmem
   _MUSL1,  // musl memmem
   _SIMDKR, // SIMD generic Rabin-Karp variants (SSE2, AVX2 and NEON)
+  _EPSM,   // SSE4 Exact Packed String Matching
 } ALGO_POS;
 
 struct algo {
@@ -537,12 +537,12 @@ const struct algo ALGOS[] = {
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
   [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
   [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0},
-  [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
   [_LIBC] = {_LIBC, FAIL, "libc", "strstr", 0, 0}, // no \0
-  [_LIBC1] = {_LIBC1, RNDCRASH, "libc1", "memmem", 0, 0},
   [_MUSL] = {_MUSL, OK, "musl", "musl strstr", 0, 0}, // no \0
+  [_LIBC1] = {_LIBC1, RNDCRASH, "libc1", "memmem", 0, 0},
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem", 0, 0},
   [_SIMDKR] = {_SIMDKR, RNDCRASH, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
+  [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
     // clang-format on
 };
 
