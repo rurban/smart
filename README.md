@@ -44,7 +44,8 @@ github actions run all the tests, linters and some verifications on all changes.
 ## Summary
 
 According to our experimental results in 2010 (until KBNDM), we conclude
-that the following algorithms are the most efficient in the following situations:
+that the following algorithms are the most efficient in the following situations.
+MUSL1 and EPSM added later as the current best.
 
 * MUSL1 memmem(): short patterns.
 * EPSM: The best SSE2 algo, but unsafe.
@@ -62,6 +63,11 @@ that the following algorithms are the most efficient in the following situations
 
 However the old tests were done with temp. buffers on the heap, not static stack buffers.
 And some implementations didn't free their temp. buffers.
+
+## Benchmarks
+
+* [Best](https://rurban.github.io/smart/results/best20/)
+* [All](https://rurban.github.io/smart/results/all/)
 
 ## Reference
 
