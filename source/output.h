@@ -506,7 +506,7 @@ void printMulti(double TIME[NumAlgo][NumPatt], FILE *fp, int w, int h,
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "colors: [");
+  fprintf(fp, "                colors: [");
   for (i = 0; i < num_colors; i++)
     fprintf(fp, "'%s',", colors[i]);
   fprintf(fp, "],\n");
@@ -765,7 +765,7 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "colors: [");
+  fprintf(fp, "                colors: [");
   for (i = 0; i < num_colors; i++)
     fprintf(fp, "'%s',", colors[i]);
   fprintf(fp, "],\n");
