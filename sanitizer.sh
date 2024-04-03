@@ -1,7 +1,7 @@
 #!/bin/sh
 make SANITIZE=1
 echo test all, not just the working algos
-for t in `cat algos.lst`
+for t in `./algocfg good` `./algocfg good 0`
 do
     ./test-asan "$t"
 done

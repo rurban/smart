@@ -78,7 +78,7 @@ ifeq ($(TESTS),)
   TESTS = hor mp kmp musl1 tbm so ssm qf33 twfr3 fndm
 endif
 
-all: $(BINS) $(HELPERS)
+all: $(BINS) $(HELPERS) good.lst asan.lst
 
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC)
 	@test -d $(BINDIR) || mkdir $(BINDIR)
@@ -134,6 +134,10 @@ sanitizer.log: $(ALLSRC)
 	-./sanitizer.sh 2>sanitizer.log
 tests.lst: $(ALLSRC)
 	for t in `cat algos.lst`; do ./test "$$t"; done | tee $@
+good.lst: algocfg
+	./algocfg good | tr ' ' '\n' >$@
+asan.lst: algocfg
+	./algocfg good 0 | perl -nle'%bad=map{$$_=>1}split/ /;for(split/ /,qx"./algocfg asan"){print $$_ unless $$bad{$$_}}' >$@
 
 # MAX_M 10 * MAX_N 36
 CBMC_ARGS = -DCBMC --slice-formula
@@ -161,7 +165,8 @@ verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
-            (echo cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; grep "^$$b.c" good.lst && exit 1); \
+            (echo cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) "$$c FAILED"; \
+	    test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/verify.log
 check-verify:
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
@@ -170,7 +175,7 @@ check-verify:
 	  echo $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
             (echo cbmc $(CBMC_ARGS_0) $(CBMC_CHECKS) "$$c FAILED"; \
-	     grep "^$$b.c" good.lst && exit 1); \
+	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done
 # prints the violations
 verify-trace: verify/trace.log
@@ -180,7 +185,7 @@ verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
 	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c; \
 	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) $$c || \
             (echo cbmc --trace $$args $(CBMC_ARGS) $(CBMC_CHECKS) " $$c FAILED"; \
-	     grep "^$$b.c" good.lst && exit 1); \
+	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
 fuzz: test-fuzz
 	for c in $(ALGOSRC); do \

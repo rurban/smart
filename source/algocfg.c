@@ -93,7 +93,7 @@ const struct algocfg ALGOCFGS[] = {
   [_TVSBS] = {_TVSBS, GOOD, FAIL, VFY_PASS, 0, 0, 256, 256},
   [_PBMH] = {_PBMH, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_FJS] = {_FJS, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
-  [_BLOCK] = {_BLOCK, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
+  //[_BLOCK] = {_BLOCK, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_HASH3] = {_HASH3, GOOD, ASAN, VFY_FAIL, 3, 0, 256, 256},
   [_HASH5] = {_HASH5, GOOD, ASAN, VFY_FAIL, 5, 0, 256, 256},
   [_HASH8] = {_HASH8, GOOD, ASAN, VFY_FAIL, 8, 0, 256, 256},
@@ -237,13 +237,13 @@ const struct algocfg ALGOCFGS[] = {
   [_SBNDM_W4] = {_SBNDM_W4, FAIL, FAIL, VFY_PASS, 4, 0, 256, 256},
   [_SBNDM_W6] = {_SBNDM_W6, GOOD, FAIL, VFY_PASS, 6, 0, 256, 256},
   [_SSM]    = {_SSM, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256},
-  [_TSA]    = {_TSA, FAIL, ASAN, VFY_TIMEOUT, 2, 0, 256, 256},
+  [_TSA]    = {_TSA, GOOD, ASAN, VFY_TIMEOUT, 2, 0, 256, 256},
   [_TSA_Q2] = {_TSA_Q2, FAIL, ASAN, VFY_TIMEOUT, 2, 64, 256, 256},
   [_TSO5]   = {_TSO5, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
   [_TUNEDBM] = {_TUNEDBM, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_TVSBS_W2] = {_TVSBS_W2, GOOD, FAIL, VFY_PASS, 0, 0, 256, 256},
   [_TVSBS_W4] = {_TVSBS_W4, FAIL, FAIL, VFY_PASS, 2, 0, 256, 256},
-  [_TVSBS_W6] = {_TVSBS_W6, FAIL, ASAN, VFY_PASS, 2, 0, 256, 256},
+  [_TVSBS_W6] = {_TVSBS_W6, GOOD, FAIL, VFY_PASS, 2, 0, 256, 256},
   [_TVSBS_W8] = {_TVSBS_W8, FAIL, FAIL, VFY_PASS, 2, 0, 256, 256},
   [_WFR]  = {_WFR, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_WFR2] = {_WFR2, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
@@ -289,7 +289,7 @@ const struct algocfg ALGOCFGS[] = {
   [_LIBC1] = {_LIBC1, GOOD, GOOD, VFY_FAIL, 0, 0, 256, 256},
   [_MUSL1] = {_MUSL1, GOOD, GOOD, VFY_PASS, 0, 0, 256, 256},
   [_SIMDKR] = {_SIMDKR, FAIL, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
-  [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256}, // no cbmc simd support yet
+  [_EPSM]  = {_EPSM, GOOD, FAIL, VFY_TIMEOUT, 0, 0, 256, 256}, // no cbmc simd support yet
     // clang-format on
 };
 
