@@ -621,7 +621,7 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
           fprintf(fp, "<div class=\"pre_time\" style=\"display:%s\">%.2f</div>",
                   preVisible, PRE_TIME[algo][il]);
           if (TIME[algo][il] == 0)
-            fprintf(fp, "<div class=\"search_time\">-</div>");
+            fprintf(fp, "<div class=\"search_time\">&nbsp;-</div>");
           else {
             if (!best)
               fprintf(fp, "<div class=\"search_time\">%.2f</div>",
