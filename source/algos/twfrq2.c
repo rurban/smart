@@ -24,13 +24,16 @@
  * factor of the pattern) and jump to the right, like in BOM.
  *
  * Constraints: requires m>=2
+ * m>512 it's far too slow
  */
 
 #define MIN_M 2
+#define MAX_M 512
 #include "include/define.h"
 #include "include/main.h"
 #include "include/GRAPH.h"
 #include "include/search_small.h"
+#include "include/search_large.h"
 
 #define Q 2
 #define HASH(j) (y[j] << 2) + y[j - 1]
@@ -61,6 +64,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned short h;
   if (m < Q)
     return search_small(x, m, y, n);
+  if (m > 512)
+    return search_large(x, m, y, n);
 
   BEGIN_PREPROCESSING
   /* Preprocessing */
