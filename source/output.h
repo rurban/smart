@@ -307,7 +307,7 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
   int ymax = (int)(dymax + 1.0);
 
   fprintf(fp,
-          "<div class=\"chart_container_small\"><div class=\"chart_title\">%s "
+          "\n<div class=\"chart_container_small\"><div class=\"chart_title\">%s "
           "- %s</div>\n",
           upname, ALGOS[algo].desc);
   fprintf(fp,
@@ -321,11 +321,9 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
   fprintf(
       fp,
       "The plot reports the mean and the distribution of the running times.");
-  fprintf(fp, "</div>\n");
-  fprintf(fp, "</div>\n");
-  fprintf(fp, "</div>\n");
+  fprintf(fp, "</div></div></div>\n");
 
-  fprintf(fp, "<script>function loadChart%u() { ", algo);
+  fprintf(fp, "<script>function loadChart%u() {\n", algo);
 
   fprintf(fp, "var data = [");
   for (unsigned int il = 0; il < NumPatt; il++)
@@ -381,20 +379,14 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
             id: 'cvs%u',\n\
             data: [bound1, bound2],\n\
             options: {\n\
-                noxaxis: true,\n\
-                textSize: 14,\n\
+                spline: true,\n\
                 filled: true,\n\
                 filledRange: true,\n\
-                fillstyle: 'rgba(255,0,0,0.1)',\n\
+                filledColors: 'rgba(255,0,0,0.1)',\n\
                 colors: ['rgba(0,0,0,0)'],\n\
-                linewidth: 0,\n\
-                ylabels: false,\n\
-                noaxes: true,\n\
-                ymax: %d,\n\
-                hmargin: 5,\n\
-                spline: true,\n\
-                gutterLeft: 40,\n\
-                tickmarks: null,\n\
+                tickmarksStyle: null,\n\
+                yaxisScaleMax: %d,\n\
+                yaxisScale: false,\n\
             }\n\
         }).draw();\n",
           algo, ymax);
@@ -403,20 +395,14 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
             id: 'cvs%u',\n\
             data: [std1, std2],\n\
             options: {\n\
-                noxaxis: true,\n\
-                textSize: 14,\n\
+                spline: true,\n\
                 filled: true,\n\
                 filledRange: true,\n\
-                fillstyle: 'rgba(255,0,0,0.2)',\n\
+                filledColors: 'rgba(255,0,0,0.2)',\n\
                 colors: ['rgba(0,0,0,0)'],\n\
-                linewidth: 0,\n\
-                ylabels: false,\n\
-                noaxes: true,\n\
-                ymax: %d,\n\
-                hmargin: 5,\n\
-                spline: true,\n\
-                gutterLeft: 40,\n\
-                tickmarks: null,\n\
+                tickmarksStyle: null,\n\
+                yaxisScaleMax: %d,\n\
+                yaxisScale: false,\n\
             }\n\
         }).draw();\n",
           algo, ymax);
@@ -428,25 +414,28 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
             	textFont: 'Yantramanav',\n\
             	textSize: '8',\n\
             	textColor: '#444',\n\
-                BackgroundBarcolor1: 'white',\n\
-                BackgroundBarcolor2: 'red',\n\
                 BackgroundGridColor: 'rgba(238,238,238,1)',\n\
                 linewidth: 1,\n\
                 filled: false,\n\
                 hmargin: 5,\n\
-                shadow: false,\
-                tickmarks: 'circle',\n\
-                ymax: %d,\n\
+                shadow: false,\n\
+                tickmarksStyle: 'circle',\n\
                 spline: true,\n\
                 gutterLeft: 40,\n\
-                tickmarks: null,\n\
-                labels: [",
+                //labelsAbove: true,\n\
+                yaxisScaleMax: %d,\n\
+                yaxisScale: true,\n\
+                yaxisLabelsCount: 5,\n\
+                yaxisTitle: 'ms',\n\
+                yaxisTitleOffsetx: 8,\n\
+                xaxisTitle: 'Pattern lengths',\n\
+                xaxisLabels: [",
           algo, ymax);
   for (unsigned int il = 0; il < NumPatt; il++)
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "colors: ['#000000'],\n");
+  fprintf(fp, "                colors: ['#000000'],\n");
   fprintf(fp, "} }).draw();");
 
   fprintf(fp, "}</script>");
@@ -508,7 +497,7 @@ void printMulti(double TIME[NumAlgo][NumPatt], FILE *fp, int w, int h,
                 fillstyle: ['red','blue','#0f0'],\n\
                 hmargin: 5,\n\
                 shadow: false,\
-                tickmarks: 'circle',\n\
+                tickmarksStyle: 'circle',\n\
                 spline: true,\n\
                 gutterLeft: 40,\n\
                 labels: [",
@@ -564,12 +553,12 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
     return 0;
   }
   fprintf(fp, "<!DOCTYPE html><html><head>");
-  fprintf(fp, "<script src=\"../js/RGraph.common.core.js\"></script>");
-  fprintf(fp, "<script src=\"../js/RGraph.common.effects.js\"></script>");
-  fprintf(fp, "<script src=\"../js/RGraph.line.js\"></script>");
-  fprintf(fp, "<script src=\"../js/RGraph.bar.js\"></script>");
-  fprintf(fp, "<script src=\"../js/RGraph.common.dynamic.js\"></script>");
-  fprintf(fp, "<script src=\"../js/RGraph.common.tooltips.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.common.core.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.common.effects.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.line.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.bar.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.common.dynamic.js\"></script>");
+  fprintf(fp, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/RGraph/6.17/RGraph.common.tooltips.js\"></script>");
   fprintf(fp, "<script src=\"../js/Smart.TimeResultFormatting.js\"></script>");
   fprintf(fp, "<link href='https://fonts.googleapis.com/css?family=Dosis:300' "
               "rel='stylesheet' type='text/css'>");
@@ -765,8 +754,8 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
                 filled: false,\n\
                 fillstyle: ['red','blue','#0f0'],\n\
                 hmargin: 5,\n\
-                shadow: false,\
-                tickmarks: 'circle',\n\
+                shadow: false,\n\
+                tickmarksStyle: 'circle',\n\
                 spline: true,\n\
                 ymax: %d,\n\
                 gutterLeft: 40,\n\
