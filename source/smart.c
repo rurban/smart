@@ -70,8 +70,8 @@ void printManual() {
          "(default 500)\n");
   printf("\t-tsize S      set the upper bound dimension (in Mb) of the text "
          "used for experimental results (default 1Mb)\n");
-  printf("\t-plen L U     test only patterns with a length between L and U "
-         "(included).\n");
+  printf("\t-plen L U or L:L...  test only patterns with a length between L and U "
+         "(included); or the given lengths.\n");
   printf(
       "\t-text F[:F...] performs experimental results using text buffer(s) F "
       "(mandatory unless you use the -simple parameter)\n");
@@ -506,24 +506,55 @@ int main(int argc, const char *argv[]) {
         goto end;
       }
       strncpy(parameter, argv[par++], SZNCPY(parameter));
-      MINLEN = string2decimal(parameter);
+      if (strchr(parameter, ':')) {
+        char plens[NumSetting][50];
+        memset(plens, 0, NumSetting * 50);
+        int num = split_filelist(parameter, plens);
+        if (num >= NumSetting) {
+          printf("Error in input parameters. Too many -plen items, max %d.\n\n",
+                 NumSetting);
+          goto end;
+        }
+        MINLEN = 1024;
+        MAXLEN = 0;
+        for (int i = 0; i < num; i++) {
+          PATT_SIZE[i] = string2decimal(plens[i]);
+          if (PATT_SIZE[i] < MINLEN)
+            MINLEN = PATT_SIZE[i];
+          if (PATT_SIZE[i] > MAXLEN)
+            MAXLEN = PATT_SIZE[i];
+        }
+        PATT_SIZE[num] = 0;
+        if (MINLEN < 1 || MAXLEN > 4200) {
+          printf("Error in input parameters. The minimum length %d or max "
+                 "length %d is not a valid "
+                 "argument.\n\n",
+                 MINLEN, MAXLEN);
+          goto end;
+        }
+      } else {
+        MINLEN = string2decimal(parameter);
 
-      if (MINLEN < 1 || MINLEN > 4200) {
-        printf("Error in input parameters. The minimum length is not a valid "
-               "argument.\n\n");
-        goto end;
-      }
-      if (par >= argc) {
-        printf("Error in input parameters. Use -h for help.\n\n");
-        goto end;
-      }
-      strncpy(parameter, argv[par++], SZNCPY(parameter));
-      MAXLEN = string2decimal(parameter);
+        if (MINLEN < 1 || MINLEN > 4200) {
+          printf("Error in input parameters. The minimum length %d is not a "
+                 "valid "
+                 "argument.\n\n",
+                 MINLEN);
+          goto end;
+        }
+        if (par >= argc) {
+          printf("Error in input parameters. Use -h for help.\n\n");
+          goto end;
+        }
+        strncpy(parameter, argv[par++], SZNCPY(parameter));
+        MAXLEN = string2decimal(parameter);
 
-      if (MAXLEN < 1 || MINLEN > MAXLEN) {
-        printf("Error in input parameters. The maximum length is not a valid "
-               "argument.\n\n");
-        goto end;
+        if (MAXLEN < 1 || MINLEN > MAXLEN) {
+          printf(
+                 "Error in input parameters. The maximum length is not a valid "
+                 "argument.\n\n");
+          goto end;
+        }
       }
     }
     if (par < argc && !strcmp("-simple", argv[par])) {
