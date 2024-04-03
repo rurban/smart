@@ -43,10 +43,12 @@ void printManual() {
   printf("\t-none           deselects all algorithms\n");
   // printf("\t-group A:B:C:D  group a list of algorithms (separated by a :) in
   // a single algorithm named D\n");
+  printf("\t-backup         copies algorithms.lst to algorithms.lst.bak\n");
+  printf("\t-restore        copies back algorithms.lst.bak to algorithms.lst "
+         "\t                (or deletes it algorithms.lst)x\n");
   printf("\t-add ALGO       add the new alorithm ALGO to the set\n");
   printf("\t                the executable file of the new algorithm must be "
-         "in %s\n",
-         BINDIR);
+         "in %s\n", BINDIR);
   printf("\t-h              gives this help list\n");
   printf("\n\n");
 }
@@ -266,6 +268,18 @@ int main(int argc, const char *argv[]) {
       for (i = 0; i < NumAlgo; i++)
         if (ALGO_NAME[i])
           execute[i] = 0;
+      continue;
+    }
+    if (par < argc && !strcmp("-backup", argv[par])) {
+      par++;
+      if (file_exists("algorithms.lst"))
+        system("cp -f algorithms.lst algorithms.lst.bak");
+      continue;
+    }
+    if (par < argc && !strcmp("-restore", argv[par])) {
+      par++;
+      if (file_exists("algorithms.lst.bak"))
+        system("cp -f algorithms.lst.bak algorithms.lst");
       continue;
     }
     if (par < argc) {

@@ -108,6 +108,15 @@ char *str2upper(const char *s) {
   return ret;
 }
 
+// and readable
+int file_exists(const char* f) {
+  FILE *fp = fopen(f, "r");
+  if (!fp)
+    return 0;
+  fclose(fp);
+  return 1;
+}
+
 int search_ALGO(const char *ALGO_NAME[], char *algo) {
   unsigned int i;
   char *low = str2lower(algo);
