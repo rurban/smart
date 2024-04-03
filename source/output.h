@@ -376,66 +376,66 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
   fprintf(fp, "];\n");
 
   fprintf(fp, "var line3 = new RGraph.Line({\n\
-            id: 'cvs%u',\n\
-            data: [bound1, bound2],\n\
-            options: {\n\
-                spline: true,\n\
-                filled: true,\n\
-                filledRange: true,\n\
-                filledColors: 'rgba(255,0,0,0.1)',\n\
-                colors: ['rgba(0,0,0,0)'],\n\
-                tickmarksStyle: null,\n\
-                yaxisScaleMax: %d,\n\
-                yaxisScale: false,\n\
-            }\n\
-        }).draw();\n",
+	id: 'cvs%u',\n\
+	data: [bound1, bound2],\n\
+	options: {\n\
+		spline: true,\n\
+		filled: true,\n\
+		filledRange: true,\n\
+		filledColors: 'rgba(255,0,0,0.1)',\n\
+		colors: ['rgba(0,0,0,0)'],\n\
+		tickmarksStyle: null,\n\
+		yaxisScaleMax: %d,\n\
+		yaxisScale: false,\n\
+	}\n\
+}).draw();\n",
           algo, ymax);
 
   fprintf(fp, "var line2 = new RGraph.Line({\n\
-            id: 'cvs%u',\n\
-            data: [std1, std2],\n\
-            options: {\n\
-                spline: true,\n\
-                filled: true,\n\
-                filledRange: true,\n\
-                filledColors: 'rgba(255,0,0,0.2)',\n\
-                colors: ['rgba(0,0,0,0)'],\n\
-                tickmarksStyle: null,\n\
-                yaxisScaleMax: %d,\n\
-                yaxisScale: false,\n\
-            }\n\
-        }).draw();\n",
+	id: 'cvs%u',\n\
+	data: [std1, std2],\n\
+	options: {\n\
+		spline: true,\n\
+		filled: true,\n\
+		filledRange: true,\n\
+		filledColors: 'rgba(255,0,0,0.2)',\n\
+		colors: ['rgba(0,0,0,0)'],\n\
+		tickmarksStyle: null,\n\
+		yaxisScaleMax: %d,\n\
+		yaxisScale: false,\n\
+	}\n\
+}).draw();\n",
           algo, ymax);
 
   fprintf(fp, "var line = new RGraph.Line({\n\
-            id: 'cvs%u',\n\
-            data: data,\n\
-            options: {\n\
-            	textFont: 'Yantramanav',\n\
-            	textSize: '8',\n\
-            	textColor: '#444',\n\
-                BackgroundGridColor: 'rgba(238,238,238,1)',\n\
-                linewidth: 1,\n\
-                filled: false,\n\
-                hmargin: 5,\n\
-                shadow: false,\n\
-                tickmarksStyle: 'circle',\n\
-                spline: true,\n\
-                gutterLeft: 40,\n\
-                //labelsAbove: true,\n\
-                yaxisScaleMax: %d,\n\
-                yaxisScale: true,\n\
-                yaxisLabelsCount: 5,\n\
-                yaxisTitle: 'ms',\n\
-                yaxisTitleOffsetx: 8,\n\
-                xaxisTitle: 'Pattern lengths',\n\
-                xaxisLabels: [",
+	id: 'cvs%u',\n\
+	data: data,\n\
+	options: {\n\
+		textFont: 'Yantramanav',\n\
+		textSize: '8',\n\
+		textColor: '#444',\n\
+		BackgroundGridColor: 'rgba(238,238,238,1)',\n\
+		linewidth: 1,\n\
+		filled: false,\n\
+		hmargin: 5,\n\
+		shadow: false,\n\
+		tickmarksStyle: 'circle',\n\
+		spline: true,\n\
+		gutterLeft: 40,\n\
+		//labelsAbove: true,\n\
+		yaxisScaleMax: %d,\n\
+		yaxisScale: true,\n\
+		yaxisLabelsCount: 5,\n\
+		yaxisTitle: 'ms',\n\
+		yaxisTitleOffsetx: 8,\n\
+		xaxisTitle: 'Pattern lengths',\n\
+		xaxisLabels: [",
           algo, ymax);
   for (unsigned int il = 0; il < NumPatt; il++)
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "                colors: ['#000000'],\n");
+  fprintf(fp, "\t\tcolors: ['#000000'],\n");
   fprintf(fp, "} }).draw();");
 
   fprintf(fp, "}</script>");
@@ -482,31 +482,31 @@ void printMulti(double TIME[NumAlgo][NumPatt], FILE *fp, int w, int h,
     }
   }
   fprintf(fp, "]; \n\
-        var line = new RGraph.Line({\n\
-            id: 'cvs%d',\n\
-            data: data,\n\
-            options: {\n\
-            	textFont: 'Yantramanav',\n\
-            	textSize: '8',\n\
-            	textColor: '#444',\n\
-                BackgroundBarcolor1: 'white',\n\
-                BackgroundBarcolor2: 'red',\n\
-                BackgroundGridColor: 'rgba(238,238,238,1)',\n\
-                linewidth: 1,\n\
-                filled: false,\n\
-                fillstyle: ['red','blue','#0f0'],\n\
-                hmargin: 5,\n\
-                shadow: false,\
-                tickmarksStyle: 'circle',\n\
-                spline: true,\n\
-                gutterLeft: 40,\n\
-                labels: [",
+var line = new RGraph.Line({\n\
+	id: 'cvs%d',\n\
+	data: data,\n\
+	options: {\n\
+		textFont: 'Yantramanav',\n\
+		textSize: '8',\n\
+		textColor: '#444',\n\
+		BackgroundBarcolor1: 'white',\n\
+		BackgroundBarcolor2: 'red',\n\
+		BackgroundGridColor: 'rgba(238,238,238,1)',\n\
+		linewidth: 1,\n\
+		filled: false,\n\
+		fillstyle: ['red','blue','#0f0'],\n\
+		hmargin: 5,\n\
+		shadow: false,\
+		tickmarksStyle: 'circle',\n\
+		spline: true,\n\
+		gutterLeft: 40,\n\
+		labels: [",
           code);
   for (il = 0; il < NumPatt; il++)
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "                colors: [");
+  fprintf(fp, "\t\tcolors: [");
   for (i = 0; i < num_colors; i++)
     fprintf(fp, "'%s',", colors[i]);
   fprintf(fp, "],\n");
@@ -740,32 +740,32 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
     }
   }
   fprintf(fp, "]; \n\
-        var line = new RGraph.Line({\n\
-            id: 'cvs',\n\
-            data: data,\n\
-            options: {\n\
-            	textFont: 'Yantramanav',\n\
-            	textSize: '8',\n\
-            	textColor: '#444',\n\
-                BackgroundBarcolor1: 'white',\n\
-                BackgroundBarcolor2: 'red',\n\
-                BackgroundGridColor: 'rgba(238,238,238,1)',\n\
-                linewidth: 1,\n\
-                filled: false,\n\
-                fillstyle: ['red','blue','#0f0'],\n\
-                hmargin: 5,\n\
-                shadow: false,\n\
-                tickmarksStyle: 'circle',\n\
-                spline: true,\n\
-                ymax: %d,\n\
-                gutterLeft: 40,\n\
-                labels: [",
+var line = new RGraph.Line({\n\
+	id: 'cvs',\n\
+	data: data,\n\
+	options: {\n\
+		textFont: 'Yantramanav',\n\
+		textSize: '8',\n\
+		textColor: '#444',\n\
+		BackgroundBarcolor1: 'white',\n\
+		BackgroundBarcolor2: 'red',\n\
+		BackgroundGridColor: 'rgba(238,238,238,1)',\n\
+		linewidth: 1,\n\
+		filled: false,\n\
+		fillstyle: ['red','blue','#0f0'],\n\
+		hmargin: 5,\n\
+		shadow: false,\n\
+		tickmarksStyle: 'circle',\n\
+		spline: true,\n\
+		ymax: %d,\n\
+		gutterLeft: 40,\n\
+		labels: [",
           ymax);
   for (il = 0; il < NumPatt; il++)
     if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN)
       fprintf(fp, "'%u',", PATT_SIZE[il]);
   fprintf(fp, "],\n");
-  fprintf(fp, "                colors: [");
+  fprintf(fp, "\t\tcolors: [");
   for (i = 0; i < num_colors; i++)
     fprintf(fp, "'%s',", colors[i]);
   fprintf(fp, "],\n");
@@ -808,59 +808,66 @@ int outputHTML(double PRE_TIME[NumAlgo][NumPatt], double TIME[NumAlgo][NumPatt],
     printf("\tError in writing file %s\n", outname);
     return 0;
   }
-  fprintf(fp, "<html>\n\
-		<head>\n\
-		\t<title>SMART: experimental results %s on %s</title>\n\
-		\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n\
-		\t<link href=\"../style.css\" rel=\"stylesheet\" type=\"text/css\" />\n\
-		</head>\n\
-		<body>\n\
-		\t<script type=\"text/javascript\">\n\
-		\t\tif (window.XMLHttpRequest) {\n\
-		\t\t\t// code for IE7+, Firefox, Chrome, Opera, Safari\n\
-	  	\t\t\txmlhttp=new XMLHttpRequest();\n\
-		\t\t}\n\
-		\t\telse {\n\
-		\t\t\t// code for IE6, IE5\n\
-  		\t\t\txmlhttp=new ActiveXObject(\"Microsoft.XMLHTTP\");\n\
-		\t\t}\n\
-		\t\txmlhttp.open(\"GET\",\"%s.xml\",false);\n\
-		\t\txmlhttp.send();\n\
-		\t\txmlDoc=xmlhttp.responseXML; \n\
-		\t\tdocument.write(\"<h2>SMART: experimental results %s on %s</h2><br>Results computed on %s<br/>\");\n\
-		\t\tdocument.write(\"<table align=\\\"center\\\">\");\n",
-          expcode, filename, filename, expcode, filename, time_format);
+  fprintf(
+      fp,
+      "<html>\n"
+      "<head>\n"
+      "\t<title>SMART: experimental results %s on %s</title>\n"
+      "\t<meta http-equiv=\"Content-Type\" content=\"text/html; "
+      "charset=utf-8\" />\n"
+      "\t<link href=\"../style.css\" rel=\"stylesheet\" type=\"text/css\" />\n"
+      "</head>\n"
+      "<body>\n"
+      "\t<script type=\"text/javascript\">\n"
+      "\t\tif (window.XMLHttpRequest) {\n"
+      "\t\t\t// code for IE7+, Firefox, Chrome, Opera, Safari\n"
+      "\t\t\txmlhttp=new XMLHttpRequest();\n"
+      "\t\t}\n"
+      "\t\telse {\n"
+      "\t\t\t// code for IE6, IE5\n"
+      "\t\t\txmlhttp=new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
+      "\t\t}\n"
+      "\t\txmlhttp.open(\"GET\",\"%s.xml\",false);\n"
+      "\t\txmlhttp.send();\n"
+      "\t\txmlDoc=xmlhttp.responseXML; \n"
+      "\t\tdocument.write(\"<h2>SMART: experimental results %s on "
+      "%s</h2><br>Results computed on %s<br/>\");\n"
+      "\t\tdocument.write(\"<table align=\\\"center\\\">\");\n",
+      expcode, filename, filename, expcode, filename, time_format);
   fprintf(fp, "document.write(\"<tr><td></td>\");\n");
   for (i = 0; PATT_SIZE[i] > 0; i++)
     if (PATT_SIZE[i] >= MINLEN && PATT_SIZE[i] <= MAXLEN)
       fprintf(fp, "document.write(\"<td><b>%u</b></td>\");\n", PATT_SIZE[i]);
   fprintf(fp, "document.write(\"</tr>\");\n");
-  fprintf(fp, "\
-		\t\tvar best=xmlDoc.getElementsByTagName(\"BEST\");\n\
-		\t\tvar bestvalues = best[0].getElementsByTagName(\"DATA\");\n\
-		\t\tvar x=xmlDoc.getElementsByTagName(\"ALGO\");\n\
-		\t\tfor (i=0;i<x.length;i++) { \n\
-		\t\t\tdocument.write(\"<tr><td><b>\");\n\
-  		\t\t\tdocument.write(x[i].getElementsByTagName(\"NAME\")[0].childNodes[0].nodeValue);\n\
-  		\t\t\tdocument.write(\"</b></td>\");\n\
-		\t\t\tvar times = x[i].getElementsByTagName(\"DATA\");\n\
-		\t\t\tfor (j=0;j<times.length;j++) { \n\
-  		\t\t\t\tdocument.write(\"<td>\");\n\
-		\t\t\tvar y = times[j].getElementsByTagName(\"SEARCH\");\n\
-		\t\t\tfor (k=0;k<y.length;k++) { \n\
-		\t\t\t\tif(y[k].childNodes[0].nodeValue==bestvalues[j].childNodes[0].nodeValue) document.write(\"<b><u>\");\n\
-  		\t\t\t\tif(y[k].childNodes[0].nodeValue<0.05) document.write(\"--\");\n\
-  		\t\t\t\telse document.write(y[k].childNodes[0].nodeValue);\n\
-		\t\t\t\tif(y[k].childNodes[0].nodeValue==bestvalues[j].childNodes[0].nodeValue) document.write(\"</u></b>\");\n\
-  		\t\t\t\tdocument.write(\"</td>\");\n\
-		\t\t\t}\n\
-		\t\t\t}\n\
-  		\t\t\tdocument.write(\"</tr>\");\n\
-		\t\t}\n\
-		\t\tdocument.write(\"</table>\");\n\
-		\t</script>\n\
-		</body>\n\
-		</html>");
+  fprintf(
+      fp,
+      "\t\tvar best=xmlDoc.getElementsByTagName(\"BEST\");\n"
+      "\t\tvar bestvalues = best[0].getElementsByTagName(\"DATA\");\n"
+      "\t\tvar x=xmlDoc.getElementsByTagName(\"ALGO\");\n"
+      "\t\tfor (i=0;i<x.length;i++) { \n"
+      "\t\t\tdocument.write(\"<tr><td><b>\");\n"
+      "\t\t\tdocument.write(x[i].getElementsByTagName(\"NAME\")[0].childNodes[0].nodeValue);\n"
+      "\t\t\tdocument.write(\"</b></td>\");\n"
+      "\t\t\tvar times = x[i].getElementsByTagName(\"DATA\");\n"
+      "\t\t\tfor (j=0;j<times.length;j++) { \n"
+      "\t\t\t\tdocument.write(\"<td>\");\n"
+      "\t\t\tvar y = times[j].getElementsByTagName(\"SEARCH\");\n"
+      "\t\t\tfor (k=0;k<y.length;k++) { \n"
+      "\t\t\t\tif(y[k].childNodes[0].nodeValue==bestvalues[j].childNodes[0].nodeValue)"
+      " document.write(\"<b><u>\");\n"
+      "\t\t\t\tif(y[k].childNodes[0].nodeValue<0.05) document.write(\"--\");\n"
+      "\t\t\t\telse document.write(y[k].childNodes[0].nodeValue);\n"
+      "\t\t\t\tif(y[k].childNodes[0].nodeValue==bestvalues[j].childNodes[0].nodeValue)"
+      " document.write(\"</u></b>\");\n"
+      "\t\t\t\tdocument.write(\"</td>\");\n"
+      "\t\t\t}\n"
+      "\t\t\t}\n"
+      "\t\t\tdocument.write(\"</tr>\");\n"
+      "\t\t}\n"
+      "\t\tdocument.write(\"</table>\");\n"
+      "\t</script>\n"
+      "</body>\n"
+      "</html>");
   fclose(fp);
   return 1;
 }
@@ -883,32 +890,35 @@ int outputINDEX(char list_of_filenames[NumSetting][50], int num_buffers,
     printf("\tError in writing file %s/index.html\n", expcode);
     return 0;
   }
-  fprintf(fp, "<html>\n\
-		\t<head>\n\
-		\t\t<title>SMART: experimental results %s</title>\n\
-		\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n\
-		\t\t<link href=\"../style.css\" rel=\"stylesheet\" type=\"text/css\" />\n\
-		\t</head>\n\
-		\t<body>\n\
-		\t\t<h2>SMART: experimental results %s</h2><br>\n\
-		\t\t<table align=\"center\">\n",
+  fprintf(fp,
+          "<html>\n"
+          "\t<head>\n"
+          "\t\t<title>SMART: experimental results %s</title>\n"
+          "\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; "
+          "charset=utf-8\" />\n"
+          "\t\t<link href=\"../style.css\" rel=\"stylesheet\" "
+          "type=\"text/css\" />\n"
+          "\t</head>\n"
+          "\t<body>\n"
+          "\t\t<h2>SMART: experimental results %s</h2><br>\n"
+          "\t\t<table align=\"center\">\n",
           expcode, expcode);
   if (strcmp(list_of_filenames[0], "all")) {
     for (int k = 0; k < num_buffers; k++)
       fprintf(fp,
-              "\t\t\t<tr><td><a href=\"%s.html\">Experimental results on "
-              "%s</a></td></tr>\n",
+              "\t\t\t<tr><td><a href=\"%s.html\">"
+              "Experimental results on %s</a></td></tr>\n",
               list_of_filenames[k], list_of_filenames[k]);
   } else
     for (sett = 0; sett < NumSetting; sett++) {
       fprintf(fp,
-              "\t\t\t<tr><td><a href=\"%s.html\">Experimental results on "
-              "%s</a></td></tr>\n",
+              "\t\t\t<tr><td><a href=\"%s.html\">"
+              "Experimental results on %s</a></td></tr>\n",
               SETTING_BUFFER[sett], SETTING_BUFFER[sett]);
     }
-  fprintf(fp, "\t\t</table>\n\
-		\t</body>\n\
-		</html>");
+  fprintf(fp, "\t\t</table>\n"
+              "\t</body>\n"
+              "</html>");
   printf("\n");
   fclose(fp);
   return 1;
