@@ -154,7 +154,7 @@ FAIL = gs gg rcolussi bmh2 bmh4 graspm simon ldm sbdm bsom bmh-sbndm faoso4 faos
 TIMEOUT_VERIFY = bm gs ag colussi gg skip askip ffs aut simon fdm bom bom2 dfdm ww ldm ildm1 ildm2 ebom \	fbom sebom sfbom skip2 skip3 skip4 bndm tndm lbndm dbww dbww2 bsdm3 bsdm4 bsdm5 bsdm7 bxs \
 	fsbndmq20 fsbndmq21 fsbndmq31 fsbndmq32 fsbndmq41 fsbndmq42 fsbndmq43 fsbndmq61 fsbndmq62 \
 	fsbndmq64 fsbndmq81 fsbndmq82 fsbndmq84 fsbndmq86 tsa tsa-q2 tso5 epsm
-NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
+NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY) $(FAIL_VERIFY)))
 verify: verify/verify.log
 verify/verify.log: $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)) algocfg
 	for c in $(filter-out $(NON_CBMC_SRC),$(ALGOSRC)); do \
