@@ -218,7 +218,6 @@ int main(int argc, const char *argv[]) {
           fflush(stdout);
           // testing correctness of the algorithm
           snprintf(command, sizeof(command), "./test %s -nv", algo);
-          //NOLINTEND(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
           fflush(stdout);
           if (system(command)) {
             printf("\n%s failed!\n", command);
@@ -272,14 +271,38 @@ int main(int argc, const char *argv[]) {
     }
     if (par < argc && !strcmp("-backup", argv[par])) {
       par++;
-      if (file_exists("algorithms.lst"))
-        system("cp -f algorithms.lst algorithms.lst.bak");
+      if (file_exists("algorithms.lst")) {
+        system("cp --backup=numbered -f algorithms.lst algorithms.lst.bak");
+      }
       continue;
     }
     if (par < argc && !strcmp("-restore", argv[par])) {
       par++;
-      if (file_exists("algorithms.lst.bak"))
-        system("cp -f algorithms.lst.bak algorithms.lst");
+      if (file_exists("algorithms.lst.bak")) {
+        // restore from numbered backups
+        system("mv -f algorithms.lst.bak algorithms.lst");
+        if (file_exists("algorithms.lst.bak.~1~")) {
+          system("mv -f algorithms.lst.bak.~1~ algorithms.lst.bak");
+          char next[80];
+          int i = 2;
+          do {
+            snprintf(next, sizeof(next), "algorithms.lst.bak.~%d~", i++);
+          } while (file_exists(next));
+          i--;
+          for (int j = 2; j < i; j++) {
+            int p = j - 1;
+            char prev[80];
+            snprintf(next, sizeof(next), "algorithms.lst.bak.~%d~", j);
+            snprintf(prev, sizeof(prev), "algorithms.lst.bak.~%d~", p);
+            if (file_exists(next)) {
+              char cmd[166];
+              snprintf(cmd, sizeof(cmd), "mv -f %s %s", next, prev);
+              system(cmd);
+            }
+          }
+        }
+      }
+      //NOLINTEND(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
       continue;
     }
     if (par < argc) {
