@@ -499,7 +499,7 @@ int main(int argc, char *argv[]) {
           }
           setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
           if (verbose)
-            printf("Searching for a set of %u patterns with m=%d in n=%d\n",
+            printf("Searching for a set of %d patterns with m=%d in n=%d\n",
                    VOLTE, m, n);
           for (int k = 1; k <= VOLTE; k++) {
             int j;
@@ -521,7 +521,7 @@ int main(int argc, char *argv[]) {
       }
       setOfRandomPatterns(setP, m, T, n, VOLTE, (unsigned char *)"");
       if (verbose)
-        printf("Searching for a set of %u patterns with m=%d in n=%d\n", VOLTE,
+        printf("Searching for a set of %d patterns with m=%d in n=%d\n", VOLTE,
                m, n);
       for (int k = 1; k <= VOLTE; k++) {
         int j;
