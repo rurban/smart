@@ -185,10 +185,10 @@ const struct algocfg ALGOCFGS[] = {
   [_BXS6] = {_BXS6, GOOD, ASAN, VFY_PASS, 6, 0, 256, 256},
   [_BXS8] = {_BXS8, GOOD, ASAN, VFY_PASS, 8, 0, 256, 256},
   [_FS_W1] = {_FS_W1, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
-  [_FS_W2] = {_FS_W2, FAIL, RNDCRASH, VFY_PASS, 0, 0, 256, 256},
-  [_FS_W4] = {_FS_W4, FAIL, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // n>=6, needs m space at the end of T
+  [_FS_W2] = {_FS_W2, FAIL, RNDCRASH, UNSATISFIABLE, 0, 0, 256, 256},
+  [_FS_W4] = {_FS_W4, GOOD, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // n>=6, needs m space at the end of T
   [_FS_W6] = {_FS_W6, GOOD, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // n>=8, needs m space at the end of T
-  [_FS_W8] = {_FS_W8, GOOD, RNDCRASH, VFY_PASS, 0, 0, 256, 256}, // needs m space at the end of T
+  [_FS_W8] = {_FS_W8, FAIL, RNDCRASH, VFY_PASS, 0, 0, 256, 256}, // needs m space at the end of T
   [_FSBNDM_W1] = {_FSBNDM_W1, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_FSBNDM_W2] = {_FSBNDM_W2, RNDCRASH, RNDCRASH, VFY_PASS, 2, 31, 256, 256},
   [_FSBNDM_W4] = {_FSBNDM_W4, RNDCRASH, RNDCRASH, VFY_PASS, 4, 31, 256, 256},
@@ -285,16 +285,16 @@ const struct algocfg ALGOCFGS[] = {
   //[_HPBM] = {_HPBM, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_SSECP] = {_SSECP, FAIL, ASAN, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
   [_LIBC]  = {_LIBC, FAIL, FAIL, VFY_FAIL, 0, 0, 256, 256}, // no \0
-  [_MUSL]  = {_MUSL, GOOD, ASAN, VFY_FAIL, 0, 0, 256, 256}, // no \0
-  [_LIBC1] = {_LIBC1, RNDCRASH, RNDCRASH, VFY_FAIL, 0, 0, 256, 256},
-  [_MUSL1] = {_MUSL1, GOOD, RNDCRASH, VFY_PASS, 0, 0, 256, 256},
-  [_SIMDKR] = {_SIMDKR, RNDCRASH, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
+  [_MUSL]  = {_MUSL, FAIL, ASAN, VFY_FAIL, 0, 0, 256, 256}, // no \0
+  [_LIBC1] = {_LIBC1, GOOD, GOOD, VFY_FAIL, 0, 0, 256, 256},
+  [_MUSL1] = {_MUSL1, GOOD, GOOD, VFY_PASS, 0, 0, 256, 256},
+  [_SIMDKR] = {_SIMDKR, FAIL, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // no cbmc simd support yet
   [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256}, // no cbmc simd support yet
     // clang-format on
 };
 
 int main(int argc, char **argv) {
-  if (argc < 1 || argc > 3) {
+  if (argc < 2 || argc > 4) {
     fprintf(stderr, "Usage: ./algocfg [algo] [cfg [value]]\n");
     return 1;
   }

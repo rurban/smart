@@ -132,6 +132,8 @@ clang-tidy: clang-tidy.log
 sanitizer.log: $(ALLSRC)
 	-rm -f sanitizer.log 2>/dev/null
 	-./sanitizer.sh 2>sanitizer.log
+tests.lst: $(ALLSRC)
+	for t in `cat algos.lst`; do ./test "$$t"; done | tee $@
 
 # MAX_M 10 * MAX_N 36
 CBMC_ARGS = -DCBMC --slice-formula

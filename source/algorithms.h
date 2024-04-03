@@ -418,10 +418,10 @@ const struct algo ALGOS[] = {
   [_BXS8] = {_BXS8, OK, "bxs8", "BXS with q-grams limit", 8, 0},
   // _BQL = {_BQL,  OK, "bql", "BNDMq Long", 8, MISSING},
   [_FS_W1] = {_FS_W1, OK, "fs-w1", "Multiple Sliding Windows", 0, 0},
-  [_FS_W2] = {_FS_W2, RNDCRASH, "fs-w2", "Multiple Sliding Windows", 0, 0},
+  [_FS_W2] = {_FS_W2, FAIL, "fs-w2", "Multiple Sliding Windows", 0, 0},
   [_FS_W4] = {_FS_W4, RNDCRASH, "fs-w4", "Multiple Sliding Windows", 0, 0}, // n>=6, needs m space at the end of T
   [_FS_W6] = {_FS_W6, RNDCRASH, "fs-w6", "Multiple Sliding Windows", 0, 0}, // n>=8, needs m space at the end of T
-  [_FS_W8] = {_FS_W8, RNDCRASH, "fs-w8", "Multiple Sliding Windows", 0, 0}, // needs m space at the end of T
+  [_FS_W8] = {_FS_W8, FAIL | RNDCRASH, "fs-w8", "Multiple Sliding Windows", 0, 0}, // needs m space at the end of T
   [_FSBNDM_W1] =
         {_FSBNDM_W1, OK, "fsbndm-w1", "fsbndm with multiple sliding windows", 0, 0},
   [_FSBNDM_W2] = // n > m
@@ -538,10 +538,10 @@ const struct algo ALGOS[] = {
   [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
   [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0},
   [_LIBC] = {_LIBC, FAIL, "libc", "strstr", 0, 0}, // no \0
-  [_MUSL] = {_MUSL, OK, "musl", "musl strstr", 0, 0}, // no \0
-  [_LIBC1] = {_LIBC1, RNDCRASH, "libc1", "memmem", 0, 0},
+  [_MUSL] = {_MUSL, FAIL, "musl", "musl strstr", 0, 0}, // no \0
+  [_LIBC1] = {_LIBC1, OK, "libc1", "memmem", 0, 0},
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem", 0, 0},
-  [_SIMDKR] = {_SIMDKR, RNDCRASH, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
+  [_SIMDKR] = {_SIMDKR, FAIL, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
   [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
     // clang-format on
 };
