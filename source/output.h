@@ -907,13 +907,13 @@ int outputINDEX(char list_of_filenames[NumSetting][50], int num_buffers,
     for (int k = 0; k < num_buffers; k++)
       fprintf(fp,
               "\t\t\t<tr><td><a href=\"%s.html\">"
-              "Experimental results on %s</a></td></tr>\n",
+              "Experimental results on <b>%s</b></a></td></tr>\n",
               list_of_filenames[k], list_of_filenames[k]);
   } else
     for (sett = 0; sett < NumSetting; sett++) {
       fprintf(fp,
               "\t\t\t<tr><td><a href=\"%s.html\">"
-              "Experimental results on %s</a></td></tr>\n",
+              "Experimental results on <b>%s</b></a></td></tr>\n",
               SETTING_BUFFER[sett], SETTING_BUFFER[sett]);
     }
   fprintf(fp, "\t\t</table>\n"
