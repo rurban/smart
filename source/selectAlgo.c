@@ -272,7 +272,7 @@ int main(int argc, const char *argv[]) {
     if (par < argc && !strcmp("-backup", argv[par])) {
       par++;
       if (file_exists("algorithms.lst")) {
-        system("cp --backup=numbered -f algorithms.lst algorithms.lst.bak");
+        (void)system("cp --backup=numbered -f algorithms.lst algorithms.lst.bak");
       }
       continue;
     }
@@ -282,7 +282,7 @@ int main(int argc, const char *argv[]) {
         // restore from numbered backups
         system("mv -f algorithms.lst.bak algorithms.lst");
         if (file_exists("algorithms.lst.bak.~1~")) {
-          system("mv -f algorithms.lst.bak.~1~ algorithms.lst.bak");
+          (void)system("mv -f algorithms.lst.bak.~1~ algorithms.lst.bak");
           char next[80];
           int i = 2;
           do {
@@ -297,7 +297,7 @@ int main(int argc, const char *argv[]) {
             if (file_exists(next)) {
               char cmd[166];
               snprintf(cmd, sizeof(cmd), "mv -f %s %s", next, prev);
-              system(cmd);
+              (void)system(cmd);
             }
           }
         }
