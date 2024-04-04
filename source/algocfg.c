@@ -53,6 +53,7 @@ struct algocfg {
 #define GOOD 1
 #define ASAN 1
 #define FAIL 0
+#define ASSERTS 0
 
 const struct algocfg ALGOCFGS[] = {
     // clang-format off
@@ -79,7 +80,7 @@ const struct algocfg ALGOCFGS[] = {
   [_GG] = {_GG, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
   [_Raita] = {_Raita, GOOD, ASAN, VFY_PASS, 2, 0, 256, 256},
   [_SMOA] = {_SMOA, GOOD, ASAN, VFY_FAIL, 0, 0, 512, 0},
-  [_RColussi] = {_RColussi, FAIL, FAIL, VFY_PASS, 0, 0, 256, 256},
+  [_RColussi] = {_RColussi, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_Skip] = {_Skip, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
   [_KMPSkip] = {_KMPSkip, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
   [_ASkip] = {_ASkip, GOOD, ASAN, VFY_TIMEOUT, 0, 0, 256, 256},
@@ -188,12 +189,12 @@ const struct algocfg ALGOCFGS[] = {
   [_FS_W2] = {_FS_W2, FAIL, RNDCRASH, UNSATISFIABLE, 0, 0, 256, 256},
   [_FS_W4] = {_FS_W4, GOOD, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // n>=6, needs m space at the end of T
   [_FS_W6] = {_FS_W6, GOOD, RNDCRASH, VFY_FAIL, 0, 0, 256, 256}, // n>=8, needs m space at the end of T
-  [_FS_W8] = {_FS_W8, FAIL, RNDCRASH, VFY_PASS, 0, 0, 256, 256}, // needs m space at the end of T
+  [_FS_W8] = {_FS_W8, GOOD, RNDCRASH, VFY_PASS, 0, 0, 256, 256}, // needs m space at the end of T
   [_FSBNDM_W1] = {_FSBNDM_W1, GOOD, ASAN, VFY_PASS, 0, 0, 256, 256},
-  [_FSBNDM_W2] = {_FSBNDM_W2, RNDCRASH, RNDCRASH, VFY_PASS, 2, 31, 256, 256},
-  [_FSBNDM_W4] = {_FSBNDM_W4, RNDCRASH, RNDCRASH, VFY_PASS, 4, 31, 256, 256},
-  [_FSBNDM_W6] = {_FSBNDM_W6, RNDCRASH, RNDCRASH, VFY_PASS, 6, 31, 256, 256},
-  [_FSBNDM_W8] = {_FSBNDM_W8, GOOD, FAIL, UNSATISFIABLE, 11, 31, 256, 256},
+  [_FSBNDM_W2] = {_FSBNDM_W2, ASSERTS, RNDCRASH, VFY_PASS, 2, 31, 256, 256},
+  [_FSBNDM_W4] = {_FSBNDM_W4, ASSERTS, RNDCRASH, VFY_PASS, 4, 31, 256, 256},
+  [_FSBNDM_W6] = {_FSBNDM_W6, ASSERTS, RNDCRASH, VFY_PASS, 6, 31, 256, 256},
+  [_FSBNDM_W8] = {_FSBNDM_W8, ASSERTS, FAIL, UNSATISFIABLE, 11, 31, 256, 256},
   [_FSBNDMQ20] = {_FSBNDMQ20, GOOD, ASAN, UNSATISFIABLE, 2, 32, 720, 0},
   [_FSBNDMQ21] = {_FSBNDMQ21, GOOD, ASAN, UNSATISFIABLE, 2, 31, 720, 256},
   [_FSBNDMQ31] = {_FSBNDMQ31, GOOD, ASAN, UNSATISFIABLE, 3, 31, 720, 256},
@@ -306,58 +307,58 @@ int main(int argc, char **argv) {
     if (strcmp(cfg, "good") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 1;
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].good == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].good == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "asan") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 1;
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].asan == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].asan == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "VFY_PASS") == 0) {
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].vfy == VFY_PASS)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].vfy == VFY_PASS)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "VFY_FAIL") == 0) {
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].vfy == VFY_FAIL)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].vfy == VFY_FAIL)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "VFY_TIMEOUT") == 0) {
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].vfy == VFY_TIMEOUT)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].vfy == VFY_TIMEOUT)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "UNSATISFIABLE") == 0) {
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].vfy == UNSATISFIABLE)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].vfy == UNSATISFIABLE)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "depth") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 256;
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].depth == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].depth == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "unwind") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 256;
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].unwind == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].unwind == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "minlen") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 0;
       // TODO which op? == < > ...
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].minlen == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].minlen == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else if (strcmp(cfg, "maxlen") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 0;
       for (unsigned i = 0; i < NumAlgo; i++)
-        if (ALGOS[i].id == i && ALGOCFGS[i].maxlen == value)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].maxlen == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
     } else {

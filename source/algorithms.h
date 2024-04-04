@@ -298,7 +298,7 @@ const struct algo ALGOS[] = {
   [_GG] = {_GG, OK, "gg", "Galil-Giancarlo", 0, 0},
   [_Raita] = {_Raita, OK, "raita", "Raita", 2, 0},
   [_SMOA] = {_SMOA, OK, "smoa", "String Matching on Ordered Alphabets", 0, 0},
-  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0},
+  [_RColussi] = {_RColussi, OK, "rcolussi", "Reverse Colussi", 0, 0},
   [_Skip] = {_Skip, OK, "skip", "Skip Search", 0, 0},
   [_KMPSkip] = {_KMPSkip, OK, "kmpskip", "KMP Skip Search", 0, 0},
   [_ASkip] = {_ASkip, OK, "askip", "Alpha Skip Search", 0, 0},
@@ -421,7 +421,7 @@ const struct algo ALGOS[] = {
   [_FS_W2] = {_FS_W2, FAIL, "fs-w2", "Multiple Sliding Windows", 0, 0},
   [_FS_W4] = {_FS_W4, RNDCRASH, "fs-w4", "Multiple Sliding Windows", 0, 0}, // n>=6, needs m space at the end of T
   [_FS_W6] = {_FS_W6, RNDCRASH, "fs-w6", "Multiple Sliding Windows", 0, 0}, // n>=8, needs m space at the end of T
-  [_FS_W8] = {_FS_W8, FAIL | RNDCRASH, "fs-w8", "Multiple Sliding Windows", 0, 0}, // needs m space at the end of T
+  [_FS_W8] = {_FS_W8, RNDCRASH, "fs-w8", "Multiple Sliding Windows", 0, 0}, // needs m space at the end of T
   [_FSBNDM_W1] =
         {_FSBNDM_W1, OK, "fsbndm-w1", "fsbndm with multiple sliding windows", 0, 0},
   [_FSBNDM_W2] = // n > m
