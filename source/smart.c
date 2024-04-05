@@ -35,8 +35,10 @@ unsigned int MINLEN = 1,
 
 //#define XSIZE 4200       // maximal length of the pattern
 //#define SIGMA 256        // constant alphabet size
-#define MG (1024 * 1024) // costant for 1 MB size
+#define MG (1024 * 1024)   // constant for 1 MB size
 #define MAXTIME 999.00
+// now ISO 8601, was %Y:%m:%d %H:%M:%S
+#define TIME_FORMAT "%Y-%m-%d %H:%M:%S"
 
 #ifndef BINDIR
 #define BINDIR "bin"
@@ -673,7 +675,7 @@ int main(int argc, const char *argv[]) {
     struct tm *tm_info;
     time(&date_timer);
     tm_info = localtime(&date_timer);
-    strftime(time_format, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+    strftime(time_format, 26, TIME_FORMAT, tm_info);
     printf("\tExperimental tests started on %s\n", time_format);
 
     printf("\tStarting experimental tests with code %s\n", expcode);
@@ -710,7 +712,7 @@ int main(int argc, const char *argv[]) {
       struct tm *tm_info;
       time(&date_timer);
       tm_info = localtime(&date_timer);
-      strftime(time_format, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+      strftime(time_format, 26, TIME_FORMAT, tm_info);
       printf("\tExperimental tests started on %s\n", time_format);
 
       run_setting(list_of_filenames[k], T, n, alpha, FREQ, VOLTE, options,
@@ -743,7 +745,7 @@ int main(int argc, const char *argv[]) {
       struct tm *tm_info;
       time(&date_timer);
       tm_info = localtime(&date_timer);
-      strftime(time_format, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+      strftime(time_format, 26, TIME_FORMAT, tm_info);
       printf("\tExperimental tests started on %s\n", time_format);
 
       run_setting(SETTING_BUFFER[sett], T, n, alpha, FREQ, VOLTE, options,
