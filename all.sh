@@ -1,6 +1,7 @@
 #!/bin/sh
 set -x
-make -s clean
+#make -s clean
+make algocfg
 make -s
 
 ./select -backup -all
