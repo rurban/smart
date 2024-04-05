@@ -196,6 +196,9 @@ fuzz: test-fuzz
 	  b="`basename $$c .c`"; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
 	  $(TIMEOUT_1m) afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
+	  for c in fuzz/$$b/default/crashes/id\:*; do \
+	    xxd -i $c fuzz/$$b/`basename $c | cut -c4-9`.h; \
+	  done \
 	done
 
 fmt:
