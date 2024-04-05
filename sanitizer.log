@@ -19,6 +19,7 @@ smith
 gg
 raita
 smoa
+rcolussi
 skip
 kmpskip
 askip
@@ -115,442 +116,723 @@ fs-w1
 fs-w4
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555493==ERROR: AddressSanitizer: SEGV on unknown address 0x7fbf1275effb (pc 0x0000004069b4 bp 0x7ffd596a4ec0 sp 0x7ffd5969ad40 T0)
-==2555493==The signal is caused by a READ memory access.
-    #0 0x4069b4 in search source/algos/fs-w4.c:115
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fbf15646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fbf1564620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473135==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4bd4efeffb (pc 0x00000040694a bp 0x7ffc26eb2ec0 sp 0x7ffc26ea8dc0 T0)
+==473135==The signal is caused by a READ memory access.
+    #0 0x40694a in search source/algos/fs-w4.c:115
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f4bd8846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f4bd884620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:115 in search
-==2555493==ABORTING
+==473135==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555494==ERROR: AddressSanitizer: SEGV on unknown address 0x7f52af15efff (pc 0x000000406d18 bp 0x7fff31e68c80 sp 0x7fff31e5eb00 T0)
-==2555494==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f52b2046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f52b204620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473136==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc0d70fefff (pc 0x000000406cb8 bp 0x7ffdd7f1a840 sp 0x7ffdd7f10740 T0)
+==473136==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fc0daa46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc0daa4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555494==ABORTING
+==473136==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555499==ERROR: AddressSanitizer: SEGV on unknown address 0x7f9888cfeffe (pc 0x000000407666 bp 0x7ffe643ef2f0 sp 0x7ffe643e5170 T0)
-==2555499==The signal is caused by a READ memory access.
-    #0 0x407666 in search source/algos/fs-w4.c:136
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f988c646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f988c64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473149==ERROR: AddressSanitizer: SEGV on unknown address 0x7f95b1f5effe (pc 0x000000407606 bp 0x7ffec5e8c4a0 sp 0x7ffec5e823a0 T0)
+==473149==The signal is caused by a READ memory access.
+    #0 0x407606 in search source/algos/fs-w4.c:136
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f95b4e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f95b4e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:136 in search
-==2555499==ABORTING
+==473149==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555500==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe08c95efff (pc 0x000000406d18 bp 0x7ffff51e15a0 sp 0x7ffff51d7420 T0)
-==2555500==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fe08f846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fe08f84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473150==ERROR: AddressSanitizer: SEGV on unknown address 0x7f30584fefff (pc 0x000000406cb8 bp 0x7ffc56c82460 sp 0x7ffc56c78360 T0)
+==473150==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f305be46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f305be4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555500==ABORTING
+==473150==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555505==ERROR: AddressSanitizer: SEGV on unknown address 0x7fcbee15efff (pc 0x000000406d18 bp 0x7ffc251a3dd0 sp 0x7ffc25199c50 T0)
-==2555505==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fcbf1046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fcbf104620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473151==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb9ab8fefff (pc 0x000000406cb8 bp 0x7ffc5de6a5c0 sp 0x7ffc5de604c0 T0)
+==473151==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fb9af246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fb9af24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555505==ABORTING
+==473151==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555510==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb1b5b5effe (pc 0x0000004069b4 bp 0x7ffe00c66c40 sp 0x7ffe00c5cac0 T0)
-==2555510==The signal is caused by a READ memory access.
-    #0 0x4069b4 in search source/algos/fs-w4.c:115
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fb1b8a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb1b8a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473156==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa296d5effe (pc 0x00000040694a bp 0x7ffc6a3c06f0 sp 0x7ffc6a3b65f0 T0)
+==473156==The signal is caused by a READ memory access.
+    #0 0x40694a in search source/algos/fs-w4.c:115
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fa299c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fa299c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:115 in search
-==2555510==ABORTING
+==473156==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555515==ERROR: AddressSanitizer: SEGV on unknown address 0x7f78b255efff (pc 0x0000004069b4 bp 0x7fffb85eac70 sp 0x7fffb85e0af0 T0)
-==2555515==The signal is caused by a READ memory access.
-    #0 0x4069b4 in search source/algos/fs-w4.c:115
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f78b5446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f78b544620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473161==ERROR: AddressSanitizer: SEGV on unknown address 0x7f9fed15efff (pc 0x00000040694a bp 0x7ffe8256a070 sp 0x7ffe8255ff70 T0)
+==473161==The signal is caused by a READ memory access.
+    #0 0x40694a in search source/algos/fs-w4.c:115
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f9ff0046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f9ff004620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:115 in search
-==2555515==ABORTING
+==473161==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555520==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa085b5efe0 (pc 0x000000406d18 bp 0x7ffdee53f250 sp 0x7ffdee5350d0 T0)
-==2555520==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fa088a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fa088a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473170==ERROR: AddressSanitizer: SEGV on unknown address 0x7f403b6fefe0 (pc 0x000000406cb8 bp 0x7ffd2e3d62f0 sp 0x7ffd2e3cc1f0 T0)
+==473170==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f403f046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f403f04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555520==ABORTING
+==473170==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555521==ERROR: AddressSanitizer: SEGV on unknown address 0x7fdd55f5efe0 (pc 0x000000406d18 bp 0x7ffe8727c030 sp 0x7ffe87271eb0 T0)
-==2555521==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fdd58e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fdd58e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473171==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff36f75efe0 (pc 0x000000406cb8 bp 0x7fff49511d60 sp 0x7fff49507c60 T0)
+==473171==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7ff372646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7ff37264620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555521==ABORTING
+==473171==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555522==ERROR: AddressSanitizer: SEGV on unknown address 0x7f56640fefff (pc 0x000000407666 bp 0x7fffbedcff20 sp 0x7fffbedc5da0 T0)
-==2555522==The signal is caused by a READ memory access.
-    #0 0x407666 in search source/algos/fs-w4.c:136
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f5667a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f5667a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473172==ERROR: AddressSanitizer: SEGV on unknown address 0x7f0edd8fefff (pc 0x000000407606 bp 0x7ffd270fa490 sp 0x7ffd270f0390 T0)
+==473172==The signal is caused by a READ memory access.
+    #0 0x407606 in search source/algos/fs-w4.c:136
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f0ee1246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f0ee124620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:136 in search
-==2555522==ABORTING
+==473172==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555523==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2bafefeffe (pc 0x000000407666 bp 0x7fff1753caa0 sp 0x7fff17532920 T0)
-==2555523==The signal is caused by a READ memory access.
-    #0 0x407666 in search source/algos/fs-w4.c:136
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f2bb3846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f2bb384620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473173==ERROR: AddressSanitizer: SEGV on unknown address 0x7fbe1d2feffe (pc 0x000000407606 bp 0x7ffca652a1b0 sp 0x7ffca65200b0 T0)
+==473173==The signal is caused by a READ memory access.
+    #0 0x407606 in search source/algos/fs-w4.c:136
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fbe20c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fbe20c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:136 in search
-==2555523==ABORTING
+==473173==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555534==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4f9c35effe (pc 0x0000004069b4 bp 0x7ffc69519d80 sp 0x7ffc6950fc00 T0)
-==2555534==The signal is caused by a READ memory access.
-    #0 0x4069b4 in search source/algos/fs-w4.c:115
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f4f9f246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f4f9f24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473176==ERROR: AddressSanitizer: SEGV on unknown address 0x7f609095effe (pc 0x00000040694a bp 0x7ffd7f2d91c0 sp 0x7ffd7f2cf0c0 T0)
+==473176==The signal is caused by a READ memory access.
+    #0 0x40694a in search source/algos/fs-w4.c:115
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f6093846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f609384620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:115 in search
-==2555534==ABORTING
+==473176==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555535==ERROR: AddressSanitizer: SEGV on unknown address 0x7f0037afefff (pc 0x0000004069b4 bp 0x7ffd833c92e0 sp 0x7ffd833bf160 T0)
-==2555535==The signal is caused by a READ memory access.
-    #0 0x4069b4 in search source/algos/fs-w4.c:115
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f003b446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f003b44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473184==ERROR: AddressSanitizer: SEGV on unknown address 0x7f092bcfefff (pc 0x00000040694a bp 0x7ffd06cc6f20 sp 0x7ffd06cbce20 T0)
+==473184==The signal is caused by a READ memory access.
+    #0 0x40694a in search source/algos/fs-w4.c:115
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f092f646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f092f64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:115 in search
-==2555535==ABORTING
+==473184==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555536==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5c3ff5effe (pc 0x000000407666 bp 0x7fff746d0b20 sp 0x7fff746c69a0 T0)
-==2555536==The signal is caused by a READ memory access.
-    #0 0x407666 in search source/algos/fs-w4.c:136
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f5c42e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f5c42e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473186==ERROR: AddressSanitizer: SEGV on unknown address 0x7f9520efeffe (pc 0x000000407606 bp 0x7ffc1bbe1260 sp 0x7ffc1bbd7160 T0)
+==473186==The signal is caused by a READ memory access.
+    #0 0x407606 in search source/algos/fs-w4.c:136
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f9524846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f952484620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:136 in search
-==2555536==ABORTING
+==473186==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555540==ERROR: AddressSanitizer: SEGV on unknown address 0x7f55ad95ef95 (pc 0x000000406d18 bp 0x7ffe9a8bbce0 sp 0x7ffe9a8b1b60 T0)
-==2555540==The signal is caused by a READ memory access.
-    #0 0x406d18 in search source/algos/fs-w4.c:165
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f55b0846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f55b084620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402f14) (BuildId: b480345844a0ca3f5328220c8cf2d66a1a7463cc)
+==473189==ERROR: AddressSanitizer: SEGV on unknown address 0x7f190175ee9a (pc 0x000000406cb8 bp 0x7ffe874a5130 sp 0x7ffe8749b030 T0)
+==473189==The signal is caused by a READ memory access.
+    #0 0x406cb8 in search source/algos/fs-w4.c:165
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f1904646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f190464620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w4+0x402e24) (BuildId: bf45a69b6cfdcc6598b277e277169eb10e91b433)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w4.c:165 in search
-==2555540==ABORTING
+==473189==ABORTING
 fs-w6
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555545==ERROR: AddressSanitizer: SEGV on unknown address 0x7fae6e35efff (pc 0x0000004082d5 bp 0x7ffd8f2a6c10 sp 0x7ffd8f29ca70 T0)
-==2555545==The signal is caused by a READ memory access.
-    #0 0x4082d5 in search source/algos/fs-w6.c:147
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fae71246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fae7124620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473196==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff9ea15efda (pc 0x000000406f03 bp 0x7ffe8affde30 sp 0x7ffe8aff3d10 T0)
+==473196==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7ff9ed046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7ff9ed04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
+==473196==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473199==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff29195efff (pc 0x000000407d56 bp 0x7ffdb12626d0 sp 0x7ffdb12585b0 T0)
+==473199==The signal is caused by a READ memory access.
+    #0 0x407d56 in search source/algos/fs-w6.c:147
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7ff294846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7ff29484620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:147 in search
-==2555545==ABORTING
+==473199==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555546==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2144efeff9 (pc 0x000000406ad4 bp 0x7fffce8b9260 sp 0x7fffce8af0c0 T0)
-==2555546==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f2148846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f214884620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473207==ERROR: AddressSanitizer: SEGV on unknown address 0x7fcda60feff9 (pc 0x0000004069aa bp 0x7ffda6cb9bf0 sp 0x7ffda6cafad0 T0)
+==473207==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fcda9a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fcda9a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555546==ABORTING
+==473207==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555547==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2eb915efff (pc 0x000000407023 bp 0x7ffe0e07c570 sp 0x7ffe0e0723d0 T0)
-==2555547==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f2ebc046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f2ebc04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473211==ERROR: AddressSanitizer: SEGV on unknown address 0x7f97a88fefff (pc 0x000000406f03 bp 0x7ffe8d5e96d0 sp 0x7ffe8d5df5b0 T0)
+==473211==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f97acac6149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f97acac620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555547==ABORTING
+==473211==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555558==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff91135efff (pc 0x000000407023 bp 0x7fff1e4ef330 sp 0x7fff1e4e5190 T0)
-==2555558==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7ff914246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ff91424620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473214==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff3f00fefff (pc 0x000000406f03 bp 0x7ffea8293f10 sp 0x7ffea8289df0 T0)
+==473214==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7ff3f3a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7ff3f3a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555558==ABORTING
+==473214==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555565==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe31795effd (pc 0x000000407023 bp 0x7ffe2b65c5f0 sp 0x7ffe2b652450 T0)
-==2555565==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fe31a846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fe31a84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473219==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb8c9efeffd (pc 0x000000406f03 bp 0x7ffeec4088b0 sp 0x7ffeec3fe790 T0)
+==473219==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fb8cd846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fb8cd84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555565==ABORTING
+==473219==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555566==ERROR: AddressSanitizer: SEGV on unknown address 0x7f935495efff (pc 0x000000407023 bp 0x7ffff7960730 sp 0x7ffff7956590 T0)
-==2555566==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f9357846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f935784620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473220==ERROR: AddressSanitizer: SEGV on unknown address 0x7fafa4cfefff (pc 0x000000406f03 bp 0x7ffc157ac700 sp 0x7ffc157a25e0 T0)
+==473220==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fafa8edb149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fafa8edb20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555566==ABORTING
+==473220==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555567==ERROR: AddressSanitizer: SEGV on unknown address 0x7f27110feffc (pc 0x000000406ad4 bp 0x7ffdccbbdaf0 sp 0x7ffdccbb3950 T0)
-==2555567==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f2714a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f2714a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473221==ERROR: AddressSanitizer: SEGV on unknown address 0x7f544735effc (pc 0x0000004069aa bp 0x7ffd86bb4090 sp 0x7ffd86ba9f70 T0)
+==473221==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f544a246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f544a24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555567==ABORTING
+==473221==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555568==ERROR: AddressSanitizer: SEGV on unknown address 0x7fdef12feffd (pc 0x000000406ad4 bp 0x7ffd9e90f460 sp 0x7ffd9e9052c0 T0)
-==2555568==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fdef4c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fdef4c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473222==ERROR: AddressSanitizer: SEGV on unknown address 0x7f821bd5effd (pc 0x0000004069aa bp 0x7ffe29988980 sp 0x7ffe2997e860 T0)
+==473222==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f821ec46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f821ec4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555568==ABORTING
+==473222==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555571==ERROR: AddressSanitizer: SEGV on unknown address 0x7f8c338fefff (pc 0x000000406ad4 bp 0x7fff307cd510 sp 0x7fff307c3370 T0)
-==2555571==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f8c37246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f8c3724620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473233==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe52ccfefff (pc 0x0000004069aa bp 0x7ffdc60eff90 sp 0x7ffdc60e5e70 T0)
+==473233==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fe530646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fe53064620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555571==ABORTING
+==473233==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555572==ERROR: AddressSanitizer: SEGV on unknown address 0x7ffbe94feff5 (pc 0x000000406ad4 bp 0x7ffd2d350630 sp 0x7ffd2d346490 T0)
-==2555572==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7ffbece46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ffbece4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473234==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc4c54feff5 (pc 0x0000004069aa bp 0x7ffcf041b850 sp 0x7ffcf0411730 T0)
+==473234==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fc4c96da149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc4c96da20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555572==ABORTING
+==473234==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555578==ERROR: AddressSanitizer: SEGV on unknown address 0x7fca5ed5eff5 (pc 0x000000406ad4 bp 0x7ffe51813cc0 sp 0x7ffe51809b20 T0)
-==2555578==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fca61c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fca61c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473235==ERROR: AddressSanitizer: SEGV on unknown address 0x7fca178feff5 (pc 0x0000004069aa bp 0x7ffe98c28bf0 sp 0x7ffe98c1ead0 T0)
+==473235==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fca1b246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fca1b24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555578==ABORTING
+==473235==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555582==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc1394feff5 (pc 0x000000406ad4 bp 0x7ffdd63032d0 sp 0x7ffdd62f9130 T0)
-==2555582==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fc13ce46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fc13ce4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473240==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff02b8feff5 (pc 0x0000004069aa bp 0x7ffc15e25df0 sp 0x7ffc15e1bcd0 T0)
+==473240==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7ff02f246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7ff02f24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555582==ABORTING
+==473240==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555583==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb157f5eff5 (pc 0x000000406ad4 bp 0x7ffe3add0510 sp 0x7ffe3adc6370 T0)
-==2555583==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fb15ae46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb15ae4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473241==ERROR: AddressSanitizer: SEGV on unknown address 0x7f239f75eff5 (pc 0x0000004069aa bp 0x7fffcaaabad0 sp 0x7fffcaaa19b0 T0)
+==473241==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f23a2646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f23a264620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555583==ABORTING
+==473241==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555584==ERROR: AddressSanitizer: SEGV on unknown address 0x7f72a5d5eff5 (pc 0x000000406ad4 bp 0x7fff8ba44cb0 sp 0x7fff8ba3ab10 T0)
-==2555584==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f72a8c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f72a8c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473242==ERROR: AddressSanitizer: SEGV on unknown address 0x7f52a70feff5 (pc 0x0000004069aa bp 0x7ffc10239fe0 sp 0x7ffc1022fec0 T0)
+==473242==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f52aaa46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f52aaa4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555584==ABORTING
+==473242==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555585==ERROR: AddressSanitizer: SEGV on unknown address 0x7ffb7855effc (pc 0x000000406ad4 bp 0x7ffe93e5ff40 sp 0x7ffe93e55da0 T0)
-==2555585==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7ffb7b446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ffb7b44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473243==ERROR: AddressSanitizer: SEGV on unknown address 0x7f446f8feffc (pc 0x0000004069aa bp 0x7fff725fcb00 sp 0x7fff725f29e0 T0)
+==473243==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f4473246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f447324620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555585==ABORTING
+==473243==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555586==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb5dab5effd (pc 0x000000406ad4 bp 0x7ffe7977aae0 sp 0x7ffe79770940 T0)
-==2555586==The signal is caused by a READ memory access.
-    #0 0x406ad4 in search source/algos/fs-w6.c:122
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fb5dda46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb5dda4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473252==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe8566feffd (pc 0x0000004069aa bp 0x7ffc9e8ddbd0 sp 0x7ffc9e8d3ab0 T0)
+==473252==The signal is caused by a READ memory access.
+    #0 0x4069aa in search source/algos/fs-w6.c:122
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fe85a8dd149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fe85a8dd20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:122 in search
-==2555586==ABORTING
+==473252==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555589==ERROR: AddressSanitizer: SEGV on unknown address 0x7fddd88fec10 (pc 0x000000407023 bp 0x7fffff73de20 sp 0x7fffff733c80 T0)
-==2555589==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7fdddc246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fdddc24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473255==ERROR: AddressSanitizer: SEGV on unknown address 0x7f450a75ec10 (pc 0x000000406f03 bp 0x7ffc1dd14fd0 sp 0x7ffc1dd0aeb0 T0)
+==473255==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7f450d646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f450d64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555589==ABORTING
+==473255==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2555595==ERROR: AddressSanitizer: SEGV on unknown address 0x7f04a175efa3 (pc 0x000000407023 bp 0x7ffeedb59bb0 sp 0x7ffeedb4fa10 T0)
-==2555595==The signal is caused by a READ memory access.
-    #0 0x407023 in search source/algos/fs-w6.c:197
-    #1 0x40284a in main source/algos/include/main.h:197
-    #2 0x7f04a4646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f04a464620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402f14) (BuildId: dd86fbdc72e35dcefcfeb050e7594343ba86ed5d)
+==473256==ERROR: AddressSanitizer: SEGV on unknown address 0x7fcf48cfef34 (pc 0x000000406f03 bp 0x7ffd65312aa0 sp 0x7ffd65308980 T0)
+==473256==The signal is caused by a READ memory access.
+    #0 0x406f03 in search source/algos/fs-w6.c:197
+    #1 0x402765 in main source/algos/include/main.h:197
+    #2 0x7fcf4ced2149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fcf4ced220a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e24 in _start (/home/rurban/Software/smart/bin/asan/fs-w6+0x402e24) (BuildId: 7d10a5c60835e7c642f695b33b121cb52b3be73b)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/fs-w6.c:197 in search
-==2555595==ABORTING
+==473256==ABORTING
+fs-w8
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473259==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc7178fefda (pc 0x0000004061f2 bp 0x7fffb832acb0 sp 0x7fffb8320b60 T0)
+==473259==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7fc71b246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc71b24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473259==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473260==ERROR: AddressSanitizer: SEGV on unknown address 0x7f9220d5efff (pc 0x000000407b07 bp 0x7ffc4146bcc0 sp 0x7ffc41461b70 T0)
+==473260==The signal is caused by a READ memory access.
+    #0 0x407b07 in search source/algos/fs-w8.c:153
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f9223c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f9223c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:153 in search
+==473260==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473263==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc785f5eff8 (pc 0x000000405b24 bp 0x7ffdd829a200 sp 0x7ffdd82900b0 T0)
+==473263==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7fc788e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc788e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473263==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473270==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd00cafefff (pc 0x0000004061f2 bp 0x7ffe59d21580 sp 0x7ffe59d17430 T0)
+==473270==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7fd010446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fd01044620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473270==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473275==ERROR: AddressSanitizer: SEGV on unknown address 0x7f6670d5efff (pc 0x0000004061f2 bp 0x7ffeb7228980 sp 0x7ffeb721e830 T0)
+==473275==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f6673c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f6673c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473275==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473280==ERROR: AddressSanitizer: SEGV on unknown address 0x7f43b5b5efff (pc 0x000000405b24 bp 0x7fff63c5b160 sp 0x7fff63c51010 T0)
+==473280==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f43b8a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f43b8a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473280==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473281==ERROR: AddressSanitizer: SEGV on unknown address 0x7f8f4955efff (pc 0x000000405b24 bp 0x7ffdc0d32940 sp 0x7ffdc0d287f0 T0)
+==473281==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f8f4c446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f8f4c44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473281==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473282==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5fff8fefff (pc 0x0000004061f2 bp 0x7ffeaf992360 sp 0x7ffeaf988210 T0)
+==473282==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f6003246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f600324620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473282==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473283==ERROR: AddressSanitizer: SEGV on unknown address 0x7f87a575effb (pc 0x000000405b24 bp 0x7ffce0b417e0 sp 0x7ffce0b37690 T0)
+==473283==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f87a8646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f87a864620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473283==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473284==ERROR: AddressSanitizer: SEGV on unknown address 0x7f063d75effc (pc 0x000000405b24 bp 0x7ffebc870120 sp 0x7ffebc865fd0 T0)
+==473284==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f0640646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f064064620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473284==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473295==ERROR: AddressSanitizer: SEGV on unknown address 0x7f49b9f5effe (pc 0x000000405b24 bp 0x7ffe6025ed10 sp 0x7ffe60254bc0 T0)
+==473295==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f49bce46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f49bce4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473295==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473296==ERROR: AddressSanitizer: SEGV on unknown address 0x7f49a24feff0 (pc 0x000000405b24 bp 0x7ffececf65d0 sp 0x7ffececec480 T0)
+==473296==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f49a5e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f49a5e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473296==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473297==ERROR: AddressSanitizer: SEGV on unknown address 0x7f117ad5eff0 (pc 0x000000405b24 bp 0x7ffeba90ed10 sp 0x7ffeba904bc0 T0)
+==473297==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f117dc46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f117dc4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473297==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473298==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4cfe35eff0 (pc 0x000000405b24 bp 0x7fff69f69430 sp 0x7fff69f5f2e0 T0)
+==473298==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f4d01246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f4d0124620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473298==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473299==ERROR: AddressSanitizer: SEGV on unknown address 0x7fdcf2b5eff0 (pc 0x000000405b24 bp 0x7ffd6b9a32d0 sp 0x7ffd6b999180 T0)
+==473299==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7fdcf5a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fdcf5a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473299==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473307==ERROR: AddressSanitizer: SEGV on unknown address 0x7f986d95eff0 (pc 0x000000405b24 bp 0x7fff23301740 sp 0x7fff232f75f0 T0)
+==473307==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f9870846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f987084620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473307==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473313==ERROR: AddressSanitizer: SEGV on unknown address 0x7f38c34feffb (pc 0x000000405b24 bp 0x7ffc9f5cd7b0 sp 0x7ffc9f5c3660 T0)
+==473313==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f38c6e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f38c6e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473313==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473314==ERROR: AddressSanitizer: SEGV on unknown address 0x7f81a00feffc (pc 0x000000405b24 bp 0x7ffc775116f0 sp 0x7ffc775075a0 T0)
+==473314==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f81a42d6149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f81a42d620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473314==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473315==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5ae4b5efff (pc 0x000000405b24 bp 0x7ffc08736be0 sp 0x7ffc0872ca90 T0)
+==473315==The signal is caused by a READ memory access.
+    #0 0x405b24 in search source/algos/fs-w8.c:124
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f5ae7a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f5ae7a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
+==473315==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473324==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc6f36fec10 (pc 0x0000004061f2 bp 0x7fff4ea9efc0 sp 0x7fff4ea94e70 T0)
+==473324==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7fc6f7046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc6f704620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473324==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==473325==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5464afee80 (pc 0x0000004061f2 bp 0x7ffed96bb660 sp 0x7ffed96b1510 T0)
+==473325==The signal is caused by a READ memory access.
+    #0 0x4061f2 in search source/algos/fs-w8.c:224
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f5468446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f546844620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x402de4) (BuildId: c60cb01fbf92e2e3a9666f21e0f73f802d3ed454)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
+==473325==ABORTING
 fsbndm-w1
-fsbndm-w8
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-fsbndm-w8: source/algos/fsbndm-w8.c:240: search: Assertion `j + plen <= n' failed.
+fsbndm-w2
 fsbndmq20
 fsbndmq21
 fsbndmq31
@@ -585,245 +867,204 @@ qlqs
 sbndm-w6
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556637==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb4c70feff9 (pc 0x000000406c46 bp 0x7fb4c85090a0 sp 0x7ffc5d3a3980 T0)
-==2556637==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fb4cb2dc149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb4cb2dc20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474408==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4efd55effc (pc 0x000000405635 bp 0x7f4efdf09da0 sp 0x7ffc8fd1cf70 T0)
+==474408==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f4f00446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f4f0044620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556637==ABORTING
+==474408==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556638==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd5fa0feffc (pc 0x000000406c46 bp 0x7fd5fb5090a0 sp 0x7fff85e86b30 T0)
-==2556638==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fd5fda46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fd5fda4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474411==ERROR: AddressSanitizer: SEGV on unknown address 0x7f64abafeff5 (pc 0x000000405635 bp 0x7f64acf09da0 sp 0x7ffd846be6f0 T0)
+==474411==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f64af446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f64af44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556638==ABORTING
+==474411==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556645==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd5a40feff5 (pc 0x000000406c46 bp 0x7fd5a55090a0 sp 0x7ffdfc565a80 T0)
-==2556645==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fd5a82c9149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fd5a82c920a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474418==ERROR: AddressSanitizer: SEGV on unknown address 0x7f58690feff5 (pc 0x000000405635 bp 0x7f586a509da0 sp 0x7fff18eff1b0 T0)
+==474418==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f586ca46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f586ca4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556645==ABORTING
+==474418==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556648==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5e95b5eff5 (pc 0x000000406c46 bp 0x7f5e965090a0 sp 0x7ffded11bb30 T0)
-==2556648==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7f5e98a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f5e98a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474421==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc6c90feff5 (pc 0x000000405635 bp 0x7fc6ca509da0 sp 0x7fff6a1ab470 T0)
+==474421==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7fc6cca46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc6cca4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556648==ABORTING
+==474421==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556649==ERROR: AddressSanitizer: SEGV on unknown address 0x7fef6fafeff5 (pc 0x000000406c46 bp 0x7fef70f090a0 sp 0x7ffe86754a70 T0)
-==2556649==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fef73446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fef7344620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474422==ERROR: AddressSanitizer: SEGV on unknown address 0x7f95590feff5 (pc 0x000000405635 bp 0x7f955a509da0 sp 0x7ffd2abdd780 T0)
+==474422==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f955d2d5149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f955d2d520a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556649==ABORTING
+==474422==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556650==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc9deafeff5 (pc 0x000000406c46 bp 0x7fc9dff090a0 sp 0x7ffc0c806de0 T0)
-==2556650==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fc9e2446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fc9e244620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474425==ERROR: AddressSanitizer: SEGV on unknown address 0x7f9a66cfeff5 (pc 0x000000405635 bp 0x7f9a68109da0 sp 0x7fff9df71240 T0)
+==474425==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f9a6a646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f9a6a64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556650==ABORTING
+==474425==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556651==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff1c855eff5 (pc 0x000000406c46 bp 0x7ff1c8f090a0 sp 0x7ffd7ad17d60 T0)
-==2556651==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7ff1cb446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ff1cb44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
+==474441==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4b5595effc (pc 0x000000405635 bp 0x7f4b56309da0 sp 0x7ffc89102600 T0)
+==474441==The signal is caused by a READ memory access.
+    #0 0x405635 in search source/algos/sbndm-w6.c:94
+    #1 0x402735 in main source/algos/include/main.h:197
+    #2 0x7f4b58846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f4b5884620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402df4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402df4) (BuildId: 4e5fff302424fd53b493b9b830176263346c48bc)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556651==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2556652==ERROR: AddressSanitizer: SEGV on unknown address 0x7f483d2feffc (pc 0x000000406c46 bp 0x7f483e7090a0 sp 0x7ffc82fcdf40 T0)
-==2556652==The signal is caused by a READ memory access.
-    #0 0x406c46 in search source/algos/sbndm-w6.c:94
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7f4840c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f4840c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:94 in search
-==2556652==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2556653==ERROR: AddressSanitizer: SEGV on unknown address 0x7fbda98fefff (pc 0x000000407972 bp 0x000000000004 sp 0x7fff613862c0 T0)
-==2556653==The signal is caused by a READ memory access.
-    #0 0x407972 in search source/algos/sbndm-w6.c:105
-    #1 0x4028da in main source/algos/include/main.h:197
-    #2 0x7fbdad246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fbdad24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fa4 in _start (/home/rurban/Software/smart/bin/asan/sbndm-w6+0x402fa4) (BuildId: 35f73caa00096bb472ae1fb51a01be381d5fa78b)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/sbndm-w6.c:105 in search
-==2556653==ABORTING
+==474441==ABORTING
 ssm
-tsa
-tsa: source/algos/tsa.c:51: search: Assertion `i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:51: search: Assertion `i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
-tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
 tso5
 tunedbm
 tvsbs-w2
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556965==ERROR: AddressSanitizer: SEGV on unknown address 0x7f733715efff (pc 0x000000403e9c bp 0x7ffd5f86ffb0 sp 0x7ffd5f7eeac0 T0)
-==2556965==The signal is caused by a READ memory access.
-    #0 0x403e9c in search source/algos/tvsbs-w2.c:78
-    #1 0x4017ca in main source/algos/include/main.h:197
-    #2 0x7f733a046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f733a04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401e94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401e94) (BuildId: 27823982ef7185e448cb1dd6bbfa745c1b6571b2)
+==474602==ERROR: AddressSanitizer: SEGV on unknown address 0x7f798655efff (pc 0x000000403cec bp 0x7ffdfccf2660 sp 0x7ffdfcc711f0 T0)
+==474602==The signal is caused by a READ memory access.
+    #0 0x403cec in search source/algos/tvsbs-w2.c:78
+    #1 0x4016e5 in main source/algos/include/main.h:197
+    #2 0x7f7989446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f798944620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x401da4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401da4) (BuildId: 376ff1818215820ffb049acda24273494cac2d6c)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w2.c:78 in search
-==2556965==ABORTING
+==474602==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2556983==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4528d5efff (pc 0x000000403ee9 bp 0x7ffc22bfae10 sp 0x7ffc22b79920 T0)
-==2556983==The signal is caused by a READ memory access.
-    #0 0x403ee9 in search source/algos/tvsbs-w2.c:78
-    #1 0x4017ca in main source/algos/include/main.h:197
-    #2 0x7f452bc46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f452bc4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401e94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401e94) (BuildId: 27823982ef7185e448cb1dd6bbfa745c1b6571b2)
+==474615==ERROR: AddressSanitizer: SEGV on unknown address 0x7f47caefefff (pc 0x000000403d39 bp 0x7ffef67701a0 sp 0x7ffef66eed30 T0)
+==474615==The signal is caused by a READ memory access.
+    #0 0x403d39 in search source/algos/tvsbs-w2.c:78
+    #1 0x4016e5 in main source/algos/include/main.h:197
+    #2 0x7f47ce846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f47ce84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x401da4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401da4) (BuildId: 376ff1818215820ffb049acda24273494cac2d6c)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w2.c:78 in search
-==2556983==ABORTING
+==474615==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557015==ERROR: AddressSanitizer: SEGV on unknown address 0x7f1c356fefff (pc 0x000000403ee9 bp 0x7fff87a97840 sp 0x7fff87a16350 T0)
-==2557015==The signal is caused by a READ memory access.
-    #0 0x403ee9 in search source/algos/tvsbs-w2.c:78
-    #1 0x4017ca in main source/algos/include/main.h:197
-    #2 0x7f1c39046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f1c3904620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401e94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401e94) (BuildId: 27823982ef7185e448cb1dd6bbfa745c1b6571b2)
+==474632==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd3dacfefff (pc 0x000000403d39 bp 0x7ffeb3fa1a50 sp 0x7ffeb3f205e0 T0)
+==474632==The signal is caused by a READ memory access.
+    #0 0x403d39 in search source/algos/tvsbs-w2.c:78
+    #1 0x4016e5 in main source/algos/include/main.h:197
+    #2 0x7fd3de646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fd3de64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x401da4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0x401da4) (BuildId: 376ff1818215820ffb049acda24273494cac2d6c)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w2.c:78 in search
-==2557015==ABORTING
+==474632==ABORTING
 tvsbs-w6
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557028==ERROR: AddressSanitizer: SEGV on unknown address 0x7faa1a35efff (pc 0x000000406186 bp 0x7fffb3e7a2c0 sp 0x7fffb3df8d80 T0)
-==2557028==The signal is caused by a READ memory access.
-    #0 0x406186 in search source/algos/tvsbs-w6.c:129
-    #1 0x4029ba in main source/algos/include/main.h:197
-    #2 0x7faa1d246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7faa1d24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x403084 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x403084) (BuildId: 1cdb3d00eca6ec776f9b81a93073f31ac251eea8)
+==474647==ERROR: AddressSanitizer: SEGV on unknown address 0x7f796055efff (pc 0x000000406136 bp 0x7ffe565973a0 sp 0x7ffe56515ee0 T0)
+==474647==The signal is caused by a READ memory access.
+    #0 0x406136 in search source/algos/tvsbs-w6.c:129
+    #1 0x4028d5 in main source/algos/include/main.h:197
+    #2 0x7f7963446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f796344620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x402f94) (BuildId: 62c99e2873edeef4afedd98bde3a5e31e45b8764)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w6.c:129 in search
-==2557028==ABORTING
+==474647==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557034==ERROR: AddressSanitizer: SEGV on unknown address 0x7ff10a55efff (pc 0x0000004061d0 bp 0x7ffed51c6ec0 sp 0x7ffed5145980 T0)
-==2557034==The signal is caused by a READ memory access.
-    #0 0x4061d0 in search source/algos/tvsbs-w6.c:129
-    #1 0x4029ba in main source/algos/include/main.h:197
-    #2 0x7ff10d446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ff10d44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x403084 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x403084) (BuildId: 1cdb3d00eca6ec776f9b81a93073f31ac251eea8)
+==474650==ERROR: AddressSanitizer: SEGV on unknown address 0x7f96f235efff (pc 0x000000406180 bp 0x7ffc448b5280 sp 0x7ffc44833dc0 T0)
+==474650==The signal is caused by a READ memory access.
+    #0 0x406180 in search source/algos/tvsbs-w6.c:129
+    #1 0x4028d5 in main source/algos/include/main.h:197
+    #2 0x7f96f5246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f96f524620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x402f94) (BuildId: 62c99e2873edeef4afedd98bde3a5e31e45b8764)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w6.c:129 in search
-==2557034==ABORTING
+==474650==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557056==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa65215efff (pc 0x0000004061d0 bp 0x7ffe7a4eec90 sp 0x7ffe7a46d750 T0)
-==2557056==The signal is caused by a READ memory access.
-    #0 0x4061d0 in search source/algos/tvsbs-w6.c:129
-    #1 0x4029ba in main source/algos/include/main.h:197
-    #2 0x7fa655046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fa65504620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x403084 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x403084) (BuildId: 1cdb3d00eca6ec776f9b81a93073f31ac251eea8)
+==474675==ERROR: AddressSanitizer: SEGV on unknown address 0x7f493b35efff (pc 0x000000406180 bp 0x7ffd16c38110 sp 0x7ffd16bb6c50 T0)
+==474675==The signal is caused by a READ memory access.
+    #0 0x406180 in search source/algos/tvsbs-w6.c:129
+    #1 0x4028d5 in main source/algos/include/main.h:197
+    #2 0x7f493e246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f493e24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x402f94) (BuildId: 62c99e2873edeef4afedd98bde3a5e31e45b8764)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w6.c:129 in search
-==2557056==ABORTING
+==474675==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557057==ERROR: AddressSanitizer: SEGV on unknown address 0x7f248c75efff (pc 0x0000004061d0 bp 0x7ffceb09c280 sp 0x7ffceb01ad40 T0)
-==2557057==The signal is caused by a READ memory access.
-    #0 0x4061d0 in search source/algos/tvsbs-w6.c:129
-    #1 0x4029ba in main source/algos/include/main.h:197
-    #2 0x7f248f646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f248f64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x403084 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x403084) (BuildId: 1cdb3d00eca6ec776f9b81a93073f31ac251eea8)
+==474676==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe0446fefff (pc 0x000000406180 bp 0x7ffed8f6e020 sp 0x7ffed8eecb60 T0)
+==474676==The signal is caused by a READ memory access.
+    #0 0x406180 in search source/algos/tvsbs-w6.c:129
+    #1 0x4028d5 in main source/algos/include/main.h:197
+    #2 0x7fe048046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fe04804620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x402f94) (BuildId: 62c99e2873edeef4afedd98bde3a5e31e45b8764)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w6.c:129 in search
-==2557057==ABORTING
+==474676==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2557058==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc91715efff (pc 0x000000406186 bp 0x7ffd8026d250 sp 0x7ffd801ebd10 T0)
-==2557058==The signal is caused by a READ memory access.
-    #0 0x406186 in search source/algos/tvsbs-w6.c:129
-    #1 0x4029ba in main source/algos/include/main.h:197
-    #2 0x7fc91a046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fc91a04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x403084 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x403084) (BuildId: 1cdb3d00eca6ec776f9b81a93073f31ac251eea8)
+==474677==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd132b5efff (pc 0x000000406136 bp 0x7ffed05cf970 sp 0x7ffed054e4b0 T0)
+==474677==The signal is caused by a READ memory access.
+    #0 0x406136 in search source/algos/tvsbs-w6.c:129
+    #1 0x4028d5 in main source/algos/include/main.h:197
+    #2 0x7fd135a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fd135a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f94 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w6+0x402f94) (BuildId: 62c99e2873edeef4afedd98bde3a5e31e45b8764)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w6.c:129 in search
-==2557058==ABORTING
+==474677==ABORTING
 wfr
 wfr2
 wfr3
@@ -861,122 +1102,121 @@ bram3
 bram5
 bram7
 ft3
+libc
+musl
 libc1
 musl1
 epsm
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f4a3dc19001 for type 'uint64_t', which requires 8 byte alignment
+0x7f4a3dc19001: note: pointer points here
+ 00 00 00  4d 54 68 64 00 00 00 06  00 01 00 05 04 00 fe ee  00 ff 51 03 09 89 79 a0  00 ff 58 04 04
+              ^ 
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558327==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa2ab0fefff (pc 0x000000406ed6 bp 0x7fa2ab0fefff sp 0x7ffef91aa1a0 T0)
-==2558327==The signal is caused by a READ memory access.
-    #0 0x406ed6 in search2 source/algos/epsm.c:119
-    #1 0x40eca1 in search source/algos/epsm.c:361
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7fa1aea46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7fa1aea4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476146==ERROR: AddressSanitizer: SEGV on unknown address 0x7fde6f15efff (pc 0x000000407136 bp 0x7fde6f15efff sp 0x7ffe23a1b080 T0)
+==476146==The signal is caused by a READ memory access.
+    #0 0x407136 in search2 source/algos/epsm.c:119
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7fdd72046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fdd7204620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:119 in search2
-==2558327==ABORTING
+==476146==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558334==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa4428fefff (pc 0x000000406ed6 bp 0x7fa4428fefff sp 0x7ffd7ec0cd10 T0)
-==2558334==The signal is caused by a READ memory access.
-    #0 0x406ed6 in search2 source/algos/epsm.c:119
-    #1 0x40eca1 in search source/algos/epsm.c:361
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7fa346246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7fa34624620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476151==ERROR: AddressSanitizer: SEGV on unknown address 0x7fbadecfefff (pc 0x000000407136 bp 0x7fbadecfefff sp 0x7ffd4a6d7010 T0)
+==476151==The signal is caused by a READ memory access.
+    #0 0x407136 in search2 source/algos/epsm.c:119
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7fb9e2646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fb9e264620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:119 in search2
-==2558334==ABORTING
+==476151==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558339==ERROR: AddressSanitizer: SEGV on unknown address 0x7f953a8feffe (pc 0x0000004090dc bp 0x7ffe4ce57470 sp 0x7ffe4ce57290 T0)
-==2558339==The signal is caused by a READ memory access.
-    #0 0x4090dc in search3 source/algos/epsm.c:165
-    #1 0x40ecc1 in search source/algos/epsm.c:363
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7f943e246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7f943e24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476154==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc259efeffe (pc 0x00000040933c bp 0x7ffcec6a2c30 sp 0x7ffcec6a2a50 T0)
+==476154==The signal is caused by a READ memory access.
+    #0 0x40933c in search3 source/algos/epsm.c:165
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7fc15e0e0149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fc15e0e020a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:165 in search3
-==2558339==ABORTING
+==476154==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558340==ERROR: AddressSanitizer: SEGV on unknown address 0x7f6c8755effe (pc 0x0000004090dc bp 0x7ffcec7e6df0 sp 0x7ffcec7e6c10 T0)
-==2558340==The signal is caused by a READ memory access.
-    #0 0x4090dc in search3 source/algos/epsm.c:165
-    #1 0x40ecc1 in search source/algos/epsm.c:363
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7f6b8a446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7f6b8a44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476158==ERROR: AddressSanitizer: SEGV on unknown address 0x7f21a695effe (pc 0x00000040933c bp 0x7ffcfadda880 sp 0x7ffcfadda6a0 T0)
+==476158==The signal is caused by a READ memory access.
+    #0 0x40933c in search3 source/algos/epsm.c:165
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7f20a9846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f20a984620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:165 in search3
-==2558340==ABORTING
+==476158==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558345==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2b82efefff (pc 0x000000406ed6 bp 0x7f2b82efefff sp 0x7fffb6b4dba0 T0)
-==2558345==The signal is caused by a READ memory access.
-    #0 0x406ed6 in search2 source/algos/epsm.c:119
-    #1 0x40eca1 in search source/algos/epsm.c:361
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7f2a86846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7f2a8684620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476166==ERROR: AddressSanitizer: SEGV on unknown address 0x7f7403d5efff (pc 0x000000407136 bp 0x7f7403d5efff sp 0x7ffde5d8f0a0 T0)
+==476166==The signal is caused by a READ memory access.
+    #0 0x407136 in search2 source/algos/epsm.c:119
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7f7306c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f7306c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:119 in search2
-==2558345==ABORTING
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f27631a9001 for type 'uint64_t', which requires 8 byte alignment
-0x7f27631a9001: note: pointer points here
- 00 00 00  a0 37 fc 95 2f 8b c6 e3  2c 5e 84 41 8b 23 bf 57  c8 f3 07 1f 23 cf 87 0b  6f 2a 2f 4d 15
+==476166==ABORTING
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7fadbaa29001 for type 'uint64_t', which requires 8 byte alignment
+0x7fadbaa29001: note: pointer points here
+ 00 00 00  56 6e a0 bb 1b 8e 07 43  54 3d 00 4a f6 be cd 2c  bb d7 bb 69 7e c1 c1 c5  0f 35 21 fc 7f
               ^ 
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f75bc8b3001 for type 'uint64_t', which requires 8 byte alignment
-0x7f75bc8b3001: note: pointer points here
- 00 00 00  04 5b f0 9e 6c f8 63 db  84 6a d5 33 31 27 aa eb  7f 40 c8 a7 5d b1 3d a5  c8 21 01 9e 17
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7fb2eb60c001 for type 'uint64_t', which requires 8 byte alignment
+0x7fb2eb60c001: note: pointer points here
+ 00 00 00  13 e2 d1 3c 7a f6 b9 4e  1b 80 19 ff 14 10 9d 7f  c2 a5 69 35 6f 18 b7 6d  e8 36 eb 11 af
               ^ 
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f9d614f8001 for type 'uint64_t', which requires 8 byte alignment
-0x7f9d614f8001: note: pointer points here
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7fa105bd7001 for type 'uint64_t', which requires 8 byte alignment
+0x7fa105bd7001: note: pointer points here
  00 00 00  61 61 61 61 61 61 61 61  61 61 61 61 61 61 61 61  61 61 61 61 61 61 61 61  61 61 61 61 61
               ^ 
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f10e8bd1001 for type 'uint64_t', which requires 8 byte alignment
-0x7f10e8bd1001: note: pointer points here
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7fc1a5dff001 for type 'uint64_t', which requires 8 byte alignment
+0x7fc1a5dff001: note: pointer points here
  00 00 00  61 62 61 62 61 62 61 62  61 62 61 62 61 62 61 62  61 62 61 62 61 62 61 62  61 62 61 62 61
               ^ 
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f61f1993001 for type 'uint64_t', which requires 8 byte alignment
-0x7f61f1993001: note: pointer points here
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f3e0bdd5001 for type 'uint64_t', which requires 8 byte alignment
+0x7f3e0bdd5001: note: pointer points here
  00 00 00  61 62 61 62 61 62 61 62  61 62 61 62 61 62 61 62  61 62 61 62 61 62 61 62  61 62 61 62 61
               ^ 
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558372==ERROR: AddressSanitizer: SEGV on unknown address 0x7f200d0feffe (pc 0x0000004090dc bp 0x7ffff0020170 sp 0x7ffff001ff90 T0)
-==2558372==The signal is caused by a READ memory access.
-    #0 0x4090dc in search3 source/algos/epsm.c:165
-    #1 0x40ecc1 in search source/algos/epsm.c:363
-    #2 0x403baa in main source/algos/include/main.h:197
-    #3 0x7f1f10a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x7f1f10a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #5 0x404274 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x404274) (BuildId: 2b307e6e3e435e2ecfd4ac74b9a1eb61881e9db3)
+==476190==ERROR: AddressSanitizer: SEGV on unknown address 0x7f0357afeffe (pc 0x00000040933c bp 0x7ffffd5bed30 sp 0x7ffffd5beb50 T0)
+==476190==The signal is caused by a READ memory access.
+    #0 0x40933c in search3 source/algos/epsm.c:165
+    #1 0x403af5 in main source/algos/include/main.h:197
+    #2 0x7f025b446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f025b44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x4041b4 in _start (/home/rurban/Software/smart/bin/asan/epsm+0x4041b4) (BuildId: b8758ffd5b9348b9a5915ae6b413db71858a63e6)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/epsm.c:165 in search3
-==2558372==ABORTING
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f86e5628001 for type 'uint64_t', which requires 8 byte alignment
-0x7f86e5628001: note: pointer points here
- 00 00 00  8f 4f 6f ac 65 65 92 9c  5c 16 ea 66 04 54 de 4c  77 31 e6 b7 3a 56 7e cd  cf fe 13 fb 22
+==476190==ABORTING
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f5cf9dbf001 for type 'uint64_t', which requires 8 byte alignment
+0x7f5cf9dbf001: note: pointer points here
+ 00 00 00  a4 bc e4 f2 7c e7 28 73  d4 6f 19 ff b6 82 4a d0  ea 2f b2 0a fd 78 62 cc  21 06 ac 4a 75
               ^ 
-source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7fcb81ecb001 for type 'uint64_t', which requires 8 byte alignment
-0x7fcb81ecb001: note: pointer points here
- 00 00 00  e6 02 21 70 eb 8b 22 38  b1 42 06 94 97 86 77 64  57 b4 7c bc 19 9f 65 be  ef 7a f6 a0 82
+source/algos/epsm.c:261:11: runtime error: load of misaligned address 0x7f8207646001 for type 'uint64_t', which requires 8 byte alignment
+0x7f8207646001: note: pointer points here
+ 00 00 00  f8 d5 68 4a bf 3c 5c 02  71 d1 c9 80 f9 41 29 c9  2e c9 b9 93 04 ad 7c 30  5b 3b 29 a3 93
               ^ 
-rcolussi
 graspm
 simon
 ldm
@@ -985,280 +1225,33 @@ faoso4
 faoso6
 blim
 fs-w2
-fs-w8
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2558549==ERROR: AddressSanitizer: SEGV on unknown address 0x7f49532fefff (pc 0x000000406ed7 bp 0x7ffe0a6786f0 sp 0x7ffe0a66e520 T0)
-==2558549==The signal is caused by a READ memory access.
-    #0 0x406ed7 in search source/algos/fs-w8.c:153
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f4956c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f4956c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
+==476326==ERROR: AddressSanitizer: SEGV on unknown address 0x7f69ecb5efe9 (pc 0x000000405aa3 bp 0x7fff28043cf0 sp 0x7fff28039c30 T0)
+==476326==The signal is caused by a READ memory access.
+    #0 0x405aa3 in search source/algos/fs-w2.c:127
+    #1 0x402725 in main source/algos/include/main.h:197
+    #2 0x7f69efa46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f69efa4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402de4 in _start (/home/rurban/Software/smart/bin/asan/fs-w2+0x402de4) (BuildId: 24fd70ec345704776ddb0d234fa09151aa543291)
 
 AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:153 in search
-==2558549==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558552==ERROR: AddressSanitizer: SEGV on unknown address 0x7fe69dafeff8 (pc 0x000000404c79 bp 0x7ffe68a05f70 sp 0x7ffe689fbda0 T0)
-==2558552==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fe6a1446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fe6a144620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558552==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558558==ERROR: AddressSanitizer: SEGV on unknown address 0x7f1ce2afefff (pc 0x000000405352 bp 0x7fffa967c0e0 sp 0x7fffa9671f10 T0)
-==2558558==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f1ce6446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f1ce644620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2558558==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558565==ERROR: AddressSanitizer: SEGV on unknown address 0x7f40a5efefff (pc 0x000000405352 bp 0x7fff2b948710 sp 0x7fff2b93e540 T0)
-==2558565==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f40a9846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f40a984620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2558565==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558566==ERROR: AddressSanitizer: SEGV on unknown address 0x7f3a5155efff (pc 0x000000404c79 bp 0x7fff84c96eb0 sp 0x7fff84c8cce0 T0)
-==2558566==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f3a54446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f3a5444620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558566==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558571==ERROR: AddressSanitizer: SEGV on unknown address 0x7f96d9b5efff (pc 0x000000404c79 bp 0x7ffe84b4bf20 sp 0x7ffe84b41d50 T0)
-==2558571==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f96dca46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f96dca4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558571==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558572==ERROR: AddressSanitizer: SEGV on unknown address 0x7f779a4fefff (pc 0x000000405352 bp 0x7ffd12dd5840 sp 0x7ffd12dcb670 T0)
-==2558572==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f779de46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f779de4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2558572==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558576==ERROR: AddressSanitizer: SEGV on unknown address 0x7f80ac55effb (pc 0x000000404c79 bp 0x7fff96b99c20 sp 0x7fff96b8fa50 T0)
-==2558576==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f80af446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f80af44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558576==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558582==ERROR: AddressSanitizer: SEGV on unknown address 0x7f3dd74feffc (pc 0x000000404c79 bp 0x7ffc374d2040 sp 0x7ffc374c7e70 T0)
-==2558582==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f3ddae46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f3ddae4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558582==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558588==ERROR: AddressSanitizer: SEGV on unknown address 0x7ffb45b5effe (pc 0x000000404c79 bp 0x7ffedc2fe090 sp 0x7ffedc2f3ec0 T0)
-==2558588==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7ffb48a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7ffb48a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558588==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558591==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2023efeff0 (pc 0x000000404c79 bp 0x7ffecf70d440 sp 0x7ffecf703270 T0)
-==2558591==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f2027846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f202784620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558591==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558592==ERROR: AddressSanitizer: SEGV on unknown address 0x7f8d3d8feff0 (pc 0x000000404c79 bp 0x7ffff1a55bc0 sp 0x7ffff1a4b9f0 T0)
-==2558592==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f8d41246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f8d4124620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558592==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558594==ERROR: AddressSanitizer: SEGV on unknown address 0x7f6a97f5eff0 (pc 0x000000404c79 bp 0x7ffd92742940 sp 0x7ffd92738770 T0)
-==2558594==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f6a9ae46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f6a9ae4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558594==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558601==ERROR: AddressSanitizer: SEGV on unknown address 0x7f0baf2feff0 (pc 0x000000404c79 bp 0x7ffd3840cd90 sp 0x7ffd38402bc0 T0)
-==2558601==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f0bb2c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f0bb2c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558601==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558605==ERROR: AddressSanitizer: SEGV on unknown address 0x7feceb0feff0 (pc 0x000000404c79 bp 0x7fff8ffa89f0 sp 0x7fff8ff9e820 T0)
-==2558605==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fecef2d6149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fecef2d620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558605==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558610==ERROR: AddressSanitizer: SEGV on unknown address 0x7f3b9635effb (pc 0x000000404c79 bp 0x7ffc142de3d0 sp 0x7ffc142d4200 T0)
-==2558610==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f3b99246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f3b9924620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558610==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558611==ERROR: AddressSanitizer: SEGV on unknown address 0x7f161ff5effc (pc 0x000000404c79 bp 0x7ffc1e6545f0 sp 0x7ffc1e64a420 T0)
-==2558611==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f1622e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f1622e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558611==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558614==ERROR: AddressSanitizer: SEGV on unknown address 0x7efedecfefff (pc 0x000000404c79 bp 0x7ffeec15e0a0 sp 0x7ffeec153ed0 T0)
-==2558614==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7efee2646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7efee264620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2558614==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558615==ERROR: AddressSanitizer: SEGV on unknown address 0x7f51fc95ec10 (pc 0x000000405352 bp 0x7ffe47245420 sp 0x7ffe4723b250 T0)
-==2558615==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f51ff846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f51ff84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2558615==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2558620==ERROR: AddressSanitizer: SEGV on unknown address 0x7f8403f5ef11 (pc 0x000000405352 bp 0x7ffcc69614b0 sp 0x7ffcc69572e0 T0)
-==2558620==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f8406e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f8406e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2558620==ABORTING
-fsbndm-w2
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
+SUMMARY: AddressSanitizer: SEGV source/algos/fs-w2.c:127 in search
+==476326==ABORTING
 fsbndm-w4
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==476333==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4fe56feffc (pc 0x000000405cbd bp 0x7f4fe6b094a0 sp 0x7ffcd12b01d0 T0)
+==476333==The signal is caused by a READ memory access.
+    #0 0x405cbd in search source/algos/fsbndm-w4.c:104
+    #1 0x402745 in main source/algos/include/main.h:197
+    #2 0x7f4fe9046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f4fe904620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402e04 in _start (/home/rurban/Software/smart/bin/asan/fsbndm-w4+0x402e04) (BuildId: ce3d25df0000b575029c36b764d72a0352170bf4)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV source/algos/fsbndm-w4.c:104 in search
+==476333==ABORTING
 fsbndm-w4: source/algos/fsbndm-w4.c:97: search: Assertion `s2 > 0' failed.
 fsbndm-w4: source/algos/fsbndm-w4.c:123: search: Assertion `s1 > 0' failed.
 fsbndm-w4: source/algos/fsbndm-w4.c:123: search: Assertion `s1 > 0' failed.
@@ -1266,6 +1259,7 @@ fsbndm-w4: source/algos/fsbndm-w4.c:123: search: Assertion `s1 > 0' failed.
 fsbndm-w4: source/algos/fsbndm-w4.c:123: search: Assertion `s1 > 0' failed.
 fsbndm-w4: source/algos/fsbndm-w4.c:123: search: Assertion `s1 > 0' failed.
 fsbndm-w6
+fsbndm-w6: source/algos/fsbndm-w6.c:120: search: Assertion `s5 + 1 <= n' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
@@ -1274,8 +1268,14 @@ fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
 fsbndm-w6: source/algos/fsbndm-w6.c:101: search: Assertion `s2 > 0' failed.
-fsbndm-w6: source/algos/fsbndm-w6.c:176: search: Assertion `j + plen <= n' failed.
-fsbndm-w6: source/algos/fsbndm-w6.c:111: search: Assertion `s2 - m >= 0' failed.
+fsbndm-w6: source/algos/fsbndm-w6.c:120: search: Assertion `s5 + 1 <= n' failed.
+fsbndm-w8
+fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
+fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
+fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
+fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
+fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
+fsbndm-w8: source/algos/fsbndm-w8.c:139: search: Assertion `s2 - m >= 0' failed.
 fsbndmq32
 fsbndmq42
 fsbndmq43
@@ -1286,370 +1286,176 @@ fsbndmq84
 fsbndmq86
 sbndm-w2
 sbndm-w4
+source/algos/sbndm-w4.c:67:10: runtime error: shift exponent 43 is too large for 32-bit type 'unsigned int'
+tsa
+tsa: source/algos/tsa.c:51: search: Assertion `i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:51: search: Assertion `i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
+tsa: source/algos/tsa.c:56: search: Assertion `j < m && i + j < n' failed.
 tsa-q2
+source/algos/tsa-q2.c:41:6: runtime error: index 746 out of bounds for type 'uint64_t [512]'
+source/algos/tsa-q2.c:41:6: runtime error: load of address 0x7f646db0a770 with insufficient space for an object of type 'uint64_t'
+0x7f646db0a770: note: pointer points here
+ 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00
+              ^ 
+source/algos/tsa-q2.c:41:17: runtime error: store to address 0x7f646db0a770 with insufficient space for an object of type 'uint64_t'
+0x7f646db0a770: note: pointer points here
+ 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00
+              ^ 
+source/algos/tsa-q2.c:56:10: runtime error: index 552 out of bounds for type 'uint64_t [512]'
+source/algos/tsa-q2.c:56:7: runtime error: load of address 0x7f646db0a160 with insufficient space for an object of type 'uint64_t'
+0x7f646db0a160: note: pointer points here
+ 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00
+              ^ 
+source/algos/tsa-q2.c:61:21: runtime error: index 627 out of bounds for type 'uint64_t [512]'
+source/algos/tsa-q2.c:61:21: runtime error: load of address 0x7f646db0a3b8 with insufficient space for an object of type 'uint64_t'
+0x7f646db0a3b8: note: pointer points here
+ 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00
+              ^ 
+source/algos/tsa-q2.c:60:22: runtime error: index 598 out of bounds for type 'uint64_t [512]'
+source/algos/tsa-q2.c:60:22: runtime error: load of address 0x7f646db0a2d0 with insufficient space for an object of type 'uint64_t'
+0x7f646db0a2d0: note: pointer points here
+ 00 00 00 00  00 00 00 02 00 01 00 00  00 00 00 00 02 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00
+              ^ 
+=================================================================
+==476585==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f646db0a098 at pc 0x000000407be9 bp 0x7ffc6754a350 sp 0x7ffc6754a348
+READ of size 8 at 0x7f646db0a098 thread T0
+    #0 0x407be8 in search source/algos/tsa-q2.c:61
+    #1 0x402855 in main source/algos/include/main.h:197
+    #2 0x7f6470046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f647004620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402f14 in _start (/home/rurban/Software/smart/bin/asan/tsa-q2+0x402f14) (BuildId: cec4ad81ba628cb499332d610b9f68d87366876a)
+
+Address 0x7f646db0a098 is located in stack of thread T0 at offset 4248 in frame
+    #0 0x406f0f in search source/algos/tsa-q2.c:23
+
+  This frame has 1 object(s):
+    [32, 4128) 'B' (line 29) <== Memory access at offset 4248 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow source/algos/tsa-q2.c:61 in search
+Shadow bytes around the buggy address:
+  0x7f646db09e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db09e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db09f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db09f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a000: 00 00 00 00 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3
+=>0x7f646db0a080: f3 f3 f3[f3]00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7f646db0a300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==476585==ABORTING
 tvsbs-w4
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559071==ERROR: AddressSanitizer: SEGV on unknown address 0x7f35dc2fefff (pc 0x00000040714e bp 0x7ffd7e6ee1e0 sp 0x7ffd7e66ccc0 T0)
-==2559071==The signal is caused by a READ memory access.
-    #0 0x40714e in search source/algos/tvsbs-w4.c:105
-    #1 0x4039ea in main source/algos/include/main.h:197
-    #2 0x7f35dfc46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f35dfc4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x4040b4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w4+0x4040b4) (BuildId: cd509a691fd76cc8e2d9b29db6e17928e3a12a8d)
+==476598==ERROR: AddressSanitizer: SEGV on unknown address 0x7fd24955efff (pc 0x00000040711e bp 0x7ffddc81b930 sp 0x7ffddc79a490 T0)
+==476598==The signal is caused by a READ memory access.
+    #0 0x40711e in search source/algos/tvsbs-w4.c:105
+    #1 0x403925 in main source/algos/include/main.h:197
+    #2 0x7fd24c446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fd24c44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x403fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w4+0x403fe4) (BuildId: 07f9d7d97cca7e00a7ecee4bb6331b401325eb47)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w4.c:105 in search
-==2559071==ABORTING
+==476598==ABORTING
 tvsbs-w8
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559088==ERROR: AddressSanitizer: SEGV on unknown address 0x7f22c5efefff (pc 0x0000004065e8 bp 0x7ffd2a3580b0 sp 0x7ffd2a2d6b80 T0)
-==2559088==The signal is caused by a READ memory access.
-    #0 0x4065e8 in search source/algos/tvsbs-w8.c:133
-    #1 0x40291a in main source/algos/include/main.h:197
-    #2 0x7f22c9846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f22c984620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402fe4) (BuildId: 1f3fa2ebca3b53034fe0a55b1a85420a4e87f88b)
+==476625==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5a3855efff (pc 0x0000004064fa bp 0x7ffc92d89f30 sp 0x7ffc92d08a90 T0)
+==476625==The signal is caused by a READ memory access.
+    #0 0x4064fa in search source/algos/tvsbs-w8.c:133
+    #1 0x402835 in main source/algos/include/main.h:197
+    #2 0x7f5a3b446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f5a3b44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402ef4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402ef4) (BuildId: 54edf551169330951f5d5b93191792ec01773f45)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w8.c:133 in search
-==2559088==ABORTING
+==476625==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559089==ERROR: AddressSanitizer: SEGV on unknown address 0x7f06376fefff (pc 0x0000004065e8 bp 0x7ffd1bfd99f0 sp 0x7ffd1bf584c0 T0)
-==2559089==The signal is caused by a READ memory access.
-    #0 0x4065e8 in search source/algos/tvsbs-w8.c:133
-    #1 0x40291a in main source/algos/include/main.h:197
-    #2 0x7f063b046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f063b04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402fe4) (BuildId: 1f3fa2ebca3b53034fe0a55b1a85420a4e87f88b)
+==476626==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa85d2fefff (pc 0x0000004064fa bp 0x7ffdd4b77710 sp 0x7ffdd4af6270 T0)
+==476626==The signal is caused by a READ memory access.
+    #0 0x4064fa in search source/algos/tvsbs-w8.c:133
+    #1 0x402835 in main source/algos/include/main.h:197
+    #2 0x7fa860c46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7fa860c4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402ef4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402ef4) (BuildId: 54edf551169330951f5d5b93191792ec01773f45)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w8.c:133 in search
-==2559089==ABORTING
+==476626==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559090==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb91535efff (pc 0x0000004065e8 bp 0x7ffc5a0151c0 sp 0x7ffc59f93c90 T0)
-==2559090==The signal is caused by a READ memory access.
-    #0 0x4065e8 in search source/algos/tvsbs-w8.c:133
-    #1 0x40291a in main source/algos/include/main.h:197
-    #2 0x7fb918246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb91824620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402fe4) (BuildId: 1f3fa2ebca3b53034fe0a55b1a85420a4e87f88b)
+==476627==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5f3acfefff (pc 0x0000004064fa bp 0x7fff7bcafc90 sp 0x7fff7bc2e7f0 T0)
+==476627==The signal is caused by a READ memory access.
+    #0 0x4064fa in search source/algos/tvsbs-w8.c:133
+    #1 0x402835 in main source/algos/include/main.h:197
+    #2 0x7f5f3e646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f5f3e64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402ef4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402ef4) (BuildId: 54edf551169330951f5d5b93191792ec01773f45)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w8.c:133 in search
-==2559090==ABORTING
+==476627==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559096==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa400cfefff (pc 0x0000004065e8 bp 0x7fffc73da940 sp 0x7fffc7359410 T0)
-==2559096==The signal is caused by a READ memory access.
-    #0 0x4065e8 in search source/algos/tvsbs-w8.c:133
-    #1 0x40291a in main source/algos/include/main.h:197
-    #2 0x7fa404646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fa40464620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402fe4) (BuildId: 1f3fa2ebca3b53034fe0a55b1a85420a4e87f88b)
+==476641==ERROR: AddressSanitizer: SEGV on unknown address 0x7f52d3efefff (pc 0x0000004064fa bp 0x7ffec8f5a300 sp 0x7ffec8ed8e60 T0)
+==476641==The signal is caused by a READ memory access.
+    #0 0x4064fa in search source/algos/tvsbs-w8.c:133
+    #1 0x402835 in main source/algos/include/main.h:197
+    #2 0x7f52d80df149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f52d80df20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402ef4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402ef4) (BuildId: 54edf551169330951f5d5b93191792ec01773f45)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w8.c:133 in search
-==2559096==ABORTING
+==476641==ABORTING
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==2559106==ERROR: AddressSanitizer: SEGV on unknown address 0x7fb6bc75efff (pc 0x0000004065e8 bp 0x7ffd7df12a90 sp 0x7ffd7de91560 T0)
-==2559106==The signal is caused by a READ memory access.
-    #0 0x4065e8 in search source/algos/tvsbs-w8.c:133
-    #1 0x40291a in main source/algos/include/main.h:197
-    #2 0x7fb6bf646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fb6bf64620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x402fe4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402fe4) (BuildId: 1f3fa2ebca3b53034fe0a55b1a85420a4e87f88b)
+==476644==ERROR: AddressSanitizer: SEGV on unknown address 0x7f0bb1cfefff (pc 0x0000004064fa bp 0x7ffc4f00f950 sp 0x7ffc4ef8e4b0 T0)
+==476644==The signal is caused by a READ memory access.
+    #0 0x4064fa in search source/algos/tvsbs-w8.c:133
+    #1 0x402835 in main source/algos/include/main.h:197
+    #2 0x7f0bb5646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #3 0x7f0bb564620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
+    #4 0x402ef4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0x402ef4) (BuildId: 54edf551169330951f5d5b93191792ec01773f45)
 
 AddressSanitizer can not provide additional info.
 SUMMARY: AddressSanitizer: SEGV source/algos/tvsbs-w8.c:133 in search
-==2559106==ABORTING
+==476644==ABORTING
 ssecp
-libc
-musl
 simdkr
-rcolussi
-graspm
-simon
-ldm
-bmh-sbndm
-faoso4
-faoso6
-blim
-fs-w2
-fs-w8
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559476==ERROR: AddressSanitizer: SEGV on unknown address 0x7f4630cfefff (pc 0x000000406ed7 bp 0x7ffc4368bef0 sp 0x7ffc43681d20 T0)
-==2559476==The signal is caused by a READ memory access.
-    #0 0x406ed7 in search source/algos/fs-w8.c:153
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f4634646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f463464620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:153 in search
-==2559476==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559479==ERROR: AddressSanitizer: SEGV on unknown address 0x7f478155eff8 (pc 0x000000404c79 bp 0x7ffdd65cf460 sp 0x7ffdd65c5290 T0)
-==2559479==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f4784446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f478444620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559479==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559480==ERROR: AddressSanitizer: SEGV on unknown address 0x7efc2855efff (pc 0x000000405352 bp 0x7ffcd2a88d00 sp 0x7ffcd2a7eb30 T0)
-==2559480==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7efc2b446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7efc2b44620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2559480==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559483==ERROR: AddressSanitizer: SEGV on unknown address 0x7f387f75efff (pc 0x000000405352 bp 0x7ffc2f3f5b80 sp 0x7ffc2f3eb9b0 T0)
-==2559483==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f3882646149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f388264620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2559483==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559488==ERROR: AddressSanitizer: SEGV on unknown address 0x7fcfa135efff (pc 0x000000404c79 bp 0x7fffc5feeee0 sp 0x7fffc5fe4d10 T0)
-==2559488==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fcfa4246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fcfa424620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559488==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559489==ERROR: AddressSanitizer: SEGV on unknown address 0x7f66462fefff (pc 0x000000404c79 bp 0x7ffe0a794ae0 sp 0x7ffe0a78a910 T0)
-==2559489==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f664a4d0149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f664a4d020a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559489==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559490==ERROR: AddressSanitizer: SEGV on unknown address 0x7f87f435efff (pc 0x000000405352 bp 0x7ffff5ae7030 sp 0x7ffff5adce60 T0)
-==2559490==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f87f7246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f87f724620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2559490==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559491==ERROR: AddressSanitizer: SEGV on unknown address 0x7fa43995effb (pc 0x000000404c79 bp 0x7fff18687cb0 sp 0x7fff1867dae0 T0)
-==2559491==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fa43c846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fa43c84620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559491==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559492==ERROR: AddressSanitizer: SEGV on unknown address 0x7f5ae02feffc (pc 0x000000404c79 bp 0x7ffe1d387c00 sp 0x7ffe1d37da30 T0)
-==2559492==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f5ae44dc149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f5ae44dc20a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559492==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559499==ERROR: AddressSanitizer: SEGV on unknown address 0x7f988df5effe (pc 0x000000404c79 bp 0x7fff6b8312c0 sp 0x7fff6b8270f0 T0)
-==2559499==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f9890e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f9890e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559499==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559505==ERROR: AddressSanitizer: SEGV on unknown address 0x7fbe9e95eff0 (pc 0x000000404c79 bp 0x7fff1f4384f0 sp 0x7fff1f42e320 T0)
-==2559505==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fbea1846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fbea184620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559505==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559509==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc5b715eff0 (pc 0x000000404c79 bp 0x7ffe5e2aa4c0 sp 0x7ffe5e2a02f0 T0)
-==2559509==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7fc5ba046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7fc5ba04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559509==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559510==ERROR: AddressSanitizer: SEGV on unknown address 0x7f402b35eff0 (pc 0x000000404c79 bp 0x7fff5bc475d0 sp 0x7fff5bc3d400 T0)
-==2559510==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f402e246149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f402e24620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559510==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559511==ERROR: AddressSanitizer: SEGV on unknown address 0x7f2c270feff0 (pc 0x000000404c79 bp 0x7ffcbea2c610 sp 0x7ffcbea22440 T0)
-==2559511==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f2c2aa46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f2c2aa4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559511==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559512==ERROR: AddressSanitizer: SEGV on unknown address 0x7f1e3155eff0 (pc 0x000000404c79 bp 0x7ffeb5d05310 sp 0x7ffeb5cfb140 T0)
-==2559512==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f1e34446149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f1e3444620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559512==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559513==ERROR: AddressSanitizer: SEGV on unknown address 0x7f16586feffb (pc 0x000000404c79 bp 0x7ffd8984c470 sp 0x7ffd898422a0 T0)
-==2559513==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f165c046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f165c04620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559513==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559518==ERROR: AddressSanitizer: SEGV on unknown address 0x7f54a64feffc (pc 0x000000404c79 bp 0x7ffd2f73a390 sp 0x7ffd2f7301c0 T0)
-==2559518==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f54a9e46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f54a9e4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559518==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559523==ERROR: AddressSanitizer: SEGV on unknown address 0x7f8295efefff (pc 0x000000404c79 bp 0x7ffe59c4db90 sp 0x7ffe59c439c0 T0)
-==2559523==The signal is caused by a READ memory access.
-    #0 0x404c79 in search source/algos/fs-w8.c:124
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f8299846149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f829984620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:124 in search
-==2559523==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559524==ERROR: AddressSanitizer: SEGV on unknown address 0x7f90ef0fec10 (pc 0x000000405352 bp 0x7ffff59eec40 sp 0x7ffff59e4a70 T0)
-==2559524==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f90f2a46149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f90f2a4620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2559524==ABORTING
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==2559529==ERROR: AddressSanitizer: SEGV on unknown address 0x7f437d15efe3 (pc 0x000000405352 bp 0x7ffe0e0543f0 sp 0x7ffe0e04a220 T0)
-==2559529==The signal is caused by a READ memory access.
-    #0 0x405352 in search source/algos/fs-w8.c:224
-    #1 0x4017fa in main source/algos/include/main.h:197
-    #2 0x7f4380046149 in __libc_start_call_main (/lib64/libc.so.6+0x28149) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #3 0x7f438004620a in __libc_start_main_impl (/lib64/libc.so.6+0x2820a) (BuildId: e0b579ca7024cf12a2686b60cf49d1d9e3ff6273)
-    #4 0x401ec4 in _start (/home/rurban/Software/smart/bin/asan/fs-w8+0x401ec4) (BuildId: d8fc6d47dd39c9023a4ad1418db9aa71435a11eb)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV source/algos/fs-w8.c:224 in search
-==2559529==ABORTING
-fsbndm-w2
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
-fsbndm-w2: source/algos/fsbndm-w2.c:109: search: Assertion `s1 > 0' failed.
+tvsbs

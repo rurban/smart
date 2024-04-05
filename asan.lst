@@ -143,7 +143,6 @@ qf72
 qf82
 qlqs
 ssm
-tsa
 tso5
 tunedbm
 wfr
@@ -183,6 +182,8 @@ bram3
 bram5
 bram7
 ft3
+libc
+musl
 libc1
 musl1
 

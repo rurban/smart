@@ -151,7 +151,6 @@ qf82
 qlqs
 sbndm-w6
 ssm
-tsa
 tso5
 tunedbm
 tvsbs-w2
@@ -193,6 +192,8 @@ bram3
 bram5
 bram7
 ft3
+libc
+musl
 libc1
 musl1
 epsm
