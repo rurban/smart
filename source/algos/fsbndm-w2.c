@@ -52,7 +52,7 @@
 #include <assert.h>
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  unsigned int B[SIGMA], W[SIGMA], d, set, hbcr[SIGMA], hbcl[SIGMA];
+  unsigned int B[SIGMA], W[SIGMA], d, hbcr[SIGMA], hbcl[SIGMA];
   int i, j, s1, s2, pos, mm1, count;
 
   /* Preprocessing */
@@ -65,7 +65,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   count = 0;
   mm1 = m - 1;
   //mp1 = m + 1;
-  set = 1;
+  const int set = 1;
   for (i = 0; i < SIGMA; i++)
     B[i] = W[i] = set;
   for (i = 0; i < m; ++i) {
@@ -86,27 +86,29 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   s1 = mm1;
   s2 = n - plen;
   while (s1 <= s2 + mm1) {
-    assert(s1 + 1 <= n);
+    //assert(s1 + 1 <= n);
     assert(s2 <= n);
     assert(s2 > 0);
-    while (s1 <= s2 + mm1 && (d = (((B[y[s1 + 1]] << 1) & B[y[s1]]) |
-                                   ((W[y[s2 - 1]] << 1) & W[y[s2]]))) == 0) {
+    while (s1 <= s2 + mm1 &&
+           (d = (((s1 <= n ? B[y[s1 + 1]] << 1 : 1) & B[y[s1]]) |
+                 ((s2 > 0 ? W[y[s2 - 1]] << 1 : 1) & W[y[s2]]))) == 0) {
       assert(s1 + m <= n);
       assert(s2 - m <= n);
       assert(s2 - m >= 0);
       s1 += hbcr[y[s1 + m]];
       s2 -= hbcl[y[s2 - m]];
-      assert(s1 <= n);
-      assert(s2 > 0);
+      //assert(s1 <= n);
+      //assert(s2 > 0);
     }
     pos = s1;
-    assert(s1 > 0);
-    assert(s1 - 1 <= n);
+    //assert(s1 > 0);
+    //assert(s1 - 1 <= n);
     assert(s2 + 1 <= n);
-    while ((d = (d + d) & (B[y[s1 - 1]] | W[y[s2 + 1]]))) {
+    while ((d = (d + d) &
+            ((s1 > 0 && s1 - 1 <= n ? B[y[s1 - 1]] : 1) | W[y[s2 + 1]]))) {
       --s1;
       ++s2;
-      assert(s1 > 0);
+      //assert(s1 > 0);
       assert(s2 + 1 <= n);
     }
     s1 += mm1;

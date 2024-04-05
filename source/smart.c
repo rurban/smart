@@ -512,8 +512,8 @@ int main(int argc, const char *argv[]) {
         char plens[NumSetting][50];
         memset(plens, 0, NumSetting * 50);
         int num = split_filelist(parameter, plens);
-        if (num >= NumSetting) {
-          printf("Error in input parameters. Too many -plen items, max %d.\n\n",
+        if (num >= (int)NumSetting) {
+          printf("Error in input parameters. Too many -plen items, max %u.\n\n",
                  NumSetting);
           goto end;
         }

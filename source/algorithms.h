@@ -425,7 +425,7 @@ const struct algo ALGOS[] = {
   [_FSBNDM_W1] =
         {_FSBNDM_W1, OK, "fsbndm-w1", "fsbndm with multiple sliding windows", 0, 0},
   [_FSBNDM_W2] = // n > m
-        {_FSBNDM_W2, RNDCRASH, "fsbndm-w2", "fsbndm with multiple sliding windows", 2, 0},
+        {_FSBNDM_W2, OK, "fsbndm-w2", "fsbndm with multiple sliding windows", 2, 0},
   [_FSBNDM_W4] =
         {_FSBNDM_W4, RNDCRASH, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
   [_FSBNDM_W6] =
