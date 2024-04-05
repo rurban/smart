@@ -49,7 +49,7 @@ int *count;
 //NOLINTBEGIN(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
 /* the brute force algorithm used for comparing occurrences */
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   int count, j;
 
   /* Searching */
@@ -115,7 +115,7 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
     printf("\t%d %s/%s %s %d %s %d ", *rip, BINDIR, algoname, pP, m, pT, n);
 #endif
   }
-  int occur1 = search(P, m, T, n);
+  int occur1 = bf_search(P, m, T, n);
   int occur2 = execute(algoname, P, m, T, n, count, alpha);
 
   if (occur2 >= 0 && occur1 != occur2) {
@@ -204,6 +204,7 @@ int main(int argc, char *argv[]) {
 
   // allocate in shared memory
   T = shmalloc(shm_T, TSIZE + 1); // text
+  char *orig_T = malloc(TSIZE + 1);
   char text[100] = {0};
   if (argc > argn) { // text=%s
     strncpy(text, argv[argn], SZNCPY(text));
@@ -224,8 +225,12 @@ int main(int argc, char *argv[]) {
       n = getText(T, fullpath, FREQ, TSIZE);
     }
     argn++;
-  } else
+    memcpy (orig_T, T, TSIZE);
+  } else {
     n = YSIZE;
+    for (int h = 0; h < YSIZE; h++)
+      RANDCH(T[h]);
+  }
   if (argc > argn) { // m=%d
     m = string2decimal(argv[argn]);
     if (m > XSIZE || m < 1) {
@@ -255,31 +260,43 @@ int main(int argc, char *argv[]) {
   /*
   int k, m, occur1, occur2, test = 1
   for(alpha = 2; alpha<=128; alpha*=2) {
-          for(i=0; i<YSIZE; i++) T[i] = rand()%alpha;
-          // compute the frequency of characters
-          //for(j=0; j<SIGMA; j++) FREQ[j]=0;
-          //for(j=0; j<YSIZE; j++) FREQ[T[j]]++;
-          for(m = 2; m<=16; m*=2) {
-                  for(j=0; j<10; j++) {
-                          rip++;
-                          printf("\b\b\b\b\b\b[%.3d%%]",rip*10/28);
-                          fflush(stdout);
-                          (*count) = 0;
-                          k = j*2;
-                          for(h=0; h<m; h++) P[h] = T[k+h];
-                          P[m]='\0';
-                          occur1 = search(P,m,T,YSIZE);
-                          occur2 =
-                          execute(algoname,pkey,m,tkey,YSIZE,rkey,ekey,prekey,count,alpha);
-                          if(occur2>=0 && occur1 != occur2) {
-                            if(verbose) printf("\n\tERROR: test failed\n\n");
-                            free_shm();
-                            exit(1);
-                          }
-                  }
-          }
+    for(i=0; i<YSIZE; i++) T[i] = rand()%alpha;
+    // compute the frequency of characters
+    //for(j=0; j<SIGMA; j++) FREQ[j]=0;
+    //for(j=0; j<YSIZE; j++) FREQ[T[j]]++;
+    for(m = 2; m<=16; m*=2) {
+      for(j=0; j<10; j++) {
+        rip++;
+        printf("\b\b\b\b\b\b[%.3d%%]",rip*10/28);
+        fflush(stdout);
+        (*count) = 0;
+        k = j*2;
+        for(h=0; h<m; h++) P[h] = T[k+h];
+        P[m]='\0';
+        occur1 = bf_search(P,m,T,YSIZE);
+        occur2 = execute(algoname,pkey,m,tkey,YSIZE,rkey,ekey,prekey,count,alpha);
+        if(occur2>=0 && occur1 != occur2) {
+          if(verbose) printf("\n\tERROR: test failed\n\n");
+          free_shm();
+          exit(1);
+        }
+      }
+    }
   }*/
   fprintf(stderr, "%s\n", algoname);
+
+  // fuzzer cases: NUL safety, NUL termination, loop termination
+  if (strcmp(algoname, "libc") || strcmp(algoname, "musl")) {
+    unsigned char fuzz_fsbndmq20_crashes_id_000000[] = {
+      0x4d, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, 0x00, 0x01, 0x00,
+      0x05, 0x04, 0x00, 0xfe, 0xee, 0x00, 0xff, 0x51, 0x03, 0x09, 0x89,
+      0x79, 0xa0, 0x00, 0xff, 0x58, 0x04, 0x04, 0x02, 0x18, 0x08, 0x00,
+      0xff, 0x59, 0x02, 0xff, 0x00, 0xa0, 0x00, 0xff, 0x58, 0x04, 0x04};
+    T[YSIZE] = '\0';
+    memcpy(P, fuzz_fsbndmq20_crashes_id_000000, 44);
+    if (!attempt(&rip, count, P, 44, T, YSIZE, algoname, verbose, alpha))
+      goto free_shm1;
+  }
 
   // 1) search for "a" in "aaaaaaaaaa"
   if (!minlen || minlen < 1) {
@@ -487,6 +504,7 @@ int main(int argc, char *argv[]) {
         (unsigned char **)malloc(sizeof(unsigned char *) * VOLTE);
     for (int i = 0; i < VOLTE; i++)
       setP[i] = (unsigned char *)malloc(sizeof(unsigned char) * (XSIZE + 1));
+    memcpy (T, orig_T, TSIZE);
     if (!m) {
       PATT_SIZE = PATT_LARGE_SIZE; // the set of pattern lengths (max 4096)
       for (int il = 0; PATT_SIZE[il] > 0; il++) {
@@ -543,9 +561,11 @@ int main(int argc, char *argv[]) {
 
   // free shared memory
   free_shm(T, P, count, e_time, pre_time);
+  free(orig_T);
   return 0;
 free_shm1:
   free_shm(T, P, count, e_time, pre_time);
+  free(orig_T);
   exit(1);
 }
 
