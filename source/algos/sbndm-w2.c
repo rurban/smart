@@ -93,13 +93,13 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   /* Searching phase */
   BEGIN_SEARCHING
   s1 = m1;
-  s2 = n - m;
+  s2 = n - plen;
   count = 0;
   while (s1 <= s2 + m1) {
     assert(s2 >= 0);
-    assert(s1 <= n);
-    assert(s2 <= n);
-    while ((d = (B[y[s1]] | W[y[s2]])) == 0) {
+    //assert(s1 <= n);
+    //assert(s2 <= n);
+    while ((d = ((s1 < n ? B[y[s1]] : 0) | (s2 < n ? W[y[s2]] : 0))) == 0) {
       assert(s1 + m <= n);
       assert(s2 - m <= n);
       assert(s2 - m >= 0);

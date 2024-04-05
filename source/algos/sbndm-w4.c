@@ -47,16 +47,15 @@
 #include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
-#include "include/search_large.h"
+#include "include/search_small.h"
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int B[SIGMA], W[SIGMA], hbcr[SIGMA], hbcl[SIGMA];
   unsigned int s, f, d;
   int i, s1, s2, s3, s4, first, count;
-  //int plen = m;
-  if (m > 32)
-    return search_large(x, m, y, n);
-  ;
+  if (m < 4 || n <= m)
+    return search_small(x, m, y, n);
+  int plen = m;
   int m1 = m - 1;
   //int mp1 = m + 1;
 
@@ -87,7 +86,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   s1 = m - 1;
   s2 = q - m;
   s3 = q;
-  s4 = n - m;
+  s4 = n - plen;
   count = 0;
   while (s1 <= s2 + m1 || s3 <= s4 + m1) {
     assert(s1 <= n);
@@ -126,32 +125,32 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       s3++;
       s4--;
       i = 0;
-      assert(s1 + m <= n);
-      while (i < m && x[i] == y[s1 + i])
+      assert(s1 + plen <= n);
+      while (i < plen && x[i] == y[s1 + i])
         i++;
-      if (i == m && s1 + m1 < s2)
+      if (i == plen && s1 + m1 < s2)
         OUTPUT(s1);
       if (s2 - m1 >= 0) {
         i = 0;
         assert(s2 - m1 >= 0);
-        assert(s2 - m1 + m <= n);
-        while (i < m && x[i] == y[s2 - m1 + i])
+        assert(s2 - m1 + plen <= n);
+        while (i < plen && x[i] == y[s2 - m1 + i])
           i++;
       }
-      if (i == m && s1 + m1 <= s2)
+      if (i == plen && s1 + m1 <= s2)
         OUTPUT(s1);
       i = 0;
-      assert(s3 + m <= n);
-      while (i < m && x[i] == y[s3 + i])
+      assert(s3 + plen <= n);
+      while (i < plen && x[i] == y[s3 + i])
         i++;
-      if (i == m && s3 + m1 < s4)
+      if (i == plen && s3 + m1 < s4)
         OUTPUT(s3);
       if (s4 - m1 >= 0) {
         i = 0;
         assert(s4 - m1 + m <= n);
-        while (i < m && x[i] == y[s4 - m1 + i])
+        while (i < plen && x[i] == y[s4 - m1 + i])
           i++;
-        if (i == m && s3 + m1 <= s4)
+        if (i == plen && s3 + m1 <= s4)
           OUTPUT(s3);
       }
     }

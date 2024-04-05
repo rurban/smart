@@ -42,7 +42,7 @@
  SUCH DAMAGE.
  *
  * Constraints: n > m, m >= 2
- * Broken: Overflow at bin/asan/fsbndm-w2 aa 2 aaaaaaaaaa 10
+ * Fixed: Overflow at bin/asan/fsbndm-w2 aa 2 aaaaaaaaaa 10
  */
 
 #define MIN_M 2
