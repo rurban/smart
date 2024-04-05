@@ -325,59 +325,26 @@ void printSTD(double TIME[NumAlgo][NumPatt], double BEST[NumAlgo][NumPatt],
 
   fprintf(fp, "<script>function loadChart%u() {\n", algo);
 
-  fprintf(fp, "var data = [");
-  for (unsigned int il = 0; il < NumPatt; il++)
-    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {
-      if (TIME[algo][il] == 0)
-        fprintf(fp, ",");
-      else
-        fprintf(fp, "%.2f,", TIME[algo][il]);
-    }
-  fprintf(fp, "];\n");
+#define DATA_ARR(name, val)                                                      \
+  fprintf(fp, "var %s = [", #name);                                            \
+  for (unsigned int il = 0; il < NumPatt; il++)                                \
+    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {                  \
+      if (TIME[algo][il] <= 0)                                                 \
+        fprintf(fp, ",");                                                      \
+      else                                                                     \
+        fprintf(fp, "%.2f,", val);                                             \
+    }                                                                          \
+  fprintf(fp, "];\n")
 
-  fprintf(fp, "var std1 = [");
-  for (unsigned int il = 0; il < NumPatt; il++)
-    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {
-      if (TIME[algo][il] == 0)
-        fprintf(fp, ",");
-      else
-        fprintf(fp, "%.2f,", TIME[algo][il] - STD[algo][il]);
-    }
-  fprintf(fp, "];\n");
-
-  fprintf(fp, "var std2 = [");
-  for (unsigned int il = 0; il < NumPatt; il++)
-    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {
-      if (TIME[algo][il] == 0)
-        fprintf(fp, ",");
-      else
-        fprintf(fp, "%.2f,", TIME[algo][il] + STD[algo][il]);
-    }
-  fprintf(fp, "];\n");
-
-  fprintf(fp, "var bound1 = [");
-  for (unsigned int il = 0; il < NumPatt; il++)
-    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {
-      if (TIME[algo][il] == 0)
-        fprintf(fp, ",");
-      else
-        fprintf(fp, "%.2f,", WORST[algo][il]);
-    }
-  fprintf(fp, "];\n");
-
-  fprintf(fp, "var bound2 = [");
-  for (unsigned int il = 0; il < NumPatt; il++)
-    if (PATT_SIZE[il] >= MINLEN && PATT_SIZE[il] <= MAXLEN) {
-      if (TIME[algo][il] == 0)
-        fprintf(fp, ",");
-      else
-        fprintf(fp, "%.2f,", BEST[algo][il]);
-    }
-  fprintf(fp, "];\n");
+  DATA_ARR(data, TIME[algo][il]);
+  DATA_ARR(std1, TIME[algo][il] - STD[algo][il]);
+  DATA_ARR(std2, TIME[algo][il] + STD[algo][il]);
+  DATA_ARR(bnd1, BEST[algo][il]);
+  DATA_ARR(bnd2, WORST[algo][il]);
 
   fprintf(fp, "var line3 = new RGraph.Line({\n\
 	id: 'cvs%u',\n\
-	data: [bound1, bound2],\n\
+	data: [bnd1, bnd2],\n\
 	options: {\n\
 		spline: true,\n\
 		filled: true,\n\
