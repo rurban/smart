@@ -78,7 +78,7 @@ jobs:
       run: ./build.sh
   macOS:
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
     - uses: actions/checkout@v4
     - run: |
