@@ -43,12 +43,15 @@
  *
  * Note: Broken!
  * Constraints: requires n>=6
- * Constraints: needs m space at the end of T
+ * Fixed lots of out-of-bounds
+ * Fixed Constraints: needs m space at the end of T
  */
 
+#define MIN_M 6
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include <assert.h>
 
 void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
   int i, j, p, f[XSIZE];
@@ -79,6 +82,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   unsigned char Pr[XSIZE];
   if (n < 6)
     return search_small(P, m, T, n);
+#ifdef DEBUG
+  unsigned char *y = T;
+  fprintf(stderr, "fs-w4 %s %d %s %d\n", P, m, T, n);
+#endif
 
   /* proprocessing */
   BEGIN_PREPROCESSING
@@ -98,23 +105,31 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   Pre_GS(P, m, gsR);
   Pre_GS(Pr, m, gsL);
 
-  for (i = 0; i < m; i++)
-    T[n + i] = P[i];
-  int mm1 = m - 1;
+  //for (i = 0; i < m; i++)
+  //  T[n + i] = P[i];
   END_PREPROCESSING
 
   /* searching */
   BEGIN_SEARCHING
-  int q = n / 2;
+  const int mm1 = m - 1;
+  const int q = n / 2;
+  count = 0;
   s1 = mm1;
   s2 = q - m;
   s3 = q;
   s4 = n - m;
-  count = 0;
+  assert(s1 >= 0);
+  assert(s1 < n);
+  //assert(s2 >= 0);
+  assert(s2 < n);
+  assert(s3 >= 0);
+  assert(s3 < n);
+  //assert(s4 >= 0);
+  assert(s4 < n);
   k1 = hbcr[T[s1]];
-  k2 = hbcl[T[s2]];
+  k2 = hbcl[s2 >= 0 ? T[s2] : 0];
   k3 = hbcr[T[s3]];
-  k4 = hbcl[T[s4]];
+  k4 = hbcl[s2 >= 0 ? T[s4] : 0];
   l1 = s1 - mm1;
   l3 = s3 - mm1;
   l2 = s2;
@@ -123,28 +138,43 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
     if (!k1) {
       j = mm1;
       k1 = s1 - mm1;
-      while (j >= 0 && P[j] == T[k1 + j])
+#ifdef DEBUG
+      fprintf(stderr, "!k1 s1 %d s2 %d l2 %d k1 %d\n", s1, s2, l2, k1);
+#endif
+      while (j >= 0 && k1 + j < n && P[j] == T[k1 + j])
         j--;
-      if (j < 0 && k1 < l2) {
+      if (j < 0 && (k1 < (l2 > 0 ? l2 : 1))) {
         l1 = k1;
         OUTPUT(l1);
       }
       s1 += gsR[j + 1];
     }
-    if (!k2) {
+    if (!k2 && s2 >= 0) {
       i = 0;
-      while (i < m && P[i] == T[s2 + i])
+#ifdef DEBUG
+      fprintf(stderr, "!k2 s2 %d l1 %d\n", s2, l1);
+#endif
+      //assert(s2 >= 0);
+      assert(s2 + m <= n);
+      while (i < m && s2 + i < n && P[i] == T[s2 + i]) {
         i++;
+        assert(i < m || s2 + i >= 0);
+        assert(i < m || s2 + i < n);
+      }
       if (i == m && s2 > l1) {
         l2 = s2;
         OUTPUT(l2);
       }
       s2 -= gsL[m - i];
     }
-    if (!k3) {
+    if (!k3 && s3 >= 0) {
       j = mm1;
       k3 = s3 - mm1;
-      while (j >= 0 && P[j] == T[k3 + j])
+#ifdef DEBUG
+      fprintf(stderr, "!k3 s3 %d s4 %d k3 %d l4 %d\n", s3, s4, k3, l4);
+#endif
+      assert(k3 + j < n);
+      while (j >= 0 && k3 + j >= 0 && P[j] == T[k3 + j])
         j--;
       if (j < 0 && k3 < l4) {
         l3 = k3;
@@ -153,7 +183,11 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
       s3 += gsR[j + 1];
     }
     if (!k4) {
+#ifdef DEBUG
+      fprintf(stderr, "!k4 s4 %d\n", s4);
+#endif
       i = 0;
+      assert(s4 + m <= n);
       while (i < m && P[i] == T[s4 + i])
         i++;
       if (i == m && s4 > l3) {
@@ -162,15 +196,31 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
       }
       s4 -= gsL[m - i];
     }
-    while ((k1 = hbcr[T[s1]]) && (k2 = hbcl[T[s2]]) && (k3 = hbcr[T[s3]]) &&
-           (k4 = hbcl[T[s4]])) {
+    assert(s1 >= 0);
+    //assert(s1 < n);
+    //assert(s2 >= 0);
+    //assert(s2 < n);
+    assert(s3 >= 0);
+    //assert(s3 < n);
+    //assert(s4 >= 0);
+    assert(s4 < n);
+    while ((k1 = hbcr[s1 < n ? T[s1] : P[s1 - n]]) &&
+           (k2 = hbcl[s2 >= 0 ? T[s2] : 0]) &&
+           (k3 = hbcr[s3 < n? T[s3] : P[s3 - n]]) &&
+           (k4 = hbcl[s2 >= 0 ? T[s4] : 0])) {
       s1 += k1;
       s2 -= k2;
       s3 += k3;
       s4 -= k4;
+      if (s1 >= n || s3 >= n)
+        break;
+      //assert(s1 < n);
+      //assert(s2 >= 0);
+      //assert(s3 < n);
+      //assert(s4 >= 0);
     }
   }
   END_SEARCHING
-  T[n] = '\0';
+  //T[n] = '\0';
   return count;
 }
