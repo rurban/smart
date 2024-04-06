@@ -282,11 +282,13 @@ int main(int argc, const char *argv[]) {
       par++;
       if (file_exists("algorithms.lst.bak")) {
         // restore from numbered backups
-        system("mv -f algorithms.lst.bak algorithms.lst");
+        int ret = system("mv -f algorithms.lst.bak algorithms.lst");
+        if (ret)
+          fprintf(stderr, "mv failed %d\n", ret);
         if (file_exists("algorithms.lst.bak.~1~")) {
           char next[80];
           int i = 2;
-          int ret = system("mv -f algorithms.lst.bak.~1~ algorithms.lst.bak");
+          ret = system("mv -f algorithms.lst.bak.~1~ algorithms.lst.bak");
           if (ret)
             fprintf(stderr, "mv failed %d\n", ret);
           do {
