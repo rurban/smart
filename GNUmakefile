@@ -173,6 +173,7 @@ verify/verify.log: $(ALGOSRC) algocfg
 	  goto-analyzer --verify --recursive-interprocedural source/algos/$$b.c; \
 	done | tee -a verify/verify.log
 check-verify:
+	@$(MAKE) -s algocfg
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
@@ -183,7 +184,7 @@ check-verify:
 	done
 # prints the violations
 verify-trace: verify/trace.log
-verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY)))
+verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) algocfg
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
 	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $$c; \

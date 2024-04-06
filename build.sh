@@ -29,12 +29,14 @@ if [ "$ARCH" != "$MACHINE" ]; then
     BINDIR=bin/$ARCH
     DRV="qemu-$ARCH "
 fi
+echo "	Compiling algocfg.c................................[OK]"
+$CC source/algocfg.c -O2 $CFLAGS -o algocfg
 echo "	Compiling smart.c..................................[OK]"
 $CC source/smart.c -O3 $CFLAGS $SSE2 -o smart -lm -std=gnu99 -DBINDIR="\"$BINDIR\""
 echo "	Compiling show.c...................................[OK]"
-$CC source/show.c -O3 $CFLAGS $SSE2 -o show
+$CC source/show.c -O2 $CFLAGS -o show
 echo "	Compiling selectAlgo.c.............................[OK]"
-$CC source/selectAlgo.c -O3 $CFLAGS -o select -DBINDIR="\"$BINDIR\""
+$CC source/selectAlgo.c -O2 $CFLAGS -o select -DBINDIR="\"$BINDIR\""
 echo "	Compiling test.c...................................[OK]"
 $CC source/test.c -O3 $CFLAGS -o test -DBINDIR="\"$BINDIR\""
 echo "	Generating random text buffers....................."
