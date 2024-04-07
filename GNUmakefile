@@ -37,18 +37,30 @@ ifneq ($(ASSERT),1)
   endif
 endif
 ifneq ($(ARCH),$(MACHINE))
-  BINDIR = bin/$(ARCH)
-  CFLAGS += -DBINDIR=\"$(BINDIR)\"
+  ifeq ($(BINDIR),bin)
+    BINDIR = bin/$(ARCH)
+    CFLAGS += -DBINDIR=\"$(BINDIR)\"
+  endif
   DRV = qemu-$(ARCH)
 else
   # debian nonsense calling linux gnu
   ifneq ($(TARGET),gnu)
-    ifneq ($(TARGET),$(shell uname -s | tr A-Z a-z))
-      BINDIR = bin/$(TARGET)
-      CFLAGS += -DBINDIR=\"$(BINDIR)\"
+    OS := $(shell uname -s | tr A-Z a-z)
+    ifeq ($(OS),darwin)
+      ifeq ($(shell echo $(TARGET)|cut -c1-6),darwin)
+	TARGET=darwin
+      endif
+    endif
+    ifneq ($(TARGET),$(OS))
+      ifeq ($(BINDIR),bin)
+        BINDIR = bin/$(TARGET)
+        CFLAGS += -DBINDIR=\"$(BINDIR)\"
+      endif
       ifeq ($(TARGET),mingw32)
         ALGOSRC := $(filter-out source/algos/libc1.c,$(wildcard source/algos/*.c))
         DRV = wine
+      else
+	DRV = qemu-$(ARCH)
       endif
     endif
   endif
