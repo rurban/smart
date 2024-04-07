@@ -213,7 +213,7 @@ const struct algocfg ALGOCFGS[] = {
   [_BXS6] = {_BXS6, GOOD, ASAN, UNSATISFIABLE, 6, 0, 360, 0, 0, 0},
   [_BXS8] = {_BXS8, GOOD, ASAN, UNSATISFIABLE, 8, 0, 360, 0, 0, 0},
   [_FS_W1] = {_FS_W1, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256, 0, 0},
-  [_FS_W2] = {_FS_W2, FAIL, RNDCRASH, UNSATISFIABLE, 0, 0, 256, 256, 0, 0},
+  [_FS_W2] = {_FS_W2, GOOD, ASAN, UNSATISFIABLE, 0, 0, 2048, 257, 0, 0}, // 4000: 8m
   [_FS_W4] = {_FS_W4, FAIL, ASAN, UNSATISFIABLE, 6, 0, 0, 257, 0, 0}, // n>=6
   [_FS_W6] = {_FS_W6, GOOD, RNDCRASH, UNSATISFIABLE, 8, 0, 1024, 0, 0, 0}, // n>=8, needs m space at the end of T
   [_FS_W8] = {_FS_W8, GOOD, RNDCRASH, UNSATISFIABLE, 10, 0, 256, 256, 0, 0}, // needs m space at the end of T

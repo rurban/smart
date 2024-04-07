@@ -207,7 +207,7 @@ enum algo_id {
   _TSA_Q2,  // word-wise popcount q=2
   _TSO5,    // optimized word-wise popcount
   _TUNEDBM, // Tuned Boyer-Moore
-  _TVSBS_W2,
+  _TVSBS_W2, // TVSBS with Multiple Sliding Windows
   _TVSBS_W4,
   _TVSBS_W6,
   _TVSBS_W8,
@@ -493,10 +493,10 @@ const struct algo ALGOS[] = {
   [_TSA_Q2] = {_TSA_Q2, FAIL, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
   [_TSO5] = {_TSO5, OK, "tso5", "optimized word-wise popcount", 2, 0}, // 2<=m<64
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
-  [_TVSBS_W2] = {_TVSBS_W2, RNDCRASH, "tvsbs-w2", "TVSBS", 0, 0},
-  [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS", 2, 0},
-  [_TVSBS_W6] = {_TVSBS_W6, FAIL, "tvsbs-w6", "TVSBS", 2, 0},
-  [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS", 2, 0},
+  [_TVSBS_W2] = {_TVSBS_W2, RNDCRASH, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
+  [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0},
+  [_TVSBS_W6] = {_TVSBS_W6, FAIL, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0},
+  [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0},
   [_WFR] = {_WFR, OK, "wfr", "Weak Factor Recognizer", 0, 0},
   [_WFR2] = {_WFR2, OK, "wfr2", "Weak Factor Recognizer (m>=2)", 2, 0},
   [_WFR3] = {_WFR3, OK, "wfr3", "Weak Factor Recognizer (m>=3)", 3, 0},
@@ -537,10 +537,10 @@ const struct algo ALGOS[] = {
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
   [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
   [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0},
-  [_LIBC] = {_LIBC, FAIL, "libc", "strstr", 0, 0}, // no \0
-  [_MUSL] = {_MUSL, FAIL, "musl", "musl strstr", 0, 0}, // no \0
-  [_LIBC1] = {_LIBC1, OK, "libc1", "memmem", 0, 0},
-  [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem", 0, 0},
+  [_LIBC] = {_LIBC, FAIL, "libc", "strstr Two-way string-matching", 0, 0}, // no \0
+  [_MUSL] = {_MUSL, FAIL, "musl", "musl strstr Two-way string-matching", 0, 0}, // no \0
+  [_LIBC1] = {_LIBC1, OK, "libc1", "memmem Two-way string-matching", 0, 0},
+  [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem Two-way string-matching", 0, 0},
   [_SIMDKR] = {_SIMDKR, FAIL, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
   [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
     // clang-format on

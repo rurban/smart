@@ -41,11 +41,12 @@
   OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
   SUCH DAMAGE.
 
- * Note: Broken! Off-by-one
+ * Fixed Constraints: needed m space at the end of T
  */
 
 #include "include/define.h"
 #include "include/main.h"
+#include <assert.h>
 
 void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
   int i, j, p, f[XSIZE];
@@ -73,6 +74,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, j, s1, s2, k, h, count, hbcr[SIGMA], hbcl[SIGMA], gsR[XSIZE],
       gsL[XSIZE];
   unsigned char Pr[XSIZE];
+#ifdef DEBUG
+  unsigned char *y = T;
+  fprintf(stderr, "fs-w2 %s %d %s %d\n", P, m, T, n);
+#endif
 
   BEGIN_PREPROCESSING
   /* preprocessing */
@@ -95,38 +100,55 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   //unsigned char lastch = P[m - 1], firstch = P[0];
   //for (i = 0; i < m; i++)
   //  T[n + i] = P[i];
-  int mm1 = m - 1;
+  const int mm1 = m - 1;
   END_PREPROCESSING
 
   /* searching */
   BEGIN_SEARCHING
-  //int q = n / 2;
-  s1 = mm1;
+  //const int q = n / 2;
+  s1 = j = mm1;
   s2 = n - m;
   count = 0;
+  assert(s1 >= 0);
+  assert(s1 < n);
+  assert(s2 >= 0);
+  assert(s2 < n);
   k = hbcr[T[s1]];
   h = hbcl[T[s2]];
   while (s1 <= s2 + mm1) {
     if (!k) {
       j = mm1;
       k = s1 - mm1;
-      while (j >= 0 && P[j] == T[k + j])
-        j--;
-      if (j < 0)
+      //assert(k + j >= 0);
+      if (k + j < n)
+        while (j >= 0 && P[j] == T[k + j])
+          j--;
+      if (j < 0) {
         OUTPUT(k);
+        h = 1; // no duplicate results
+      }
+      assert(j + 1 >= 0);
       s1 += gsR[j + 1];
     }
-    if (!h) {
+    if (!h && s2 >= 0) {
       i = 0;
-      while (i < m && P[i] == T[s2 + i])
-        i++;
-      if (i == m)
-        OUTPUT(s2);
+      if (s2 + m <= n) {
+        while (i < m && s2 + i < n && P[i] == T[s2 + i])
+          i++;
+        if (i == m)
+          OUTPUT(s2);
+      }
+      assert(m - i >= 0);
+      assert(m - i < XSIZE);
       s2 -= gsL[m - i];
     }
-    while ((k = hbcr[T[s1]]) && (h = hbcl[T[s2]])) {
-      s1 += k;
-      s2 -= h;
+    if (s1 < n) {
+      while ((k = (s1 >= 0 ? hbcr[T[s1]] : 1)) && (h = (s2 >= 0 ? hbcl[T[s2]] : 1))) {
+        s1 += k;
+        s2 -= h;
+        if (s1 >= n)
+          break;
+      }
     }
   }
   END_SEARCHING
