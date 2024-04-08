@@ -72,6 +72,10 @@ void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, j, s1, k, count, hbcr[SIGMA], gsR[XSIZE], gsL[XSIZE];
   unsigned char Pr[XSIZE];
+#ifdef DEBUG
+  unsigned char *y = T;
+  fprintf(stderr, "fs-w1 %s %d %s %d\n", P, m, T, n);
+#endif
 
   /* prprocessing */
   BEGIN_PREPROCESSING
@@ -94,9 +98,9 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   Pre_GS(Pr, m, gsL);
 
   // unsigned char lastch = P[m - 1], firstch = P[0];
-  for (i = 0; i < m; i++)
-    T[n + i] = P[i];
-  int mm1 = m - 1;
+  //for (i = 0; i < m; i++)
+  //  T[n + i] = P[i];
+  const int mm1 = m - 1;
   END_PREPROCESSING
 
   /* searching */
@@ -108,13 +112,14 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
     if (!k) {
       j = mm1;
       k = s1 - mm1;
-      while (j >= 0 && P[j] == T[k + j])
-        j--;
+      if (k + j < n && k + j >= 0)
+        while (j >= 0 && P[j] == T[k + j])
+          j--;
       if (j < 0)
         OUTPUT(k);
       s1 += gsR[j + 1];
     }
-    while ((k = hbcr[T[s1]])) {
+    while ((k = (s1 >= 0 && s1 < n ? hbcr[T[s1]] : 0))) {
       s1 += k;
     }
   }
