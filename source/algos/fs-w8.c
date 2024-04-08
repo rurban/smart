@@ -75,6 +75,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   int l1, l2, l3, l4, l5, l6, l7, l8;
   int hbcr[SIGMA], hbcl[SIGMA], gsR[XSIZE], gsL[XSIZE];
   unsigned char Pr[XSIZE];
+#ifdef DEBUG
+  unsigned char *y = T;
+  fprintf(stderr, "fs-w8 %s %d %s %d\n", P, m, T, n);
+#endif
 
   /* proprocessing */
   BEGIN_PREPROCESSING

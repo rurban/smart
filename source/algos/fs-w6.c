@@ -78,6 +78,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   unsigned char Pr[XSIZE];
   if (n < 6)
     return search_small(P, m, T, n);
+#ifdef DEBUG
+  unsigned char *y = T;
+  fprintf(stderr, "fs-w6 %s %d %s %d\n", P, m, T, n);
+#endif
 
   /* proprocessing */
   BEGIN_PREPROCESSING
