@@ -317,6 +317,7 @@ const struct algocfg ALGOCFGS[] = {
   [_LIBC1] = {_LIBC1, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
   [_MUSL]  = {_MUSL,  GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0}, // no \0
   [_MUSL1] = {_MUSL1, GOOD, ASAN, UNSATISFIABLE, 0, 0, 720, 256, 0, 0}, //7s, upto d=820 ok
+  [_MUSL2] = {_MUSL2, FAIL, ASAN, UNSATISFIABLE, 0, 0, 720, 256, 0, 0},
   [_EPSM]  = {_EPSM,  GOOD, FAIL, UNSATISFIABLE, 0, 0, 360, 0, 0, 0}, // no cbmc simd support yet
     // clang-format on
 };
