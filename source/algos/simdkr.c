@@ -104,6 +104,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 static FORCE_INLINE int sse2_strstr_generic(const unsigned char *s, int n,
                                             const unsigned char *needle,
                                             int m) {
+#ifdef DEBUG
+  const unsigned char *y = s;
+#endif
   BEGIN_PREPROCESSING
   int count = 0;
   assert(m > 1);

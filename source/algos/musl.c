@@ -191,7 +191,9 @@ static char *musl_strstr(const char *h, const char *n) {
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  //const unsigned char *orig_y = y;
+#ifdef DEBUG
+  unsigned char *orig_y = y;
+#endif
   (void)m;
   (void)n;
   BEGIN_PREPROCESSING

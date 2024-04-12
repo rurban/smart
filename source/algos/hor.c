@@ -35,6 +35,9 @@ void preBmBc(unsigned char *P, int m, int bmBc[]) {
 
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, s, count = 0, bmBc[SIGMA];
+#ifdef DEBUG
+  unsigned char *y = T;
+#endif
   BEGIN_PREPROCESSING
   preBmBc(P, m, bmBc);
   END_PREPROCESSING

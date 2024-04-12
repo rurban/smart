@@ -64,6 +64,9 @@ int FindBadPos(unsigned char *P, int m) {
 
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, s, count, bc[SIGMA], pos;
+#ifdef DEBUG
+  unsigned char *y = T;
+#endif
 
   BEGIN_PREPROCESSING
   pos = FindBadPos(P, m);

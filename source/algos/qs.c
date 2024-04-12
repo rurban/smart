@@ -34,6 +34,9 @@ void preQsBc(unsigned char *P, int m, int qbc[]) {
 
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, s, count, qsbc[SIGMA];
+#ifdef DEBUG
+  unsigned char *y = T;
+#endif
 
   /* Preoprocessing */
   BEGIN_PREPROCESSING

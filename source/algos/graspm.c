@@ -49,6 +49,9 @@ void ADD_LIST(GList **l, int e) {
 int search(unsigned char *p, int m, unsigned char *t, int n) {
   GList *pos, *z[SIGMA];
   int i, j, k, count, first = 0, hbc[SIGMA];
+#ifdef DEBUG
+  unsigned char *y = t;
+#endif
   if (m <= 1)
     return search_small(p, m, t, n);
 

@@ -65,6 +65,9 @@ void PrecomputeWOH(unsigned char *p, /*int m,*/ int q, int wo[]) {
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, s, count, q, wo[SIGMA];
   double freq[SIGMA];
+#ifdef DEBUG
+  unsigned char *y = T;
+#endif
 
   BEGIN_PREPROCESSING
   computeFreq(T, freq);

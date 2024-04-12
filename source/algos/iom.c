@@ -34,6 +34,9 @@ void PrecomputeIOH(unsigned char *p, int m, int step, int ibc[]) {
 
 int search(unsigned char *P, int m, unsigned char *T, int n) {
   int i, s, count, step1, step2, ibc1[SIGMA], ibc2[SIGMA];
+#ifdef DEBUG
+  unsigned char *y = T;
+#endif
 
   BEGIN_PREPROCESSING
   step1 = step2 = 2 * m - 1;
