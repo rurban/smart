@@ -29,6 +29,7 @@
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include <assert.h>
 
 #define F_8(j)                                                                 \
   (B[y[j]] << 7) & (B[y[j - 1]] << 6) & (B[y[j - 2]] << 5) &                   \
@@ -39,7 +40,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n);
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], D, shift;
-  int i, j, pos, mMinusq, mq, count;
+  int i, j, pos, count;
   const int q = 8;
 
   if (m < q)
@@ -50,8 +51,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   /* Preprocessing */
   BEGIN_PREPROCESSING
   count = 0;
-  mMinusq = m - q + 1;
-  mq = m - q;
+  const int mMinusq = m - q + 1;
+  const int mq = m - q;
+  assert(mq > 0);
+  assert(mMinusq > 0);
   for (i = 0; i < SIGMA; i++)
     B[i] = 0;
   for (i = 1; i <= m; ++i)
@@ -76,9 +79,11 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     OUTPUT(0);
   j = m;
   while (j < n) {
+    assert(j - 7 >= 0);
     D = F_8(j);
     if (D != 0) {
       pos = j;
+      assert(j - q < n);
       while ((D = (D << 1) & B[y[j - q]]))
         --j;
       j += mq;
@@ -102,20 +107,20 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], D, shift;
-  int i, j, pos, mMinusq, mq, count, p_len;
+  int i, j, pos, count;
   const int q = 8;
 
   if (m < q)
     return 0;
-  p_len = m;
+  const int p_len = m;
   m = 32;
-  int diff = p_len - m;
+  const int diff = p_len - m;
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
   count = 0;
-  mMinusq = m - q + 1;
-  mq = m - q;
+  const int mMinusq = m - q + 1;
+  const int mq = m - q;
   for (i = 0; i < SIGMA; i++)
     B[i] = 0;
   for (i = 1; i <= m; ++i)
