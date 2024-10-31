@@ -400,6 +400,10 @@ int main(int argc, char **argv) {
       exit(1);
     }
   } else {
+    if (argc < 3 || argc > 4) {
+      fprintf(stderr, "Usage: ./algocfg algo cfg [value]\n");
+      return 1;
+    }
     const char *cfg = argv[2];
     if (strcmp(cfg, "good") == 0)
       printf("%d\n", ALGOCFGS[id].good);
