@@ -166,7 +166,10 @@ CBMC_ARGS = -DCBMC --bounds-check --pointer-check --memory-leak-check     \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
-  # cbmc 5.12.1: --pointer-primitive-check
+#CBMC_VERSION := $(shell cbmc --version | cut -c1-3)
+#CBMC_ARGS += $(shell if test "`echo "$$CBMC_VERSION >= 5.13" | bc`" = 1; then \
+#	echo "--pointer-primitive-check"; fi)
+# cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
 FAIL_VERIFY := $(shell ./algocfg VFY_FAIL)
 TIMEOUT_VERIFY := $(shell ./algocfg VFY_TIMEOUT)

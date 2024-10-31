@@ -45,6 +45,9 @@ enum cbmc_args {
   cprover_smt2 = 7,
   ipasir_cadical = 8,
   ipasir_custom = 9,
+  bitwuzla = 10,
+  mathsat = 11,
+  ipasir_riss = 12, // NYI
   no_ua = 16, // no --unwinding-assertions
   no_sf = 17, // no --slice-formula
 };
@@ -57,8 +60,11 @@ const char *cbmc_flags[] = {
   [yices] = "--yices",
   [cprover_smt2] = "--cprover-smt2",
   [glucose] = "--sat-solver glucose",
+  [bitwuzla] = "--bitwuzla",
+  [mathsat] = "--mathsat",
   [ipasir_cadical] = "--sat-solver cadical",
   [ipasir_custom] = "--sat-solver ipasir",
+  [ipasir_riss] = "--sat-solver riss",
 };
 
 /* UNSATIFIABLE means cbmc it ran into --depth limit. redo with higher --depth,
@@ -405,6 +411,7 @@ int main(int argc, char **argv) {
       return 1;
     }
     const char *cfg = argv[2];
+    unsigned solver_flags = ALGOCFGS[id].flags & 15;
     if (strcmp(cfg, "good") == 0)
       printf("%d\n", ALGOCFGS[id].good);
     else if (strcmp(cfg, "asan") == 0)
@@ -438,6 +445,8 @@ int main(int argc, char **argv) {
         printf("--unwinding-assertions ");
       if (!(ALGOCFGS[id].flags & no_sf))
         printf("--slice-formula ");
+      if (solver_flags && (solver_flags <= ipasir_riss))
+        printf("%s ", cbmc_flags[solver_flags]);
       printf("\n");
     } else if (strcmp(cfg, "minlen") == 0)
       printf("%d\n", ALGOCFGS[id].minlen);
