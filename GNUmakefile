@@ -105,9 +105,9 @@ $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
 verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $< > $@; \
-	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $< | tee -a $@
+	b=`basename $@ .vfy`; echo -n "cbmcargs="; ./algocfg $$b cbmc; cbmcargs=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc $$cbmcargs $(CBMC_ARGS) $< > $@; \
+	  $(TIMEOUT_4m) cbmc $$cbmcargs $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
@@ -116,9 +116,9 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
 CMBC_TRACE_ARGS = --trace --reachability-slice-fb
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy-trace`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$args $(CBMC_ARGS) $< > $@; \
-	  $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$args $(CBMC_ARGS) $< | tee -a $@
+	b=`basename $@ .vfy-trace`; echo -n "cbmcargs="; ./algocfg $$b cbmc; cbmcargs=`./algocfg $$b cbmc`; \
+	  echo $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$cbmcargs $(CBMC_ARGS) $< > $@; \
+	  $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$cbmcargs $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
@@ -168,7 +168,7 @@ CBMC_ARGS = -DCBMC --bounds-check --pointer-check --memory-leak-check     \
   --float-overflow-check --nan-check --enum-range-check
   # cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
-FAIL_VERIFY = $(shell ./algocfg VFY_FAIL)
+FAIL_VERIFY := $(shell ./algocfg VFY_FAIL)
 TIMEOUT_VERIFY := $(shell ./algocfg VFY_TIMEOUT)
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
