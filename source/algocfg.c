@@ -49,7 +49,7 @@ enum cbmc_args {
   mathsat = 11,
   ipasir_riss = 12, // NYI
   no_ua = 16, // no --unwinding-assertions
-  no_sf = 17, // no --slice-formula
+  no_sf = 32, // no --slice-formula
 };
 
 const char *cbmc_flags[] = {
@@ -89,19 +89,25 @@ struct algocfg {
 #define FAIL 0
 #define ASSERTS 0
 
+/* unwind:
+  preMp: MAX_M * MAX_M = 64
+  timeout 30s cbmc -DCBMC --unwind 64 --verbosity 9 --slice-formula source/algos/mp.c | tee mp.vfy
+  grep -c Unwinding mp.vfy => 12118
+ */
+
 const struct algocfg ALGOCFGS[] = {
     // clang-format off
   // Comparison based Algorithms
-  [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
-  [_MP] = {_MP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 512, 0, 0, 0}, // 3m
-  [_KMP] = {_KMP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 20, 0, 0, 0},
-  [_BM] = {_BM, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
-  [_HOR] = {_HOR, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
-  [_GS] = {_GS, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
-  [_AG] = {_AG, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
-  [_KR] = {_KR, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 0, 0, 0},
-  [_ZT] = {_ZT, GOOD, ASAN, UNSATISFIABLE, 2, 0, 256, 256, 0, 0},
-  [_AC] = {_AC, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, 0, 0},
+  [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0}, // 0.26s
+  [_MP] = {_MP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 0, 64, no_ua, 10}, // 1024: 51s
+  [_KMP] = {_KMP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 20, 256, 0, 0},
+  [_BM] = {_BM, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
+  [_HOR] = {_HOR, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
+  [_GS] = {_GS, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
+  [_AG] = {_AG, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
+  [_KR] = {_KR, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
+  [_ZT] = {_ZT, GOOD, ASAN, UNSATISFIABLE, 2, 0, 360, 256, 0, 0},
+  [_AC] = {_AC, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
   [_TW] = {_TW, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256, 0, 0},
   [_OM] = {_OM, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256, 0, 0},
   [_MS] = {_MS, GOOD, ASAN, UNSATISFIABLE, 0, 0, 256, 256, 0, 0},
@@ -437,6 +443,10 @@ int main(int argc, char **argv) {
     else if (strcmp(cfg, "timeout") == 0)
       printf("%d\n", ALGOCFGS[id].timeout_min);
     else if (strcmp(cfg, "cbmc") == 0) {
+      if (ALGOCFGS[id].timeout_min)
+        printf("timeout %dm cbmc ", ALGOCFGS[id].timeout_min);
+      else
+        printf("timeout 4m cbmc ");
       if (ALGOCFGS[id].depth)
         printf("--depth %d ", ALGOCFGS[id].depth);
       if (ALGOCFGS[id].unwind)

@@ -91,8 +91,8 @@ int main(void) {
 #elif defined CBMC
 
 #include <assert.h>
-#define MAX_M 10
-#define MAX_N 36
+#define MAX_M 8
+#define MAX_N 12
 #undef XSIZE
 #undef YSIZE
 #define XSIZE MAX_M

@@ -105,9 +105,10 @@ $(SELECTBIN): source/selectAlgo.c $(SRCINC)
 	$(CC) $(CFLAGS) $< -o $@
 verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy`; echo -n "cbmcargs="; ./algocfg $$b cbmc; cbmcargs=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$cbmcargs $(CBMC_ARGS) $< > $@; \
-	  $(TIMEOUT_4m) cbmc $$cbmcargs $(CBMC_ARGS) $< | tee -a $@
+	b=`basename $@ .vfy`; echo -n "cmd="; ./algocfg $$b cbmc; \
+	  cmd=`./algocfg $$b cbmc`; \
+	  echo $$cmd $(CBMC_ARGS) $< > $@; \
+	  $$cmd $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
@@ -116,9 +117,10 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
 CMBC_TRACE_ARGS = --trace --reachability-slice-fb
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg
 	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy-trace`; echo -n "cbmcargs="; ./algocfg $$b cbmc; cbmcargs=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$cbmcargs $(CBMC_ARGS) $< > $@; \
-	  $(TIMEOUT_4m) cbmc $(CMBC_TRACE_ARGS) $$cbmcargs $(CBMC_ARGS) $< | tee -a $@
+	b=`basename $@ .vfy-trace`; echo -n "cbmcargs="; ./algocfg $$b cbmc; \
+	  cmd=`./algocfg $$b cbmc`; \
+	  echo $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< > $@; \
+	  $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
@@ -177,10 +179,10 @@ NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
 verify/verify.log: $(ALGOSRC) algocfg
 	for c in $(ALGOSRC); do \
-	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $$c; \
-	  $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $$c || \
-            (echo cbmc $$args $(CBMC_ARGS) "$$c FAILED"; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; cmd=`./algocfg $$b cbmc`; \
+	  echo $$cmd $(CBMC_ARGS) $$c; \
+	  $$cmd $(CBMC_ARGS) $$c || \
+            (echo $$cmd $(CBMC_ARGS) "$$c FAILED"; \
 	    test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/verify.log
 	for b in `./algocfg UNSATISFIABLE` `./algocfg VFY_TIMEOUT`; do \
@@ -191,20 +193,22 @@ check-verify:
 	@$(MAKE) -s algocfg
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \
-	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc $$args $(CBMC_ARGS) $$c; \
-	  $(TIMEOUT_1m) cbmc $$args $(CBMC_ARGS) $$c || \
-            (echo cbmc $(CBMC_ARGS) "$$c FAILED"; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
+	  cmd=`./algocfg $$b cbmc`; \
+	  echo $$cmd $(CBMC_ARGS) $$c; \
+	  $$cmd $(CBMC_ARGS) $$c || \
+            (echo $$cmd $(CBMC_ARGS) "$$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done
 # prints the violations
 verify-trace: verify/trace.log
 verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) algocfg
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
-	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; args=`./algocfg $$b cbmc`; \
-	  echo $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $$c; \
-	  $(TIMEOUT_4m) cbmc --trace $$args $(CBMC_ARGS) $$c || \
-            (echo cbmc --trace $$args $(CBMC_ARGS) " $$c FAILED"; \
+	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
+	  cmd=`./algocfg $$b cbmc`; \
+	  echo $$cmd --trace $(CBMC_ARGS) $$c; \
+	  $$cmd --trace $(CBMC_ARGS) $$c || \
+            (echo $$cmd --trace $(CBMC_ARGS) " $$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
 fuzz: test-fuzz
