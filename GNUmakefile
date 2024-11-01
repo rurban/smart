@@ -92,19 +92,18 @@ endif
 
 all: $(BINS) $(HELPERS) good.lst asan.lst
 
-$(BINDIR)/%: source/algos/%.c $(ALGOSINC)
+$(BINDIR)/%: source/algos/%.c $(ALGOSINC) GNUmakefile
 	@test -d $(BINDIR) || mkdir $(BINDIR)
 	$(CC) $(CFLAGS) $< -o $@
-./%-fuzz: source/%.c $(SRCINC) source/algos/include/shmids.h
+./%-fuzz: source/%.c $(SRCINC) source/algos/include/shmids.h GNUmakefile
 	$(CC) $(CFLAGS) -DFUZZ $< -std=gnu99 -o $@ -lm
-./%-asan: source/%.c $(SRCINC) source/algos/include/shmids.h
+./%-asan: source/%.c $(SRCINC) source/algos/include/shmids.h GNUmakefile
 	$(CC) $(CFLAGS) $< -std=gnu99 -o $@ -lm
-./%: source/%.c $(SRCINC) source/algos/include/shmids.h
+./%: source/%.c $(SRCINC) source/algos/include/shmids.h GNUmakefile
 	$(CC) $(CFLAGS) $< -std=gnu99 -o $@ -lm
-$(SELECTBIN): source/selectAlgo.c $(SRCINC)
+$(SELECTBIN): source/selectAlgo.c $(SRCINC) GNUmakefile
 	$(CC) $(CFLAGS) $< -o $@
-verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
-	@$(MAKE) -s algocfg
+verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	b=`basename $@ .vfy`; echo -n "cmd="; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CBMC_ARGS) $< > $@; \
@@ -115,9 +114,8 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg
 	  goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
 	fi
 CMBC_TRACE_ARGS = --trace --reachability-slice-fb
-verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg
-	@$(MAKE) -s algocfg
-	b=`basename $@ .vfy-trace`; echo -n "cbmcargs="; ./algocfg $$b cbmc; \
+verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
+	b=`basename $@ .vfy-trace`; echo -n "cmd="; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< > $@; \
 	  $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< | tee -a $@
@@ -149,7 +147,7 @@ CPPCHECK_ARGS = -j4 --enable=warning,portability --inline-suppr
 cppcheck:
 	cppcheck $(CPPCHECK_ARGS) source/*.c source/algos/*.c
 compile_commands.json: GNUmakefile
-	-+$(MAKE) clean
+	+$(MAKE) clean
 	bear -- $(MAKE)
 clang-tidy.log: compile_commands.json $(ALLSRC)
 	clang-tidy source/*.c source/algos/*.c | sed -e"s,$$PWD/,," | tee clang-tidy.log
@@ -177,7 +175,7 @@ FAIL_VERIFY := $(shell ./algocfg VFY_FAIL)
 TIMEOUT_VERIFY := $(shell ./algocfg VFY_TIMEOUT)
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
-verify/verify.log: $(ALGOSRC) algocfg
+verify/verify.log: $(ALGOSRC) algocfg GNUmakefile
 	for c in $(ALGOSRC); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CBMC_ARGS) $$c; \
@@ -189,8 +187,7 @@ verify/verify.log: $(ALGOSRC) algocfg
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c; \
 	  goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c; \
 	done | tee -a verify/verify.log
-check-verify:
-	@$(MAKE) -s algocfg
+check-verify: algocfg GNUmakefile
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
@@ -202,7 +199,7 @@ check-verify:
 	done
 # prints the violations
 verify-trace: verify/trace.log
-verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) algocfg
+verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) algocfg GNUmakefile
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
@@ -211,7 +208,7 @@ verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) alg
             (echo $$cmd --trace $(CBMC_ARGS) " $$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
-fuzz: test-fuzz
+fuzz: test-fuzz GNUmakefile
 	for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
