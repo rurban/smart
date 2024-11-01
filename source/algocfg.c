@@ -443,10 +443,11 @@ int main(int argc, char **argv) {
     else if (strcmp(cfg, "timeout") == 0)
       printf("%d\n", ALGOCFGS[id].timeout_min);
     else if (strcmp(cfg, "cbmc") == 0) {
+      // cmbc 5.12 has too high default verbosity 8, we want 6 + unwind summaries
       if (ALGOCFGS[id].timeout_min)
-        printf("timeout %dm cbmc ", ALGOCFGS[id].timeout_min);
+        printf("timeout %dm cbmc --verbosity 7 ", ALGOCFGS[id].timeout_min);
       else
-        printf("timeout 4m cbmc ");
+        printf("timeout 4m cbmc --verbosity 7 ");
       if (ALGOCFGS[id].depth)
         printf("--depth %d ", ALGOCFGS[id].depth);
       if (ALGOCFGS[id].unwind)
