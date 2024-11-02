@@ -31,4 +31,7 @@ algorithms.lst
 /source/3rd/
 /source/algos/new/
 /fuzz/
-/verify/
+/verify/*.vfy-trace
+/verify/*.c
+/verify/*.log
+

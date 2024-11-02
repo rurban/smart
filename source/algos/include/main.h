@@ -17,16 +17,16 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  */
 
-#ifndef CBMC
-#include "timer.h"
-#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+
 #ifndef CBMC
+#include "timer.h"
+#define __CPROVER_loop_invariant(x)
 #include "shmids.h"
 #endif
-#include <sys/types.h>
 
 #if !defined __AVR__ && !defined CBMC
 TIMER *_timer;
@@ -95,8 +95,12 @@ int main(void) {
 #elif defined CBMC
 
 #include <assert.h>
+#ifndef MAX_M
 #define MAX_M 8
+#endif
+#ifndef MAX_N
 #define MAX_N 12
+#endif
 #undef XSIZE
 #undef YSIZE
 #define XSIZE MAX_M
@@ -107,7 +111,10 @@ static inline int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   assert(m < MAX_M);
   assert(n < MAX_N);
   int count = 0;
-  for (int j = 0; j <= n - m; ++j) {
+  for (int j = 0; j <= n - m; ++j)
+    __CPROVER_loop_invariant(j <= MAX_N - MAX_M)
+    __CPROVER_loop_invariant(j >= __CPROVER_loop_entry(j))
+  {
     if (memcmp(x, &y[j], m) == 0)
       count++;
     //for (i = 0; i < m && x[i] == y[i + j]; ++i)
@@ -127,35 +134,53 @@ int main(void) {
     c = nondet_uchar();                                                        \
     __CPROVER_assume(c > 0 && c <= 255);                                       \
   }
-  int m = nondet_int();
+  int m = MAX_M; // nondet_int();
 #ifdef MIN_M
   __CPROVER_assume(m > MIN_M && m < MAX_M);
 #else
   __CPROVER_assume(m > 0 && m < MAX_M);
 #endif
-  int n = nondet_int();
-  __CPROVER_assume(n > 0 && n < MAX_N);
-  __CPROVER_assume(m <= n);
+  int n = MAX_N; // nondet_int();
   unsigned char P[MAX_M];
-  unsigned char T[MAX_N];
+  unsigned char T[256];
   for (int i = 0; i < MAX_M; i++)
+    __CPROVER_loop_invariant(i < MAX_M)
     RANDCH(P[i]);
-  P[m] = '\0';
   for (int i = 0; i < MAX_N; i++)
+    __CPROVER_loop_invariant(i < MAX_N)
     RANDCH(T[i]);
-  T[n] = '\0';
   __CPROVER_input("P", P);
-  __CPROVER_input("m", m);
+  //__CPROVER_input("m", m);
   __CPROVER_input("T", T);
-  __CPROVER_input("n", n);
+  //__CPROVER_input("n", n);
+  int occ, ref;
 
-  int occ = search(P, m, T, n);
-  __CPROVER_output("occ", occ);
+#define M_N_LOOP(m, n)                          \
+  T[n] = '\0';                                  \
+  P[m] = '\0';                                  \
+  occ = search(P, m, T, n);                     \
+  __CPROVER_output("occ", occ);                 \
+  ref = bf_search(P, m, T, n);                  \
+  __CPROVER_output("ref", ref);                 \
+  __CPROVER_assert(ref == occ, "ref == occ")
 
-  int ref = bf_search(P, m, T, n);
-  __CPROVER_output("ref", ref);
+  M_N_LOOP(0, MAX_N-1);
+  M_N_LOOP(1, MAX_N-1);
+  M_N_LOOP(2, MAX_N-1);
+  M_N_LOOP(3, MAX_N-1);
+  M_N_LOOP(4, MAX_N-1);
+  M_N_LOOP(5, MAX_N-1);
+  M_N_LOOP(6, MAX_N-1);
+  M_N_LOOP(7, MAX_N-1);
+  M_N_LOOP(MAX_M, MAX_N-1);
+  M_N_LOOP(MAX_M, MAX_N); // includes the 0
+  M_N_LOOP(7, 8);
+  M_N_LOOP(7, MAX_N-2);
 
-  __CPROVER_assert(ref == occ, "ref == occ");
+  strcpy(T, "8TOLWd903QRXd4QMPL665XT8dPY0b214VPQMNZNRK0::4bW");
+  M_N_LOOP(2, 47);
+  M_N_LOOP(4, 47);
+  M_N_LOOP(8, 47);
 }
 
 #else
