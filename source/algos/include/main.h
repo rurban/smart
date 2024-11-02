@@ -17,18 +17,23 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  */
 
+#ifndef CBMC
 #include "timer.h"
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef CBMC
 #include "shmids.h"
+#endif
 #include <sys/types.h>
 
+#if !defined __AVR__ && !defined CBMC
+TIMER *_timer;
 double *run_time, // searching time
     *pre_time;    // preprocessing time
 double m_run_time, m_pre_time;
 
-#if !defined __AVR__ && !defined CBMC
 #define BEGIN_PREPROCESSING                                                    \
   {                                                                            \
     timer_start(_timer);                                                       \
@@ -61,7 +66,6 @@ clock_t start, end;
 #define END_SEARCHING
 #endif
 
-TIMER *_timer;
 static inline int search(unsigned char *p, int m, unsigned char *t, int n);
 
 #if defined FUZZ

@@ -35,6 +35,8 @@ enum verify_status {
   VFY_TIMEOUT,
 };
 
+// the first flags are exclusive, the rest bitmasks can be added
+#define FLAGS_MASK 31
 enum cbmc_args {
   cadical = 1,
   z3 = 2,
@@ -47,9 +49,14 @@ enum cbmc_args {
   ipasir_custom = 9,
   bitwuzla = 10,
   mathsat = 11,
-  ipasir_riss = 12, // NYI
-  no_ua = 16, // no --unwinding-assertions
-  no_sf = 32, // no --slice-formula
+  picosat = 12,
+  chaff = 13,
+  kissat = 14,   // see also github.com/rurban/cmbc -b new-sat-solvers
+  squolem2 = 15, // see also github.com/rurban/cmbc -b new-sat-solvers
+  stp = 16,      // requires github.com/rurban/cmbc -b stp
+  no_ua = 32,    // no --unwinding-assertions
+  no_sf = 64,    // no --slice-formula
+  rs = 128,      // --refine-strings
 };
 
 const char *cbmc_flags[] = {
@@ -59,12 +66,16 @@ const char *cbmc_flags[] = {
   [boolector] = "--boolector",
   [yices] = "--yices",
   [cprover_smt2] = "--cprover-smt2",
+  [ipasir_cadical] = "--sat-solver cadical",
+  [ipasir_custom] = "--sat-solver ipasir",
   [glucose] = "--sat-solver glucose",
   [bitwuzla] = "--bitwuzla",
   [mathsat] = "--mathsat",
-  [ipasir_cadical] = "--sat-solver cadical",
-  [ipasir_custom] = "--sat-solver ipasir",
-  [ipasir_riss] = "--sat-solver riss",
+  [picosat] = "--external-sat-solver picosat",
+  [chaff] = "--external-sat-solver chaff",
+  [kissat] = "--external-sat-solver kissat --dimacs",
+  [squolem] = "--external-sat-solver squolem --smt2",
+  [stp] = "--stp",
 };
 
 /* UNSATIFIABLE means cbmc it ran into --depth limit. redo with higher --depth,
@@ -99,7 +110,7 @@ const struct algocfg ALGOCFGS[] = {
     // clang-format off
   // Comparison based Algorithms
   [_BF] = {_BF, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0}, // 0.26s
-  [_MP] = {_MP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 0, 64, no_ua, 10}, // 1024: 51s
+  [_MP] = {_MP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 0, no_ua|z3, 10}, // 1024: 51s
   [_KMP] = {_KMP, GOOD, ASAN, UNSATISFIABLE, 0, 0, 20, 256, 0, 0},
   [_BM] = {_BM, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
   [_HOR] = {_HOR, GOOD, ASAN, UNSATISFIABLE, 0, 0, 360, 256, 0, 0},
@@ -417,7 +428,7 @@ int main(int argc, char **argv) {
       return 1;
     }
     const char *cfg = argv[2];
-    unsigned solver_flags = ALGOCFGS[id].flags & 15;
+    unsigned solver_flags = ALGOCFGS[id].flags & FLAGS_MASK;
     if (strcmp(cfg, "good") == 0)
       printf("%d\n", ALGOCFGS[id].good);
     else if (strcmp(cfg, "asan") == 0)
