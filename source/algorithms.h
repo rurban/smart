@@ -276,7 +276,7 @@ struct algo {
 
 // Note: This part may be edited by select
 const struct algo ALGOS[] = {
-    // clang-format off
+  // clang-format off
   // Comparison based Algorithms
   [_BF] = {_BF, OK, "bf", "Brute Force", 0, 0},
   [_MP] = {_MP, OK, "mp", "Morris-Pratt", 0, 0},
@@ -428,7 +428,7 @@ const struct algo ALGOS[] = {
   [_FSBNDM_W2] = // n > m
         {_FSBNDM_W2, OK, "fsbndm-w2", "fsbndm with multiple sliding windows", 2, 0},
   [_FSBNDM_W4] =
-        {_FSBNDM_W4, FAIL, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
+        {_FSBNDM_W4, RNDCRASH, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
   [_FSBNDM_W6] =
         {_FSBNDM_W6, RNDCRASH, "fsbndm-w6", "fsbndm with multiple sliding windows", 6, 0},
   [_FSBNDM_W8] =
@@ -486,18 +486,18 @@ const struct algo ALGOS[] = {
   [_QF72] = {_QF72, OK, "qf72", "Q-gram Filtering q=7 s=2", 8, 0},
   [_QF82] = {_QF82, OK, "qf82", "Q-gram Filtering q=8 s=2", 9, 0},
   [_QLQS] = {_QLQS, OK, "qlqs", "Quantum Leap Quick Search", 0, 0},
-  [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0},
-  [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0},
-  [_SBNDM_W6] = {_SBNDM_W6, RNDCRASH, "sbndm-w6", "SBNDM with lookahead", 6, 0},
+  [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0}, // m: 2..32
+  [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0}, // m: 4..?
+  [_SBNDM_W6] = {_SBNDM_W6, RNDCRASH, "sbndm-w6", "SBNDM with lookahead", 6, 0}, // m: 6..32
   [_SSM] = {_SSM, OK, "ssm", "SSM", 0, 0},
   [_TSA] = {_TSA, OK, "tsa", "word-wise popcount", 2, 0}, // 2<=m<64
   [_TSA_Q2] = {_TSA_Q2, FAIL, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
   [_TSO5] = {_TSO5, OK, "tso5", "optimized word-wise popcount", 2, 0}, // 2<=m<64
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
   [_TVSBS_W2] = {_TVSBS_W2, RNDCRASH, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
-  [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0},
-  [_TVSBS_W6] = {_TVSBS_W6, FAIL, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0},
-  [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0},
+  [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W6] = {_TVSBS_W6, FAIL, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_WFR] = {_WFR, OK, "wfr", "Weak Factor Recognizer", 0, 0},
   [_WFR2] = {_WFR2, OK, "wfr2", "Weak Factor Recognizer (m>=2)", 2, 0},
   [_WFR3] = {_WFR3, OK, "wfr3", "Weak Factor Recognizer (m>=3)", 3, 0},

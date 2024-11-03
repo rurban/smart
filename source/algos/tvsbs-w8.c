@@ -24,6 +24,7 @@
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include "include/search_large.h"
 #include <assert.h>
 
 void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
@@ -44,6 +45,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     return search_small(x, m, y, n);
   if (m < 2)
     return search_small(x, m, y, n);
+  if (m >= XSIZE)
+    return search_large(x, m, y, n);
 
   int count, i, s1, s2, s3, s4, s5, s6, s7, s8;
   int l1, l2, l3, l4, l5, l6, l7, l8;

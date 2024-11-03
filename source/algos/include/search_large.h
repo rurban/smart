@@ -1,4 +1,4 @@
-// fallback for algos with m<32 or similar constraints
+// fallback for algos with m<32, m>=XSIZE or similar constraints
 // from musl memmem
 #include <stddef.h>
 #include <stdint.h>

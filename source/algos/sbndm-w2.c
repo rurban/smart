@@ -49,6 +49,7 @@
  */
 
 #define MIN_M 2
+#define MAX_M 32
 #include <assert.h>
 #include "include/define.h"
 #include "include/main.h"

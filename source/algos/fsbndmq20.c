@@ -27,6 +27,7 @@
  */
 
 #define MIN_M 2
+#define MAX_M 32
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

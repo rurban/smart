@@ -22,6 +22,7 @@
 //#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_large.h"
 
 void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
   int a, b, i;
@@ -40,6 +41,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int count, i, s1, s2;
   int BrBcR[SIGMA][SIGMA], BrBcL[SIGMA][SIGMA];
   unsigned char firstch, lastch;
+  if (m >= XSIZE)
+    return search_large(x, m, y, n);
+
   BEGIN_PREPROCESSING
   unsigned char xr[XSIZE];
   for (i = 0; i < m; i++)

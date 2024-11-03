@@ -23,9 +23,9 @@ else
     CFLAGS += -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
   endif
   ifeq ($(FUZZ),1)
-    CC = /usr/bin/afl-clang-lto
+    CC = afl-clang-lto
     BINDIR = bin/fuzz
-    CFLAGS = -O1 -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
+    CFLAGS = -O1 -Isource/algos -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
   endif
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
@@ -162,7 +162,7 @@ good.lst: algocfg
 asan.lst: algocfg
 	./algocfg good 0 | perl -nle'%bad=map{$$_=>1}split/ /;for(split/ /,qx"./algocfg asan"){print $$_ unless $$bad{$$_}}' >$@
 
-CBMC_ARGS = -DCBMC --bounds-check --pointer-check --memory-leak-check     \
+CBMC_ARGS = -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
@@ -175,7 +175,7 @@ FAIL_VERIFY := $(shell ./algocfg VFY_FAIL)
 TIMEOUT_VERIFY := $(shell ./algocfg VFY_TIMEOUT)
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
-verify/verify.log: $(ALGOSRC) algocfg GNUmakefile
+verify/verify.log: $(ALGOSRC) $(ALGOSINC) algocfg GNUmakefile
 	for c in $(ALGOSRC); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CBMC_ARGS) $$c; \
@@ -199,7 +199,7 @@ check-verify: algocfg GNUmakefile
 	done
 # prints the violations
 verify-trace: verify/trace.log
-verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) algocfg GNUmakefile
+verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) $(ALGOSINC) algocfg GNUmakefile
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
