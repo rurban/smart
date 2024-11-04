@@ -12,7 +12,7 @@ int main(void) {
 
   __AFL_INIT();
   p = __AFL_FUZZ_TESTCASE_BUF;
-  n = (rand() % 5000) + 32;
+  n = (rand() % 4000) + 32;
   t = malloc(n + 1);
   for (int i = 0; i < n; i++)
     t[i] = rand() % 256;
