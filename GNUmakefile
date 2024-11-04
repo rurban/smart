@@ -110,8 +110,8 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	  $$cmd $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
-	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
-	  goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
+	  echo goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
+	  goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
 	fi
 CMBC_TRACE_ARGS = --trace --reachability-slice-fb
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
@@ -121,8 +121,8 @@ verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	  $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
-	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
-	  goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
+	  echo goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
+	  goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
 	fi
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
