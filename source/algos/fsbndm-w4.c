@@ -41,11 +41,12 @@
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
  *
- * Constraints: requires m>=4
+ * Constraints: requires m >= 4
  * Buffer overflows.  bin/asan/fsbndm-w4 aaaaaa 6 aaaaaaaaaa 10
  */
 
 #define MIN_M 4
+//#define MAX_M 31
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
@@ -60,7 +61,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     m = 31;
   if (m < 4)
     return search_small(x, m, y, n);
-  ;
+
   BEGIN_PREPROCESSING
   /* Preprocessing */
   count = 0;

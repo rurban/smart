@@ -46,7 +46,7 @@
  * rurban had to fix plenty of buffer under- and overflows.
  */
 
-//#include <assert.h>
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 

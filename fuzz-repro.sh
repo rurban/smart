@@ -13,6 +13,7 @@ if [ -z "$data" ] || [ ! -f "$data" ]; then
     echo data.t $data not found in fuzz/$algo/default/data.t
 fi
 
-make SANITIZE=1 test-asan bin/asan/$algo
-./test-asan $algo --files "$id" "$data"
+make -s SANITIZE=1 test-asan bin/asan/$algo
+echo ./test-asan $algo --files "$id" "$data"
+./test-asan $algo --files "$id" "$data" && rm -i -- "$id"
 

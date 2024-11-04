@@ -3,9 +3,9 @@ MACHINE := $(shell uname -m)
 ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
 # to detect mingw
 TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
-TIMEOUT_1m := timeout 1m
+TIMEOUT_1m := timeout --preserve-status 1m
 TIMEOUT_4m := timeout 4m
-ifeq (, $(shell which timeout))
+ifeq (, $(shell command -v timeout))
   TIMEOUT_1m =
   TIMEOUT_4m =
 endif
@@ -212,10 +212,11 @@ fuzz: test-fuzz GNUmakefile
 	for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
-	  $(TIMEOUT_1m) afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
+	  $(TIMEOUT_1m) afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b || true; \
 	  for c in fuzz/$$b/default/crashes/id\:*; do \
-	    xxd -i $c fuzz/$$b/`basename $c | cut -c4-9`.h; \
-	  done \
+	    if [ -n "$c" ]; then xxd -i $c fuzz/$$b/id$(basename "$c" | cut -c4-9).h; fi; \
+	  done; \
+	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9; \
 	done
 
 fmt:

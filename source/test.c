@@ -74,7 +74,7 @@ void printManual() {
   printf("\t-nv non-verbose (i.e. silent)\n");
   printf("\ttext: optional data/text corpus(es) to use\n");
   printf("\tpatlen: only use this pattern length, not all.\n");
-  printf("--files: ./test-asan algo --files fuzz/algo/default/crashes/id:... fuzz/algo/default/data.t\n");
+  printf("\tfiles: ./test-asan algo --files fuzz/algo/default/crashes/id:... fuzz/algo/default/data.t\n");
   printf("\n\n");
 }
 
