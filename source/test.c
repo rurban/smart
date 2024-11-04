@@ -67,13 +67,14 @@ int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
 
 void printManual() {
   printf("\n\tSMART UTILITY FOR TESTING STRING MATCHING ALGORITHMS\n\n");
-  printf("\tusage: ./test ALGONAME [-nv][text [patlen]]\n");
+  printf("\tusage: ./test ALGONAME [-nv][text [patlen]] | [--files pattern_file text_file]\n");
   printf("\tTest the program named \"ALGONAME\" for correctness.\n");
   printf("\tThe program \"ALGONAME\" must be located in %s/\n", BINDIR);
   printf("\tOnly programs in smart format can be tested.\n");
   printf("\t-nv non-verbose (i.e. silent)\n");
   printf("\ttext: optional data/text corpus(es) to use\n");
   printf("\tpatlen: only use this pattern length, not all.\n");
+  printf("--files: ./test-asan algo --files fuzz/algo/default/crashes/id:... fuzz/algo/default/data.t\n");
   printf("\n\n");
 }
 
@@ -207,6 +208,44 @@ int main(int argc, char *argv[]) {
   char *orig_T = malloc(TSIZE + 1);
   char text[100] = {0};
   if (argc > argn) { // text=%s
+
+    if (strcmp(argv[argn], "--files") == 0 && argc > argn + 2) {
+      // usage: ./test algo --files fuzz/ac/default/data.t fuzz/ac/default/crashes/id:000000,sig:11,src:000017,time:25,execs:1557,op:havoc,rep:2
+      char *p_file = argv[++argn];
+      char *t_file = argv[++argn];
+      FILE *fp = fopen(p_file, "r");
+      FILE *ft = fopen(t_file, "r");
+      if (!ft || !fp) {
+        fprintf(stderr, "%s or %s not found\n", t_file, p_file);
+        exit(1);
+      }
+      fseek(ft, 0L, SEEK_END);
+      n = ftell(ft);
+      fseek(ft, 0L, SEEK_SET);
+      if (n > TSIZE) {
+        fprintf(stderr, "%s too large: %u > %u\n", t_file, n, TSIZE);
+        exit(1);
+      }
+      if (!fread(T, n, 1, ft))
+        exit(1);
+      fclose(ft);
+      fseek(fp, 0L, SEEK_END);
+      m = ftell(fp);
+      fseek(fp, 0L, SEEK_SET);
+      P = shmalloc(shm_P, m + 1);       // pattern
+      if (!fread(P, m, 1, fp))
+        exit(1);
+      fclose(fp);
+
+      count = shmalloc(shm_r, sizeof(int));         // number of occurrences
+      e_time = shmalloc(shm_e, sizeof(double));     // running time
+      pre_time = shmalloc(shm_pre, sizeof(double)); // preprocessing
+      int rip = 0;
+      if (!attempt(&rip, count, P, m, T, n, algoname, verbose, 2))
+        goto free_shm1;
+      free_shm(T, P, count, e_time, pre_time);
+      exit(0);
+    }
     strncpy(text, argv[argn], SZNCPY(text));
     if (strcmp(text, "all") == 0) {
       char list_of_filenames[NumSetting][50];
