@@ -219,6 +219,11 @@ fuzz: test-fuzz GNUmakefile
 	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9; \
 	done
 
+# emacs flymake-mode
+check-syntax:
+	test -n "$(CHK_SOURCES)" && \
+	  $(COMPILE) -o /dev/null -S $(CHK_SOURCES)
+.PHONY: check-syntax
 fmt:
 	clang-format -i `find source -name \*.c -o -name \*.h`
 clean:
