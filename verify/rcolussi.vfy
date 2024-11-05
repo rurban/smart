@@ -1,4 +1,4 @@
-timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/rcolussi.c
+timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/rcolussi.c
 CBMC version 6.3.1 (cbmc-6.3.1-32-g7801c5c88c) 64-bit x86_64 linux
 Type-checking rcolussi
 Generating GOTO Program
@@ -73,54 +73,65 @@ function __CPROVER__start
 [strcpy.pointer_dereference.12] line 30 dereference failure: invalid integer address in dst[(signed long int)i]: SUCCESS
 [strcpy.overflow.2] line 31 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
 
-source/algos/include/main.h function bf_search
-[bf_search.assertion.1] line 111 assertion m < MAX_M: SUCCESS
-[bf_search.assertion.2] line 112 assertion n < MAX_N: SUCCESS
-[bf_search.overflow.1] line 114 arithmetic overflow on signed - in n - m: SUCCESS
-[bf_search.overflow.4] line 114 arithmetic overflow on signed + in j + 1: SUCCESS
-[bf_search.overflow.2] line 118 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
-[bf_search.pointer_arithmetic.1] line 118 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.2] line 118 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.3] line 118 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.4] line 118 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.5] line 118 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.6] line 118 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
-[bf_search.overflow.3] line 119 arithmetic overflow on signed + in count + 1: SUCCESS
+source/algos/include/cbmc.h function bf_search
+[bf_search.assertion.1] line 18 assertion m < MAX_M: SUCCESS
+[bf_search.assertion.2] line 19 assertion n < MAX_N: SUCCESS
+[bf_search.overflow.1] line 21 arithmetic overflow on signed - in n - m: SUCCESS
+[bf_search.overflow.4] line 21 arithmetic overflow on signed + in j + 1: SUCCESS
+[bf_search.overflow.2] line 25 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
+[bf_search.pointer_arithmetic.1] line 25 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.2] line 25 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.3] line 25 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.4] line 25 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.5] line 25 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.6] line 25 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[bf_search.overflow.3] line 26 arithmetic overflow on signed + in count + 1: SUCCESS
 
-source/algos/include/main.h function main
-[main.overflow.1] line 146 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.1] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.2] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.3] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.4] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.5] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.6] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.overflow.2] line 149 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.7] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.8] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.9] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.10] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.11] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.12] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.assertion.1] line 167 ref == occ: SUCCESS
-[main.assertion.2] line 168 ref == occ: SUCCESS
-[main.assertion.3] line 169 ref == occ: SUCCESS
-[main.assertion.4] line 170 ref == occ: SUCCESS
-[main.assertion.5] line 171 ref == occ: SUCCESS
-[main.assertion.6] line 172 ref == occ: SUCCESS
-[main.assertion.7] line 173 ref == occ: SUCCESS
-[main.assertion.8] line 174 ref == occ: SUCCESS
-[main.array_bounds.13] line 175 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.9] line 175 ref == occ: SUCCESS
-[main.array_bounds.14] line 176 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.10] line 176 ref == occ: SUCCESS
-[main.assertion.11] line 177 ref == occ: SUCCESS
-[main.assertion.12] line 178 ref == occ: SUCCESS
-[main.precondition_instance.1] line 180 strcpy src/dst overlap: SUCCESS
-[main.assertion.13] line 181 ref == occ: SUCCESS
-[main.assertion.14] line 182 ref == occ: SUCCESS
-[main.array_bounds.15] line 183 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.15] line 183 ref == occ: SUCCESS
+source/algos/include/cbmc.h function main
+[main.overflow.1] line 71 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.1] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.2] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.3] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.4] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.5] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.6] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.overflow.2] line 74 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.7] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.8] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.9] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.10] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.11] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.12] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.assertion.1] line 102 ref == occ: SUCCESS
+[main.assertion.2] line 105 ref == occ: SUCCESS
+[main.assertion.3] line 108 ref == occ: SUCCESS
+[main.assertion.4] line 109 ref == occ: SUCCESS
+[main.assertion.5] line 110 ref == occ: SUCCESS
+[main.assertion.6] line 111 ref == occ: SUCCESS
+[main.assertion.7] line 112 ref == occ: SUCCESS
+[main.assertion.8] line 113 ref == occ: SUCCESS
+[main.assertion.9] line 114 ref == occ: SUCCESS
+[main.assertion.10] line 115 ref == occ: SUCCESS
+[main.assertion.11] line 116 ref == occ: SUCCESS
+[main.assertion.12] line 117 ref == occ: SUCCESS
+[main.assertion.13] line 120 ref == occ: SUCCESS
+[main.assertion.14] line 123 ref == occ: SUCCESS
+[main.assertion.15] line 126 ref == occ: SUCCESS
+[main.assertion.16] line 127 ref == occ: SUCCESS
+[main.assertion.17] line 130 ref == occ: SUCCESS
+[main.assertion.18] line 131 ref == occ: SUCCESS
+[main.assertion.19] line 132 ref == occ: SUCCESS
+[main.assertion.20] line 135 ref == occ: SUCCESS
+[main.assertion.21] line 138 ref == occ: SUCCESS
+[main.assertion.22] line 139 ref == occ: SUCCESS
+[main.assertion.23] line 142 ref == occ: SUCCESS
+[main.assertion.24] line 143 ref == occ: SUCCESS
+[main.precondition_instance.1] line 146 strcpy src/dst overlap: SUCCESS
+[main.assertion.25] line 148 ref == occ: SUCCESS
+[main.assertion.26] line 149 ref == occ: SUCCESS
+[main.assertion.27] line 152 ref == occ: SUCCESS
+[main.assertion.28] line 155 ref == occ: SUCCESS
+[main.assertion.29] line 156 ref == occ: SUCCESS
 
 source/algos/rcolussi.c function preRc
 [preRc.overflow.1] line 36 arithmetic overflow on signed + in a + 1: SUCCESS
@@ -144,8 +155,8 @@ source/algos/rcolussi.c function preRc
 [preRc.pointer_dereference.5] line 40 dereference failure: pointer outside object bounds in x[(signed long int)i]: SUCCESS
 [preRc.pointer_dereference.6] line 40 dereference failure: invalid integer address in x[(signed long int)i]: SUCCESS
 [preRc.array_bounds.6] line 41 array 'locc' upper bound in locc[(signed long int)x[(signed long int)i]]: SUCCESS
-[preRc.overflow.16] line 44 arithmetic overflow on signed + in a + 1: SUCCESS
-[preRc.overflow.15] line 45 arithmetic overflow on signed + in s + 1: SUCCESS
+[preRc.overflow.15] line 44 arithmetic overflow on signed + in a + 1: SUCCESS
+[preRc.overflow.14] line 45 arithmetic overflow on signed + in s + 1: SUCCESS
 [preRc.array_bounds.7] line 46 array 'locc' lower bound in locc[(signed long int)a]: SUCCESS
 [preRc.array_bounds.8] line 46 array 'locc' upper bound in locc[(signed long int)a]: SUCCESS
 [preRc.array_bounds.9] line 47 array 'link' lower bound in link[(signed long int)(m - s)]: SUCCESS
@@ -179,177 +190,156 @@ source/algos/rcolussi.c function preRc
 [preRc.pointer_dereference.10] line 55 dereference failure: dead object in rcBc[(signed long int)a]: SUCCESS
 [preRc.pointer_dereference.11] line 55 dereference failure: pointer outside object bounds in rcBc[(signed long int)a]: SUCCESS
 [preRc.pointer_dereference.12] line 55 dereference failure: invalid integer address in rcBc[(signed long int)a]: SUCCESS
-[preRc.array_bounds.18] line 56 array dynamic object upper bound in rcBc[(signed long int)a][(signed long int)s]: SUCCESS
-[preRc.assertion.1] line 56 assertion rcBc[a][s] > 0: SUCCESS
-[preRc.overflow.14] line 56 arithmetic overflow on signed * in (signed long int)a * (signed long int)32ul: SUCCESS
-[preRc.pointer_arithmetic.13] line 56 pointer arithmetic: pointer NULL in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_arithmetic.14] line 56 pointer arithmetic: pointer invalid in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_arithmetic.15] line 56 pointer arithmetic: deallocated dynamic object in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_arithmetic.16] line 56 pointer arithmetic: dead object in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_arithmetic.17] line 56 pointer arithmetic: pointer outside object bounds in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_arithmetic.18] line 56 pointer arithmetic: invalid integer address in rcBc + (signed long int)a: SUCCESS
-[preRc.pointer_dereference.13] line 56 dereference failure: pointer NULL in rcBc[(signed long int)a]: SUCCESS
-[preRc.pointer_dereference.14] line 56 dereference failure: pointer invalid in rcBc[(signed long int)a]: SUCCESS
-[preRc.pointer_dereference.15] line 56 dereference failure: deallocated dynamic object in rcBc[(signed long int)a]: SUCCESS
-[preRc.pointer_dereference.16] line 56 dereference failure: dead object in rcBc[(signed long int)a]: SUCCESS
-[preRc.pointer_dereference.17] line 56 dereference failure: pointer outside object bounds in rcBc[(signed long int)a]: SUCCESS
-[preRc.pointer_dereference.18] line 56 dereference failure: invalid integer address in rcBc[(signed long int)a]: SUCCESS
-[preRc.overflow.17] line 61 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.overflow.16] line 61 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.overflow.17] line 63 arithmetic overflow on signed - in i - k: SUCCESS
 [preRc.overflow.18] line 63 arithmetic overflow on signed - in i - k: SUCCESS
-[preRc.overflow.19] line 63 arithmetic overflow on signed - in i - k: SUCCESS
-[preRc.pointer_arithmetic.19] line 63 pointer arithmetic: pointer NULL in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.20] line 63 pointer arithmetic: pointer invalid in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.21] line 63 pointer arithmetic: deallocated dynamic object in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.22] line 63 pointer arithmetic: dead object in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.23] line 63 pointer arithmetic: pointer outside object bounds in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.24] line 63 pointer arithmetic: invalid integer address in x + (signed long int)(i - k): SUCCESS
-[preRc.pointer_arithmetic.25] line 63 pointer arithmetic: pointer NULL in x + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.26] line 63 pointer arithmetic: pointer invalid in x + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.27] line 63 pointer arithmetic: deallocated dynamic object in x + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.28] line 63 pointer arithmetic: dead object in x + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.29] line 63 pointer arithmetic: pointer outside object bounds in x + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.30] line 63 pointer arithmetic: invalid integer address in x + (signed long int)i: SUCCESS
-[preRc.pointer_dereference.19] line 63 dereference failure: pointer NULL in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.20] line 63 dereference failure: pointer invalid in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.21] line 63 dereference failure: deallocated dynamic object in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.22] line 63 dereference failure: dead object in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.23] line 63 dereference failure: pointer outside object bounds in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.24] line 63 dereference failure: invalid integer address in x[(signed long int)(i - k)]: SUCCESS
-[preRc.pointer_dereference.25] line 63 dereference failure: pointer NULL in x[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.26] line 63 dereference failure: pointer invalid in x[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.27] line 63 dereference failure: deallocated dynamic object in x[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.28] line 63 dereference failure: dead object in x[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.29] line 63 dereference failure: pointer outside object bounds in x[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.30] line 63 dereference failure: invalid integer address in x[(signed long int)i]: SUCCESS
-[preRc.overflow.20] line 64 arithmetic overflow on signed - in i - 1: SUCCESS
-[preRc.array_bounds.19] line 65 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.20] line 65 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
-[preRc.overflow.21] line 66 arithmetic overflow on signed + in k + 1: SUCCESS
-[preRc.array_bounds.21] line 67 array 'hmin' lower bound in hmin[(signed long int)(q - k)]: SUCCESS
-[preRc.array_bounds.22] line 67 array 'hmin' upper bound in hmin[(signed long int)(q - k)]: SUCCESS
-[preRc.overflow.22] line 67 arithmetic overflow on signed - in q - k: SUCCESS
-[preRc.overflow.23] line 67 arithmetic overflow on signed - in hmin[(signed long int)(q - k)] - (q - k): SUCCESS
-[preRc.array_bounds.23] line 68 array 'hmin' lower bound in hmin[(signed long int)q]: SUCCESS
-[preRc.array_bounds.24] line 68 array 'hmin' upper bound in hmin[(signed long int)q]: SUCCESS
-[preRc.overflow.24] line 69 arithmetic overflow on signed + in q + 1: SUCCESS
-[preRc.overflow.25] line 71 arithmetic overflow on signed - in q - k: SUCCESS
-[preRc.overflow.26] line 71 arithmetic overflow on signed + in i + (q - k): SUCCESS
-[preRc.overflow.27] line 74 arithmetic overflow on signed - in m - 1: SUCCESS
-[preRc.overflow.28] line 78 arithmetic overflow on signed to unsigned type conversion in (unsigned long int)m: SUCCESS
-[preRc.overflow.29] line 78 arithmetic overflow on unsigned * in (unsigned long int)m * sizeof(signed int) /*4ul*/ : SUCCESS
+[preRc.pointer_arithmetic.13] line 63 pointer arithmetic: pointer NULL in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.14] line 63 pointer arithmetic: pointer invalid in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.15] line 63 pointer arithmetic: deallocated dynamic object in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.16] line 63 pointer arithmetic: dead object in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.17] line 63 pointer arithmetic: pointer outside object bounds in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.18] line 63 pointer arithmetic: invalid integer address in x + (signed long int)(i - k): SUCCESS
+[preRc.pointer_arithmetic.19] line 63 pointer arithmetic: pointer NULL in x + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.20] line 63 pointer arithmetic: pointer invalid in x + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.21] line 63 pointer arithmetic: deallocated dynamic object in x + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.22] line 63 pointer arithmetic: dead object in x + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.23] line 63 pointer arithmetic: pointer outside object bounds in x + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.24] line 63 pointer arithmetic: invalid integer address in x + (signed long int)i: SUCCESS
+[preRc.pointer_dereference.13] line 63 dereference failure: pointer NULL in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.14] line 63 dereference failure: pointer invalid in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.15] line 63 dereference failure: deallocated dynamic object in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.16] line 63 dereference failure: dead object in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.17] line 63 dereference failure: pointer outside object bounds in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.18] line 63 dereference failure: invalid integer address in x[(signed long int)(i - k)]: SUCCESS
+[preRc.pointer_dereference.19] line 63 dereference failure: pointer NULL in x[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.20] line 63 dereference failure: pointer invalid in x[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.21] line 63 dereference failure: deallocated dynamic object in x[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.22] line 63 dereference failure: dead object in x[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.23] line 63 dereference failure: pointer outside object bounds in x[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.24] line 63 dereference failure: invalid integer address in x[(signed long int)i]: SUCCESS
+[preRc.overflow.19] line 64 arithmetic overflow on signed - in i - 1: SUCCESS
+[preRc.array_bounds.18] line 65 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.19] line 65 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
+[preRc.overflow.20] line 66 arithmetic overflow on signed + in k + 1: SUCCESS
+[preRc.array_bounds.20] line 67 array 'hmin' lower bound in hmin[(signed long int)(q - k)]: SUCCESS
+[preRc.array_bounds.21] line 67 array 'hmin' upper bound in hmin[(signed long int)(q - k)]: SUCCESS
+[preRc.overflow.21] line 67 arithmetic overflow on signed - in q - k: SUCCESS
+[preRc.overflow.22] line 67 arithmetic overflow on signed - in hmin[(signed long int)(q - k)] - (q - k): SUCCESS
+[preRc.array_bounds.22] line 68 array 'hmin' lower bound in hmin[(signed long int)q]: SUCCESS
+[preRc.array_bounds.23] line 68 array 'hmin' upper bound in hmin[(signed long int)q]: SUCCESS
+[preRc.overflow.23] line 69 arithmetic overflow on signed + in q + 1: SUCCESS
+[preRc.overflow.24] line 71 arithmetic overflow on signed - in q - k: SUCCESS
+[preRc.overflow.25] line 71 arithmetic overflow on signed + in i + (q - k): SUCCESS
+[preRc.overflow.26] line 74 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.overflow.27] line 78 arithmetic overflow on signed to unsigned type conversion in (unsigned long int)m: SUCCESS
+[preRc.overflow.28] line 78 arithmetic overflow on unsigned * in (unsigned long int)m * sizeof(signed int) /*4ul*/ : SUCCESS
 [preRc.precondition_instance.1] line 78 memset destination region writeable: SUCCESS
-[preRc.overflow.30] line 79 arithmetic overflow on signed - in k - 1: SUCCESS
-[preRc.array_bounds.25] line 80 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.26] line 80 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.27] line 80 array 'kmin' lower bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
-[preRc.array_bounds.28] line 80 array 'kmin' upper bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
-[preRc.overflow.31] line 82 arithmetic overflow on signed - in m - 1: SUCCESS
-[preRc.overflow.33] line 82 arithmetic overflow on signed - in i - 1: SUCCESS
-[preRc.array_bounds.29] line 83 array 'hmin' lower bound in hmin[(signed long int)(i + 1)]: SUCCESS
-[preRc.array_bounds.30] line 83 array 'hmin' upper bound in hmin[(signed long int)(i + 1)]: SUCCESS
-[preRc.overflow.32] line 83 arithmetic overflow on signed + in i + 1: SUCCESS
-[preRc.array_bounds.31] line 85 array 'rmin' lower bound in rmin[(signed long int)i]: SUCCESS
-[preRc.array_bounds.32] line 85 array 'rmin' upper bound in rmin[(signed long int)i]: SUCCESS
-[preRc.overflow.34] line 89 arithmetic overflow on signed to unsigned type conversion in (unsigned long int)m: SUCCESS
-[preRc.overflow.35] line 89 arithmetic overflow on unsigned * in (unsigned long int)m * sizeof(signed int) /*4ul*/ : SUCCESS
+[preRc.overflow.29] line 79 arithmetic overflow on signed - in k - 1: SUCCESS
+[preRc.array_bounds.24] line 80 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.25] line 80 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.26] line 80 array 'kmin' lower bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
+[preRc.array_bounds.27] line 80 array 'kmin' upper bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
+[preRc.overflow.30] line 82 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.overflow.32] line 82 arithmetic overflow on signed - in i - 1: SUCCESS
+[preRc.array_bounds.28] line 83 array 'hmin' lower bound in hmin[(signed long int)(i + 1)]: SUCCESS
+[preRc.array_bounds.29] line 83 array 'hmin' upper bound in hmin[(signed long int)(i + 1)]: SUCCESS
+[preRc.overflow.31] line 83 arithmetic overflow on signed + in i + 1: SUCCESS
+[preRc.array_bounds.30] line 85 array 'rmin' lower bound in rmin[(signed long int)i]: SUCCESS
+[preRc.array_bounds.31] line 85 array 'rmin' upper bound in rmin[(signed long int)i]: SUCCESS
+[preRc.overflow.33] line 89 arithmetic overflow on signed to unsigned type conversion in (unsigned long int)m: SUCCESS
+[preRc.overflow.34] line 89 arithmetic overflow on unsigned * in (unsigned long int)m * sizeof(signed int) /*4ul*/ : SUCCESS
 [preRc.precondition_instance.2] line 89 memset destination region writeable: SUCCESS
-[preRc.overflow.40] line 91 arithmetic overflow on signed + in k + 1: SUCCESS
-[preRc.array_bounds.33] line 92 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.34] line 92 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.35] line 92 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.36] line 92 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.37] line 92 array 'kmin' lower bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
-[preRc.array_bounds.38] line 92 array 'kmin' upper bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
-[preRc.overflow.36] line 92 arithmetic overflow on signed - in m - 1: SUCCESS
-[preRc.array_bounds.39] line 93 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
-[preRc.array_bounds.40] line 93 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
-[preRc.overflow.37] line 93 arithmetic overflow on signed * in (signed long int)i * (signed long int)4ul: SUCCESS
-[preRc.pointer_arithmetic.31] line 93 pointer arithmetic: pointer NULL in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.32] line 93 pointer arithmetic: pointer invalid in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.33] line 93 pointer arithmetic: deallocated dynamic object in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.34] line 93 pointer arithmetic: dead object in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.35] line 93 pointer arithmetic: pointer outside object bounds in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.36] line 93 pointer arithmetic: invalid integer address in h + (signed long int)i: SUCCESS
-[preRc.pointer_dereference.31] line 93 dereference failure: pointer NULL in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.32] line 93 dereference failure: pointer invalid in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.33] line 93 dereference failure: deallocated dynamic object in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.34] line 93 dereference failure: dead object in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.35] line 93 dereference failure: pointer outside object bounds in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.36] line 93 dereference failure: invalid integer address in h[(signed long int)i]: SUCCESS
-[preRc.assertion.2] line 94 assertion k > 0: SUCCESS
-[preRc.overflow.38] line 95 arithmetic overflow on signed + in i + 1: SUCCESS
-[preRc.overflow.39] line 95 arithmetic overflow on signed * in (signed long int)tmp_post_i * (signed long int)4ul: SUCCESS
-[preRc.pointer_arithmetic.37] line 95 pointer arithmetic: pointer NULL in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_arithmetic.38] line 95 pointer arithmetic: pointer invalid in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_arithmetic.39] line 95 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_arithmetic.40] line 95 pointer arithmetic: dead object in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_arithmetic.41] line 95 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_arithmetic.42] line 95 pointer arithmetic: invalid integer address in rcGs + (signed long int)tmp_post_i: SUCCESS
-[preRc.pointer_dereference.37] line 95 dereference failure: pointer NULL in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.pointer_dereference.38] line 95 dereference failure: pointer invalid in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.pointer_dereference.39] line 95 dereference failure: deallocated dynamic object in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.pointer_dereference.40] line 95 dereference failure: dead object in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.pointer_dereference.41] line 95 dereference failure: pointer outside object bounds in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.pointer_dereference.42] line 95 dereference failure: invalid integer address in rcGs[(signed long int)tmp_post_i]: SUCCESS
-[preRc.overflow.41] line 98 arithmetic overflow on signed - in m - 1: SUCCESS
-[preRc.overflow.42] line 99 arithmetic overflow on signed - in m - 2: SUCCESS
-[preRc.overflow.46] line 99 arithmetic overflow on signed - in j - 1: SUCCESS
-[preRc.array_bounds.41] line 100 array 'kmin' lower bound in kmin[(signed long int)j]: SUCCESS
-[preRc.array_bounds.42] line 100 array 'kmin' upper bound in kmin[(signed long int)j]: SUCCESS
-[preRc.overflow.43] line 101 arithmetic overflow on signed * in (signed long int)i * (signed long int)4ul: SUCCESS
-[preRc.pointer_arithmetic.43] line 101 pointer arithmetic: pointer NULL in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.44] line 101 pointer arithmetic: pointer invalid in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.45] line 101 pointer arithmetic: deallocated dynamic object in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.46] line 101 pointer arithmetic: dead object in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.47] line 101 pointer arithmetic: pointer outside object bounds in h + (signed long int)i: SUCCESS
-[preRc.pointer_arithmetic.48] line 101 pointer arithmetic: invalid integer address in h + (signed long int)i: SUCCESS
-[preRc.pointer_dereference.43] line 101 dereference failure: pointer NULL in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.44] line 101 dereference failure: pointer invalid in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.45] line 101 dereference failure: deallocated dynamic object in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.46] line 101 dereference failure: dead object in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.47] line 101 dereference failure: pointer outside object bounds in h[(signed long int)i]: SUCCESS
-[preRc.pointer_dereference.48] line 101 dereference failure: invalid integer address in h[(signed long int)i]: SUCCESS
-[preRc.array_bounds.43] line 102 array 'rmin' lower bound in rmin[(signed long int)j]: SUCCESS
-[preRc.array_bounds.44] line 102 array 'rmin' upper bound in rmin[(signed long int)j]: SUCCESS
-[preRc.assertion.3] line 102 assertion rmin[j] > 0: SUCCESS
-[preRc.overflow.44] line 103 arithmetic overflow on signed - in i - 1: SUCCESS
-[preRc.overflow.45] line 103 arithmetic overflow on signed * in (signed long int)tmp_post_i$0 * (signed long int)4ul: SUCCESS
-[preRc.pointer_arithmetic.49] line 103 pointer arithmetic: pointer NULL in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_arithmetic.50] line 103 pointer arithmetic: pointer invalid in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_arithmetic.51] line 103 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_arithmetic.52] line 103 pointer arithmetic: dead object in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_arithmetic.53] line 103 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_arithmetic.54] line 103 pointer arithmetic: invalid integer address in rcGs + (signed long int)tmp_post_i$0: SUCCESS
-[preRc.pointer_dereference.49] line 103 dereference failure: pointer NULL in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.pointer_dereference.50] line 103 dereference failure: pointer invalid in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.pointer_dereference.51] line 103 dereference failure: deallocated dynamic object in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.pointer_dereference.52] line 103 dereference failure: dead object in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.pointer_dereference.53] line 103 dereference failure: pointer outside object bounds in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.pointer_dereference.54] line 103 dereference failure: invalid integer address in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
-[preRc.assertion.4] line 106 assertion rmin[0] > 0: SUCCESS
-[preRc.overflow.47] line 107 arithmetic overflow on signed * in (signed long int)m * (signed long int)4ul: SUCCESS
-[preRc.pointer_arithmetic.55] line 107 pointer arithmetic: pointer NULL in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_arithmetic.56] line 107 pointer arithmetic: pointer invalid in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_arithmetic.57] line 107 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_arithmetic.58] line 107 pointer arithmetic: dead object in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_arithmetic.59] line 107 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_arithmetic.60] line 107 pointer arithmetic: invalid integer address in rcGs + (signed long int)m: SUCCESS
-[preRc.pointer_dereference.55] line 107 dereference failure: pointer NULL in rcGs[(signed long int)m]: SUCCESS
-[preRc.pointer_dereference.56] line 107 dereference failure: pointer invalid in rcGs[(signed long int)m]: SUCCESS
-[preRc.pointer_dereference.57] line 107 dereference failure: deallocated dynamic object in rcGs[(signed long int)m]: SUCCESS
-[preRc.pointer_dereference.58] line 107 dereference failure: dead object in rcGs[(signed long int)m]: SUCCESS
-[preRc.pointer_dereference.59] line 107 dereference failure: pointer outside object bounds in rcGs[(signed long int)m]: SUCCESS
-[preRc.pointer_dereference.60] line 107 dereference failure: invalid integer address in rcGs[(signed long int)m]: SUCCESS
+[preRc.overflow.39] line 91 arithmetic overflow on signed + in k + 1: SUCCESS
+[preRc.array_bounds.32] line 92 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.33] line 92 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.34] line 92 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.35] line 92 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.36] line 92 array 'kmin' lower bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
+[preRc.array_bounds.37] line 92 array 'kmin' upper bound in kmin[(signed long int)hmin[(signed long int)k]]: SUCCESS
+[preRc.overflow.35] line 92 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.array_bounds.38] line 93 array 'hmin' lower bound in hmin[(signed long int)k]: SUCCESS
+[preRc.array_bounds.39] line 93 array 'hmin' upper bound in hmin[(signed long int)k]: SUCCESS
+[preRc.overflow.36] line 93 arithmetic overflow on signed * in (signed long int)i * (signed long int)4ul: SUCCESS
+[preRc.pointer_arithmetic.25] line 93 pointer arithmetic: pointer NULL in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.26] line 93 pointer arithmetic: pointer invalid in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.27] line 93 pointer arithmetic: deallocated dynamic object in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.28] line 93 pointer arithmetic: dead object in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.29] line 93 pointer arithmetic: pointer outside object bounds in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.30] line 93 pointer arithmetic: invalid integer address in h + (signed long int)i: SUCCESS
+[preRc.pointer_dereference.25] line 93 dereference failure: pointer NULL in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.26] line 93 dereference failure: pointer invalid in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.27] line 93 dereference failure: deallocated dynamic object in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.28] line 93 dereference failure: dead object in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.29] line 93 dereference failure: pointer outside object bounds in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.30] line 93 dereference failure: invalid integer address in h[(signed long int)i]: SUCCESS
+[preRc.overflow.37] line 95 arithmetic overflow on signed + in i + 1: SUCCESS
+[preRc.overflow.38] line 95 arithmetic overflow on signed * in (signed long int)tmp_post_i * (signed long int)4ul: SUCCESS
+[preRc.pointer_arithmetic.31] line 95 pointer arithmetic: pointer NULL in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_arithmetic.32] line 95 pointer arithmetic: pointer invalid in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_arithmetic.33] line 95 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_arithmetic.34] line 95 pointer arithmetic: dead object in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_arithmetic.35] line 95 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_arithmetic.36] line 95 pointer arithmetic: invalid integer address in rcGs + (signed long int)tmp_post_i: SUCCESS
+[preRc.pointer_dereference.31] line 95 dereference failure: pointer NULL in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.pointer_dereference.32] line 95 dereference failure: pointer invalid in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.pointer_dereference.33] line 95 dereference failure: deallocated dynamic object in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.pointer_dereference.34] line 95 dereference failure: dead object in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.pointer_dereference.35] line 95 dereference failure: pointer outside object bounds in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.pointer_dereference.36] line 95 dereference failure: invalid integer address in rcGs[(signed long int)tmp_post_i]: SUCCESS
+[preRc.overflow.40] line 98 arithmetic overflow on signed - in m - 1: SUCCESS
+[preRc.overflow.41] line 99 arithmetic overflow on signed - in m - 2: SUCCESS
+[preRc.overflow.45] line 99 arithmetic overflow on signed - in j - 1: SUCCESS
+[preRc.array_bounds.40] line 100 array 'kmin' lower bound in kmin[(signed long int)j]: SUCCESS
+[preRc.array_bounds.41] line 100 array 'kmin' upper bound in kmin[(signed long int)j]: SUCCESS
+[preRc.overflow.42] line 101 arithmetic overflow on signed * in (signed long int)i * (signed long int)4ul: SUCCESS
+[preRc.pointer_arithmetic.37] line 101 pointer arithmetic: pointer NULL in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.38] line 101 pointer arithmetic: pointer invalid in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.39] line 101 pointer arithmetic: deallocated dynamic object in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.40] line 101 pointer arithmetic: dead object in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.41] line 101 pointer arithmetic: pointer outside object bounds in h + (signed long int)i: SUCCESS
+[preRc.pointer_arithmetic.42] line 101 pointer arithmetic: invalid integer address in h + (signed long int)i: SUCCESS
+[preRc.pointer_dereference.37] line 101 dereference failure: pointer NULL in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.38] line 101 dereference failure: pointer invalid in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.39] line 101 dereference failure: deallocated dynamic object in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.40] line 101 dereference failure: dead object in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.41] line 101 dereference failure: pointer outside object bounds in h[(signed long int)i]: SUCCESS
+[preRc.pointer_dereference.42] line 101 dereference failure: invalid integer address in h[(signed long int)i]: SUCCESS
+[preRc.array_bounds.42] line 103 array 'rmin' lower bound in rmin[(signed long int)j]: SUCCESS
+[preRc.array_bounds.43] line 103 array 'rmin' upper bound in rmin[(signed long int)j]: SUCCESS
+[preRc.overflow.43] line 103 arithmetic overflow on signed - in i - 1: SUCCESS
+[preRc.overflow.44] line 103 arithmetic overflow on signed * in (signed long int)tmp_post_i$0 * (signed long int)4ul: SUCCESS
+[preRc.pointer_arithmetic.43] line 103 pointer arithmetic: pointer NULL in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_arithmetic.44] line 103 pointer arithmetic: pointer invalid in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_arithmetic.45] line 103 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_arithmetic.46] line 103 pointer arithmetic: dead object in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_arithmetic.47] line 103 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_arithmetic.48] line 103 pointer arithmetic: invalid integer address in rcGs + (signed long int)tmp_post_i$0: SUCCESS
+[preRc.pointer_dereference.43] line 103 dereference failure: pointer NULL in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.pointer_dereference.44] line 103 dereference failure: pointer invalid in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.pointer_dereference.45] line 103 dereference failure: deallocated dynamic object in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.pointer_dereference.46] line 103 dereference failure: dead object in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.pointer_dereference.47] line 103 dereference failure: pointer outside object bounds in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.pointer_dereference.48] line 103 dereference failure: invalid integer address in rcGs[(signed long int)tmp_post_i$0]: SUCCESS
+[preRc.overflow.46] line 107 arithmetic overflow on signed * in (signed long int)m * (signed long int)4ul: SUCCESS
+[preRc.pointer_arithmetic.49] line 107 pointer arithmetic: pointer NULL in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_arithmetic.50] line 107 pointer arithmetic: pointer invalid in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_arithmetic.51] line 107 pointer arithmetic: deallocated dynamic object in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_arithmetic.52] line 107 pointer arithmetic: dead object in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_arithmetic.53] line 107 pointer arithmetic: pointer outside object bounds in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_arithmetic.54] line 107 pointer arithmetic: invalid integer address in rcGs + (signed long int)m: SUCCESS
+[preRc.pointer_dereference.49] line 107 dereference failure: pointer NULL in rcGs[(signed long int)m]: SUCCESS
+[preRc.pointer_dereference.50] line 107 dereference failure: pointer invalid in rcGs[(signed long int)m]: SUCCESS
+[preRc.pointer_dereference.51] line 107 dereference failure: deallocated dynamic object in rcGs[(signed long int)m]: SUCCESS
+[preRc.pointer_dereference.52] line 107 dereference failure: dead object in rcGs[(signed long int)m]: SUCCESS
+[preRc.pointer_dereference.53] line 107 dereference failure: pointer outside object bounds in rcGs[(signed long int)m]: SUCCESS
+[preRc.pointer_dereference.54] line 107 dereference failure: invalid integer address in rcGs[(signed long int)m]: SUCCESS
 
 source/algos/rcolussi.c function search
 [search.overflow.1] line 123 arithmetic overflow on signed - in n - m: SUCCESS
-[search.assertion.1] line 124 assertion j + m - 1 < n: SUCCESS
-[search.overflow.2] line 124 arithmetic overflow on signed + in j + m: SUCCESS
-[search.overflow.3] line 124 arithmetic overflow on signed - in (j + m) - 1: SUCCESS
-[search.overflow.4] line 125 arithmetic overflow on signed - in n - m: SUCCESS
-[search.overflow.5] line 125 arithmetic overflow on signed - in m - 1: SUCCESS
-[search.overflow.6] line 125 arithmetic overflow on signed + in j + m: SUCCESS
-[search.overflow.7] line 125 arithmetic overflow on signed - in (j + m) - 1: SUCCESS
+[search.overflow.2] line 125 arithmetic overflow on signed - in n - m: SUCCESS
+[search.overflow.3] line 125 arithmetic overflow on signed - in m - 1: SUCCESS
+[search.overflow.4] line 125 arithmetic overflow on signed + in j + m: SUCCESS
+[search.overflow.5] line 125 arithmetic overflow on signed - in (j + m) - 1: SUCCESS
 [search.pointer_arithmetic.1] line 125 pointer arithmetic: pointer NULL in x + (signed long int)(m - 1): SUCCESS
 [search.pointer_arithmetic.2] line 125 pointer arithmetic: pointer invalid in x + (signed long int)(m - 1): SUCCESS
 [search.pointer_arithmetic.3] line 125 pointer arithmetic: deallocated dynamic object in x + (signed long int)(m - 1): SUCCESS
@@ -377,8 +367,8 @@ source/algos/rcolussi.c function search
 [search.array_bounds.1] line 126 array 'rcBc' upper bound in rcBc[(signed long int)y[(signed long int)((j + m) - 1)]]: SUCCESS
 [search.array_bounds.2] line 126 array 'rcBc'[] lower bound in rcBc[(signed long int)y[(signed long int)((j + m) - 1)]][(signed long int)s]: SUCCESS
 [search.array_bounds.3] line 126 array 'rcBc'[] upper bound in rcBc[(signed long int)y[(signed long int)((j + m) - 1)]][(signed long int)s]: SUCCESS
-[search.overflow.8] line 126 arithmetic overflow on signed + in j + m: SUCCESS
-[search.overflow.9] line 126 arithmetic overflow on signed - in (j + m) - 1: SUCCESS
+[search.overflow.6] line 126 arithmetic overflow on signed + in j + m: SUCCESS
+[search.overflow.7] line 126 arithmetic overflow on signed - in (j + m) - 1: SUCCESS
 [search.pointer_arithmetic.13] line 126 pointer arithmetic: pointer NULL in y + (signed long int)((j + m) - 1): SUCCESS
 [search.pointer_arithmetic.14] line 126 pointer arithmetic: pointer invalid in y + (signed long int)((j + m) - 1): SUCCESS
 [search.pointer_arithmetic.15] line 126 pointer arithmetic: deallocated dynamic object in y + (signed long int)((j + m) - 1): SUCCESS
@@ -391,12 +381,11 @@ source/algos/rcolussi.c function search
 [search.pointer_dereference.16] line 126 dereference failure: dead object in y[(signed long int)((j + m) - 1)]: SUCCESS
 [search.pointer_dereference.17] line 126 dereference failure: pointer outside object bounds in y[(signed long int)((j + m) - 1)]: SUCCESS
 [search.pointer_dereference.18] line 126 dereference failure: invalid integer address in y[(signed long int)((j + m) - 1)]: SUCCESS
-[search.assertion.2] line 127 assertion s > 0: SUCCESS
-[search.overflow.10] line 128 arithmetic overflow on signed + in j + s: SUCCESS
+[search.overflow.8] line 128 arithmetic overflow on signed + in j + s: SUCCESS
 [search.array_bounds.4] line 130 array 'h' lower bound in h[(signed long int)i]: SUCCESS
 [search.array_bounds.5] line 130 array 'h' upper bound in h[(signed long int)i]: SUCCESS
-[search.overflow.11] line 130 arithmetic overflow on signed + in j + h[(signed long int)i]: SUCCESS
-[search.overflow.13] line 130 arithmetic overflow on signed + in i + 1: SUCCESS
+[search.overflow.9] line 130 arithmetic overflow on signed + in j + h[(signed long int)i]: SUCCESS
+[search.overflow.10] line 130 arithmetic overflow on signed + in i + 1: SUCCESS
 [search.pointer_arithmetic.19] line 130 pointer arithmetic: pointer NULL in x + (signed long int)h[(signed long int)i]: SUCCESS
 [search.pointer_arithmetic.20] line 130 pointer arithmetic: pointer invalid in x + (signed long int)h[(signed long int)i]: SUCCESS
 [search.pointer_arithmetic.21] line 130 pointer arithmetic: deallocated dynamic object in x + (signed long int)h[(signed long int)i]: SUCCESS
@@ -421,18 +410,11 @@ source/algos/rcolussi.c function search
 [search.pointer_dereference.28] line 130 dereference failure: dead object in y[(signed long int)(j + h[(signed long int)i])]: SUCCESS
 [search.pointer_dereference.29] line 130 dereference failure: pointer outside object bounds in y[(signed long int)(j + h[(signed long int)i])]: SUCCESS
 [search.pointer_dereference.30] line 130 dereference failure: invalid integer address in y[(signed long int)(j + h[(signed long int)i])]: SUCCESS
-[search.array_bounds.6] line 131 array 'h' lower bound in h[(signed long int)i]: SUCCESS
-[search.array_bounds.7] line 131 array 'h' upper bound in h[(signed long int)i]: SUCCESS
-[search.assertion.3] line 131 assertion h[i] >= 0: SUCCESS
-[search.assertion.4] line 132 assertion h[i] < m: SUCCESS
-[search.assertion.5] line 133 assertion j + h[i] < n: SUCCESS
-[search.overflow.12] line 133 arithmetic overflow on signed + in j + h[(signed long int)i]: SUCCESS
-[search.overflow.14] line 135 arithmetic overflow on signed - in n - m: SUCCESS
-[search.overflow.15] line 136 arithmetic overflow on signed + in count + 1: SUCCESS
-[search.array_bounds.8] line 137 array 'rcGs' lower bound in rcGs[(signed long int)i]: SUCCESS
-[search.array_bounds.9] line 137 array 'rcGs' upper bound in rcGs[(signed long int)i]: SUCCESS
-[search.assertion.6] line 138 assertion s > 0: SUCCESS
-[search.overflow.16] line 139 arithmetic overflow on signed + in j + s: SUCCESS
+[search.overflow.11] line 135 arithmetic overflow on signed - in n - m: SUCCESS
+[search.overflow.12] line 136 arithmetic overflow on signed + in count + 1: SUCCESS
+[search.array_bounds.6] line 137 array 'rcGs' lower bound in rcGs[(signed long int)i]: SUCCESS
+[search.array_bounds.7] line 137 array 'rcGs' upper bound in rcGs[(signed long int)i]: SUCCESS
+[search.overflow.13] line 139 arithmetic overflow on signed + in j + s: SUCCESS
 
-** 0 of 410 failed (1 iterations)
+** 0 of 392 failed (1 iterations)
 VERIFICATION SUCCESSFUL

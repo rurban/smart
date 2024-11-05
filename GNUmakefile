@@ -112,6 +112,7 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
 	  goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
+          $(MAKE) verify/$$b.vfy-trace; \
 	fi
 CMBC_TRACE_ARGS = --trace --reachability-slice-fb
 verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
@@ -186,7 +187,7 @@ verify/verify.log: $(ALGOSRC) $(ALGOSINC) algocfg GNUmakefile
 	for b in `./algocfg UNSATISFIABLE` `./algocfg VFY_TIMEOUT`; do \
 	  echo goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c; \
 	  goto-analyzer -DCBMC --verify --recursive-interprocedural source/algos/$$b.c; \
-	done | tee -a verify/verify.log
+	done | tee -a verify/verify.log;
 check-verify: algocfg GNUmakefile
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(filter-out $(TIMEOUT_VERIFY),$(TESTS)))); \
 	do \

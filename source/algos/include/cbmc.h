@@ -66,7 +66,7 @@ int main(void) {
   __CPROVER_assume(m > 0 && m < MAX_M);
 #endif
   int n = MAX_N; // nondet_int();
-  unsigned char P[MAX_M];
+  unsigned char P[32];
   unsigned char T[256];
   for (int i = 0; i < MAX_M; i++)
     __CPROVER_loop_invariant(i < MAX_M)
@@ -106,6 +106,15 @@ int main(void) {
 #endif  
 #if MIN_M >= 2 || MIN_M == 0
   M_N_LOOP(2, MAX_N-1);
+  M_N_LOOP(2, 2);
+  M_N_LOOP(2, 3);
+  M_N_LOOP(2, 4);
+  M_N_LOOP(2, 5);
+  M_N_LOOP(2, 6);
+  M_N_LOOP(2, 7);
+  M_N_LOOP(2, 8);
+  M_N_LOOP(2, 9);
+  M_N_LOOP(2, 10);
 #endif
 #if MIN_M >= 3 || MIN_M == 0
   M_N_LOOP(3, MAX_N-1);
@@ -134,20 +143,21 @@ int main(void) {
   M_N_LOOP(7, MAX_N-2);
 #endif
 
-#if MAX_M == 0 || MAX_M > 47
   strcpy(T, "8TOLWd903QRXd4QMPL665XT8dPY0b214VPQMNZNRK0::4bW");
 #if MIN_M >= 2 || MIN_M == 0
   M_N_LOOP_LARGE(2, 47);
+  M_N_LOOP_LARGE(2, 32);
 #endif
 #if MIN_M >= 4 || MIN_M == 0
   M_N_LOOP_LARGE(4, 47);
 #endif
 #if MIN_M >= 8 || MIN_M == 0
   M_N_LOOP_LARGE(8, 47);
+  M_N_LOOP_LARGE(8, 32);
 #endif
-#if MIN_M >= 20 || MIN_M == 0
+#if MAX_M >= 20
   M_N_LOOP_LARGE(20, 47);
-#endif
+  M_N_LOOP_LARGE(20, 32);
 #endif
 }
 

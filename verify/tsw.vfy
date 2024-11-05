@@ -1,4 +1,4 @@
-timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/tsw.c
+timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/tsw.c
 CBMC version 6.3.1 (cbmc-6.3.1-32-g7801c5c88c) 64-bit x86_64 linux
 Type-checking tsw
 Generating GOTO Program
@@ -69,54 +69,52 @@ function __CPROVER__start
 [strcpy.pointer_dereference.12] line 30 dereference failure: invalid integer address in dst[(signed long int)i]: SUCCESS
 [strcpy.overflow.2] line 31 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
 
-source/algos/include/main.h function bf_search
-[bf_search.assertion.1] line 111 assertion m < MAX_M: SUCCESS
-[bf_search.assertion.2] line 112 assertion n < MAX_N: SUCCESS
-[bf_search.overflow.1] line 114 arithmetic overflow on signed - in n - m: SUCCESS
-[bf_search.overflow.4] line 114 arithmetic overflow on signed + in j + 1: SUCCESS
-[bf_search.overflow.2] line 118 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
-[bf_search.pointer_arithmetic.1] line 118 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.2] line 118 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.3] line 118 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.4] line 118 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.5] line 118 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.6] line 118 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
-[bf_search.overflow.3] line 119 arithmetic overflow on signed + in count + 1: SUCCESS
+source/algos/include/cbmc.h function bf_search
+[bf_search.assertion.1] line 18 assertion m < MAX_M: SUCCESS
+[bf_search.assertion.2] line 19 assertion n < MAX_N: SUCCESS
+[bf_search.overflow.1] line 21 arithmetic overflow on signed - in n - m: SUCCESS
+[bf_search.overflow.4] line 21 arithmetic overflow on signed + in j + 1: SUCCESS
+[bf_search.overflow.2] line 25 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
+[bf_search.pointer_arithmetic.1] line 25 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.2] line 25 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.3] line 25 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.4] line 25 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.5] line 25 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.6] line 25 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[bf_search.overflow.3] line 26 arithmetic overflow on signed + in count + 1: SUCCESS
 
-source/algos/include/main.h function main
-[main.overflow.1] line 146 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.1] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.2] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.3] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.4] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.5] line 148 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.6] line 148 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.overflow.2] line 149 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.7] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.8] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.9] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.10] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.11] line 151 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.12] line 151 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.assertion.1] line 167 ref == occ: SUCCESS
-[main.assertion.2] line 168 ref == occ: SUCCESS
-[main.assertion.3] line 169 ref == occ: SUCCESS
-[main.assertion.4] line 170 ref == occ: SUCCESS
-[main.assertion.5] line 171 ref == occ: SUCCESS
-[main.assertion.6] line 172 ref == occ: SUCCESS
-[main.assertion.7] line 173 ref == occ: SUCCESS
-[main.assertion.8] line 174 ref == occ: SUCCESS
-[main.array_bounds.13] line 175 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.9] line 175 ref == occ: SUCCESS
-[main.array_bounds.14] line 176 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.10] line 176 ref == occ: SUCCESS
-[main.assertion.11] line 177 ref == occ: SUCCESS
-[main.assertion.12] line 178 ref == occ: SUCCESS
-[main.precondition_instance.1] line 180 strcpy src/dst overlap: SUCCESS
-[main.assertion.13] line 181 ref == occ: SUCCESS
-[main.assertion.14] line 182 ref == occ: SUCCESS
-[main.array_bounds.15] line 183 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.15] line 183 ref == occ: SUCCESS
+source/algos/include/cbmc.h function main
+[main.overflow.1] line 71 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.1] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.2] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.3] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.4] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.5] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.6] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.overflow.2] line 74 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.7] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.8] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.9] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.10] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.11] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.12] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.assertion.1] line 105 ref == occ: SUCCESS
+[main.assertion.2] line 108 ref == occ: SUCCESS
+[main.assertion.3] line 109 ref == occ: SUCCESS
+[main.assertion.4] line 110 ref == occ: SUCCESS
+[main.assertion.5] line 111 ref == occ: SUCCESS
+[main.assertion.6] line 112 ref == occ: SUCCESS
+[main.assertion.7] line 113 ref == occ: SUCCESS
+[main.assertion.8] line 114 ref == occ: SUCCESS
+[main.assertion.9] line 115 ref == occ: SUCCESS
+[main.assertion.10] line 116 ref == occ: SUCCESS
+[main.assertion.11] line 117 ref == occ: SUCCESS
+[main.assertion.12] line 120 ref == occ: SUCCESS
+[main.assertion.13] line 138 ref == occ: SUCCESS
+[main.assertion.14] line 139 ref == occ: SUCCESS
+[main.precondition_instance.1] line 146 strcpy src/dst overlap: SUCCESS
+[main.assertion.15] line 148 ref == occ: SUCCESS
+[main.assertion.16] line 149 ref == occ: SUCCESS
 
 source/algos/include/search_small.h function preSA
 [preSA.overflow.2] line 6 arithmetic overflow on signed + in i + 1: SUCCESS
@@ -299,11 +297,9 @@ source/algos/tsw.c function preBrBc
 
 source/algos/tsw.c function search
 [search.overflow.1] line 51 arithmetic overflow on signed - in n - 3: SUCCESS
-[search.assertion.1] line 53 assertion m < n - 2: SUCCESS
-[search.overflow.2] line 53 arithmetic overflow on signed - in n - 2: SUCCESS
-[search.overflow.3] line 57 arithmetic overflow on signed - in m - 1: SUCCESS
-[search.overflow.4] line 57 arithmetic overflow on signed - in i - 1: SUCCESS
-[search.overflow.5] line 57 arithmetic overflow on signed + in j + 1: SUCCESS
+[search.overflow.2] line 57 arithmetic overflow on signed - in m - 1: SUCCESS
+[search.overflow.3] line 57 arithmetic overflow on signed - in i - 1: SUCCESS
+[search.overflow.4] line 57 arithmetic overflow on signed + in j + 1: SUCCESS
 [search.array_bounds.1] line 58 array 'x1' lower bound in x1[(signed long int)j]: SUCCESS
 [search.array_bounds.2] line 58 array 'x1' upper bound in x1[(signed long int)j]: SUCCESS
 [search.pointer_arithmetic.1] line 58 pointer arithmetic: pointer NULL in x + (signed long int)i: SUCCESS
@@ -318,9 +314,9 @@ source/algos/tsw.c function search
 [search.pointer_dereference.4] line 58 dereference failure: dead object in x[(signed long int)i]: SUCCESS
 [search.pointer_dereference.5] line 58 dereference failure: pointer outside object bounds in x[(signed long int)i]: SUCCESS
 [search.pointer_dereference.6] line 58 dereference failure: invalid integer address in x[(signed long int)i]: SUCCESS
-[search.overflow.6] line 67 arithmetic overflow on signed - in n - m: SUCCESS
-[search.overflow.7] line 69 arithmetic overflow on signed + in j + i: SUCCESS
-[search.overflow.8] line 69 arithmetic overflow on signed + in i + 1: SUCCESS
+[search.overflow.5] line 67 arithmetic overflow on signed - in n - m: SUCCESS
+[search.overflow.6] line 69 arithmetic overflow on signed + in j + i: SUCCESS
+[search.overflow.7] line 69 arithmetic overflow on signed + in i + 1: SUCCESS
 [search.pointer_arithmetic.7] line 69 pointer arithmetic: pointer NULL in x + (signed long int)i: SUCCESS
 [search.pointer_arithmetic.8] line 69 pointer arithmetic: pointer invalid in x + (signed long int)i: SUCCESS
 [search.pointer_arithmetic.9] line 69 pointer arithmetic: deallocated dynamic object in x + (signed long int)i: SUCCESS
@@ -345,9 +341,9 @@ source/algos/tsw.c function search
 [search.pointer_dereference.16] line 69 dereference failure: dead object in y[(signed long int)(j + i)]: SUCCESS
 [search.pointer_dereference.17] line 69 dereference failure: pointer outside object bounds in y[(signed long int)(j + i)]: SUCCESS
 [search.pointer_dereference.18] line 69 dereference failure: invalid integer address in y[(signed long int)(j + i)]: SUCCESS
-[search.overflow.9] line 72 arithmetic overflow on signed + in count + 1: SUCCESS
-[search.overflow.10] line 74 arithmetic overflow on signed + in a + b: SUCCESS
-[search.overflow.11] line 74 arithmetic overflow on signed + in b + 1: SUCCESS
+[search.overflow.8] line 72 arithmetic overflow on signed + in count + 1: SUCCESS
+[search.overflow.9] line 74 arithmetic overflow on signed + in a + b: SUCCESS
+[search.overflow.10] line 74 arithmetic overflow on signed + in b + 1: SUCCESS
 [search.pointer_arithmetic.19] line 74 pointer arithmetic: pointer NULL in x + (signed long int)b: SUCCESS
 [search.pointer_arithmetic.20] line 74 pointer arithmetic: pointer invalid in x + (signed long int)b: SUCCESS
 [search.pointer_arithmetic.21] line 74 pointer arithmetic: deallocated dynamic object in x + (signed long int)b: SUCCESS
@@ -372,17 +368,12 @@ source/algos/tsw.c function search
 [search.pointer_dereference.28] line 74 dereference failure: dead object in y[(signed long int)(a + b)]: SUCCESS
 [search.pointer_dereference.29] line 74 dereference failure: pointer outside object bounds in y[(signed long int)(a + b)]: SUCCESS
 [search.pointer_dereference.30] line 74 dereference failure: invalid integer address in y[(signed long int)(a + b)]: SUCCESS
-[search.overflow.12] line 77 arithmetic overflow on signed + in count + 1: SUCCESS
-[search.assertion.2] line 79 assertion j + m + 1 < n: SUCCESS
-[search.overflow.13] line 79 arithmetic overflow on signed + in j + m: SUCCESS
-[search.overflow.14] line 79 arithmetic overflow on signed + in j + m + 1: SUCCESS
-[search.assertion.3] line 80 assertion a - 1 < n: SUCCESS
-[search.overflow.15] line 80 arithmetic overflow on signed - in a - 1: SUCCESS
-[search.assertion.4] line 82 assertion a - 2 >= 0: SUCCESS
-[search.overflow.16] line 82 arithmetic overflow on signed - in a - 2: SUCCESS
+[search.overflow.11] line 77 arithmetic overflow on signed + in count + 1: SUCCESS
 [search.array_bounds.3] line 83 array 'brBc_left' upper bound in brBc_left[(signed long int)y[(signed long int)(j + m)]]: SUCCESS
 [search.array_bounds.4] line 83 array 'brBc_left'[] upper bound in brBc_left[(signed long int)y[(signed long int)(j + m)]][(signed long int)y[(signed long int)(j + m + 1)]]: SUCCESS
-[search.overflow.17] line 83 arithmetic overflow on signed + in j + brBc_left[(signed long int)y[(signed long int)(j + m)]][(signed long int)y[(signed long int)(j + m + 1)]]: SUCCESS
+[search.overflow.12] line 83 arithmetic overflow on signed + in j + m: SUCCESS
+[search.overflow.13] line 83 arithmetic overflow on signed + in j + m + 1: SUCCESS
+[search.overflow.14] line 83 arithmetic overflow on signed + in j + brBc_left[(signed long int)y[(signed long int)(j + m)]][(signed long int)y[(signed long int)(j + m + 1)]]: SUCCESS
 [search.pointer_arithmetic.31] line 83 pointer arithmetic: pointer NULL in y + (signed long int)(j + m): SUCCESS
 [search.pointer_arithmetic.32] line 83 pointer arithmetic: pointer invalid in y + (signed long int)(j + m): SUCCESS
 [search.pointer_arithmetic.33] line 83 pointer arithmetic: deallocated dynamic object in y + (signed long int)(j + m): SUCCESS
@@ -409,7 +400,9 @@ source/algos/tsw.c function search
 [search.pointer_dereference.42] line 83 dereference failure: invalid integer address in y[(signed long int)(j + m + 1)]: SUCCESS
 [search.array_bounds.5] line 84 array 'brBc_right' upper bound in brBc_right[(signed long int)y[(signed long int)(a - 1)]]: SUCCESS
 [search.array_bounds.6] line 84 array 'brBc_right'[] upper bound in brBc_right[(signed long int)y[(signed long int)(a - 1)]][(signed long int)y[(signed long int)(a - 2)]]: SUCCESS
-[search.overflow.18] line 84 arithmetic overflow on signed - in a - brBc_right[(signed long int)y[(signed long int)(a - 1)]][(signed long int)y[(signed long int)(a - 2)]]: SUCCESS
+[search.overflow.15] line 84 arithmetic overflow on signed - in a - 1: SUCCESS
+[search.overflow.16] line 84 arithmetic overflow on signed - in a - 2: SUCCESS
+[search.overflow.17] line 84 arithmetic overflow on signed - in a - brBc_right[(signed long int)y[(signed long int)(a - 1)]][(signed long int)y[(signed long int)(a - 2)]]: SUCCESS
 [search.pointer_arithmetic.43] line 84 pointer arithmetic: pointer NULL in y + (signed long int)(a - 1): SUCCESS
 [search.pointer_arithmetic.44] line 84 pointer arithmetic: pointer invalid in y + (signed long int)(a - 1): SUCCESS
 [search.pointer_arithmetic.45] line 84 pointer arithmetic: deallocated dynamic object in y + (signed long int)(a - 1): SUCCESS
@@ -435,5 +428,5 @@ source/algos/tsw.c function search
 [search.pointer_dereference.53] line 84 dereference failure: pointer outside object bounds in y[(signed long int)(a - 2)]: SUCCESS
 [search.pointer_dereference.54] line 84 dereference failure: invalid integer address in y[(signed long int)(a - 2)]: SUCCESS
 
-** 0 of 409 failed (1 iterations)
+** 0 of 402 failed (1 iterations)
 VERIFICATION SUCCESSFUL

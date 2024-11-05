@@ -41,6 +41,34 @@ function __CPROVER__start
 [memcmp.pointer_dereference.11] line 27 dereference failure: pointer outside object bounds in *tmp_post_sc2: SUCCESS
 [memcmp.pointer_dereference.12] line 27 dereference failure: invalid integer address in *tmp_post_sc2: SUCCESS
 
+<builtin-library-strcpy> function strcpy
+[strcpy.overflow.1] line 29 arithmetic overflow on unsigned to signed type conversion in (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.1] line 29 pointer arithmetic: pointer NULL in src + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.2] line 29 pointer arithmetic: pointer invalid in src + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.3] line 29 pointer arithmetic: deallocated dynamic object in src + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.4] line 29 pointer arithmetic: dead object in src + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.5] line 29 pointer arithmetic: pointer outside object bounds in src + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.6] line 29 pointer arithmetic: invalid integer address in src + (signed long int)i: SUCCESS
+[strcpy.pointer_dereference.1] line 29 dereference failure: pointer NULL in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.2] line 29 dereference failure: pointer invalid in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.3] line 29 dereference failure: deallocated dynamic object in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.4] line 29 dereference failure: dead object in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.5] line 29 dereference failure: pointer outside object bounds in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.6] line 29 dereference failure: invalid integer address in src[(signed long int)i]: SUCCESS
+[strcpy.pointer_arithmetic.7] line 30 pointer arithmetic: pointer NULL in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.8] line 30 pointer arithmetic: pointer invalid in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.9] line 30 pointer arithmetic: deallocated dynamic object in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.10] line 30 pointer arithmetic: dead object in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.11] line 30 pointer arithmetic: pointer outside object bounds in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_arithmetic.12] line 30 pointer arithmetic: invalid integer address in dst + (signed long int)i: SUCCESS
+[strcpy.pointer_dereference.7] line 30 dereference failure: pointer NULL in dst[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.8] line 30 dereference failure: pointer invalid in dst[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.9] line 30 dereference failure: deallocated dynamic object in dst[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.10] line 30 dereference failure: dead object in dst[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.11] line 30 dereference failure: pointer outside object bounds in dst[(signed long int)i]: SUCCESS
+[strcpy.pointer_dereference.12] line 30 dereference failure: invalid integer address in dst[(signed long int)i]: SUCCESS
+[strcpy.overflow.2] line 31 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+
 source/algos/fsbndm-w4.c function search
 [search.overflow.1] line 68 arithmetic overflow on signed - in m - 1: SUCCESS
 [search.overflow.2] line 71 arithmetic overflow on signed + in i + 1: SUCCESS
@@ -511,12 +539,23 @@ source/algos/include/cbmc.h function main
 [main.array_bounds.12] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
 [main.assertion.1] line 105 ref == occ: SUCCESS
 [main.assertion.2] line 108 ref == occ: SUCCESS
-[main.assertion.3] line 111 ref == occ: SUCCESS
-[main.assertion.4] line 114 ref == occ: SUCCESS
-[main.array_bounds.13] line 129 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.5] line 129 ref == occ: SUCCESS
-[main.array_bounds.14] line 130 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.6] line 130 ref == occ: SUCCESS
+[main.assertion.3] line 109 ref == occ: SUCCESS
+[main.assertion.4] line 110 ref == occ: SUCCESS
+[main.assertion.5] line 111 ref == occ: SUCCESS
+[main.assertion.6] line 112 ref == occ: SUCCESS
+[main.assertion.7] line 113 ref == occ: SUCCESS
+[main.assertion.8] line 114 ref == occ: SUCCESS
+[main.assertion.9] line 115 ref == occ: SUCCESS
+[main.assertion.10] line 116 ref == occ: SUCCESS
+[main.assertion.11] line 117 ref == occ: SUCCESS
+[main.assertion.12] line 120 ref == occ: SUCCESS
+[main.assertion.13] line 123 ref == occ: SUCCESS
+[main.assertion.14] line 138 ref == occ: SUCCESS
+[main.assertion.15] line 139 ref == occ: SUCCESS
+[main.precondition_instance.1] line 146 strcpy src/dst overlap: SUCCESS
+[main.assertion.16] line 148 ref == occ: SUCCESS
+[main.assertion.17] line 149 ref == occ: SUCCESS
+[main.assertion.18] line 152 ref == occ: SUCCESS
 
 source/algos/include/search_small.h function preSA
 [preSA.overflow.2] line 6 arithmetic overflow on signed + in i + 1: SUCCESS
@@ -580,5 +619,5 @@ source/algos/include/search_small.h function search_small
 [search_small.pointer_dereference.6] line 31 dereference failure: invalid integer address in y[(signed long int)j]: SUCCESS
 [search_small.overflow.3] line 33 arithmetic overflow on signed + in count + 1: SUCCESS
 
-** 0 of 558 failed (1 iterations)
+** 0 of 595 failed (1 iterations)
 VERIFICATION SUCCESSFUL
