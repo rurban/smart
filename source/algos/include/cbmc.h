@@ -115,10 +115,12 @@ int main(void) {
 #endif
 #if MIN_M >= 5 || MIN_M == 0
   M_N_LOOP(5, MAX_N-1);
+  M_N_LOOP(5, 10);
 #endif
 #if MIN_M >= 6 || MIN_M == 0
   M_N_LOOP(6, MAX_N-1);
   M_N_LOOP(6, 10);
+  M_N_LOOP(6, 8);
 #endif
 #if MIN_M >= 7 || MIN_M == 0
   M_N_LOOP(7, MAX_N-1);

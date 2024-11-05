@@ -513,10 +513,10 @@ source/algos/include/cbmc.h function main
 [main.assertion.2] line 108 ref == occ: SUCCESS
 [main.assertion.3] line 111 ref == occ: SUCCESS
 [main.assertion.4] line 114 ref == occ: SUCCESS
-[main.array_bounds.13] line 126 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.5] line 126 ref == occ: SUCCESS
-[main.array_bounds.14] line 127 array 'P' upper bound in P[(signed long int)8]: SUCCESS
-[main.assertion.6] line 127 ref == occ: SUCCESS
+[main.array_bounds.13] line 129 array 'P' upper bound in P[(signed long int)8]: SUCCESS
+[main.assertion.5] line 129 ref == occ: SUCCESS
+[main.array_bounds.14] line 130 array 'P' upper bound in P[(signed long int)8]: SUCCESS
+[main.assertion.6] line 130 ref == occ: SUCCESS
 
 source/algos/include/search_small.h function preSA
 [preSA.overflow.2] line 6 arithmetic overflow on signed + in i + 1: SUCCESS

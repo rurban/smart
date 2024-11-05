@@ -95,12 +95,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     assert(s2 <= n);
     assert(s3 + 1 <= n);
     assert(s4 <= n);
-    assert(s2 > 0);
+    // assert(s2 > 0);
     assert(s4 > 0);
     while ((d = (((B[y[s1 + 1]] << 1) & B[y[s1]]) |
-                 ((W[y[s2 - 1]] << 1) & W[y[s2]]) |
+                 ((s2 > 0 ? (W[y[s2 - 1]] << 1) : 1) & (s2 >= 0 ? W[y[s2]] : 0)) |
                  ((B[y[s3 + 1]] << 1) & B[y[s3]]) |
                  ((W[y[s4 - 1]] << 1) & W[y[s4]]))) == 0) {
+      assert(s2 >= m);
+      assert(s4 >= m);
       s1 += hbcr[y[s1 + m]];
       s2 -= hbcl[y[s2 - m]];
       s3 += hbcr[y[s3 + m]];
