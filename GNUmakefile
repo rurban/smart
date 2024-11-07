@@ -210,15 +210,18 @@ verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) $(A
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
 fuzz: test-fuzz GNUmakefile
-	for c in $(ALGOSRC); do \
-	  b="`basename $$c .c`"; \
+	echo '!#/bin/sh' >fuzz.sh
+	-for c in $(ALGOSRC); do \
+	  b="`basename $$c .c`"; echo $(MAKE) $$b.fuzz >>fuzz.sh; \
+	done; chmod +x fuzz.sh; sh ./fuzz.sh
+%.fuzz: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
+	b=`basename $@ .fuzz`; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
-	  $(TIMEOUT_1m) afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b || true; \
+	  timeout 30s afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
 	  for c in fuzz/$$b/default/crashes/id\:*; do \
 	    if [ -n "$c" ]; then xxd -i $c fuzz/$$b/id$(basename "$c" | cut -c4-9).h; fi; \
 	  done; \
-	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9; \
-	done
+	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9
 
 # emacs flymake-mode
 check-syntax:
