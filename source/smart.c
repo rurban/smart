@@ -517,8 +517,8 @@ int main(int argc, const char *argv[]) {
                  NumSetting);
           goto end;
         }
-        MINLEN = 1024;
-        MAXLEN = 0;
+        MINLEN = 1024U;
+        MAXLEN = 0U;
         for (int i = 0; i < num; i++) {
           PATT_SIZE[i] = string2decimal(plens[i]);
           if (PATT_SIZE[i] < MINLEN)
@@ -528,8 +528,8 @@ int main(int argc, const char *argv[]) {
         }
         PATT_SIZE[num] = 0;
         if (MINLEN < 1 || MAXLEN > 4200) {
-          printf("Error in input parameters. The minimum length %d or max "
-                 "length %d is not a valid "
+          printf("Error in input parameters. The minimum length %u or max "
+                 "length %u is not a valid "
                  "argument.\n\n",
                  MINLEN, MAXLEN);
           goto end;
@@ -538,7 +538,7 @@ int main(int argc, const char *argv[]) {
         MINLEN = string2decimal(parameter);
 
         if (MINLEN < 1 || MINLEN > 4200) {
-          printf("Error in input parameters. The minimum length %d is not a "
+          printf("Error in input parameters. The minimum length %u is not a "
                  "valid "
                  "argument.\n\n",
                  MINLEN);
