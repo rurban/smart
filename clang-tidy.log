@@ -1,8 +1,113 @@
-source/algos/graspm.c:100:9: warning: Value stored to 'pos' is never read [clang-analyzer-deadcode.DeadStores]
-  100 |         pos = pos->next;
+source/algocfg.c:351:5: warning: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+  351 |     fprintf(stderr, "Usage: ./algocfg [algo] [cfg [value]]\n");
+      |     ^~~~~~~
+source/algocfg.c:351:5: note: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
+  351 |     fprintf(stderr, "Usage: ./algocfg [algo] [cfg [value]]\n");
+      |     ^~~~~~~
+source/algocfg.c:428:7: warning: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+  428 |       fprintf(stderr, "Usage: ./algocfg algo cfg [value]\n");
+      |       ^~~~~~~
+source/algocfg.c:428:7: note: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
+  428 |       fprintf(stderr, "Usage: ./algocfg algo cfg [value]\n");
+      |       ^~~~~~~
+source/textgen.c:91:7: warning: Null pointer passed to 2nd parameter expecting 'nonnull' [clang-analyzer-core.NonNullParamChecker]
+   91 |       fputc(c, stream);
+      |       ^        ~~~~~~
+source/textgen.c:48:15: note: '?' condition is false
+   48 |   int istty = getenv("CI") ? 0 : 1;
+      |               ^
+source/textgen.c:50:3: note: Loop condition is true.  Entering loop body
+   50 |   for (int sigma = 2; sigma <= 256; sigma *= 2) {
+      |   ^
+source/textgen.c:51:5: note: Control jumps to 'case 2:'  at line 52
+   51 |     switch (sigma) {
+      |     ^
+source/textgen.c:53:16: note: Assuming pointer value is null
+   53 |       stream = fopen("data/rand2/rand2.txt", "w");
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/textgen.c:53:16: note: Assuming that 'fopen' fails
+   53 |       stream = fopen("data/rand2/rand2.txt", "w");
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/textgen.c:53:7: note: Value assigned to 'stream'
+   53 |       stream = fopen("data/rand2/rand2.txt", "w");
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/textgen.c:54:7: note:  Execution continues on line 81
+   54 |       break;
+      |       ^
+source/textgen.c:83:5: note: Loop condition is true.  Entering loop body
+   83 |     for (int i = 0; i < 5000000; i++) {
+      |     ^
+source/textgen.c:85:11: note: 'sigma' is <= 64
+   85 |       if (sigma <= 64)
+      |           ^~~~~
+source/textgen.c:85:7: note: Taking true branch
+   85 |       if (sigma <= 64)
+      |       ^
+source/textgen.c:91:7: note: Null pointer passed to 2nd parameter expecting 'nonnull'
+   91 |       fputc(c, stream);
+      |       ^        ~~~~~~
+source/algos/dbww.c:54:10: warning: Right operand is negative in left shift [clang-analyzer-core.BitwiseShift]
+   54 |   H = 1U << (m - 1);
+      |       ~~~^~~~~~~~~~
+source/algos/dbww.c:36:7: note: Assuming 'm' is <= 16
+   36 |   if (m > 16)
+      |       ^~~~~~
+source/algos/dbww.c:36:3: note: Taking false branch
+   36 |   if (m > 16)
+      |   ^
+source/algos/dbww.c:40:7: note: Assuming the condition is false
+   40 |   if ((n / m) < 2)
+      |       ^~~~~~~~~~~
+source/algos/dbww.c:40:3: note: Taking false branch
+   40 |   if ((n / m) < 2)
+      |   ^
+source/algos/dbww.c:47:15: note: Assuming 'i' is >= 'm'
+   47 |   for (i = 0; i < m; ++i) {
+      |               ^~~~~
+source/algos/dbww.c:47:3: note: Loop condition is false. Execution continues on line 54
+   47 |   for (i = 0; i < m; ++i) {
+      |   ^
+source/algos/dbww.c:54:10: note: The result of left shift is undefined because the right operand is negative
+   54 |   H = 1U << (m - 1);
+      |       ~~~^~~~~~~~~~
+source/algos/dbww2.c:58:10: warning: Right operand is negative in left shift [clang-analyzer-core.BitwiseShift]
+   58 |   H = 1U << (m - 1);
+      |       ~~~^~~~~~~~~~
+source/algos/dbww2.c:41:7: note: Assuming 'm' is <= 16
+   41 |   if (m > 16)
+      |       ^~~~~~
+source/algos/dbww2.c:41:3: note: Taking false branch
+   41 |   if (m > 16)
+      |   ^
+source/algos/dbww2.c:45:7: note: Assuming the condition is false
+   45 |   if (n / m < 2)
+      |       ^~~~~~~~~
+source/algos/dbww2.c:45:3: note: Taking false branch
+   45 |   if (n / m < 2)
+      |   ^
+source/algos/dbww2.c:51:15: note: Assuming 'i' is >= 'm'
+   51 |   for (i = 0; i < m; ++i) {
+      |               ^~~~~
+source/algos/dbww2.c:51:3: note: Loop condition is false. Execution continues on line 58
+   51 |   for (i = 0; i < m; ++i) {
+      |   ^
+source/algos/dbww2.c:58:10: note: The result of left shift is undefined because the right operand is negative
+   58 |   H = 1U << (m - 1);
+      |       ~~~^~~~~~~~~~
+source/algos/epsm.c:55:13: warning: unknown pragma ignored [clang-diagnostic-unknown-pragmas]
+   55 | #pragma GCC optimize("O3")
+      |             ^
+source/algos/fs-w2.c:109:8: warning: Although the value stored to 'j' is used in the enclosing expression, the value is never actually read from 'j' [clang-analyzer-deadcode.DeadStores]
+  109 |   s1 = j = mm1;
+      |        ^   ~~~
+source/algos/fs-w2.c:109:8: note: Although the value stored to 'j' is used in the enclosing expression, the value is never actually read from 'j'
+  109 |   s1 = j = mm1;
+      |        ^   ~~~
+source/algos/graspm.c:103:9: warning: Value stored to 'pos' is never read [clang-analyzer-deadcode.DeadStores]
+  103 |         pos = pos->next;
       |         ^     ~~~~~~~~~
-source/algos/graspm.c:100:9: note: Value stored to 'pos' is never read
-  100 |         pos = pos->next;
+source/algos/graspm.c:103:9: note: Value stored to 'pos' is never read
+  103 |         pos = pos->next;
       |         ^     ~~~~~~~~~
 source/algos/sebom.c:59:17: warning: Array access results in an undefined pointer dereference [clang-analyzer-core.NullDereference]
    59 |     trans[i][c] = iMinus1;
@@ -67,3 +172,1394 @@ source/algos/sfbom.c:51:3: note: Loop condition is true.  Entering loop body
 source/algos/sfbom.c:54:17: note: Array access results in an undefined pointer dereference
    54 |     trans[i][c] = iMinus1;
       |     ~~~~~~~~~~~~^~~~~~~~~
+source/algos/tndm.c:80:19: warning: Right operand is negative in left shift [clang-analyzer-core.BitwiseShift]
+   80 |       if (d & (1U << (m - 1))) {
+      |                ~~~^~~~~~~~~~
+source/algos/tndm.c:34:7: note: Assuming 'm' is <= 32
+   34 |   if (m > 32)
+      |       ^~~~~~
+source/algos/tndm.c:34:3: note: Taking false branch
+   34 |   if (m > 32)
+      |   ^
+source/algos/tndm.c:43:19: note: Assuming 'i' is < 0
+   43 |   for (i = m - 1; i >= 0; i--) {
+      |                   ^~~~~~
+source/algos/tndm.c:43:3: note: Loop condition is false. Execution continues on line 47
+   43 |   for (i = m - 1; i >= 0; i--) {
+      |   ^
+source/algos/tndm.c:48:7: note: Assuming right operand of bit shift is non-negative but less than 32
+   48 |   s = ~0U >> (WORD - m);
+      |       ^~~~~~~~~~~~~~~~~
+source/algos/tndm.c:49:19: note: 'i' is < 0
+   49 |   for (i = m - 1; i >= 0; i--) {
+      |                   ^
+source/algos/tndm.c:49:3: note: Loop condition is false. Execution continues on line 58
+   49 |   for (i = m - 1; i >= 0; i--) {
+      |   ^
+source/algos/tndm.c:63:10: note: Assuming 'j' is < 'n'
+   63 |   while (j < n) {
+      |          ^~~~~
+source/algos/tndm.c:63:3: note: Loop condition is true.  Entering loop body
+   63 |   while (j < n) {
+      |   ^
+source/algos/tndm.c:67:9: note: Assuming the condition is false
+   67 |     if ((d & 1) == 0) {
+      |         ^~~~~~~~~~~~
+source/algos/tndm.c:67:5: note: Taking false branch
+   67 |     if ((d & 1) == 0) {
+      |     ^
+source/algos/tndm.c:80:19: note: The result of left shift is undefined because the right operand is negative
+   80 |       if (d & (1U << (m - 1))) {
+      |                ~~~^~~~~~~~~~
+source/compilesm.c:202:9: warning: Null pointer passed to 1st parameter expecting 'nonnull' [clang-analyzer-core.NonNullParamChecker]
+  202 |         fclose(stream);
+      |         ^      ~~~~~~
+source/compilesm.c:43:15: note: '?' condition is true
+   43 |   int istty = getenv("CI") ? 0 : 1;
+      |               ^
+source/compilesm.c:63:7: note: Assuming 'argc' is <= 1
+   63 |   if (argc > 1) {
+      |       ^~~~~~~~
+source/compilesm.c:63:3: note: Taking false branch
+   63 |   if (argc > 1) {
+      |   ^
+source/compilesm.c:76:7: note: 'd' is null
+   76 |   if (d) {
+      |       ^
+source/compilesm.c:76:3: note: Taking false branch
+   76 |   if (d) {
+      |   ^
+source/compilesm.c:91:7: note: 'd' is null
+   91 |   if (d) {
+      |       ^
+source/compilesm.c:91:3: note: Taking false branch
+   91 |   if (d) {
+      |   ^
+source/compilesm.c:106:7: note: Assuming that 'opendir' is successful
+  106 |   d = opendir("./source/algos");
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:107:7: note: 'd' is non-null
+  107 |   if (d) {
+      |       ^
+source/compilesm.c:107:3: note: Taking true branch
+  107 |   if (d) {
+      |   ^
+source/compilesm.c:109:12: note: Assuming the condition is true
+  109 |     while ((dir = readdir(d)) != NULL) {
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:109:5: note: Loop condition is true.  Entering loop body
+  109 |     while ((dir = readdir(d)) != NULL) {
+      |     ^
+source/compilesm.c:113:11: note: Assuming 'len' is > 2
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |           ^~~~~~~
+source/compilesm.c:113:11: note: Left side of '&&' is true
+source/compilesm.c:113:22: note: Assuming the condition is true
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:113:11: note: Left side of '&&' is true
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |           ^
+source/compilesm.c:113:50: note: Assuming the condition is true
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:113:11: note: Left side of '&&' is true
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |           ^
+source/compilesm.c:114:11: note: Assuming the condition is true
+  114 |           filename[0] != '.' && filename[1] != '#') {
+      |           ^~~~~~~~~~~~~~~~~~
+source/compilesm.c:113:11: note: Left side of '&&' is true
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |           ^
+source/compilesm.c:114:33: note: Assuming the condition is true
+  114 |           filename[0] != '.' && filename[1] != '#') {
+      |                                 ^~~~~~~~~~~~~~~~~~
+source/compilesm.c:113:7: note: Taking true branch
+  113 |       if (len > 2 && filename[len - 1] == 'c' && filename[len - 2] == '.' &&
+      |       ^
+source/compilesm.c:140:13: note: 'doTest' is 0
+  140 |         if (doTest)
+      |             ^~~~~~
+source/compilesm.c:140:9: note: Taking false branch
+  140 |         if (doTest)
+      |         ^
+source/compilesm.c:144:21: note: Assuming the condition is false
+  144 |         for (i = 0; i < 15 - (int)strlen(filename); i++)
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:144:9: note: Loop condition is false. Execution continues on line 146
+  144 |         for (i = 0; i < 15 - (int)strlen(filename); i++)
+      |         ^
+source/compilesm.c:146:13: note: 'istty' is 0
+  146 |         if (istty)
+      |             ^~~~~
+source/compilesm.c:146:9: note: Taking false branch
+  146 |         if (istty)
+      |         ^
+source/compilesm.c:152:13: note: 'istty' is 0
+  152 |         if (istty)
+      |             ^~~~~
+source/compilesm.c:152:9: note: Taking false branch
+  152 |         if (istty)
+      |         ^
+source/compilesm.c:156:18: note: Assuming that 'freopen' fails
+  156 |         stream = freopen("warning", "a", stderr); // redirect of stderr
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:156:9: note: Value assigned to 'stream'
+  156 |         stream = freopen("warning", "a", stderr); // redirect of stderr
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:157:13: note: Assuming the condition is true
+  157 |         if (system(command) == 1)
+      |             ^~~~~~~~~~~~~~~~~~~~
+source/compilesm.c:157:9: note: Taking true branch
+  157 |         if (system(command) == 1)
+      |         ^
+source/compilesm.c:202:9: note: Null pointer passed to 1st parameter expecting 'nonnull'
+  202 |         fclose(stream);
+      |         ^      ~~~~~~
+source/function.h:273:30: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |                              ^
+source/smart.c:429:7: note: Assuming 'argc' is not equal to 1
+  429 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/smart.c:429:3: note: Taking false branch
+  429 |   if (argc == 1) {
+      |   ^
+source/smart.c:433:7: note: Assuming the condition is false
+  433 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:433:3: note: Taking false branch
+  433 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/smart.c:438:10: note: 'par' is < 'argc'
+  438 |   while (par < argc) {
+      |          ^~~
+source/smart.c:438:3: note: Loop condition is true.  Entering loop body
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:439:9: note: 'par' is < 'argc'
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |         ^~~
+source/smart.c:439:9: note: Left side of '&&' is true
+source/smart.c:439:23: note: Assuming the condition is false
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:439:5: note: Taking false branch
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |     ^
+source/smart.c:452:9: note: 'par' is < 'argc'
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |         ^~~
+source/smart.c:452:9: note: Left side of '&&' is true
+source/smart.c:452:23: note: Assuming the condition is false
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:452:5: note: Taking false branch
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |     ^
+source/smart.c:469:9: note: 'par' is < 'argc'
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |         ^~~
+source/smart.c:469:9: note: Left side of '&&' is true
+source/smart.c:469:23: note: Assuming the condition is false
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:469:5: note: Taking false branch
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |     ^
+source/smart.c:483:9: note: 'par' is < 'argc'
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |         ^~~
+source/smart.c:483:9: note: Left side of '&&' is true
+source/smart.c:483:23: note: Assuming the condition is false
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:483:5: note: Taking false branch
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |     ^
+source/smart.c:496:9: note: 'par' is < 'argc'
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |         ^~~
+source/smart.c:496:9: note: Left side of '&&' is true
+source/smart.c:496:23: note: Assuming the condition is false
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:496:5: note: Taking false branch
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |     ^
+source/smart.c:504:9: note: 'par' is < 'argc'
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |         ^~~
+source/smart.c:504:9: note: Left side of '&&' is true
+source/smart.c:504:23: note: Assuming the condition is false
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:504:5: note: Taking false branch
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |     ^
+source/smart.c:562:9: note: 'par' is < 'argc'
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |         ^~~
+source/smart.c:562:9: note: Left side of '&&' is true
+source/smart.c:562:23: note: Assuming the condition is false
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:562:5: note: Taking false branch
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |     ^
+source/smart.c:585:9: note: 'par' is < 'argc'
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |         ^~~
+source/smart.c:585:9: note: Left side of '&&' is true
+source/smart.c:585:23: note: Assuming the condition is false
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:585:5: note: Taking false branch
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |     ^
+source/smart.c:589:9: note: 'par' is < 'argc'
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |         ^~~
+source/smart.c:589:9: note: Left side of '&&' is true
+source/smart.c:589:23: note: Assuming the condition is false
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:589:5: note: Taking false branch
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |     ^
+source/smart.c:593:9: note: 'par' is < 'argc'
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |         ^~~
+source/smart.c:593:9: note: Left side of '&&' is true
+source/smart.c:593:23: note: Assuming the condition is false
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:593:5: note: Taking false branch
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |     ^
+source/smart.c:597:9: note: 'par' is < 'argc'
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |         ^~~
+source/smart.c:597:9: note: Left side of '&&' is true
+source/smart.c:597:23: note: Assuming the condition is false
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:597:5: note: Taking false branch
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |     ^
+source/smart.c:601:9: note: 'par' is < 'argc'
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |         ^~~
+source/smart.c:601:9: note: Left side of '&&' is true
+source/smart.c:601:23: note: Assuming the condition is false
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:601:5: note: Taking false branch
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |     ^
+source/smart.c:605:9: note: 'par' is < 'argc'
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |         ^~~
+source/smart.c:605:9: note: Left side of '&&' is true
+source/smart.c:605:23: note: Assuming the condition is false
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:605:5: note: Taking false branch
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |     ^
+source/smart.c:609:9: note: 'par' is < 'argc'
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |         ^~~
+source/smart.c:609:9: note: Left side of '&&' is true
+source/smart.c:609:23: note: Assuming the condition is false
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:609:5: note: Taking false branch
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |     ^
+source/smart.c:613:9: note: 'par' is < 'argc'
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |         ^~~
+source/smart.c:613:9: note: Left side of '&&' is true
+source/smart.c:613:23: note: Assuming the condition is false
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:613:5: note: Taking false branch
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |     ^
+source/smart.c:617:9: note: 'par' is < 'argc'
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |         ^~~
+source/smart.c:617:9: note: Left side of '&&' is true
+source/smart.c:617:5: note: Taking true branch
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |     ^
+source/smart.c:621:9: note: Assuming 'par' is >= 'argc'
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |         ^~~~~~~~~~
+source/smart.c:621:20: note: Left side of '&&' is false
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |                    ^
+source/smart.c:625:9: note: 'par' is >= 'argc'
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |         ^~~
+source/smart.c:625:20: note: Left side of '&&' is false
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |                    ^
+source/smart.c:438:3: note: Loop condition is false. Execution continues on line 638
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:638:7: note: Assuming the condition is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~
+source/smart.c:638:28: note: Left side of '&&' is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |                            ^
+source/smart.c:643:7: note: Assuming the condition is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~~
+source/smart.c:643:29: note: Left side of '&&' is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |                             ^
+source/smart.c:655:7: note: Assuming field 'simple' is 0
+  655 |   if (options.simple) {
+      |       ^~~~~~~~~~~~~~
+source/smart.c:655:3: note: Taking false branch
+  655 |   if (options.simple) {
+      |   ^
+source/smart.c:685:14: note: Assuming the condition is true
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:685:10: note: Taking true branch
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |          ^
+source/smart.c:687:9: note: Assuming the condition is false
+  687 |     if (system("./logo"))
+      |         ^~~~~~~~~~~~~~~~
+source/smart.c:687:5: note: Taking false branch
+  687 |     if (system("./logo"))
+      |     ^
+source/smart.c:697:21: note: Assuming 'k' is < 'num_buffers'
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |                     ^~~~~~~~~~~~~~~
+source/smart.c:697:5: note: Loop condition is true.  Entering loop body
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |     ^
+source/smart.c:703:17: note: Calling 'getText'
+  703 |       if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:271:8: note: Assuming 'index' is non-null
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |        ^~~~~
+source/function.h:271:3: note: Taking true branch
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |   ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:5: note: Loop condition is true.  Entering loop body
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |     ^
+source/function.h:274:11: note: Assuming the condition is true
+  274 |       if (c == '#') {
+      |           ^~~~~~~~
+source/function.h:274:7: note: Taking true branch
+  274 |       if (c == '#') {
+      |       ^
+source/function.h:279:21: note: Assuming this stream operation fails
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is true.  Entering loop body
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:279:16: note: Assuming the condition is false
+  279 |         while ((c = getc(index)) != '#')
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is false. Execution continues on line 281
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:284:14: note: Assuming 'input' is null
+  284 |         if ((input = fopen(filename, "r"))) {
+      |              ^~~~~
+source/function.h:284:9: note: Taking false branch
+  284 |         if ((input = fopen(filename, "r"))) {
+      |         ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:30: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |                              ^~~~~~~~~~~
+source/function.h:273:30: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |                              ^
+source/smart.c:429:7: note: Assuming 'argc' is not equal to 1
+  429 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/smart.c:429:3: note: Taking false branch
+  429 |   if (argc == 1) {
+      |   ^
+source/smart.c:433:7: note: Assuming the condition is false
+  433 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:433:3: note: Taking false branch
+  433 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/smart.c:438:10: note: 'par' is < 'argc'
+  438 |   while (par < argc) {
+      |          ^~~
+source/smart.c:438:3: note: Loop condition is true.  Entering loop body
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:439:9: note: 'par' is < 'argc'
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |         ^~~
+source/smart.c:439:9: note: Left side of '&&' is true
+source/smart.c:439:23: note: Assuming the condition is false
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:439:5: note: Taking false branch
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |     ^
+source/smart.c:452:9: note: 'par' is < 'argc'
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |         ^~~
+source/smart.c:452:9: note: Left side of '&&' is true
+source/smart.c:452:23: note: Assuming the condition is false
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:452:5: note: Taking false branch
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |     ^
+source/smart.c:469:9: note: 'par' is < 'argc'
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |         ^~~
+source/smart.c:469:9: note: Left side of '&&' is true
+source/smart.c:469:23: note: Assuming the condition is false
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:469:5: note: Taking false branch
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |     ^
+source/smart.c:483:9: note: 'par' is < 'argc'
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |         ^~~
+source/smart.c:483:9: note: Left side of '&&' is true
+source/smart.c:483:23: note: Assuming the condition is false
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:483:5: note: Taking false branch
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |     ^
+source/smart.c:496:9: note: 'par' is < 'argc'
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |         ^~~
+source/smart.c:496:9: note: Left side of '&&' is true
+source/smart.c:496:23: note: Assuming the condition is false
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:496:5: note: Taking false branch
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |     ^
+source/smart.c:504:9: note: 'par' is < 'argc'
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |         ^~~
+source/smart.c:504:9: note: Left side of '&&' is true
+source/smart.c:504:23: note: Assuming the condition is false
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:504:5: note: Taking false branch
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |     ^
+source/smart.c:562:9: note: 'par' is < 'argc'
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |         ^~~
+source/smart.c:562:9: note: Left side of '&&' is true
+source/smart.c:562:23: note: Assuming the condition is false
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:562:5: note: Taking false branch
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |     ^
+source/smart.c:585:9: note: 'par' is < 'argc'
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |         ^~~
+source/smart.c:585:9: note: Left side of '&&' is true
+source/smart.c:585:23: note: Assuming the condition is false
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:585:5: note: Taking false branch
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |     ^
+source/smart.c:589:9: note: 'par' is < 'argc'
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |         ^~~
+source/smart.c:589:9: note: Left side of '&&' is true
+source/smart.c:589:23: note: Assuming the condition is false
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:589:5: note: Taking false branch
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |     ^
+source/smart.c:593:9: note: 'par' is < 'argc'
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |         ^~~
+source/smart.c:593:9: note: Left side of '&&' is true
+source/smart.c:593:23: note: Assuming the condition is false
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:593:5: note: Taking false branch
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |     ^
+source/smart.c:597:9: note: 'par' is < 'argc'
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |         ^~~
+source/smart.c:597:9: note: Left side of '&&' is true
+source/smart.c:597:23: note: Assuming the condition is false
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:597:5: note: Taking false branch
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |     ^
+source/smart.c:601:9: note: 'par' is < 'argc'
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |         ^~~
+source/smart.c:601:9: note: Left side of '&&' is true
+source/smart.c:601:23: note: Assuming the condition is false
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:601:5: note: Taking false branch
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |     ^
+source/smart.c:605:9: note: 'par' is < 'argc'
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |         ^~~
+source/smart.c:605:9: note: Left side of '&&' is true
+source/smart.c:605:23: note: Assuming the condition is false
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:605:5: note: Taking false branch
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |     ^
+source/smart.c:609:9: note: 'par' is < 'argc'
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |         ^~~
+source/smart.c:609:9: note: Left side of '&&' is true
+source/smart.c:609:23: note: Assuming the condition is false
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:609:5: note: Taking false branch
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |     ^
+source/smart.c:613:9: note: 'par' is < 'argc'
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |         ^~~
+source/smart.c:613:9: note: Left side of '&&' is true
+source/smart.c:613:23: note: Assuming the condition is false
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:613:5: note: Taking false branch
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |     ^
+source/smart.c:617:9: note: 'par' is < 'argc'
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |         ^~~
+source/smart.c:617:9: note: Left side of '&&' is true
+source/smart.c:617:5: note: Taking true branch
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |     ^
+source/smart.c:621:9: note: Assuming 'par' is >= 'argc'
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |         ^~~~~~~~~~
+source/smart.c:621:20: note: Left side of '&&' is false
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |                    ^
+source/smart.c:625:9: note: 'par' is >= 'argc'
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |         ^~~
+source/smart.c:625:20: note: Left side of '&&' is false
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |                    ^
+source/smart.c:438:3: note: Loop condition is false. Execution continues on line 638
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:638:7: note: Assuming the condition is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~
+source/smart.c:638:28: note: Left side of '&&' is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |                            ^
+source/smart.c:643:7: note: Assuming the condition is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~~
+source/smart.c:643:29: note: Left side of '&&' is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |                             ^
+source/smart.c:655:7: note: Assuming field 'simple' is 0
+  655 |   if (options.simple) {
+      |       ^~~~~~~~~~~~~~
+source/smart.c:655:3: note: Taking false branch
+  655 |   if (options.simple) {
+      |   ^
+source/smart.c:685:14: note: Assuming the condition is true
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:685:10: note: Taking true branch
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |          ^
+source/smart.c:687:9: note: Assuming the condition is false
+  687 |     if (system("./logo"))
+      |         ^~~~~~~~~~~~~~~~
+source/smart.c:687:5: note: Taking false branch
+  687 |     if (system("./logo"))
+      |     ^
+source/smart.c:697:21: note: Assuming 'k' is < 'num_buffers'
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |                     ^~~~~~~~~~~~~~~
+source/smart.c:697:5: note: Loop condition is true.  Entering loop body
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |     ^
+source/smart.c:703:17: note: Calling 'getText'
+  703 |       if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:271:8: note: Assuming 'index' is non-null
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |        ^~~~~
+source/function.h:271:3: note: Taking true branch
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |   ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:5: note: Loop condition is true.  Entering loop body
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |     ^
+source/function.h:274:11: note: Assuming the condition is true
+  274 |       if (c == '#') {
+      |           ^~~~~~~~
+source/function.h:274:7: note: Taking true branch
+  274 |       if (c == '#') {
+      |       ^
+source/function.h:279:21: note: Assuming stream reaches end-of-file here
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is true.  Entering loop body
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:279:16: note: Assuming the condition is false
+  279 |         while ((c = getc(index)) != '#')
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is false. Execution continues on line 281
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:284:14: note: Assuming 'input' is null
+  284 |         if ((input = fopen(filename, "r"))) {
+      |              ^~~~~
+source/function.h:284:9: note: Taking false branch
+  284 |         if ((input = fopen(filename, "r"))) {
+      |         ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:30: note: Read function called when stream is in EOF state. Function has no effect
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |                              ^~~~~~~~~~~
+source/function.h:279:21: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^
+source/smart.c:429:7: note: Assuming 'argc' is not equal to 1
+  429 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/smart.c:429:3: note: Taking false branch
+  429 |   if (argc == 1) {
+      |   ^
+source/smart.c:433:7: note: Assuming the condition is false
+  433 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:433:3: note: Taking false branch
+  433 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/smart.c:438:10: note: 'par' is < 'argc'
+  438 |   while (par < argc) {
+      |          ^~~
+source/smart.c:438:3: note: Loop condition is true.  Entering loop body
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:439:9: note: 'par' is < 'argc'
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |         ^~~
+source/smart.c:439:9: note: Left side of '&&' is true
+source/smart.c:439:23: note: Assuming the condition is false
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:439:5: note: Taking false branch
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |     ^
+source/smart.c:452:9: note: 'par' is < 'argc'
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |         ^~~
+source/smart.c:452:9: note: Left side of '&&' is true
+source/smart.c:452:23: note: Assuming the condition is false
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:452:5: note: Taking false branch
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |     ^
+source/smart.c:469:9: note: 'par' is < 'argc'
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |         ^~~
+source/smart.c:469:9: note: Left side of '&&' is true
+source/smart.c:469:23: note: Assuming the condition is false
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:469:5: note: Taking false branch
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |     ^
+source/smart.c:483:9: note: 'par' is < 'argc'
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |         ^~~
+source/smart.c:483:9: note: Left side of '&&' is true
+source/smart.c:483:23: note: Assuming the condition is false
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:483:5: note: Taking false branch
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |     ^
+source/smart.c:496:9: note: 'par' is < 'argc'
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |         ^~~
+source/smart.c:496:9: note: Left side of '&&' is true
+source/smart.c:496:23: note: Assuming the condition is false
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:496:5: note: Taking false branch
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |     ^
+source/smart.c:504:9: note: 'par' is < 'argc'
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |         ^~~
+source/smart.c:504:9: note: Left side of '&&' is true
+source/smart.c:504:23: note: Assuming the condition is false
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:504:5: note: Taking false branch
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |     ^
+source/smart.c:562:9: note: 'par' is < 'argc'
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |         ^~~
+source/smart.c:562:9: note: Left side of '&&' is true
+source/smart.c:562:23: note: Assuming the condition is false
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:562:5: note: Taking false branch
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |     ^
+source/smart.c:585:9: note: 'par' is < 'argc'
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |         ^~~
+source/smart.c:585:9: note: Left side of '&&' is true
+source/smart.c:585:23: note: Assuming the condition is false
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:585:5: note: Taking false branch
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |     ^
+source/smart.c:589:9: note: 'par' is < 'argc'
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |         ^~~
+source/smart.c:589:9: note: Left side of '&&' is true
+source/smart.c:589:23: note: Assuming the condition is false
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:589:5: note: Taking false branch
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |     ^
+source/smart.c:593:9: note: 'par' is < 'argc'
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |         ^~~
+source/smart.c:593:9: note: Left side of '&&' is true
+source/smart.c:593:23: note: Assuming the condition is false
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:593:5: note: Taking false branch
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |     ^
+source/smart.c:597:9: note: 'par' is < 'argc'
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |         ^~~
+source/smart.c:597:9: note: Left side of '&&' is true
+source/smart.c:597:23: note: Assuming the condition is false
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:597:5: note: Taking false branch
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |     ^
+source/smart.c:601:9: note: 'par' is < 'argc'
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |         ^~~
+source/smart.c:601:9: note: Left side of '&&' is true
+source/smart.c:601:23: note: Assuming the condition is false
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:601:5: note: Taking false branch
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |     ^
+source/smart.c:605:9: note: 'par' is < 'argc'
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |         ^~~
+source/smart.c:605:9: note: Left side of '&&' is true
+source/smart.c:605:23: note: Assuming the condition is false
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:605:5: note: Taking false branch
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |     ^
+source/smart.c:609:9: note: 'par' is < 'argc'
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |         ^~~
+source/smart.c:609:9: note: Left side of '&&' is true
+source/smart.c:609:23: note: Assuming the condition is false
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:609:5: note: Taking false branch
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |     ^
+source/smart.c:613:9: note: 'par' is < 'argc'
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |         ^~~
+source/smart.c:613:9: note: Left side of '&&' is true
+source/smart.c:613:23: note: Assuming the condition is false
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:613:5: note: Taking false branch
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |     ^
+source/smart.c:617:9: note: 'par' is < 'argc'
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |         ^~~
+source/smart.c:617:9: note: Left side of '&&' is true
+source/smart.c:617:5: note: Taking true branch
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |     ^
+source/smart.c:621:9: note: Assuming 'par' is >= 'argc'
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |         ^~~~~~~~~~
+source/smart.c:621:20: note: Left side of '&&' is false
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |                    ^
+source/smart.c:625:9: note: 'par' is >= 'argc'
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |         ^~~
+source/smart.c:625:20: note: Left side of '&&' is false
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |                    ^
+source/smart.c:438:3: note: Loop condition is false. Execution continues on line 638
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:638:7: note: Assuming the condition is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~
+source/smart.c:638:28: note: Left side of '&&' is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |                            ^
+source/smart.c:643:7: note: Assuming the condition is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~~
+source/smart.c:643:29: note: Left side of '&&' is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |                             ^
+source/smart.c:655:7: note: Assuming field 'simple' is 0
+  655 |   if (options.simple) {
+      |       ^~~~~~~~~~~~~~
+source/smart.c:655:3: note: Taking false branch
+  655 |   if (options.simple) {
+      |   ^
+source/smart.c:685:14: note: Assuming the condition is true
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:685:10: note: Taking true branch
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |          ^
+source/smart.c:687:9: note: Assuming the condition is false
+  687 |     if (system("./logo"))
+      |         ^~~~~~~~~~~~~~~~
+source/smart.c:687:5: note: Taking false branch
+  687 |     if (system("./logo"))
+      |     ^
+source/smart.c:697:21: note: Assuming 'k' is < 'num_buffers'
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |                     ^~~~~~~~~~~~~~~
+source/smart.c:697:5: note: Loop condition is true.  Entering loop body
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |     ^
+source/smart.c:703:17: note: Calling 'getText'
+  703 |       if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:271:8: note: Assuming 'index' is non-null
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |        ^~~~~
+source/function.h:271:3: note: Taking true branch
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |   ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:5: note: Loop condition is true.  Entering loop body
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |     ^
+source/function.h:274:11: note: Assuming the condition is true
+  274 |       if (c == '#') {
+      |           ^~~~~~~~
+source/function.h:274:7: note: Taking true branch
+  274 |       if (c == '#') {
+      |       ^
+source/function.h:279:21: note: Assuming this stream operation fails
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is true.  Entering loop body
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:279:21: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/function.h:279:21: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^
+source/smart.c:429:7: note: Assuming 'argc' is not equal to 1
+  429 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/smart.c:429:3: note: Taking false branch
+  429 |   if (argc == 1) {
+      |   ^
+source/smart.c:433:7: note: Assuming the condition is false
+  433 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:433:3: note: Taking false branch
+  433 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/smart.c:438:10: note: 'par' is < 'argc'
+  438 |   while (par < argc) {
+      |          ^~~
+source/smart.c:438:3: note: Loop condition is true.  Entering loop body
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:439:9: note: 'par' is < 'argc'
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |         ^~~
+source/smart.c:439:9: note: Left side of '&&' is true
+source/smart.c:439:23: note: Assuming the condition is false
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:439:5: note: Taking false branch
+  439 |     if (par < argc && !strcmp("-pset", argv[par])) {
+      |     ^
+source/smart.c:452:9: note: 'par' is < 'argc'
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |         ^~~
+source/smart.c:452:9: note: Left side of '&&' is true
+source/smart.c:452:23: note: Assuming the condition is false
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:452:5: note: Taking false branch
+  452 |     if (par < argc && !strcmp("-alpha", argv[par])) {
+      |     ^
+source/smart.c:469:9: note: 'par' is < 'argc'
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |         ^~~
+source/smart.c:469:9: note: Left side of '&&' is true
+source/smart.c:469:23: note: Assuming the condition is false
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:469:5: note: Taking false branch
+  469 |     if (par < argc && !strcmp("-tsize", argv[par])) {
+      |     ^
+source/smart.c:483:9: note: 'par' is < 'argc'
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |         ^~~
+source/smart.c:483:9: note: Left side of '&&' is true
+source/smart.c:483:23: note: Assuming the condition is false
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:483:5: note: Taking false branch
+  483 |     if (par < argc && !strcmp("-tb", argv[par])) {
+      |     ^
+source/smart.c:496:9: note: 'par' is < 'argc'
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |         ^~~
+source/smart.c:496:9: note: Left side of '&&' is true
+source/smart.c:496:23: note: Assuming the condition is false
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:496:5: note: Taking false branch
+  496 |     if (par < argc && !strcmp("-text", argv[par])) {
+      |     ^
+source/smart.c:504:9: note: 'par' is < 'argc'
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |         ^~~
+source/smart.c:504:9: note: Left side of '&&' is true
+source/smart.c:504:23: note: Assuming the condition is false
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:504:5: note: Taking false branch
+  504 |     if (par < argc && !strcmp("-plen", argv[par])) {
+      |     ^
+source/smart.c:562:9: note: 'par' is < 'argc'
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |         ^~~
+source/smart.c:562:9: note: Left side of '&&' is true
+source/smart.c:562:23: note: Assuming the condition is false
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:562:5: note: Taking false branch
+  562 |     if (par < argc && !strcmp("-simple", argv[par])) {
+      |     ^
+source/smart.c:585:9: note: 'par' is < 'argc'
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |         ^~~
+source/smart.c:585:9: note: Left side of '&&' is true
+source/smart.c:585:23: note: Assuming the condition is false
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:585:5: note: Taking false branch
+  585 |     if (par < argc && !strcmp("-occ", argv[par])) {
+      |     ^
+source/smart.c:589:9: note: 'par' is < 'argc'
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |         ^~~
+source/smart.c:589:9: note: Left side of '&&' is true
+source/smart.c:589:23: note: Assuming the condition is false
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:589:5: note: Taking false branch
+  589 |     if (par < argc && !strcmp("-pre", argv[par])) {
+      |     ^
+source/smart.c:593:9: note: 'par' is < 'argc'
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |         ^~~
+source/smart.c:593:9: note: Left side of '&&' is true
+source/smart.c:593:23: note: Assuming the condition is false
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:593:5: note: Taking false branch
+  593 |     if (par < argc && !strcmp("-dif", argv[par])) {
+      |     ^
+source/smart.c:597:9: note: 'par' is < 'argc'
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |         ^~~
+source/smart.c:597:9: note: Left side of '&&' is true
+source/smart.c:597:23: note: Assuming the condition is false
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:597:5: note: Taking false branch
+  597 |     if (par < argc && !strcmp("-txt", argv[par])) {
+      |     ^
+source/smart.c:601:9: note: 'par' is < 'argc'
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |         ^~~
+source/smart.c:601:9: note: Left side of '&&' is true
+source/smart.c:601:23: note: Assuming the condition is false
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:601:5: note: Taking false branch
+  601 |     if (par < argc && !strcmp("-std", argv[par])) {
+      |     ^
+source/smart.c:605:9: note: 'par' is < 'argc'
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |         ^~~
+source/smart.c:605:9: note: Left side of '&&' is true
+source/smart.c:605:23: note: Assuming the condition is false
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:605:5: note: Taking false branch
+  605 |     if (par < argc && !strcmp("-all", argv[par])) {
+      |     ^
+source/smart.c:609:9: note: 'par' is < 'argc'
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |         ^~~
+source/smart.c:609:9: note: Left side of '&&' is true
+source/smart.c:609:23: note: Assuming the condition is false
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:609:5: note: Taking false branch
+  609 |     if (par < argc && !strcmp("-tex", argv[par])) {
+      |     ^
+source/smart.c:613:9: note: 'par' is < 'argc'
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |         ^~~
+source/smart.c:613:9: note: Left side of '&&' is true
+source/smart.c:613:23: note: Assuming the condition is false
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:613:5: note: Taking false branch
+  613 |     if (par < argc && !strcmp("-php", argv[par])) {
+      |     ^
+source/smart.c:617:9: note: 'par' is < 'argc'
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |         ^~~
+source/smart.c:617:9: note: Left side of '&&' is true
+source/smart.c:617:5: note: Taking true branch
+  617 |     if (par < argc && !strcmp("-short", argv[par])) {
+      |     ^
+source/smart.c:621:9: note: Assuming 'par' is >= 'argc'
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |         ^~~~~~~~~~
+source/smart.c:621:20: note: Left side of '&&' is false
+  621 |     if (par < argc && !strcmp("-vshort", argv[par])) {
+      |                    ^
+source/smart.c:625:9: note: 'par' is >= 'argc'
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |         ^~~
+source/smart.c:625:20: note: Left side of '&&' is false
+  625 |     if (par < argc && strcmp("-text", argv[par]) != 0 &&
+      |                    ^
+source/smart.c:438:3: note: Loop condition is false. Execution continues on line 638
+  438 |   while (par < argc) {
+      |   ^
+source/smart.c:638:7: note: Assuming the condition is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~
+source/smart.c:638:28: note: Left side of '&&' is false
+  638 |   if (strcmp(filename, "") && options.simple) {
+      |                            ^
+source/smart.c:643:7: note: Assuming the condition is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |       ^~~~~~~~~~~~~~~~~~~~~
+source/smart.c:643:29: note: Left side of '&&' is false
+  643 |   if (!strcmp(filename, "") && !options.simple) {
+      |                             ^
+source/smart.c:655:7: note: Assuming field 'simple' is 0
+  655 |   if (options.simple) {
+      |       ^~~~~~~~~~~~~~
+source/smart.c:655:3: note: Taking false branch
+  655 |   if (options.simple) {
+      |   ^
+source/smart.c:685:14: note: Assuming the condition is true
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/smart.c:685:10: note: Taking true branch
+  685 |   } else if (strcmp(filename, "all") != 0) {
+      |          ^
+source/smart.c:687:9: note: Assuming the condition is false
+  687 |     if (system("./logo"))
+      |         ^~~~~~~~~~~~~~~~
+source/smart.c:687:5: note: Taking false branch
+  687 |     if (system("./logo"))
+      |     ^
+source/smart.c:697:21: note: Assuming 'k' is < 'num_buffers'
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |                     ^~~~~~~~~~~~~~~
+source/smart.c:697:5: note: Loop condition is true.  Entering loop body
+  697 |     for (int k = 0; k < num_buffers; k++) {
+      |     ^
+source/smart.c:703:17: note: Calling 'getText'
+  703 |       if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/function.h:271:8: note: Assuming 'index' is non-null
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |        ^~~~~
+source/function.h:271:3: note: Taking true branch
+  271 |   if ((index = fopen(indexfilename, "r"))) {
+      |   ^
+source/function.h:273:12: note: 'i' is < 'TSIZE'
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |            ^
+source/function.h:273:12: note: Left side of '&&' is true
+source/function.h:273:5: note: Loop condition is true.  Entering loop body
+  273 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+      |     ^
+source/function.h:274:11: note: Assuming the condition is true
+  274 |       if (c == '#') {
+      |           ^~~~~~~~
+source/function.h:274:7: note: Taking true branch
+  274 |       if (c == '#') {
+      |       ^
+source/function.h:279:21: note: Assuming stream reaches end-of-file here
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/function.h:279:9: note: Loop condition is true.  Entering loop body
+  279 |         while ((c = getc(index)) != '#')
+      |         ^
+source/function.h:279:21: note: Read function called when stream is in EOF state. Function has no effect
+  279 |         while ((c = getc(index)) != '#')
+      |                     ^~~~~~~~~~~
+source/selectAlgo.c:162:13: warning: Opened stream never closed. Potential resource leak [clang-analyzer-unix.Stream]
+  162 |         if (search_ALGO(ALGO_NAME, algo) >= 0)
+      |             ^~~~~~~~~~~
+source/selectAlgo.c:66:7: note: Assuming 'argc' is not equal to 1
+   66 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/selectAlgo.c:66:3: note: Taking false branch
+   66 |   if (argc == 1) {
+      |   ^
+source/selectAlgo.c:71:7: note: Assuming the condition is false
+   71 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:71:3: note: Taking false branch
+   71 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/selectAlgo.c:77:10: note: 'par' is < 'argc'
+   77 |   while (par < argc) {
+      |          ^~~
+source/selectAlgo.c:77:3: note: Loop condition is true.  Entering loop body
+   77 |   while (par < argc) {
+      |   ^
+source/selectAlgo.c:79:9: note: 'par' is < 'argc'
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:79:9: note: Left side of '&&' is true
+source/selectAlgo.c:79:23: note: Assuming the condition is false
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:79:5: note: Taking false branch
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |     ^
+source/selectAlgo.c:83:9: note: 'par' is < 'argc'
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:83:9: note: Left side of '&&' is true
+source/selectAlgo.c:83:23: note: Assuming the condition is false
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:83:5: note: Taking false branch
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |     ^
+source/selectAlgo.c:115:9: note: 'par' is < 'argc'
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:115:9: note: Left side of '&&' is true
+source/selectAlgo.c:115:23: note: Assuming the condition is false
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:115:5: note: Taking false branch
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |     ^
+source/selectAlgo.c:148:9: note: 'par' is < 'argc'
+  148 |     if (par < argc && !strcmp("-add", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:148:9: note: Left side of '&&' is true
+source/selectAlgo.c:148:5: note: Taking true branch
+  148 |     if (par < argc && !strcmp("-add", argv[par])) {
+      |     ^
+source/selectAlgo.c:150:11: note: Assuming 'par' is < 'argc'
+  150 |       if (par >= argc) {
+      |           ^~~~~~~~~~~
+source/selectAlgo.c:150:7: note: Taking false branch
+  150 |       if (par >= argc) {
+      |       ^
+source/selectAlgo.c:159:18: note: Stream opened here
+  159 |       FILE *fp = fopen(path, "r");
+      |                  ^~~~~~~~~~~~~~~~
+source/selectAlgo.c:159:18: note: Assuming that 'fopen' is successful
+  159 |       FILE *fp = fopen(path, "r");
+      |                  ^~~~~~~~~~~~~~~~
+source/selectAlgo.c:160:11: note: 'fp' is non-null
+  160 |       if (fp) {
+      |           ^~
+source/selectAlgo.c:160:7: note: Taking true branch
+  160 |       if (fp) {
+      |       ^
+source/selectAlgo.c:162:13: note: Opened stream never closed. Potential resource leak
+  162 |         if (search_ALGO(ALGO_NAME, algo) >= 0)
+      |             ^~~~~~~~~~~
+source/selectAlgo.c:210:13: warning: Opened stream never closed. Potential resource leak [clang-analyzer-unix.Stream]
+  210 |         if (search_ALGO(ALGO_NAME, algo) >= 0)
+      |             ^~~~~~~~~~~
+source/selectAlgo.c:66:7: note: Assuming 'argc' is not equal to 1
+   66 |   if (argc == 1) {
+      |       ^~~~~~~~~
+source/selectAlgo.c:66:3: note: Taking false branch
+   66 |   if (argc == 1) {
+      |   ^
+source/selectAlgo.c:71:7: note: Assuming the condition is false
+   71 |   if (!strcmp("-h", argv[1])) {
+      |       ^~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:71:3: note: Taking false branch
+   71 |   if (!strcmp("-h", argv[1])) {
+      |   ^
+source/selectAlgo.c:77:10: note: 'par' is < 'argc'
+   77 |   while (par < argc) {
+      |          ^~~
+source/selectAlgo.c:77:3: note: Loop condition is true.  Entering loop body
+   77 |   while (par < argc) {
+      |   ^
+source/selectAlgo.c:79:9: note: 'par' is < 'argc'
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:79:9: note: Left side of '&&' is true
+source/selectAlgo.c:79:23: note: Assuming the condition is false
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:79:5: note: Taking false branch
+   79 |     if (par < argc && !strcmp("-desc", argv[par])) {
+      |     ^
+source/selectAlgo.c:83:9: note: 'par' is < 'argc'
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:83:9: note: Left side of '&&' is true
+source/selectAlgo.c:83:23: note: Assuming the condition is false
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:83:5: note: Taking false branch
+   83 |     if (par < argc && !strcmp("-show", argv[par])) {
+      |     ^
+source/selectAlgo.c:115:9: note: 'par' is < 'argc'
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:115:9: note: Left side of '&&' is true
+source/selectAlgo.c:115:23: note: Assuming the condition is false
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:115:5: note: Taking false branch
+  115 |     if (par < argc && !strcmp("-which", argv[par])) {
+      |     ^
+source/selectAlgo.c:148:9: note: 'par' is < 'argc'
+  148 |     if (par < argc && !strcmp("-add", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:148:9: note: Left side of '&&' is true
+source/selectAlgo.c:148:23: note: Assuming the condition is false
+  148 |     if (par < argc && !strcmp("-add", argv[par])) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+source/selectAlgo.c:148:5: note: Taking false branch
+  148 |     if (par < argc && !strcmp("-add", argv[par])) {
+      |     ^
+source/selectAlgo.c:195:9: note: 'par' is < 'argc'
+  195 |     if (par < argc && !strcmp("-group", argv[par])) {
+      |         ^~~
+source/selectAlgo.c:195:9: note: Left side of '&&' is true
+source/selectAlgo.c:195:5: note: Taking true branch
+  195 |     if (par < argc && !strcmp("-group", argv[par])) {
+      |     ^
+source/selectAlgo.c:197:11: note: Assuming 'par' is < 'argc'
+  197 |       if (par >= argc) {
+      |           ^~~~~~~~~~~
+source/selectAlgo.c:197:7: note: Taking false branch
+  197 |       if (par >= argc) {
+      |       ^
+source/selectAlgo.c:207:18: note: Stream opened here
+  207 |       FILE *fp = fopen(path, "r");
+      |                  ^~~~~~~~~~~~~~~~
+source/selectAlgo.c:207:18: note: Assuming that 'fopen' is successful
+  207 |       FILE *fp = fopen(path, "r");
+      |                  ^~~~~~~~~~~~~~~~
+source/selectAlgo.c:208:11: note: 'fp' is non-null
+  208 |       if (fp) {
+      |           ^~
+source/selectAlgo.c:208:7: note: Taking true branch
+  208 |       if (fp) {
+      |       ^
+source/selectAlgo.c:210:13: note: Opened stream never closed. Potential resource leak
+  210 |         if (search_ALGO(ALGO_NAME, algo) >= 0)
+      |             ^~~~~~~~~~~
+source/selectAlgo.c:327:7: warning: Call to function 'fprintf' is insecure as it does not provide bounding of the memory buffer or security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+  327 |       fprintf(fp, "#%d #%s \n", execute[j], ALGO_NAME[j]);
+      |       ^~~~~~~
+source/selectAlgo.c:327:7: note: Call to function 'fprintf' is insecure as it does not provide bounding of the memory buffer or security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
+  327 |       fprintf(fp, "#%d #%s \n", execute[j], ALGO_NAME[j]);
+      |       ^~~~~~~
