@@ -26,6 +26,7 @@
  */
 
 #define MIN_M 4
+#include <assert.h>
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"

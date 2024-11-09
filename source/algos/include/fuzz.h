@@ -10,12 +10,21 @@ int main(void) {
   char fn[80];
   FILE *f;
 
+#ifdef PRETTY_RANDCH
+#define RANDCH(c)                                                              \
+  do {                                                                         \
+    c = (rand() % 74) + '0';                                                   \
+  } while (!isalnum(c))
+#else
+#define RANDCH(c) c = rand() % 256
+#endif
+
   __AFL_INIT();
   p = __AFL_FUZZ_TESTCASE_BUF;
   n = (rand() % 120) + 32;
   t = malloc(n + 1);
   for (int i = 0; i < n; i++)
-    t[i] = rand() % 256;
+    RANDCH(t[i]);
   t[n] = '\0';
 
   // TODO dump only on crash, with the crash id
