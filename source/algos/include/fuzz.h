@@ -12,13 +12,12 @@ int main(void) {
 
   __AFL_INIT();
   p = __AFL_FUZZ_TESTCASE_BUF;
-  n = (rand() % 4000) + 32;
+  n = (rand() % 120) + 32;
   t = malloc(n + 1);
   for (int i = 0; i < n; i++)
     t[i] = rand() % 256;
   t[n] = '\0';
 
-#if 1
   // TODO dump only on crash, with the crash id
   snprintf(fn, sizeof(fn), "/proc/%d/comm", getpid());
   f = fopen(fn, "r");
@@ -29,11 +28,27 @@ int main(void) {
   f = fopen(fn, "w");
   fwrite(t, n, 1, f);
   fclose(f);
+
+  const int min_m =
+#if MIN_M
+    MIN_M
+#else
+    2
 #endif
+    ;
+  const int max_m =
+#if MAX_M
+    MAX_M
+#else
+    63
+#endif
+    ;
 
   while (__AFL_LOOP(10000)) {
     m = __AFL_FUZZ_TESTCASE_LEN;
-    if (m > 1 && m < 64)
+    if (m > n)
+      continue;
+    if (m >= min_m && m <= max_m)
       search(p, m, t, n);
   }
   free(t);

@@ -70,7 +70,12 @@
 #endif
 
 #if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC))
+#ifndef HAVE_SHM
 #define HAVE_SHM
+#endif
+#endif
+#ifdef NOSHM
+#undef HAVE_SHM
 #endif
 
 #ifdef __GNUC__

@@ -7,10 +7,6 @@
 #define X64_ONLY 0
 #endif
 
-#if !(defined(_WIN32) || defined(__AVR__))
-#define HAVE_SHM
-#endif
-
 enum algo_id {
   // Comparison based Algorithms
   _BF,       // Brute Force
@@ -553,5 +549,15 @@ const struct algo ALGOS[] = {
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define NumAlgo ARRAY_SIZE(ALGOS)
+
+// also in define.h
+#if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC))
+#ifndef HAVE_SHM
+#define HAVE_SHM
+#endif
+#endif
+#ifdef NOSHM
+#undef HAVE_SHM
+#endif
 
 #endif // _ALGORITHMS_H

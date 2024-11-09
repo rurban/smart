@@ -78,23 +78,81 @@ void printManual() {
   printf("\n\n");
 }
 
+void to_hex(unsigned char c, unsigned char *str) {
+    static const char hex_digits[] = "0123456789abcdef";
+    str[0] = '\\';
+    str[1] = 'x';
+    str[2] = hex_digits[(c >> 4) & 0xF];  // Get the high nibble (4 most significant bits)
+    str[3] = hex_digits[c & 0xF];         // Get the low nibble (4 least significant bits)
+    str[4] = '\0';
+}
+
+int hexquote(char *out, unsigned char *P, const int m) {
+  // hexquote P and T
+  int is_printable = 1;
+  int pos = 0;
+  for (int i = 0; i < m; i++) {
+    if (isalnum(P[i])) {
+      out[pos++] =  P[i];
+    }
+    else {
+      unsigned char hex[5];
+      to_hex(P[i], hex);
+      is_printable = 0;
+      memcpy(&out[pos], hex, 4);
+      pos += 4;
+    }
+  }
+  out[pos] = '\0';
+  return is_printable;
+}
+
 int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
-            int *count, int alpha) {
-  char command[100];
+            int *count, int verbose) {
 #ifndef HAVE_SHM
-  sprintf(command, "./%s/%s %s %d %s %d", BINDIR, algoname, P, m, T, n);
+  char *command;
+  // hexquote P and T
+  char *cmd1 = malloc((4 * m) + 1);
+  char *cmd2 = malloc((4 * n) + 1);
+  int is_printable1 = hexquote(cmd1, P, m);
+  int is_printable2 = hexquote(cmd2, T, n);
+  size_t sz = 5 + 8 /*the 2 numbers (max 4 digit)*/ + strlen(BINDIR) + strlen(algoname) + m + n;
+  if (is_printable1 && is_printable2) {
+    command = malloc(sz + 1);
+    snprintf(command, sz, "%s/%s %s %d %s %d", BINDIR, algoname, P, m, T, n);
+  }
+  else if (is_printable1 && !is_printable2) {
+    sz += 3 + (n * 4);
+    command = malloc(sz + 1);
+    snprintf(command, sz, "%s/%s %s %d $'%s' %d", BINDIR, algoname, P, m, cmd2, n);
+  }
+  else if (!is_printable1 && is_printable2) {
+    sz += 3 + (m * 4);
+    command = malloc(sz + 1);
+    snprintf(command, sz, "%s/%s $'%s' %d %s %d", BINDIR, algoname, cmd1, m, T, n);
+  }
+  else {
+    sz += 6 + (m * 4) + (n * 4);
+    command = malloc(sz + 1);
+    snprintf(command, sz, "%s/%s $'%s' %d $'%s' %d", BINDIR, algoname, cmd1, m, cmd2, n);
+  }
+  free(cmd1);
+  free(cmd2);
 #else
+  char command[100];
   (void)P;
   (void)T;
-  (void)alpha;
   sprintf(command, "./%s/%s shared %d %d %d %d %d %d %d", BINDIR, algoname,
           shmids[shm_P].key, m, shmids[shm_T].key, n, shmids[shm_r].key,
           shmids[shm_e].key, shmids[shm_pre].key);
-  //fprintf(stderr, "%s\n", command);
 #endif
   // TODO fork/exec with timeout
-  // printf("%s\n",command);
+  if (verbose)
+    printf("%s\n", command);
   int res = system(command);
+#ifndef HAVE_SHM
+  free(command);
+#endif
   if (!res)
     return (*count);
   else
@@ -106,18 +164,19 @@ int FREQ[SIGMA];
 int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
             int n, char *algoname, int verbose, int alpha /*ignored*/) {
   // printf("\b\b\b\b\b\b[%.3d%%]",(*rip)*100/18); fflush(stdout);
-  (*count) = 0;
   char *pP = NULL;
   char *pT = NULL;
+  (void)alpha;
+  (*count) = 0;
   if (verbose) {
     pP = printable((char *)P);
     pT = printable((char *)T);
 #ifdef DEBUG
-    printf("\t%d %s/%s %s %d %s %d ", *rip, BINDIR, algoname, pP, m, pT, n);
+    printf("\t%d %s/%s '%s' %d '%s' %d ", *rip, BINDIR, algoname, pP, m, pT, n);
 #endif
   }
   int occur1 = bf_search(P, m, T, n);
-  int occur2 = execute(algoname, P, m, T, n, count, alpha);
+  int occur2 = execute(algoname, P, m, T, n, count, verbose);
 
   if (occur2 >= 0 && occur1 != occur2) {
     if (verbose) {

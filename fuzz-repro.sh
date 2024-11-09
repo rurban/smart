@@ -15,5 +15,6 @@ fi
 
 make -s SANITIZE=1 test-asan bin/asan/$algo
 echo ./test-asan $algo --files "$id" "$data"
-./test-asan $algo --files "$id" "$data" && rm -i -- "$id" && echo not repro
+./test-asan $algo --files "$id" "$data"
+# rm -i -- "$id" && echo not repro
 

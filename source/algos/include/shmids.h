@@ -48,6 +48,7 @@ struct shmids {
     [shm_r] = {"r", 0, 0, sizeof(int)},
 };
 
+#ifdef HAVE_SHM
 static int shmvalidkey(key_t key) {
   for (unsigned e = shm_T; e <= shm_r; e++) {
     if (key != 0 && key == shmids[e].key)
@@ -55,6 +56,7 @@ static int shmvalidkey(key_t key) {
   }
   return 1;
 }
+#endif
 
 void *shmalloc(shmids_e e, size_t size) {
 #ifdef HAVE_SHM

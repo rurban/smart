@@ -51,6 +51,9 @@ typedef struct list {
   int pos;
 } LIST;
 
+#ifdef __GNUC__
+#pragma GCC optimize("O3")
+#endif
 int search1(unsigned char *pattern, int patlen, unsigned char *x,
             int textlen) { // we exactly know patlen=1
 

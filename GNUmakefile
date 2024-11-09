@@ -20,12 +20,12 @@ else
   CFLAGS  := -O3 -march=native -mtune=native -Wall -Wfatal-errors
   ifeq ($(SANITIZE),1)
     BINDIR = bin/asan
-    CFLAGS += -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
+    CFLAGS += -Og -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
   endif
   ifeq ($(FUZZ),1)
     CC = afl-clang-lto
     BINDIR = bin/fuzz
-    CFLAGS = -O1 -Isource/algos -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
+    CFLAGS = -Og -Isource/algos -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
   endif
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
@@ -89,6 +89,7 @@ TESTS := $(shell shuf -n 10 good.lst)
 ifeq ($(TESTS),)
   TESTS = hor mp kmp musl1 tbm so ssm qf33 twfr3 fndm
 endif
+COMPILE = $(CC) $(CFLAGS)
 
 all: $(BINS) $(HELPERS) good.lst asan.lst
 
@@ -226,7 +227,7 @@ fuzz: test-fuzz GNUmakefile
 # emacs flymake-mode
 check-syntax:
 	test -n "$(CHK_SOURCES)" && \
-	  $(COMPILE) -o /dev/null -S $(CHK_SOURCES)
+	  $(COMPILE) -c -o /dev/null -S $(CHK_SOURCES)
 .PHONY: check-syntax
 fmt:
 	clang-format -i `find source -name \*.c -o -name \*.h`
