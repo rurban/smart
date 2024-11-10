@@ -138,17 +138,18 @@ int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
   }
   free(cmd1);
   free(cmd2);
+  if (verbose)
+    printf("%s\n", command);
 #else
   char command[100];
   (void)P;
   (void)T;
+  (void)verbose;
   sprintf(command, "./%s/%s shared %d %d %d %d %d %d %d", BINDIR, algoname,
           shmids[shm_P].key, m, shmids[shm_T].key, n, shmids[shm_r].key,
           shmids[shm_e].key, shmids[shm_pre].key);
 #endif
   // TODO fork/exec with timeout
-  if (verbose)
-    printf("%s\n", command);
   int res = system(command);
 #ifndef HAVE_SHM
   free(command);
