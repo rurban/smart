@@ -32,7 +32,7 @@ jobs:
         make CC=clang SANITIZE=1 &&
         for t in `cat asan.lst`
         do
-          ./test-asan "$t"
+          ./test-asan "$t" -nv
         done
   lint:
     runs-on: ubuntu-latest
@@ -97,7 +97,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - uses: uraimo/run-on-arch-action@v2.7.1
+      - uses: uraimo/run-on-arch-action@v2.8.1
         name: check on aarch64
         id: runcmd
         with:

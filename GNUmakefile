@@ -201,7 +201,7 @@ check-verify: algocfg GNUmakefile
 	done
 # prints the violations
 verify-trace: verify/trace.log
-verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) $(ALGOSINC) algocfg GNUmakefile
+verify/trace.log: algocfg $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) $(ALGOSINC) GNUmakefile
 	for c in $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))); do \
 	  echo $$c; b=`basename $$c .c`; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
@@ -210,12 +210,12 @@ verify/trace.log: $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIFY))) $(A
             (echo $$cmd --trace $(CBMC_ARGS) " $$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
-fuzz: test-fuzz GNUmakefile
+fuzz: test-fuzz algocfg GNUmakefile
 	echo '!#/bin/sh' >fuzz.sh
 	-for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; echo $(MAKE) $$b.fuzz >>fuzz.sh; \
 	done; chmod +x fuzz.sh; sh ./fuzz.sh
-%.fuzz: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
+%.fuzz: algocfg source/algos/%.c $(ALGOSINC) GNUmakefile
 	b=`basename $@ .fuzz`; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
 	  timeout 30s afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
