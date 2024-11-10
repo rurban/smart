@@ -142,7 +142,7 @@ check: all
 	for t in $(TESTS); do echo $$t rand2 2; $(DRV) ./$(TESTBIN) $$t rand2 2; done
 	$(DRV) ./$(SELECTBIN) -all block bmh2 bmh4 dfdm sbdm faoso2 blim ssecp
 	-mv algorithms.lst.bak algorithms.lst
-lint: cppcheck clang-tidy sanitizer.log
+lint: algocfg cppcheck clang-tidy sanitizer.log
 # for newer cppcheck
 #CPPCHECK_ARGS="-j4 --enable=warning,portability --inline-suppr --check-level=exhaustive"
 CPPCHECK_ARGS = -j4 --enable=warning,portability --inline-suppr
@@ -164,10 +164,14 @@ good.lst: algocfg
 asan.lst: algocfg
 	./algocfg good 0 | perl -nle'%bad=map{$$_=>1}split/ /;for(split/ /,qx"./algocfg asan"){print $$_ unless $$bad{$$_}}' >$@
 
+ifeq (esbmc, $(CBMC))
+CBMC_ARGS = -Isource/algos -DCBMC -DESBMC
+else
 CBMC_ARGS = -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check \
   --div-by-zero-check --signed-overflow-check --unsigned-overflow-check   \
   --pointer-overflow-check --conversion-check --undefined-shift-check     \
   --float-overflow-check --nan-check --enum-range-check
+endif
 #CBMC_VERSION := $(shell cbmc --version | cut -c1-3)
 #CBMC_ARGS += $(shell if test "`echo "$$CBMC_VERSION >= 5.13" | bc`" = 1; then \
 #	echo "--pointer-primitive-check"; fi)

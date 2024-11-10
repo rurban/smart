@@ -13,6 +13,21 @@
 #define XSIZE MAX_M
 #define YSIZE MAX_N
 
+#ifndef ESBMC
+#define __VERIFIER_assume(x)    __CPROVER_assume(x)
+#define __VERIFIER_assert(x)    __CPROVER_assert(x)
+#define __VERIFIER_input(a,b)   __CPROVER_input(a,b)
+#define __VERIFIER_output(a,b)  __CPROVER_output(a,b)
+#define __VERIFIER_nondet_uchar nondet_uchar
+#define __VERIFIER_nondet_int   nondet_int
+#else
+void __VERIFIER_assert(int cond);
+#define __VERIFIER_input(a,b)
+#define __VERIFIER_output(a,b)
+#endif
+// not needed, and would need cbmc > 5.12
+#define __CPROVER_loop_invariant(cond)
+
 /* the brute force algorithm used for comparing occurrences */
 static inline int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   assert(m < MAX_M);
@@ -20,7 +35,7 @@ static inline int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   int count = 0;
   for (int j = 0; j <= n - m; ++j)
     __CPROVER_loop_invariant(j <= MAX_N - MAX_M)
-    __CPROVER_loop_invariant(j >= __CPROVER_loop_entry(j))
+    __CPROVER_loop_invariant(j >= __VERIFIER_loop_entry(j))
   {
     if (memcmp(x, &y[j], m) == 0)
       count++;
@@ -38,7 +53,7 @@ static inline int bf_search_large(unsigned char *x, int m, unsigned char *y, int
   int count = 0;
   for (int j = 0; j <= n - m; ++j)
     __CPROVER_loop_invariant(j <= n - MAX_M)
-    __CPROVER_loop_invariant(j >= __CPROVER_loop_entry(j))
+    __CPROVER_loop_invariant(j >= __VERIFIER_loop_entry(j))
   {
     if (memcmp(x, &y[j], m) == 0)
       count++;
@@ -50,22 +65,22 @@ static inline int bf_search_large(unsigned char *x, int m, unsigned char *y, int
   return count;
 }
 
-unsigned char nondet_uchar();
-int nondet_int();
+unsigned char __VERIFIER_nondet_uchar();
+int __VERIFIER_nondet_int();
 
 int main(void) {
 #define RANDCH(c)                                                              \
   {                                                                            \
-    c = nondet_uchar();                                                        \
-    __CPROVER_assume(c > 0 && c <= 255);                                       \
+    c = __VERIFIER_nondet_uchar();                                                        \
+    __VERIFIER_assume(c > 0 && c <= 255);                                       \
   }
-  int m = MAX_M; // nondet_int();
+  int m = MAX_M; // __VERIFIER_nondet_int();
 #ifdef MIN_M
-  __CPROVER_assume(m > MIN_M && m < MAX_M);
+  __VERIFIER_assume(m > MIN_M && m < MAX_M);
 #else
-  __CPROVER_assume(m > 0 && m < MAX_M);
+  __VERIFIER_assume(m > 0 && m < MAX_M);
 #endif
-  int n = MAX_N; // nondet_int();
+  int n = MAX_N; // __VERIFIER_nondet_int();
   unsigned char P[32];
   unsigned char T[256];
   for (int i = 0; i < MAX_M; i++)
@@ -74,29 +89,29 @@ int main(void) {
   for (int i = 0; i < MAX_N; i++)
     __CPROVER_loop_invariant(i < MAX_N)
     RANDCH(T[i]);
-  __CPROVER_input("P", P);
-  //__CPROVER_input("m", m);
-  __CPROVER_input("T", T);
-  //__CPROVER_input("n", n);
+  __VERIFIER_input("P", P);
+  //__VERIFIER_input("m", m);
+  __VERIFIER_input("T", T);
+  //__VERIFIER_input("n", n);
   int occ, ref;
 
 #define M_N_LOOP(m, n)                          \
   T[n] = '\0';                                  \
   P[m] = '\0';                                  \
   occ = search(P, m, T, n);                     \
-  __CPROVER_output("occ", occ);                 \
+  __VERIFIER_output("occ", occ);                \
   ref = bf_search(P, m, T, n);                  \
-  __CPROVER_output("ref", ref);                 \
-  __CPROVER_assert(ref == occ, "ref == occ")
+  __VERIFIER_output("ref", ref);                \
+  assert(ref == occ)
 
 #define M_N_LOOP_LARGE(m, n)                    \
   T[n] = '\0';                                  \
   P[m] = '\0';                                  \
   occ = search(P, m, T, n);                     \
-  __CPROVER_output("occ", occ);                 \
+  __VERIFIER_output("occ", occ);                \
   ref = bf_search(P, m, T, n);                  \
-  __CPROVER_output("ref", ref);                 \
-  __CPROVER_assert(ref == occ, "ref == occ")
+  __VERIFIER_output("ref", ref);                \
+  assert(ref == occ)
 
 #if MIN_M == 0
   M_N_LOOP(0, MAX_N-1);
