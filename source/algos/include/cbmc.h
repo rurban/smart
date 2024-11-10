@@ -81,7 +81,7 @@ int main(void) {
   __VERIFIER_assume(m > 0 && m < MAX_M);
 #endif
   int n = MAX_N; // __VERIFIER_nondet_int();
-  unsigned char P[32];
+  unsigned char P[33];
   unsigned char T[256];
   for (int i = 0; i < MAX_M; i++)
     __CPROVER_loop_invariant(i < MAX_M)
@@ -158,7 +158,7 @@ int main(void) {
   M_N_LOOP(7, MAX_N-2);
 #endif
 
-  strcpy(T, "8TOLWd903QRXd4QMPL665XT8dPY0b214VPQMNZNRK0::4bW");
+  strcpy((char*)T, "8TOLWd903QRXd4QMPL665XT8dPY0b214VPQMNZNRK0::4bW");
 #if MIN_M >= 2 || MIN_M == 0
   M_N_LOOP_LARGE(2, 47);
   M_N_LOOP_LARGE(2, 32);
