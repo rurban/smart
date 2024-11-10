@@ -227,6 +227,11 @@ fuzz: test-fuzz algocfg GNUmakefile
 	    if [ -n "$c" ]; then xxd -i $c fuzz/$$b/id$(basename "$c" | cut -c4-9).h; fi; \
 	  done; \
 	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9
+.PHONY: fuzz-repro
+fuzz-repro:
+	$(MAKE) SANITIZE=1
+	for i in fuzz/*/default/crashes/id*; do \
+	  ./fuzz-repro.sh "$$i"; done
 
 # emacs flymake-mode
 check-syntax:
