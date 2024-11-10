@@ -20,12 +20,12 @@ else
   CFLAGS  := -O3 -march=native -mtune=native -Wall -Wfatal-errors
   ifeq ($(SANITIZE),1)
     BINDIR = bin/asan
-    CFLAGS += -Og -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
+    CFLAGS += -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
   endif
   ifeq ($(FUZZ),1)
     CC = afl-clang-lto
     BINDIR = bin/fuzz
-    CFLAGS = -Og -Isource/algos -march=native -mtune=native -g -DFUZZ -DBINDIR=\"$(BINDIR)\"
+    CFLAGS = -Og -g -Isource/algos -fsanitize=address,undefined -march=native -mtune=native -DFUZZ -DBINDIR=\"$(BINDIR)\"
   endif
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
