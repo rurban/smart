@@ -116,7 +116,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_PREPROCESSING
   //NOLINTBEGIN(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
   memset(B, 0, SIGMA * sizeof(unsigned int));
-  memset(restore, 0, 32 * sizeof(int));
+  memset(restore, 0, (XSIZE + 1) * sizeof(int));
   //NOLINTEND(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
   s = 1;
   for (i = m - 1; i >= 0; i--) {

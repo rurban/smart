@@ -108,7 +108,7 @@ verify/%.vfy: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	b=`basename $@ .vfy`; echo -n "cmd="; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CBMC_ARGS) $< > $@; \
-	  $$cmd $(CBMC_ARGS) $< | tee -a $@
+	  $$cmd $(CBMC_ARGS) $< 2>&1 | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \
@@ -120,7 +120,7 @@ verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	b=`basename $@ .vfy-trace`; echo -n "cmd="; ./algocfg $$b cbmc; \
 	  cmd=`./algocfg $$b cbmc`; \
 	  echo $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< > $@; \
-	  $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< | tee -a $@
+	  $$cmd $(CMBC_TRACE_ARGS) $(CBMC_ARGS) $< 2>&1 | tee -a $@
 	if grep UNSATISFIABLE $@ >/dev/null; then \
 	  echo | tee -a $@; b=`basename $@ .vfy`; \
 	  echo goto-analyzer -Isource/algos -DCBMC --verify --recursive-interprocedural source/algos/$$b.c | tee -a $@; \

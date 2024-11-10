@@ -153,7 +153,7 @@ const struct algocfg ALGOCFGS[] = {
   //[_BMH2] = {_BMH2, GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},
   //[_BMH4] = {_BMH4, GOOD, ASAN, VFY_PASS, 4, 0, 0, 0, 0, 0},
   [_GRASPm] = {_GRASPm, FAIL, FAIL, VFY_PASS, 2, 0, 0, 0, 0, 0},
-  [_SSEF] = {_SSEF, X64_ONLY, FAIL, VFY_PASS, 32, 0, 0, 0, 0, 0},
+  [_SSEF] = {_SSEF, X64_ONLY, FAIL, VFY_FAIL, 32, 0, 0, 0, 0, 0},
   [_AUT] = {_AUT, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_RF] = {_RF, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_TRF] = {_TRF, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
@@ -238,7 +238,7 @@ const struct algocfg ALGOCFGS[] = {
   [_BXS8] = {_BXS8, GOOD, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
   [_FS_W1] = {_FS_W1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_FS_W2] = {_FS_W2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // 4000: 8m
-  [_FS_W4] = {_FS_W4, GOOD, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0}, // n>=6
+  [_FS_W4] = {_FS_W4, GOOD, FAIL, VFY_PASS, 6, 0, 0, 0, 0, 0}, // n>=6
   [_FS_W6] = {_FS_W6, GOOD, FAIL, VFY_PASS, 8, 0, 0, 0, 0, 0}, // n>=8
   [_FS_W8] = {_FS_W8, GOOD, FAIL, VFY_PASS, 10, 0, 0, 0, 0, 0}, // needs m space at the end of T
   [_FSBNDM_W1] = {_FSBNDM_W1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
@@ -335,14 +335,14 @@ const struct algocfg ALGOCFGS[] = {
   [_BRAM7] = {_BRAM7, GOOD, ASAN, VFY_PASS, 7, 0, 0, 0, 0, 0},
   [_FT3]   = {_FT3,   GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   //[_HPBM] = {_HPBM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
-  [_SSECP] = {_SSECP, FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no cbmc simd support yet
-  [_SIMDKR] = {_SIMDKR, FAIL, RNDCRASH, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no cbmc simd support yet
+  [_SSECP] = {_SSECP, FAIL, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
+  [_SIMDKR] = {_SIMDKR, FAIL, RNDCRASH, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
   [_LIBC]  = {_LIBC,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
-  [_LIBC1] = {_LIBC1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_LIBC1] = {_LIBC1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // esbmc fails
   [_MUSL]  = {_MUSL,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
   [_MUSL1] = {_MUSL1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, //7s, upto d=820 ok
   [_MUSL2] = {_MUSL2, FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
-  [_EPSM]  = {_EPSM,  GOOD, FAIL, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no cbmc simd support yet
+  [_EPSM]  = {_EPSM,  GOOD, FAIL, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
     // clang-format on
 };
 
