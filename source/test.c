@@ -314,14 +314,14 @@ int main(int argc, char *argv[]) {
         char fullpath[800];
         snprintf(fullpath, sizeof(fullpath), "data/%s", list_of_filenames[k]);
         // initialize the frequency vector
-        if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+        if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
           exit(1);
         }
       }
     } else {
       char fullpath[800];
       snprintf(fullpath, sizeof(fullpath), "data/%s", text);
-      n = getText(T, fullpath, FREQ, TSIZE);
+      n = getText(T, fullpath, FREQ, TSIZE, verbose);
     }
     argn++;
     memcpy (orig_T, T, TSIZE);

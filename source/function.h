@@ -273,7 +273,7 @@ void textStats(unsigned char *T, int n, int FREQ[SIGMA]) {
   free(sorted);
 }
 
-int getText(unsigned char *T, char *path, int FREQ[SIGMA], int TSIZE) {
+int getText(unsigned char *T, char *path, int FREQ[SIGMA], int TSIZE, int verbose) {
   // obtains the input text
   int j, i = 0;
   char indexfilename[100];
@@ -291,7 +291,8 @@ int getText(unsigned char *T, char *path, int FREQ[SIGMA], int TSIZE) {
         while ((c = getc(index)) != '#')
           filename[j++] = c;
         filename[j] = '\0';
-        printf("\tLoading the file %s\n", filename);
+        if (verbose)
+          printf("\tLoading the file %s\n", filename);
         FILE *input;
         if ((input = fopen(filename, "r"))) {
           int d;

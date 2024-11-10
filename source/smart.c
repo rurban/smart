@@ -420,6 +420,7 @@ int main(int argc, const char *argv[]) {
   unsigned char *T = NULL; // text
   int n;                   // length of the text
   char parameter[1000];
+  int verbose = 1;
 
   memset(&options, 0, sizeof(options));
   options.limit = 300; // running time bound
@@ -500,6 +501,14 @@ int main(int argc, const char *argv[]) {
         goto end;
       }
       strncat(filename, argv[par++], SZNCAT(filename));
+    }
+    if (par < argc && !strcmp("-nv", argv[par])) {
+      par++;
+      if (par >= argc) {
+        printf("Error in input parameters. Use -h for help.\n\n");
+        goto end;
+      }
+      verbose = 0;
     }
     if (par < argc && !strcmp("-plen", argv[par])) {
       par++;
@@ -700,7 +709,7 @@ int main(int argc, const char *argv[]) {
       char fullpath[800];
       snprintf(fullpath, sizeof(fullpath), "data/%s", list_of_filenames[k]);
       // initialize the text and frequency vector
-      if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
         goto end_shm;
       }
       if (!(alpha = getAlpha(list_of_filenames[k]))) {
@@ -736,7 +745,7 @@ int main(int argc, const char *argv[]) {
       alpha = SETTING_ALPHA_SIZE[sett];
       printf("\n\tTry to process archive %s\n", SETTING_BUFFER[sett]);
       // initialize the frequency vector
-      if (!(n = getText(T, fullpath, FREQ, TSIZE))) {
+      if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
         goto end_shm;
       }
       //printf("\tText buffer of dimension %d byte\n", n);
