@@ -43,27 +43,39 @@ int string2decimal(char *s) {
   return decimal;
 }
 
+void to_hex(unsigned char c, unsigned char *str) {
+    static const char hex_digits[] = "0123456789abcdef";
+    str[0] = '\\';
+    str[1] = 'x';
+    str[2] = hex_digits[(c >> 4) & 0xF];  // Get the high nibble (4 most significant bits)
+    str[3] = hex_digits[c & 0xF];         // Get the low nibble (4 least significant bits)
+    str[4] = '\0';
+}
+
 ATTRIBUTE_MALLOC
-char *printable(const char *s) {
-  int n = strlen(s) - 1;
+char *printable(const char *s, int n, int *is_printable) {
   unsigned sz = (n + 1) * 4;
   char *ret = calloc(sz, 1);
-  while (n >= 0) {
-    if (!isgraph(s[n]) || s[n] == '\'' || s[n] == ' ' || s[n] == '"') {
-      char tmp[5];
-      snprintf(tmp, sizeof(tmp), "\\%03o", s[n]);
-      if (strlen(ret) + n + 5 > sz) {
-        sz = strlen(ret) + n + 5;
+  *is_printable = 1;
+  for (int i=0; i < n; i++) {
+    unsigned char c = (unsigned char)s[i];
+    if (!isgraph(c) || c == '\'' || c == ' ' || c == '"') {
+      unsigned char hex[5];
+      to_hex(c, hex);
+      *is_printable = 0;
+      if (strlen(ret) + n + 4 > sz) {
+        sz = strlen(ret) + n + 4;
         char *tmp = realloc(ret, sz);
         if (tmp)
           ret = tmp;
         else
           abort();
       }
-      strncat(ret, tmp, sz);
+      strncat(ret, (char*)hex, sz);
     } else {
-      char tmp[4];
-      snprintf(tmp, 4, "%c", s[n]);
+      char tmp[2];
+      tmp[0] = s[n];
+      tmp[1] = '\0';
       strcat(ret, tmp);
     }
     n--;

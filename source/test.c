@@ -78,14 +78,6 @@ void printManual() {
   printf("\n\n");
 }
 
-void to_hex(unsigned char c, unsigned char *str) {
-    static const char hex_digits[] = "0123456789abcdef";
-    str[0] = '\\';
-    str[1] = 'x';
-    str[2] = hex_digits[(c >> 4) & 0xF];  // Get the high nibble (4 most significant bits)
-    str[3] = hex_digits[c & 0xF];         // Get the low nibble (4 least significant bits)
-    str[4] = '\0';
-}
 
 int hexquote(char *out, unsigned char *P, const int m) {
   // hexquote P and T
@@ -169,11 +161,19 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
   char *pT = NULL;
   (void)alpha;
   (*count) = 0;
+  int is_printable1, is_printable2;
   if (verbose) {
-    pP = printable((char *)P);
-    pT = printable((char *)T);
+    pP = printable((char *)P, m, &is_printable1);
+    pT = printable((char *)T, n, &is_printable2);
 #ifdef DEBUG
-    printf("\t%d %s/%s '%s' %d '%s' %d ", *rip, BINDIR, algoname, pP, m, pT, n);
+    if (is_printable1)
+      printf("\t%d %s/%s %s %d ", *rip, BINDIR, algoname, P, m);
+    else
+      printf("\t%d %s/%s $'%s' %d", *rip, BINDIR, algoname, pP, m, pT, n);
+    if (is_printable2)
+      printf("%s %d ", T, n);
+    else
+      printf("$'%s' %d ", pT, n);
 #endif
   }
   int occur1 = bf_search(P, m, T, n);
