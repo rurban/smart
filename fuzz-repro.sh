@@ -1,7 +1,7 @@
 #!/bin/sh
 id="$1"
 arg=
-if [ "$1" == "-nv" ]; then
+if [ "$1" = "-nv" ]; then
     arg=-nv
     id="$2"
 fi
