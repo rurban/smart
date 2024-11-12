@@ -71,8 +71,8 @@ int __VERIFIER_nondet_int();
 int main(void) {
 #define RANDCH(c)                                                              \
   {                                                                            \
-    c = __VERIFIER_nondet_uchar();                                                        \
-    __VERIFIER_assume(c > 0 && c <= 255);                                       \
+    c = __VERIFIER_nondet_uchar();                                             \
+    __VERIFIER_assume(c > 0 && c <= 255);                                      \
   }
   int m = MAX_M; // __VERIFIER_nondet_int();
 #ifdef MIN_M
@@ -81,7 +81,7 @@ int main(void) {
   __VERIFIER_assume(m > 0 && m < MAX_M);
 #endif
   int n = MAX_N; // __VERIFIER_nondet_int();
-  unsigned char P[33];
+  unsigned char P[65]; // the largest MAX_M is 64 and 512
   unsigned char T[256];
   for (int i = 0; i < MAX_M; i++)
     __CPROVER_loop_invariant(i < MAX_M)
@@ -149,7 +149,7 @@ int main(void) {
 #if MIN_M >= 7 || MIN_M == 0
   M_N_LOOP(7, MAX_N-1);
 #endif
-#if MIN_M <= MAX_M || MIN_M == 0
+#if (MIN_M <= MAX_M || MIN_M == 0) && (MAX_M <= 64)
   M_N_LOOP(MAX_M, MAX_N-1);
   M_N_LOOP(MAX_M, MAX_N); // includes the 0
 #endif

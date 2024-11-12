@@ -38,6 +38,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   memset(B, 0, 512 * 8);
   for (j = 0; j < m - Q + 1; ++j) {
     assert(j + 1 <= m);
+    assert(j < 64);
+    assert(HS(P, j) < 512);
     B[HS(P, j)] |= (UINT64_C(1) << (j));
   }
   // for (j=0; j<256; ++j) B1[j] = B[j]+1;
