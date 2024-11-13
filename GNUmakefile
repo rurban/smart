@@ -162,7 +162,7 @@ tests.lst: $(ALLSRC)
 good.lst: algocfg
 	./algocfg good | tr ' ' '\n' >$@
 asan.lst: algocfg
-	./algocfg good 0 | perl -nle'%bad=map{$$_=>1}split/ /;for(split/ /,qx"./algocfg asan"){print $$_ unless $$bad{$$_}}' >$@
+	./algocfg good 0 | perl -nle'%bad=map{$$_=>1}split/ /;for(split/ /,qx"./algocfg asan"){print $$_ if $$_ ne "\n" and !$$bad{$$_}}' >$@
 
 ifeq (esbmc, $(CBMC))
 CBMC_ARGS = -Isource/algos -DCBMC -DESBMC
