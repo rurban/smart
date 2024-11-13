@@ -80,7 +80,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   int l1, l2, l3, l4;
   int count, hbcr[SIGMA], hbcl[SIGMA], gsR[XSIZE], gsL[XSIZE];
   unsigned char Pr[XSIZE];
-  if (n < 6)
+  if (m < 6)
     return search_small(P, m, T, n);
 #ifdef DEBUG
   unsigned char *y = T;
@@ -129,7 +129,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   k1 = hbcr[T[s1]];
   k2 = hbcl[s2 >= 0 ? T[s2] : 0];
   k3 = hbcr[T[s3]];
-  k4 = hbcl[s2 >= 0 ? T[s4] : 0];
+  k4 = hbcl[s4 >= 0 ? T[s4] : 0];
   l1 = s1 - mm1;
   l3 = s3 - mm1;
   l2 = s2;
@@ -147,6 +147,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
         l1 = k1;
         OUTPUT(l1);
       }
+      assert(j + 1 >= 0);
+      assert(j + 1 < XSIZE);
       s1 += gsR[j + 1];
     }
     if (!k2 && s2 >= 0) {
@@ -165,6 +167,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
         l2 = s2;
         OUTPUT(l2);
       }
+      assert(m - i >= 0);
+      assert(m - i < XSIZE);
       s2 -= gsL[m - i];
     }
     if (!k3 && s3 >= 0) {
@@ -180,6 +184,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
         l3 = k3;
         OUTPUT(l3);
       }
+      assert(j + 1 >= 0);
+      assert(j + 1 < XSIZE);
       s3 += gsR[j + 1];
     }
     if (!k4) {
@@ -194,6 +200,8 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
         l4 = s4;
         OUTPUT(l4);
       }
+      assert(m - i >= 0);
+      assert(m - i < XSIZE);
       s4 -= gsL[m - i];
     }
     assert(s1 >= 0);

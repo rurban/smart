@@ -237,9 +237,9 @@ const struct algocfg ALGOCFGS[] = {
   [_BXS6] = {_BXS6, GOOD, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0},
   [_BXS8] = {_BXS8, GOOD, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
   [_FS_W1] = {_FS_W1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
-  [_FS_W2] = {_FS_W2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // 4000: 8m
-  [_FS_W4] = {_FS_W4, FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0}, // n>=6
-  [_FS_W6] = {_FS_W6, GOOD, FAIL, VFY_PASS, 8, 0, 0, 0, 0, 0}, // n>=8
+  [_FS_W2] = {_FS_W2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_FS_W4] = {_FS_W4, FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0}, // m>=6
+  [_FS_W6] = {_FS_W6, GOOD, FAIL, VFY_PASS, 8, 0, 0, 0, 0, 0}, // m>=8
   [_FS_W8] = {_FS_W8, GOOD, FAIL, VFY_PASS, 10, 0, 0, 0, 0, 0}, // needs m space at the end of T
   [_FSBNDM_W1] = {_FSBNDM_W1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_FSBNDM_W2] = {_FSBNDM_W2, GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},

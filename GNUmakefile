@@ -20,7 +20,10 @@ else
   CFLAGS  := -O3 -march=native -mtune=native -Wall -Wfatal-errors
   ifeq ($(SANITIZE),1)
     BINDIR = bin/asan
-    CFLAGS += -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
+    CFLAGS += -O1 -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
+  endif
+  ifeq ($(DEBUG),1)
+    CFLAGS += -O0 -DDEBUG
   endif
   ifeq ($(FUZZ),1)
     CC = afl-clang-lto

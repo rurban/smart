@@ -169,7 +169,7 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
     if (is_printable1)
       printf("\t%d %s/%s %s %d ", *rip, BINDIR, algoname, P, m);
     else
-      printf("\t%d %s/%s $'%s' %d", *rip, BINDIR, algoname, pP, m, pT, n);
+      printf("\t%d %s/%s $'%s' %d", *rip, BINDIR, algoname, pP, m);
     if (is_printable2)
       printf("%s %d ", T, n);
     else
