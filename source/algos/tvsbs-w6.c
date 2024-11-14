@@ -77,7 +77,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   s4 = 2 * q - 1;
   s5 = 2 * q;
   s6 = n - m;
-  ;
+
   if (s2 > n - m)
     s2 = n - m;
   if (s4 > n - m)
@@ -128,11 +128,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
         }
       }
     }
+    assert(s1 + mp1 < n);
     s1 += BrBcR[y[s1 + m]][y[s1 + mp1]];
+    assert(s2 - 2 >= 0);
     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
+    assert(s3 + mp1 < n);
     s3 += BrBcR[y[s3 + m]][y[s3 + mp1]];
+    assert(s4 - 2 >= 0);
     s4 -= BrBcL[y[s4 - 1]][y[s4 - 2]];
+    assert(s5 + mp1 < n);
     s5 += BrBcR[y[s5 + m]][y[s5 + mp1]];
+    assert(s6 - 2 >= 0);
     s6 -= BrBcL[y[s6 - 1]][y[s6 - 2]];
   }
   //y[n] = '\0';
