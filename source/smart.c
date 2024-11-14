@@ -778,15 +778,17 @@ end_shm:
 end:
   return 0;
 
-#ifndef HAVE_SHM
+#ifdef HAVE_SHM
   //end_1:
 #ifdef SHMDEBUG
   fprintf(stderr, "shmdt T %p id=%d\n", T, shmids[shm_T].id);
 #endif
   shmdt(T);
   shmctl(shmids[shm_T].id, IPC_RMID, 0);
-  return 1;
+#else
+  free(T);
 #endif
+  return 1;
 }
 
 //NOLINTEND(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
