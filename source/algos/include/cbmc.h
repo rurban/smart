@@ -176,7 +176,7 @@ int main(void) {
 #endif
 }
 
-#define NDEBUG
+//#define NDEBUG
 // but we must not use the search asserts to guide our verification
-#undef assert
-#define assert(x)
+//#undef assert
+//#define assert(x)
