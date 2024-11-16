@@ -94,7 +94,7 @@ jobs:
         ./free_shm
   aarch64:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: uraimo/run-on-arch-action@v2.8.1
@@ -107,4 +107,4 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -y make gcc grep
-          run: ./build.sh dotest
+          run: make check
