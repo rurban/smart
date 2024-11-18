@@ -34,25 +34,19 @@ static inline int bf_search(unsigned char *x, int m, unsigned char *y, int n) {
   assert(n < MAX_N);
   int count = 0;
   for (int j = 0; j <= n - m; ++j)
-    __CPROVER_loop_invariant(j <= MAX_N - MAX_M)
     __CPROVER_loop_invariant(j >= __VERIFIER_loop_entry(j))
   {
     if (memcmp(x, &y[j], m) == 0)
       count++;
-    //for (i = 0; i < m && x[i] == y[i + j]; ++i)
-    //  ;
-    //if (i >= m)
-    //  count++;
   }
   return count;
 }
 
 /* for MAX_N > 12 */
 static inline int bf_search_large(unsigned char *x, int m, unsigned char *y, int n) {
-  assert(m < MAX_M);
   int count = 0;
   for (int j = 0; j <= n - m; ++j)
-    __CPROVER_loop_invariant(j <= n - MAX_M)
+    __CPROVER_loop_invariant(j <= n - m)
     __CPROVER_loop_invariant(j >= __VERIFIER_loop_entry(j))
   {
     if (memcmp(x, &y[j], m) == 0)
@@ -109,7 +103,7 @@ int main(void) {
   P[m] = '\0';                                  \
   occ = search(P, m, T, n);                     \
   __VERIFIER_output("occ", occ);                \
-  ref = bf_search(P, m, T, n);                  \
+  ref = bf_search_large(P, m, T, n);            \
   __VERIFIER_output("ref", ref);                \
   assert(ref == occ)
 
@@ -133,27 +127,35 @@ int main(void) {
 #endif
 #if MIN_M >= 3 || MIN_M == 0
   M_N_LOOP(3, MAX_N-1);
+  M_N_LOOP(3, 3);
 #endif
 #if MIN_M >= 4 || MIN_M == 0
   M_N_LOOP(4, MAX_N-1);
+  M_N_LOOP(4, 8);
+  M_N_LOOP(4, 5);
+  M_N_LOOP(4, 4);
 #endif
 #if MIN_M >= 5 || MIN_M == 0
   M_N_LOOP(5, MAX_N-1);
   M_N_LOOP(5, 10);
+  M_N_LOOP(5, 9);
+  M_N_LOOP(5, 8);
+  M_N_LOOP(5, 7);
+  M_N_LOOP(5, 6);
+  M_N_LOOP(5, 5);
 #endif
 #if MIN_M >= 6 || MIN_M == 0
   M_N_LOOP(6, MAX_N-1);
   M_N_LOOP(6, 10);
   M_N_LOOP(6, 8);
-#endif
-#if MIN_M >= 7 || MIN_M == 0
-  M_N_LOOP(7, MAX_N-1);
+  M_N_LOOP(6, 7);
+  M_N_LOOP(6, 6);
 #endif
 #if (MIN_M <= MAX_M || MIN_M == 0) && (MAX_M <= 64)
-  M_N_LOOP(MAX_M, MAX_N-1);
-  M_N_LOOP(MAX_M, MAX_N); // includes the 0
+  M_N_LOOP(MAX_M-1, MAX_N-1);
 #endif
 #if MIN_M >= 7 || MIN_M == 0
+  M_N_LOOP(7, 7);
   M_N_LOOP(7, 8);
   M_N_LOOP(7, MAX_N-2);
 #endif
@@ -165,12 +167,13 @@ int main(void) {
 #endif
 #if MIN_M >= 4 || MIN_M == 0
   M_N_LOOP_LARGE(4, 47);
+  M_N_LOOP_LARGE(4, 32);
 #endif
 #if MIN_M >= 8 || MIN_M == 0
   M_N_LOOP_LARGE(8, 47);
   M_N_LOOP_LARGE(8, 32);
 #endif
-#if MAX_M >= 20
+#if MIN_M >= 20 || MIN_M == 0
   M_N_LOOP_LARGE(20, 47);
   M_N_LOOP_LARGE(20, 32);
 #endif

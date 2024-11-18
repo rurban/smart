@@ -1,5 +1,5 @@
 timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/fjs.c
-CBMC version 6.3.1 (cbmc-6.3.1-32-g7801c5c88c) 64-bit x86_64 linux
+CBMC version 6.4.0 (cbmc-6.4.0-24-g63675f5121) 64-bit x86_64 linux
 Type-checking fjs
 Generating GOTO Program
 Adding CPROVER library (x86_64)
@@ -308,64 +308,62 @@ source/algos/fjs.c function search
 [search.overflow.13] line 77 arithmetic overflow on signed + in s + (i - kmp[(signed long int)i]): SUCCESS
 
 source/algos/include/cbmc.h function bf_search
-[bf_search.assertion.1] line 18 assertion m < MAX_M: SUCCESS
-[bf_search.assertion.2] line 19 assertion n < MAX_N: SUCCESS
-[bf_search.overflow.1] line 21 arithmetic overflow on signed - in n - m: SUCCESS
-[bf_search.overflow.4] line 21 arithmetic overflow on signed + in j + 1: SUCCESS
-[bf_search.overflow.2] line 25 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
-[bf_search.pointer_arithmetic.1] line 25 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.2] line 25 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.3] line 25 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.4] line 25 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.5] line 25 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.6] line 25 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
-[bf_search.overflow.3] line 26 arithmetic overflow on signed + in count + 1: SUCCESS
+[bf_search.overflow.1] line 34 arithmetic overflow on signed - in n - m: SUCCESS
+[bf_search.overflow.4] line 34 arithmetic overflow on signed + in j + 1: SUCCESS
+[bf_search.overflow.2] line 37 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
+[bf_search.pointer_arithmetic.1] line 37 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.2] line 37 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.3] line 37 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.4] line 37 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.5] line 37 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.6] line 37 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[bf_search.overflow.3] line 38 arithmetic overflow on signed + in count + 1: SUCCESS
 
 source/algos/include/cbmc.h function main
-[main.overflow.1] line 71 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.1] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.2] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.3] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.4] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.5] line 73 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.6] line 73 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.overflow.2] line 74 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.7] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.8] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.9] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.10] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.11] line 76 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.12] line 76 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.assertion.1] line 102 ref == occ: SUCCESS
-[main.assertion.2] line 105 ref == occ: SUCCESS
-[main.assertion.3] line 108 ref == occ: SUCCESS
-[main.assertion.4] line 109 ref == occ: SUCCESS
-[main.assertion.5] line 110 ref == occ: SUCCESS
-[main.assertion.6] line 111 ref == occ: SUCCESS
-[main.assertion.7] line 112 ref == occ: SUCCESS
-[main.assertion.8] line 113 ref == occ: SUCCESS
-[main.assertion.9] line 114 ref == occ: SUCCESS
-[main.assertion.10] line 115 ref == occ: SUCCESS
-[main.assertion.11] line 116 ref == occ: SUCCESS
-[main.assertion.12] line 117 ref == occ: SUCCESS
-[main.assertion.13] line 120 ref == occ: SUCCESS
-[main.assertion.14] line 123 ref == occ: SUCCESS
-[main.assertion.15] line 126 ref == occ: SUCCESS
-[main.assertion.16] line 127 ref == occ: SUCCESS
-[main.assertion.17] line 130 ref == occ: SUCCESS
-[main.assertion.18] line 131 ref == occ: SUCCESS
-[main.assertion.19] line 132 ref == occ: SUCCESS
-[main.assertion.20] line 135 ref == occ: SUCCESS
-[main.assertion.21] line 138 ref == occ: SUCCESS
-[main.assertion.22] line 139 ref == occ: SUCCESS
-[main.assertion.23] line 142 ref == occ: SUCCESS
-[main.assertion.24] line 143 ref == occ: SUCCESS
-[main.precondition_instance.1] line 146 strcpy src/dst overlap: SUCCESS
-[main.assertion.25] line 148 ref == occ: SUCCESS
-[main.assertion.26] line 149 ref == occ: SUCCESS
-[main.assertion.27] line 152 ref == occ: SUCCESS
-[main.assertion.28] line 155 ref == occ: SUCCESS
-[main.assertion.29] line 156 ref == occ: SUCCESS
+[main.overflow.1] line 79 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.1] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.2] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.3] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.4] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.5] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.6] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.overflow.2] line 82 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.7] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.8] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.9] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.10] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.11] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.12] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.assertion.1] line 110 assertion ref == occ: SUCCESS
+[main.assertion.2] line 113 assertion ref == occ: SUCCESS
+[main.assertion.3] line 116 assertion ref == occ: SUCCESS
+[main.assertion.4] line 117 assertion ref == occ: SUCCESS
+[main.assertion.5] line 118 assertion ref == occ: SUCCESS
+[main.assertion.6] line 119 assertion ref == occ: SUCCESS
+[main.assertion.7] line 120 assertion ref == occ: SUCCESS
+[main.assertion.8] line 121 assertion ref == occ: SUCCESS
+[main.assertion.9] line 122 assertion ref == occ: SUCCESS
+[main.assertion.10] line 123 assertion ref == occ: SUCCESS
+[main.assertion.11] line 124 assertion ref == occ: SUCCESS
+[main.assertion.12] line 125 assertion ref == occ: SUCCESS
+[main.assertion.13] line 128 assertion ref == occ: SUCCESS
+[main.assertion.14] line 131 assertion ref == occ: SUCCESS
+[main.assertion.15] line 134 assertion ref == occ: SUCCESS
+[main.assertion.16] line 135 assertion ref == occ: SUCCESS
+[main.assertion.17] line 138 assertion ref == occ: SUCCESS
+[main.assertion.18] line 139 assertion ref == occ: SUCCESS
+[main.assertion.19] line 140 assertion ref == occ: SUCCESS
+[main.assertion.20] line 143 assertion ref == occ: SUCCESS
+[main.assertion.21] line 146 assertion ref == occ: SUCCESS
+[main.assertion.22] line 147 assertion ref == occ: SUCCESS
+[main.assertion.23] line 150 assertion ref == occ: SUCCESS
+[main.assertion.24] line 151 assertion ref == occ: SUCCESS
+[main.precondition_instance.1] line 154 strcpy src/dst overlap: SUCCESS
+[main.assertion.25] line 156 assertion ref == occ: SUCCESS
+[main.assertion.26] line 157 assertion ref == occ: SUCCESS
+[main.assertion.27] line 160 assertion ref == occ: SUCCESS
+[main.assertion.28] line 163 assertion ref == occ: SUCCESS
+[main.assertion.29] line 164 assertion ref == occ: SUCCESS
 
-** 0 of 343 failed (1 iterations)
+** 0 of 341 failed (1 iterations)
 VERIFICATION SUCCESSFUL
