@@ -296,6 +296,10 @@ int main(int argc, char *argv[]) {
       if (!fread(P, m, 1, fp))
         exit(1);
       fclose(fp);
+      if (m > n) {
+        fprintf(stderr, "m %d > n %d: fixup to %d\n", m, n, n);
+        m = n;
+      }
 
       count = shmalloc(shm_r, sizeof(int));         // number of occurrences
       e_time = shmalloc(shm_e, sizeof(double));     // running time

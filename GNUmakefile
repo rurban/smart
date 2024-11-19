@@ -221,8 +221,10 @@ verify/trace.log: algocfg $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIF
 	done | tee verify/trace.log
 fuzz: test-fuzz algocfg GNUmakefile
 	-@test -d data/fuzz || \
-	  (mkdir data/fuzz; cp `ls -rS data/midimusic/*.mid | head -n4` data/fuzz/; \
-	   cut -c1-256 <data/rand16/rand16.txt > data/fuzz/rand16.txt)
+	  (mkdir data/fuzz; \
+	   for m in `seq 2 2 32`; do \
+	     cut -c1-$$m <data/rand16/rand16.txt > data/fuzz/rand16-$$m.txt; \
+	   done)
 	echo '!#/bin/sh' >fuzz.sh
 	-for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; echo $(MAKE) $$b.fuzz >>fuzz.sh; \
