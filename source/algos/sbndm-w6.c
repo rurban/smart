@@ -51,7 +51,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int B[SIGMA], W[SIGMA], hbcr[SIGMA], hbcl[SIGMA];
   unsigned int s, f, d;
   int i, s1, s2, s3, s4, s5, s6, first, count;
-  if (m < 6 || n <= m)
+  if (m < 6 || (n <= m && m < 32))
     return search_small(x, m, y, n);
   int plen = m;
   if (m > 32)

@@ -10,13 +10,15 @@ void preSA(unsigned char *x, int m, unsigned int S[]) {
   }
 }
 
-// from sa.c, best for small patterns, very small alphabets
+// from sa.c, best for small patterns, very small alphabets. m < 32
 int search_small(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int D;
   unsigned int S[SIGMA], F;
   int j, count;
   if (m < 1)
     return 0;
+  if (m >= 32)
+    return search(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
