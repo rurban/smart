@@ -5,9 +5,11 @@ ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
 TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
 TIMEOUT_1m := timeout --preserve-status 1m
 TIMEOUT_4m := timeout 4m
+TIMEOUT_30s := timeout 30s
 ifeq (, $(shell command -v timeout))
   TIMEOUT_1m =
   TIMEOUT_4m =
+  TIMEOUT_30s =
 endif
 BINDIR   := bin
 ALGOSINC := $(wildcard source/algos/include/*.h)
@@ -218,6 +220,9 @@ verify/trace.log: algocfg $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIF
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
 fuzz: test-fuzz algocfg GNUmakefile
+	-@test -d data/fuzz || \
+	  (mkdir data/fuzz; cp `ls -rS data/midimusic/*.mid | head -n4` data/fuzz/; \
+	   cut -c1-256 <data/rand16/rand16.txt > data/fuzz/rand16.txt)
 	echo '!#/bin/sh' >fuzz.sh
 	-for c in $(ALGOSRC); do \
 	  b="`basename $$c .c`"; echo $(MAKE) $$b.fuzz >>fuzz.sh; \
@@ -225,7 +230,7 @@ fuzz: test-fuzz algocfg GNUmakefile
 %.fuzz: algocfg source/algos/%.c $(ALGOSINC) GNUmakefile
 	b=`basename $@ .fuzz`; \
 	  $(MAKE) FUZZ=1 bin/fuzz/$$b; \
-	  timeout 30s afl-fuzz -i data/midimusic -o fuzz/$$b -- bin/fuzz/$$b; \
+	  $(TIMEOUT_1m) afl-fuzz -i data/fuzz -o fuzz/$$b -- bin/fuzz/$$b; \
 	  for c in fuzz/$$b/default/crashes/id\:*; do \
 	    if [ -n "$c" ]; then xxd -i $c fuzz/$$b/id$(basename "$c" | cut -c4-9).h; fi; \
 	  done; \

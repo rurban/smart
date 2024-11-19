@@ -22,6 +22,7 @@ algorithms.lst
 /data/rand4/rand4.txt
 /data/rand64/rand64.txt
 /data/rand8/rand8.txt
+/data/fuzz
 /results/
 /bin/
 /compile_commands.json
