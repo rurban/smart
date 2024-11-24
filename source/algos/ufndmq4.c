@@ -22,7 +22,7 @@
  * Engineering and Experiments, ALENEX 2009, pp.29--37, SIAM, New York, New
  * York, USA, (2009).
  *
- * Constraints: requires m>=4
+ * Constraints: requires m>=4. required 2m space after y.
  */
 
 #define MIN_M 4
@@ -33,21 +33,24 @@
 #define GRAM4(i)                                                               \
   ((B[y[i - 3]] << 3) | (B[y[i - 2]] << 2) | (B[y[i - 1]] << 1) | B[y[i]])
 
-int search_large(unsigned char *x, int m, unsigned char *y, int n);
+int search_large(unsigned char *x, int m, unsigned char *_y, int n);
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int search(unsigned char *x, int m, unsigned char *_y, int n) {
   unsigned int D, F, mm, mask, B[SIGMA], S;
   int i, j, k, mq;
   int count = 0;
   const int q = 4;
+  unsigned char *y;
 
   if (m < q)
-    return search_small(x, m, y, n);
+    return search_small(x, m, _y, n);
   if (m + q > WORD)
-    return search_large(x, m, y, n);
+    return search_large(x, m, _y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
+  y = malloc(n + 2*m);
+  memcpy(y, _y, n);
   S = ~((unsigned char)7 << m);
   for (j = 0; j < SIGMA; ++j)
     B[j] = S;
@@ -79,6 +82,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
             if (y[k + j] != x[j])
               goto mismatch;
           if (k + m > n) {
+            free(y);
             END_SEARCHING
             return (count);
           }
@@ -101,21 +105,24 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  * the pattern
  */
 
-int search_large(unsigned char *x, int m, unsigned char *y, int n) {
+int search_large(unsigned char *x, int m, unsigned char *_y, int n) {
   unsigned int D, F, mm, mask, B[SIGMA], S;
-  int i, j, k, mq, q, p_len;
+  int i, j, k, mq, p_len;
   int count = 0;
-  q = 4;
+  const int q = 4;
+  unsigned char *y;
   if (m < q)
     return 0;
 
+  /* Preprocessing */
+  BEGIN_PREPROCESSING
+  y = malloc(n + 2*m);
+  memcpy(y, _y, n);
   for (i = 0; i < m; i++)
     y[n + i] = y[n + m + i] = x[i];
   p_len = m;
   m = 32 - q;
 
-  /* Preprocessing */
-  BEGIN_PREPROCESSING
   S = ~((unsigned char)7 << m);
   for (j = 0; j < SIGMA; ++j)
     B[j] = S;
@@ -144,6 +151,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
             if (y[k + j] != x[j])
               goto mismatch;
           if (k + p_len > n) {
+            free(y);
             END_SEARCHING
             return (count);
           }

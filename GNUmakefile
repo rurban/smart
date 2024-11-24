@@ -41,6 +41,9 @@ ifneq ($(ASSERT),1)
     endif
   endif
 endif
+ifeq ($(NOSHM),1)
+  CFLAGS += -DNOSHM
+endif
 ifneq ($(ARCH),$(MACHINE))
   ifeq ($(BINDIR),bin)
     BINDIR = bin/$(ARCH)
@@ -94,7 +97,7 @@ TESTS := $(shell shuf -n 10 good.lst)
 ifeq ($(TESTS),)
   TESTS = hor mp kmp musl1 tbm so ssm qf33 twfr3 fndm
 endif
-COMPILE = $(CC) $(CFLAGS)
+COMPILE = $(CC) -c $(CFLAGS)
 
 all: $(BINS) $(HELPERS) good.lst asan.lst
 
@@ -246,7 +249,7 @@ fuzz-repro:
 # emacs flymake-mode
 check-syntax:
 	test -n "$(CHK_SOURCES)" && \
-	  $(COMPILE) -c -o /dev/null -S $(CHK_SOURCES)
+	  $(COMPILE) -Wextra -o /dev/null -S $(CHK_SOURCES)
 .PHONY: check-syntax
 fmt:
 	clang-format -i `find source -name \*.c -o -name \*.h`
