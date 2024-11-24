@@ -245,6 +245,8 @@ void textStats(unsigned char *T, int n, int FREQ[SIGMA]) {
   int maxfreq = 0;
   int median = 0;
   unsigned char *sorted;
+  if (n < 1)
+    return;
   for (j = 0; j < SIGMA; j++)
     FREQ[j] = 0;
   for (j = 0; j < n; j++) {
