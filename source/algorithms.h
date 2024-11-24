@@ -387,7 +387,7 @@ const struct algo ALGOS[] = {
   [_SBNDMq2] = {_SBNDMq2, OK, "sbndmq2", "simplified bndm with q-grams", 2, 0},
   [_SBNDMq4] = {_SBNDMq4, OK, "sbndmq4", "simplified bndm with q-grams", 4, 0},
   [_SBNDMq6] = {_SBNDMq6, OK, "sbndmq6", "simplified bndm with q-grams", 6, 0},
-  [_SBNDMq8] = {_SBNDMq8, OK, "sbndmq8", "simplified bndm with q-grams", 8, 0},
+  [_SBNDMq8] = {_SBNDMq8, RNDCRASH, "sbndmq8", "simplified bndm with q-grams", 8, 0},
   [_UFNDMq2] = {_UFNDMq2, OK, "ufndmq2", "Upper bits fndm with q-grams", 2, 0},
   [_UFNDMq4] = {_UFNDMq4, OK, "ufndmq4", "Upper bits fndm with q-grams", 4, 0},
   [_UFNDMq6] = {_UFNDMq6, OK, "ufndmq6", "Upper bits fndm with q-grams", 6, 0},
@@ -458,7 +458,7 @@ const struct algo ALGOS[] = {
   [_FSBNDMQ86] =
         {_FSBNDMQ86, FAIL, "fsbndmq86", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..26
   [_IOM] = {_IOM, OK, "iom", "Improved Occurrence Heuristic", 0, 0},
-  [_JOM] = {_JOM, OK, "jom", "Jumping Occurrence Matcher", 2, 0},
+  [_JOM] = {_JOM, OK, "jom", "Jumping Occurrence Matcher", 2, 0}, // fixed for n<100
   [_LWFR2] = {_LWFR2, OK, "lwfr2", "Weak Factor Recognizer, Linear Version", 2, 0},
   [_LWFR3] = {_LWFR3, OK, "lwfr3", "Weak Factor Recognizer, Linear Version", 3, 0},
   [_LWFR4] = {_LWFR4, OK, "lwfr4", "Weak Factor Recognizer, Linear Version", 4, 0},

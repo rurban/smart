@@ -22,6 +22,7 @@
  * pp.92-106 (2013)
  *
  * Constraints: requires m>=2
+ * Fixed for n<100
  */
 
 #define MIN_M 2
@@ -31,33 +32,35 @@
 
 /* we suppose an alphabet of SIGMA characters with a distribution equal to the
  * first 100 characters of the pattern */
-void computeFreq(unsigned char *T, double freq[]) {
+void computeFreq(unsigned char *T, double freq[], int n) {
   for (int i = 0; i < SIGMA; i++)
     freq[i] = 0;
-  for (int i = 0; i < 100; i++)
+  for (int i = 0; i < MIN(n, 100); i++)
     freq[T[i]]++;
   for (int i = 0; i < SIGMA; i++)
     freq[i] /= 100.0;
 }
 
-int FindJumpDistance(unsigned char *p, /*int m,*/ int i, double freq[],
+int FindJumpDistance(unsigned char *p, int m, int i, double freq[],
                      double bound) {
   int v[SIGMA];
   for (int c = 0; c < SIGMA; c++)
     v[c] = 1;
   double frq = 1.0;
   int j = 1;
-  while (frq >= bound && j <= i + 1) {
-    if (v[p[i + 1 - j]] == 1) {
-      v[p[i + 1 - j]] = 0;
-      frq -= freq[p[i + 1 - j]];
+  if (i + 1 - j < m) {
+    while (frq >= bound && j <= i + 1) {
+      if (v[p[i + 1 - j]] == 1) {
+        v[p[i + 1 - j]] = 0;
+        frq -= freq[p[i + 1 - j]];
+      }
+      j = j + 1;
     }
-    j = j + 1;
   }
   return j - 1;
 }
 
-void PrecomputeJOH(unsigned char *p, /*int m,*/ int i, int j,
+void PrecomputeJOH(unsigned char *p, int m, int i, int j,
                    int jbc[SIGMA][SIGMA]) {
   for (int a = 0; a < SIGMA; a++)
     for (int b = 0; b < SIGMA; b++)
@@ -71,8 +74,9 @@ void PrecomputeJOH(unsigned char *p, /*int m,*/ int i, int j,
     jbc[p[k]][p[k + j]] = i - k;
 
   for (int k = i - j; k <= i - 1; k++)
-    for (int a = 0; a < SIGMA; a++)
-      jbc[p[k]][a] = i - k;
+    if (k >= 0 && k < m)
+      for (int a = 0; a < SIGMA; a++)
+        jbc[p[k]][a] = i - k;
 }
 
 int FindWorstOccurrence(unsigned char *p, int m, double freq[]) {
@@ -104,10 +108,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
     return search_small(P, m, T, n);
 
   BEGIN_PREPROCESSING
-  computeFreq(T, freq);
+  computeFreq(T, freq, n);
   i = FindWorstOccurrence(P, m, freq);
-  j = FindJumpDistance(P, /*m,*/ i, freq, 0.9);
-  PrecomputeJOH(P, /*m,*/ i, j, jbc);
+  j = FindJumpDistance(P, m, i, freq, 0.9);
+  PrecomputeJOH(P, m, i, j, jbc);
   END_PREPROCESSING
 
   BEGIN_SEARCHING
