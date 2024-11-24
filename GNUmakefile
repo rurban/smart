@@ -137,7 +137,7 @@ verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
 check: all
-	-cp source/algorithms.lst source/algorithms.lst.bak
+	@-cp source/algorithms.lst source/algorithms.lst.bak
 	$(DRV) ./$(SELECTBIN) -all
 	$(DRV) ./$(SELECTBIN) -which | grep br
 	-cp $(BINDIR)/br $(BINDIR)/br1
@@ -149,7 +149,7 @@ check: all
 	for t in $(TESTS); do echo $$t -nv; $(DRV) ./$(TESTBIN) $$t -nv; done
 	for t in $(TESTS); do echo $$t -nv rand2 2; $(DRV) ./$(TESTBIN) $$t -nv rand2 2; done
 	$(DRV) ./$(SELECTBIN) -all block bmh2 bmh4 dfdm sbdm faoso2 blim ssecp
-	-mv algorithms.lst.bak algorithms.lst
+	@-test -f algorithms.lst.bak && mv algorithms.lst.bak algorithms.lst
 lint: algocfg cppcheck clang-tidy sanitizer.log
 # for newer cppcheck
 #CPPCHECK_ARGS="-j4 --enable=warning,portability --inline-suppr --check-level=exhaustive"
@@ -242,7 +242,6 @@ fuzz: test-fuzz algocfg GNUmakefile
 	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9
 .PHONY: fuzz-repro
 fuzz-repro:
-	$(MAKE) SANITIZE=1
 	for i in fuzz/*/default/crashes/id*; do \
 	  ./fuzz-repro.sh "$$i"; done
 
