@@ -136,20 +136,26 @@ int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
   char command[100];
   (void)P;
   (void)T;
-  (void)verbose;
   sprintf(command, "./%s/%s shared %d %d %d %d %d %d %d", BINDIR, algoname,
           shmids[shm_P].key, m, shmids[shm_T].key, n, shmids[shm_r].key,
           shmids[shm_e].key, shmids[shm_pre].key);
 #endif
   // TODO fork/exec with timeout
   int res = system(command);
+  if (!res) {
 #ifndef HAVE_SHM
-  free(command);
+    free(command);
 #endif
-  if (!res)
     return (*count);
-  else
+  }
+  else {
+    if (verbose)
+      fprintf(stderr, "%s failed => %d\n", command, res);
+#ifndef HAVE_SHM
+    free(command);
+#endif
     return -1;
+  }
 }
 
 int FREQ[SIGMA];
@@ -179,7 +185,7 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
   int occur1 = bf_search(P, m, T, n);
   int occur2 = execute(algoname, P, m, T, n, count, verbose);
 
-  if (occur2 >= 0 && occur1 != occur2) {
+  if (occur2 < 0 || occur1 != occur2) {
     if (verbose) {
       printf("%s\tERROR: test failed on case n.%d\n"
 #ifndef DEBUG
@@ -196,7 +202,7 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
     }
     //free_shm();
     (*rip)++; //NOLINT(clang-analyzer-unix.Malloc)
-    return 0;
+    return 0; // fail
   } else {
     if (verbose) {
 #ifdef DEBUG
@@ -207,7 +213,7 @@ int attempt(int *rip, int *count, unsigned char *P, int m, unsigned char *T,
     }
   }
   (*rip)++; //NOLINT(clang-analyzer-unix.Malloc)
-  return 1;
+  return 1; //ok
 }
 
 void free_setP(unsigned char **setP, const int VOLTE) {
