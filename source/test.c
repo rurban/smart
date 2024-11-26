@@ -85,7 +85,7 @@ int hexquote(char *out, unsigned char *P, const int m) {
   int pos = 0;
   for (int i = 0; i < m; i++) {
     if (isalnum(P[i])) {
-      out[pos++] =  P[i];
+      out[pos++] = P[i];
     }
     else {
       unsigned char hex[5];
@@ -108,23 +108,23 @@ int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
   char *cmd2 = malloc((4 * n) + 1);
   int is_printable1 = hexquote(cmd1, P, m);
   int is_printable2 = hexquote(cmd2, T, n);
-  size_t sz = 5 + 8 /*the 2 numbers (max 4 digit)*/ + strlen(BINDIR) + strlen(algoname) + m + n;
+  size_t sz = 20 + 8 /*the 2 numbers (max 4 digit)*/ + strlen(BINDIR) + strlen(algoname) + m + n;
   if (is_printable1 && is_printable2) {
     command = malloc(sz + 1);
     snprintf(command, sz, "%s/%s %s %d %s %d", BINDIR, algoname, P, m, T, n);
   }
   else if (is_printable1 && !is_printable2) {
-    sz += 3 + (n * 4);
+    sz += 3 + strlen(cmd2);
     command = malloc(sz + 1);
     snprintf(command, sz, "%s/%s %s %d $'%s' %d", BINDIR, algoname, P, m, cmd2, n);
   }
   else if (!is_printable1 && is_printable2) {
-    sz += 3 + (m * 4);
+    sz += 3 + strlen(cmd1);
     command = malloc(sz + 1);
     snprintf(command, sz, "%s/%s $'%s' %d %s %d", BINDIR, algoname, cmd1, m, T, n);
   }
   else {
-    sz += 6 + (m * 4) + (n * 4);
+    sz += 6 + strlen(cmd1) + strlen(cmd2);
     command = malloc(sz + 1);
     snprintf(command, sz, "%s/%s $'%s' %d $'%s' %d", BINDIR, algoname, cmd1, m, cmd2, n);
   }
@@ -295,6 +295,7 @@ int main(int argc, char *argv[]) {
       if (!fread(T, n, 1, ft))
         exit(1);
       fclose(ft);
+      T[n] = '\0';
       fseek(fp, 0L, SEEK_END);
       m = ftell(fp);
       fseek(fp, 0L, SEEK_SET);
@@ -306,6 +307,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "m %d > n %d: fixup to %d\n", m, n, n);
         m = n;
       }
+      P[m] = '\0';
 
       count = shmalloc(shm_r, sizeof(int));         // number of occurrences
       e_time = shmalloc(shm_e, sizeof(double));     // running time
