@@ -208,7 +208,7 @@ static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
   union {
     uint8_t tmp[8];
     uint32_t word[2];
-  };
+  } u;
   END_PREPROCESSING
 
   BEGIN_SEARCHING
@@ -223,14 +223,14 @@ static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
     const uint8x8_t pred_8 =
         vbsl_u8(half, vget_low_u8(pred_16), vget_high_u8(pred_16));
 
-    vst1_u8(tmp, pred_8);
+    vst1_u8(u.tmp, pred_8);
 
-    if ((word[0] | word[1]) == 0) {
+    if ((u.word[0] | u.word[1]) == 0) {
       continue;
     }
 
     for (int j = 0; j < 8; j++) {
-      if (tmp[j] & 0x0f) {
+      if (u.tmp[j] & 0x0f) {
         if (memcmp(s + i + j + 1, needle + 1, m - 2) == 0) {
           OUTPUT(i + j);
         }
@@ -238,8 +238,8 @@ static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
     }
 
     for (int j = 0; j < 8; j++) {
-      if (tmp[j] & 0xf0) {
-        if (memcmp(s + i + j + 1 + 8, needle + 1, k - 2) == 0) {
+      if (u.tmp[j] & 0xf0) {
+        if (memcmp(s + i + j + 1 + 8, needle + 1, m - 2) == 0) {
           OUTPUT(i + j + 8);
         }
       }
