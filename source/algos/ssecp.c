@@ -26,8 +26,27 @@
 #include "include/main.h"
 #include "include/search_small.h"
 
-#include <assert.h>
+#ifdef __SSE4_2__
 #include <nmmintrin.h>
+#else
+#define SIMDE_ENABLE_NATIVE_ALIASES
+#include "simde/x86/sse4.2.h"
+//#define __m128i           simde__m128i
+//#define _mm_loadu_si128   simde_mm_loadu_si128
+//#define _mm_extract_epi32 simde_mm_extract_epi32
+//#define _mm_set_epi8      simde_mm_set_epi8
+//#define _mm_and_si128     simde_mm_and_si128
+//#define _mm_cmpestrm      simde_mm_cmpestrz
+//#define _mm_cmpestri      simde_mm_cmpestrs
+//#define _mm_cmpestrc      simde_mm_cmpestrz
+//#define _mm_popcnt_u32    __builtin_popcount
+//#define _SIDD_UBYTE_OPS         SIMDE_SIDD_UBYTE_OPS
+//#define _SIDD_CMP_EQUAL_ORDERED SIMDE_SIDD_CMP_EQUAL_ORDERED
+//#define _SIDD_CMP_EQUAL_EACH    SIMDE_SIDD_CMP_EQUAL_EACH
+//#define _SIDD_NEGATIVE_POLARITY SIMDE_SIDD_NEGATIVE_POLARITY
+#endif
+
+#include <assert.h>
 #include <stdint.h>
 
 // BEWARE: code sometimes has access to load bytes after end of string.

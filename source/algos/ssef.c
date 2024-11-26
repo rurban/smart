@@ -30,7 +30,14 @@
 #include "include/main.h"
 #include "include/search_small.h"
 
+#ifdef __SSE2__
 #include <emmintrin.h>
+#else
+#define SIMDE_ENABLE_NATIVE_ALIASES
+#include "simde/x86/sse2.h"
+//#define __m128i simde__m128i
+//#define _mm_movemask_epi8 simde_mm_movemask_epi8
+#endif
 
 typedef union {
   __m128i *data16;
