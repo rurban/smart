@@ -22,10 +22,14 @@
  * Proceedings of the 10th International Symposium on String Processing and
  * Information Retrieval SPIRE'03, Lecture Notes in Computer Science, vol.2857,
  * pp.80--94, Springer-Verlag, Berlin, Manaus, Brazil, (2003).
+ *
+ * Constraints: requires m>=2
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 int verify(unsigned char *y, int left, unsigned char *x, int m, int k,
            int pos) {
@@ -52,7 +56,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   int i, j, l;
   int m1, m2, rmd;
   if (m < 2)
-    return -1;
+    return search_small(x, m, y, n);
 
   BEGIN_PREPROCESSING
   /* Preprocessing */

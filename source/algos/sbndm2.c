@@ -20,10 +20,14 @@
  * in J. Holub and B. Durian. Talk: Fast variants of bit parallel approach to
  * suffix automata. The Second Haifa Annual International Stringology Research
  * Workshop of the Israeli Science Foundation, (2005).
+ *
+ * Constraints: requires m>=2
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n);
 
@@ -31,7 +35,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned int B[SIGMA], D;
   int i, j, pos, mMinus1, m2, count, shift;
   if (m < 2)
-    return -1;
+    return search_small(x, m, y, n);
   if (m > 32)
     return search_large(x, m, y, n);
 

@@ -360,7 +360,7 @@ const struct algo ALGOS[] = {
   [_SBNDM] = {_SBNDM, OK, "sbndm", "Simplified BNDM", 0, 0},
   [_TNDM] = {_TNDM, OK, "tndm", "Two-Way Nondeterministic DAWG Matching", 0, 0},
   [_TNDMa] = {_TNDMa, OK, "tndma", "Two-Way Nondeterministic DAWG Matching (version 2)", 0, 0},
-  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 0, 0},
+  [_LBNDM] = {_LBNDM, OK, "lbndm", "long patterns bndm", 2, 0},
   // hg BNDM with q-grams
   // bg BNDM with q-grams, and parallel search
   [_SVM0] = {_SVM0, OK, "svm0", "shift vector matching (version 0)", 0, 0},
@@ -368,7 +368,7 @@ const struct algo ALGOS[] = {
   [_SVM2] = {_SVM2, OK, "svm2", "shift vector matching (version 2)", 0, 0},
   [_SVM3] = {_SVM3, OK, "svm3", "shift vector matching (version 3)", 0, 0},
   [_SVM4] = {_SVM4, OK, "svm4", "shift vector matching (version 4)", 0, 0},
-  [_SBNDM2] = {_SBNDM2, OK, "sbndm2", "simplified bndm with loop-unrolling", 0, 0},
+  [_SBNDM2] = {_SBNDM2, OK, "sbndm2", "simplified bndm with loop-unrolling", 2, 0},
   [_SBNDM_BMH] = {_SBNDM_BMH, OK, "sbndm-bmh", "sbndm with horspool shift", 2, 0},
   [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0},
   [_FNDM] = {_FNDM, OK, "fndm", "forward nondeterministic dawg matching", 0, 0},
