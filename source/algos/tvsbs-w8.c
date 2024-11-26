@@ -17,7 +17,9 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  *
  * Note: Flaky tests with m=32,n=64 (off-by-one count)
+ *       Broken!
  * Constraints: requires n >= m + 2, and m>=2 and m<XSIZE
+ * Requires 2m space after y.
  */
 
 #define MIN_M 2
@@ -40,13 +42,13 @@ void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
     brBc[x[m - 1]][a] = 1;
 }
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int search(unsigned char *x, int m, unsigned char *_y, int n) {
   if (n < m + 2)
-    return search_small(x, m, y, n);
+    return search_small(x, m, _y, n);
   if (m < 2)
-    return search_small(x, m, y, n);
+    return search_small(x, m, _y, n);
   if (m >= XSIZE)
-    return search_large(x, m, y, n);
+    return search_large(x, m, _y, n);
 
   int count, i, s1, s2, s3, s4, s5, s6, s7, s8;
   int l1, l2, l3, l4, l5, l6, l7, l8;
@@ -55,6 +57,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   unsigned char c;
 
   BEGIN_PREPROCESSING
+  unsigned char *y = malloc(n + 2*m);
+  memcpy(y, _y, n);
   assert(m < XSIZE);
   for (i = 0; i < m; i++)
     xr[i] = x[m - 1 - i];
@@ -141,6 +145,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     s7 += BrBcR[y[s7 + m]][y[s7 + mPlus1]];
     s8 -= BrBcL[y[s8 - 1]][y[s8 - 2]];
   }
+  free(y);
   END_SEARCHING
   return count;
 }

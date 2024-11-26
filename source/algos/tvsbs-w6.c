@@ -18,6 +18,7 @@
  *
  * Note: Broken!
  * Constraints: requires n >= m + 2, and m>=2
+ * Requires 2m space after y.
  */
 
 #define MIN_M 2
@@ -40,19 +41,21 @@ void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
     brBc[x[m - 1]][a] = 1;
 }
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int search(unsigned char *x, int m, unsigned char *_y, int n) {
   int count, i, s1, s2, s3, s4, s5, s6;
   int l1, l2, l3, l4, l5, l6;
   int BrBcR[SIGMA][SIGMA], BrBcL[SIGMA][SIGMA];
 
   if (n < m + 2)
-    return search_small(x, m, y, n);
+    return search_small(x, m, _y, n);
   if (m < 2)
-    return search_small(x, m, y, n);
+    return search_small(x, m, _y, n);
   if (m >= XSIZE)
-    return search_large(x, m, y, n);
+    return search_large(x, m, _y, n);
 
   BEGIN_PREPROCESSING
+  unsigned char *y = malloc(n + 2*m);
+  memcpy(y, _y, n);
   unsigned char xr[XSIZE];
   unsigned char c, lastch, firstch;
   assert(m < XSIZE);
@@ -142,6 +145,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     s6 -= BrBcL[y[s6 - 1]][y[s6 - 2]];
   }
   //y[n] = '\0';
+  free(y);
   END_SEARCHING
   return count;
 }

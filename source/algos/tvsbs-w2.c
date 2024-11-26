@@ -17,6 +17,8 @@
  * download the tool at: http://www.dmi.unict.it/~faro/smart/
  *
  * Optimized TVSBS algorithm.
+ * Note: Broken!
+ * Requires 2m space after y.
  */
 
 //#define MIN_M 2
@@ -37,14 +39,16 @@ void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
     brBc[x[m - 1]][a] = 1;
 }
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
+int search(unsigned char *x, int m, unsigned char *_y, int n) {
   int count, i, s1, s2;
   int BrBcR[SIGMA][SIGMA], BrBcL[SIGMA][SIGMA];
   unsigned char firstch, lastch;
   if (m >= XSIZE)
-    return search_large(x, m, y, n);
+    return search_large(x, m, _y, n);
 
   BEGIN_PREPROCESSING
+  unsigned char *y = malloc(n + 2*m);
+  memcpy(y, _y, n);
   unsigned char xr[XSIZE];
   for (i = 0; i < m; i++)
     xr[i] = x[m - 1 - i];
@@ -81,6 +85,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     s1 += BrBcR[y[s1 + m]][y[s1 + mp1]];
     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
   }
+  free(y);
   END_SEARCHING
   return count;
 }

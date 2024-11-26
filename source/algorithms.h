@@ -490,9 +490,9 @@ const struct algo ALGOS[] = {
   [_TSA_Q2] = {_TSA_Q2, FAIL, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
   [_TSO5] = {_TSO5, OK, "tso5", "optimized word-wise popcount", 2, 0}, // 2<=m<64
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
-  [_TVSBS_W2] = {_TVSBS_W2, RNDCRASH, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
+  [_TVSBS_W2] = {_TVSBS_W2, FAIL, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
   [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
-  [_TVSBS_W6] = {_TVSBS_W6, FAIL, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W6] = {_TVSBS_W6, RNDCRASH, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_WFR] = {_WFR, OK, "wfr", "Weak Factor Recognizer", 0, 0},
   [_WFR2] = {_WFR2, OK, "wfr2", "Weak Factor Recognizer (m>=2)", 2, 0},
