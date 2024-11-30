@@ -22,7 +22,7 @@ else
   CFLAGS  := -O3 -march=native -mtune=native -Wall -Wfatal-errors
   ifeq ($(SANITIZE),1)
     BINDIR = bin/asan
-    CFLAGS += -O1 -g -Wextra -fsanitize=address,undefined -DBINDIR=\"$(BINDIR)\"
+    CFLAGS += -O1 -g -Wextra -fsanitize=address,undefined -fno-sanitize-recover=all -DBINDIR=\"$(BINDIR)\"
   endif
   ifeq ($(DEBUG),1)
     CFLAGS += -O0 -DDEBUG
@@ -30,7 +30,7 @@ else
   ifeq ($(FUZZ),1)
     CC = afl-clang-lto
     BINDIR = bin/fuzz
-    CFLAGS = -Og -g -Isource/algos -fsanitize=address,undefined -march=native -mtune=native -DFUZZ -DBINDIR=\"$(BINDIR)\"
+    CFLAGS = -Og -g -Isource/algos -fsanitize=address,undefined -fno-sanitize-recover=all -march=native -mtune=native -DFUZZ -DBINDIR=\"$(BINDIR)\"
   endif
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
@@ -242,8 +242,9 @@ fuzz: test-fuzz algocfg GNUmakefile
 	  ps xw|grep 'bin/[f]uzz' |cut -c1-8|xargs kill -9
 .PHONY: fuzz-repro
 fuzz-repro:
-	for i in fuzz/*/default/crashes/id*; do \
-	  ./fuzz-repro.sh "$$i"; done
+	@for i in fuzz/*/default/crashes/id*; do \
+	  if ./fuzz-repro.sh "$$i"; then echo -e "\033[31;1;4mFAIL\033[0m not repro"; \
+	  else echo -e "\033[32;1;4mREPRO\033[0m"; fi; done
 
 # emacs flymake-mode
 check-syntax:
