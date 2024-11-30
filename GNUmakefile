@@ -244,7 +244,7 @@ fuzz: test-fuzz algocfg GNUmakefile
 fuzz-repro:
 	@for i in fuzz/*/default/crashes/id*; do \
 	  if ./fuzz-repro.sh "$$i"; then echo -e "\033[31;1;4mFAIL\033[0m not repro"; \
-	  else echo -e "\033[32;1;4mREPRO\033[0m"; fi; done
+	    rm -f "$$i"; else echo -e "\033[32;1;4mREPRO\033[0m"; fi; done
 
 # emacs flymake-mode
 check-syntax:
