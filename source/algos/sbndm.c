@@ -21,10 +21,13 @@
  * Matching. Proceedings of the 10th International Symposium on String
  * Processing and Information Retrieval SPIRE'03, Lecture Notes in Computer
  * Science, vol.2857, pp.80--94, Springer-Verlag, Berlin, (2003).
+ *
+ * Constraints: m >= 2, m < 32
  */
 
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 int search_large(unsigned char *x, int m, unsigned char *y, int n);
 
@@ -38,7 +41,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   if (m > 32)
     return search_large(x, m, y, n);
   if (m < 2)
-    return -1;
+    return search_small(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
