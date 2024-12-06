@@ -47,13 +47,10 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
   for (i = m - 1; i <= n - 1; i += m) {
     D = B[T[i]];
     j = 1;
-    assert(i - j >= 0);
-    assert(i + j < n);
-    while ((j < m) &&
+    while ((j < m) && (i >= j) &&
            (D &= (((B[T[i - j]] + 1) << j) - 1) &
                  ((B[T[i + j]] >> j) | ((~UINT64_C(0)) << (m - j))))) {
       j++;
-      assert(j < m && i + j < n);
     }
 
     // TODO: OUTPUT

@@ -1,5 +1,5 @@
 timeout 4m cbmc --verbosity 7 --unwinding-assertions --slice-formula -Isource/algos -DCBMC --bounds-check --pointer-check --memory-leak-check --div-by-zero-check --signed-overflow-check --unsigned-overflow-check --pointer-overflow-check --conversion-check --undefined-shift-check --float-overflow-check --nan-check --enum-range-check source/algos/tsa.c
-CBMC version 6.4.0 (cbmc-6.4.0-24-g63675f5121) 64-bit x86_64 linux
+CBMC version 6.4.1 (cbmc-6.4.1-15-g94e4338237) 64-bit x86_64 linux
 Type-checking tsa
 Generating GOTO Program
 Adding CPROVER library (x86_64)
@@ -74,50 +74,61 @@ function __CPROVER__start
 [strcpy.overflow.2] line 31 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
 
 source/algos/include/cbmc.h function bf_search
-[bf_search.overflow.1] line 34 arithmetic overflow on signed - in n - m: SUCCESS
-[bf_search.overflow.4] line 34 arithmetic overflow on signed + in j + 1: SUCCESS
-[bf_search.overflow.2] line 37 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
-[bf_search.pointer_arithmetic.1] line 37 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.2] line 37 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.3] line 37 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.4] line 37 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.5] line 37 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
-[bf_search.pointer_arithmetic.6] line 37 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
-[bf_search.overflow.3] line 38 arithmetic overflow on signed + in count + 1: SUCCESS
+[bf_search.assertion.1] line 33 assertion m < MAX_M: SUCCESS
+[bf_search.assertion.2] line 34 assertion n < MAX_N: SUCCESS
+[bf_search.overflow.1] line 36 arithmetic overflow on signed - in n - m: SUCCESS
+[bf_search.overflow.4] line 36 arithmetic overflow on signed + in j + 1: SUCCESS
+[bf_search.overflow.2] line 39 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
+[bf_search.pointer_arithmetic.1] line 39 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.2] line 39 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.3] line 39 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.4] line 39 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.5] line 39 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[bf_search.pointer_arithmetic.6] line 39 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[bf_search.overflow.3] line 40 arithmetic overflow on signed + in count + 1: SUCCESS
+
+source/algos/include/cbmc.h function bf_search_large
+[bf_search_large.overflow.1] line 48 arithmetic overflow on signed - in n - m: SUCCESS
+[bf_search_large.overflow.4] line 48 arithmetic overflow on signed + in j + 1: SUCCESS
+[bf_search_large.overflow.2] line 52 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
+[bf_search_large.pointer_arithmetic.1] line 52 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[bf_search_large.pointer_arithmetic.2] line 52 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[bf_search_large.pointer_arithmetic.3] line 52 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[bf_search_large.pointer_arithmetic.4] line 52 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[bf_search_large.pointer_arithmetic.5] line 52 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[bf_search_large.pointer_arithmetic.6] line 52 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[bf_search_large.overflow.3] line 53 arithmetic overflow on signed + in count + 1: SUCCESS
 
 source/algos/include/cbmc.h function main
-[main.overflow.1] line 79 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.1] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.2] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.3] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.4] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.5] line 81 array 'P' lower bound in P[(signed long int)i]: SUCCESS
-[main.array_bounds.6] line 81 array 'P' upper bound in P[(signed long int)i]: SUCCESS
-[main.overflow.2] line 82 arithmetic overflow on signed + in i + 1: SUCCESS
-[main.array_bounds.7] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.8] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.9] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.10] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.11] line 84 array 'T' lower bound in T[(signed long int)i]: SUCCESS
-[main.array_bounds.12] line 84 array 'T' upper bound in T[(signed long int)i]: SUCCESS
-[main.assertion.1] line 113 assertion ref == occ: SUCCESS
-[main.assertion.2] line 116 assertion ref == occ: SUCCESS
-[main.assertion.3] line 117 assertion ref == occ: SUCCESS
-[main.assertion.4] line 118 assertion ref == occ: SUCCESS
-[main.assertion.5] line 119 assertion ref == occ: SUCCESS
-[main.assertion.6] line 120 assertion ref == occ: SUCCESS
-[main.assertion.7] line 121 assertion ref == occ: SUCCESS
-[main.assertion.8] line 122 assertion ref == occ: SUCCESS
-[main.assertion.9] line 123 assertion ref == occ: SUCCESS
-[main.assertion.10] line 124 assertion ref == occ: SUCCESS
-[main.assertion.11] line 125 assertion ref == occ: SUCCESS
-[main.assertion.12] line 146 assertion ref == occ: SUCCESS
-[main.assertion.13] line 147 assertion ref == occ: SUCCESS
-[main.precondition_instance.1] line 154 strcpy src/dst overlap: SUCCESS
-[main.assertion.14] line 156 assertion ref == occ: SUCCESS
-[main.assertion.15] line 157 assertion ref == occ: SUCCESS
-[main.assertion.16] line 167 assertion ref == occ: SUCCESS
-[main.assertion.17] line 168 assertion ref == occ: SUCCESS
+[main.overflow.1] line 80 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.1] line 82 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.2] line 82 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.3] line 82 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.4] line 82 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.5] line 82 array 'P' lower bound in P[(signed long int)i]: SUCCESS
+[main.array_bounds.6] line 82 array 'P' upper bound in P[(signed long int)i]: SUCCESS
+[main.overflow.2] line 83 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.7] line 85 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.8] line 85 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.9] line 85 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.10] line 85 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.11] line 85 array 'T' lower bound in T[(signed long int)i]: SUCCESS
+[main.array_bounds.12] line 85 array 'T' upper bound in T[(signed long int)i]: SUCCESS
+[main.assertion.1] line 114 assertion ref == occ: SUCCESS
+[main.assertion.2] line 117 assertion ref == occ: SUCCESS
+[main.assertion.3] line 118 assertion ref == occ: SUCCESS
+[main.assertion.4] line 119 assertion ref == occ: SUCCESS
+[main.assertion.5] line 120 assertion ref == occ: SUCCESS
+[main.assertion.6] line 121 assertion ref == occ: SUCCESS
+[main.assertion.7] line 122 assertion ref == occ: SUCCESS
+[main.assertion.8] line 123 assertion ref == occ: SUCCESS
+[main.assertion.9] line 124 assertion ref == occ: SUCCESS
+[main.assertion.10] line 125 assertion ref == occ: SUCCESS
+[main.assertion.11] line 126 assertion ref == occ: SUCCESS
+[main.assertion.12] line 155 assertion ref == occ: SUCCESS
+[main.precondition_instance.1] line 163 strcpy src/dst overlap: SUCCESS
+[main.assertion.13] line 165 assertion ref == occ: SUCCESS
+[main.assertion.14] line 166 assertion ref == occ: SUCCESS
 
 source/algos/include/search_large.h function search_large
 [search_large.overflow.1] line 136 arithmetic overflow on signed to unsigned type conversion in (size_t)m: SUCCESS
@@ -466,24 +477,24 @@ source/algos/include/search_small.h function preSA
 [preSA.pointer_dereference.18] line 9 dereference failure: invalid integer address in S[(signed long int)x[(signed long int)i]]: SUCCESS
 
 source/algos/include/search_small.h function search_small
-[search_small.overflow.1] line 24 arithmetic overflow on signed - in m - 1: SUCCESS
-[search_small.overflow.2] line 24 arithmetic overflow on signed to unsigned type conversion in (unsigned int)(m - 1): SUCCESS
-[search_small.undefined-shift.1] line 24 shift distance too large in 1u << (unsigned int)(m - 1): SUCCESS
-[search_small.overflow.4] line 30 arithmetic overflow on signed + in j + 1: SUCCESS
-[search_small.array_bounds.1] line 31 array 'S' upper bound in S[(signed long int)y[(signed long int)j]]: SUCCESS
-[search_small.pointer_arithmetic.1] line 31 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
-[search_small.pointer_arithmetic.2] line 31 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
-[search_small.pointer_arithmetic.3] line 31 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
-[search_small.pointer_arithmetic.4] line 31 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
-[search_small.pointer_arithmetic.5] line 31 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
-[search_small.pointer_arithmetic.6] line 31 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
-[search_small.pointer_dereference.1] line 31 dereference failure: pointer NULL in y[(signed long int)j]: SUCCESS
-[search_small.pointer_dereference.2] line 31 dereference failure: pointer invalid in y[(signed long int)j]: SUCCESS
-[search_small.pointer_dereference.3] line 31 dereference failure: deallocated dynamic object in y[(signed long int)j]: SUCCESS
-[search_small.pointer_dereference.4] line 31 dereference failure: dead object in y[(signed long int)j]: SUCCESS
-[search_small.pointer_dereference.5] line 31 dereference failure: pointer outside object bounds in y[(signed long int)j]: SUCCESS
-[search_small.pointer_dereference.6] line 31 dereference failure: invalid integer address in y[(signed long int)j]: SUCCESS
-[search_small.overflow.3] line 33 arithmetic overflow on signed + in count + 1: SUCCESS
+[search_small.overflow.1] line 26 arithmetic overflow on signed - in m - 1: SUCCESS
+[search_small.overflow.2] line 26 arithmetic overflow on signed to unsigned type conversion in (unsigned int)(m - 1): SUCCESS
+[search_small.undefined-shift.1] line 26 shift distance too large in 1u << (unsigned int)(m - 1): SUCCESS
+[search_small.overflow.4] line 32 arithmetic overflow on signed + in j + 1: SUCCESS
+[search_small.array_bounds.1] line 33 array 'S' upper bound in S[(signed long int)y[(signed long int)j]]: SUCCESS
+[search_small.pointer_arithmetic.1] line 33 pointer arithmetic: pointer NULL in y + (signed long int)j: SUCCESS
+[search_small.pointer_arithmetic.2] line 33 pointer arithmetic: pointer invalid in y + (signed long int)j: SUCCESS
+[search_small.pointer_arithmetic.3] line 33 pointer arithmetic: deallocated dynamic object in y + (signed long int)j: SUCCESS
+[search_small.pointer_arithmetic.4] line 33 pointer arithmetic: dead object in y + (signed long int)j: SUCCESS
+[search_small.pointer_arithmetic.5] line 33 pointer arithmetic: pointer outside object bounds in y + (signed long int)j: SUCCESS
+[search_small.pointer_arithmetic.6] line 33 pointer arithmetic: invalid integer address in y + (signed long int)j: SUCCESS
+[search_small.pointer_dereference.1] line 33 dereference failure: pointer NULL in y[(signed long int)j]: SUCCESS
+[search_small.pointer_dereference.2] line 33 dereference failure: pointer invalid in y[(signed long int)j]: SUCCESS
+[search_small.pointer_dereference.3] line 33 dereference failure: deallocated dynamic object in y[(signed long int)j]: SUCCESS
+[search_small.pointer_dereference.4] line 33 dereference failure: dead object in y[(signed long int)j]: SUCCESS
+[search_small.pointer_dereference.5] line 33 dereference failure: pointer outside object bounds in y[(signed long int)j]: SUCCESS
+[search_small.pointer_dereference.6] line 33 dereference failure: invalid integer address in y[(signed long int)j]: SUCCESS
+[search_small.overflow.3] line 35 arithmetic overflow on signed + in count + 1: SUCCESS
 
 source/algos/tsa.c function search
 [search.precondition_instance.1] line 34 memset destination region writeable: SUCCESS
@@ -518,7 +529,7 @@ source/algos/tsa.c function search
 [search.pointer_dereference.12] line 46 dereference failure: invalid integer address in T[(signed long int)(n + 1)]: SUCCESS
 [search.overflow.3] line 47 arithmetic overflow on signed - in m - 1: SUCCESS
 [search.overflow.4] line 47 arithmetic overflow on signed - in n - 1: SUCCESS
-[search.overflow.15] line 47 arithmetic overflow on signed + in i + m: SUCCESS
+[search.overflow.12] line 47 arithmetic overflow on signed + in i + m: SUCCESS
 [search.array_bounds.2] line 48 array 'B' upper bound in B[(signed long int)T[(signed long int)i]]: SUCCESS
 [search.pointer_arithmetic.13] line 48 pointer arithmetic: pointer NULL in T + (signed long int)i: SUCCESS
 [search.pointer_arithmetic.14] line 48 pointer arithmetic: pointer invalid in T + (signed long int)i: SUCCESS
@@ -532,51 +543,45 @@ source/algos/tsa.c function search
 [search.pointer_dereference.16] line 48 dereference failure: dead object in T[(signed long int)i]: SUCCESS
 [search.pointer_dereference.17] line 48 dereference failure: pointer outside object bounds in T[(signed long int)i]: SUCCESS
 [search.pointer_dereference.18] line 48 dereference failure: invalid integer address in T[(signed long int)i]: SUCCESS
-[search.assertion.1] line 50 assertion i - j >= 0: SUCCESS
-[search.overflow.5] line 50 arithmetic overflow on signed - in i - j: SUCCESS
-[search.assertion.2] line 51 assertion i + j < n: SUCCESS
-[search.overflow.6] line 51 arithmetic overflow on signed + in i + j: SUCCESS
-[search.array_bounds.3] line 53 array 'B' upper bound in B[(signed long int)T[(signed long int)(i - j)]]: SUCCESS
-[search.overflow.7] line 53 arithmetic overflow on signed - in i - j: SUCCESS
-[search.overflow.8] line 53 arithmetic overflow on unsigned + in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1: SUCCESS
-[search.overflow.9] line 53 arithmetic overflow on unsigned - in (B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j) - (unsigned long int)1: SUCCESS
-[search.pointer_arithmetic.19] line 53 pointer arithmetic: pointer NULL in T + (signed long int)(i - j): SUCCESS
-[search.pointer_arithmetic.20] line 53 pointer arithmetic: pointer invalid in T + (signed long int)(i - j): SUCCESS
-[search.pointer_arithmetic.21] line 53 pointer arithmetic: deallocated dynamic object in T + (signed long int)(i - j): SUCCESS
-[search.pointer_arithmetic.22] line 53 pointer arithmetic: dead object in T + (signed long int)(i - j): SUCCESS
-[search.pointer_arithmetic.23] line 53 pointer arithmetic: pointer outside object bounds in T + (signed long int)(i - j): SUCCESS
-[search.pointer_arithmetic.24] line 53 pointer arithmetic: invalid integer address in T + (signed long int)(i - j): SUCCESS
-[search.pointer_dereference.19] line 53 dereference failure: pointer NULL in T[(signed long int)(i - j)]: SUCCESS
-[search.pointer_dereference.20] line 53 dereference failure: pointer invalid in T[(signed long int)(i - j)]: SUCCESS
-[search.pointer_dereference.21] line 53 dereference failure: deallocated dynamic object in T[(signed long int)(i - j)]: SUCCESS
-[search.pointer_dereference.22] line 53 dereference failure: dead object in T[(signed long int)(i - j)]: SUCCESS
-[search.pointer_dereference.23] line 53 dereference failure: pointer outside object bounds in T[(signed long int)(i - j)]: SUCCESS
-[search.pointer_dereference.24] line 53 dereference failure: invalid integer address in T[(signed long int)(i - j)]: SUCCESS
-[search.undefined-shift.3] line 53 shift distance is negative in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j: SUCCESS
-[search.undefined-shift.4] line 53 shift distance too large in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j: SUCCESS
-[search.array_bounds.4] line 54 array 'B' upper bound in B[(signed long int)T[(signed long int)(i + j)]]: SUCCESS
-[search.overflow.10] line 54 arithmetic overflow on signed + in i + j: SUCCESS
-[search.overflow.11] line 54 arithmetic overflow on signed - in m - j: SUCCESS
-[search.pointer_arithmetic.25] line 54 pointer arithmetic: pointer NULL in T + (signed long int)(i + j): SUCCESS
-[search.pointer_arithmetic.26] line 54 pointer arithmetic: pointer invalid in T + (signed long int)(i + j): SUCCESS
-[search.pointer_arithmetic.27] line 54 pointer arithmetic: deallocated dynamic object in T + (signed long int)(i + j): SUCCESS
-[search.pointer_arithmetic.28] line 54 pointer arithmetic: dead object in T + (signed long int)(i + j): SUCCESS
-[search.pointer_arithmetic.29] line 54 pointer arithmetic: pointer outside object bounds in T + (signed long int)(i + j): SUCCESS
-[search.pointer_arithmetic.30] line 54 pointer arithmetic: invalid integer address in T + (signed long int)(i + j): SUCCESS
-[search.pointer_dereference.25] line 54 dereference failure: pointer NULL in T[(signed long int)(i + j)]: SUCCESS
-[search.pointer_dereference.26] line 54 dereference failure: pointer invalid in T[(signed long int)(i + j)]: SUCCESS
-[search.pointer_dereference.27] line 54 dereference failure: deallocated dynamic object in T[(signed long int)(i + j)]: SUCCESS
-[search.pointer_dereference.28] line 54 dereference failure: dead object in T[(signed long int)(i + j)]: SUCCESS
-[search.pointer_dereference.29] line 54 dereference failure: pointer outside object bounds in T[(signed long int)(i + j)]: SUCCESS
-[search.pointer_dereference.30] line 54 dereference failure: invalid integer address in T[(signed long int)(i + j)]: SUCCESS
-[search.undefined-shift.5] line 54 shift distance is negative in B[(signed long int)T[(signed long int)(i + j)]] >> j: SUCCESS
-[search.undefined-shift.6] line 54 shift distance too large in B[(signed long int)T[(signed long int)(i + j)]] >> j: SUCCESS
-[search.undefined-shift.7] line 54 shift distance is negative in ~0ul << m - j: SUCCESS
-[search.undefined-shift.8] line 54 shift distance too large in ~0ul << m - j: SUCCESS
-[search.overflow.12] line 55 arithmetic overflow on signed + in j + 1: SUCCESS
-[search.assertion.3] line 56 assertion j < m && i + j < n: SUCCESS
-[search.overflow.13] line 56 arithmetic overflow on signed + in i + j: SUCCESS
-[search.overflow.14] line 61 arithmetic overflow on signed + in count + __builtin_popcount(D): SUCCESS
+[search.array_bounds.3] line 51 array 'B' upper bound in B[(signed long int)T[(signed long int)(i - j)]]: SUCCESS
+[search.overflow.5] line 51 arithmetic overflow on signed - in i - j: SUCCESS
+[search.overflow.6] line 51 arithmetic overflow on unsigned + in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1: SUCCESS
+[search.overflow.7] line 51 arithmetic overflow on unsigned - in (B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j) - (unsigned long int)1: SUCCESS
+[search.pointer_arithmetic.19] line 51 pointer arithmetic: pointer NULL in T + (signed long int)(i - j): SUCCESS
+[search.pointer_arithmetic.20] line 51 pointer arithmetic: pointer invalid in T + (signed long int)(i - j): SUCCESS
+[search.pointer_arithmetic.21] line 51 pointer arithmetic: deallocated dynamic object in T + (signed long int)(i - j): SUCCESS
+[search.pointer_arithmetic.22] line 51 pointer arithmetic: dead object in T + (signed long int)(i - j): SUCCESS
+[search.pointer_arithmetic.23] line 51 pointer arithmetic: pointer outside object bounds in T + (signed long int)(i - j): SUCCESS
+[search.pointer_arithmetic.24] line 51 pointer arithmetic: invalid integer address in T + (signed long int)(i - j): SUCCESS
+[search.pointer_dereference.19] line 51 dereference failure: pointer NULL in T[(signed long int)(i - j)]: SUCCESS
+[search.pointer_dereference.20] line 51 dereference failure: pointer invalid in T[(signed long int)(i - j)]: SUCCESS
+[search.pointer_dereference.21] line 51 dereference failure: deallocated dynamic object in T[(signed long int)(i - j)]: SUCCESS
+[search.pointer_dereference.22] line 51 dereference failure: dead object in T[(signed long int)(i - j)]: SUCCESS
+[search.pointer_dereference.23] line 51 dereference failure: pointer outside object bounds in T[(signed long int)(i - j)]: SUCCESS
+[search.pointer_dereference.24] line 51 dereference failure: invalid integer address in T[(signed long int)(i - j)]: SUCCESS
+[search.undefined-shift.3] line 51 shift distance is negative in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j: SUCCESS
+[search.undefined-shift.4] line 51 shift distance too large in B[(signed long int)T[(signed long int)(i - j)]] + (unsigned long int)1 << j: SUCCESS
+[search.array_bounds.4] line 52 array 'B' upper bound in B[(signed long int)T[(signed long int)(i + j)]]: SUCCESS
+[search.overflow.8] line 52 arithmetic overflow on signed + in i + j: SUCCESS
+[search.overflow.9] line 52 arithmetic overflow on signed - in m - j: SUCCESS
+[search.pointer_arithmetic.25] line 52 pointer arithmetic: pointer NULL in T + (signed long int)(i + j): SUCCESS
+[search.pointer_arithmetic.26] line 52 pointer arithmetic: pointer invalid in T + (signed long int)(i + j): SUCCESS
+[search.pointer_arithmetic.27] line 52 pointer arithmetic: deallocated dynamic object in T + (signed long int)(i + j): SUCCESS
+[search.pointer_arithmetic.28] line 52 pointer arithmetic: dead object in T + (signed long int)(i + j): SUCCESS
+[search.pointer_arithmetic.29] line 52 pointer arithmetic: pointer outside object bounds in T + (signed long int)(i + j): SUCCESS
+[search.pointer_arithmetic.30] line 52 pointer arithmetic: invalid integer address in T + (signed long int)(i + j): SUCCESS
+[search.pointer_dereference.25] line 52 dereference failure: pointer NULL in T[(signed long int)(i + j)]: SUCCESS
+[search.pointer_dereference.26] line 52 dereference failure: pointer invalid in T[(signed long int)(i + j)]: SUCCESS
+[search.pointer_dereference.27] line 52 dereference failure: deallocated dynamic object in T[(signed long int)(i + j)]: SUCCESS
+[search.pointer_dereference.28] line 52 dereference failure: dead object in T[(signed long int)(i + j)]: SUCCESS
+[search.pointer_dereference.29] line 52 dereference failure: pointer outside object bounds in T[(signed long int)(i + j)]: SUCCESS
+[search.pointer_dereference.30] line 52 dereference failure: invalid integer address in T[(signed long int)(i + j)]: SUCCESS
+[search.undefined-shift.5] line 52 shift distance is negative in B[(signed long int)T[(signed long int)(i + j)]] >> j: SUCCESS
+[search.undefined-shift.6] line 52 shift distance too large in B[(signed long int)T[(signed long int)(i + j)]] >> j: SUCCESS
+[search.undefined-shift.7] line 52 shift distance is negative in ~0ul << m - j: SUCCESS
+[search.undefined-shift.8] line 52 shift distance too large in ~0ul << m - j: SUCCESS
+[search.overflow.10] line 53 arithmetic overflow on signed + in j + 1: SUCCESS
+[search.overflow.11] line 58 arithmetic overflow on signed + in count + __builtin_popcount(D): SUCCESS
 
-** 0 of 548 failed (1 iterations)
+** 0 of 551 failed (1 iterations)
 VERIFICATION SUCCESSFUL

@@ -14,6 +14,9 @@ endif
 BINDIR   := bin
 ALGOSINC := $(wildcard source/algos/include/*.h)
 SRCINC   := $(wildcard source/*.h)
+ifeq ($(ASAN),1)
+  SANITIZE=1
+endif
 ifneq ($(ARCH),x86_64)
   CFLAGS  := -O3 -Wall
   NON_SSE = source/algos/epsm.c source/algos/ssecp.c source/algos/ssef.c
