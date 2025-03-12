@@ -270,6 +270,14 @@ enum algo_id {
   _LHC6,   // Linear HashChain Q=6
   _LHC7,   // Linear HashChain Q=7
   _LHC8,   // Linear HashChain Q=8
+  _SHC1,   // Sentinel HashChain Q=1
+  _SHC2,   // Sentinel HashChain Q=2
+  _SHC3,   // Sentinel HashChain Q=3
+  _SHC4,   // Sentinel HashChain Q=4
+  _SHC5,   // Sentinel HashChain Q=5
+  _SHC6,   // Sentinel HashChain Q=6
+  _SHC7,   // Sentinel HashChain Q=7
+  _SHC8,   // Sentinel HashChain Q=8
   _FHC1,   // Fast HashChain Q=1
   _FHC2,   // Fast HashChain Q=2
   _FHC3,   // Fast HashChain Q=3
@@ -581,6 +589,14 @@ const struct algo ALGOS[] = {
   [_LHC6] = {_LHC6, FAIL, "lhc6", "Linear HashChain q=6", 6, 0},
   [_LHC7] = {_LHC7, FAIL, "lhc7", "Linear HashChain q=7", 7, 0},
   [_LHC8] = {_LHC8, FAIL, "lhc8", "Linear HashChain q=8", 8, 0},
+  [_SHC1] = {_SHC1, OK,   "shc1", "Sentinel HashChain q=1", 0, 0},
+  [_SHC2] = {_SHC2, OK,   "shc2", "Sentinel HashChain q=2", 2, 0},
+  [_SHC3] = {_SHC3, OK,   "shc3", "Sentinel HashChain q=3", 3, 0},
+  [_SHC4] = {_SHC4, FAIL, "shc4", "Sentinel HashChain q=4", 4, 0},
+  [_SHC5] = {_SHC5, FAIL, "shc5", "Sentinel HashChain q=5", 5, 0},
+  [_SHC6] = {_SHC6, FAIL, "shc6", "Sentinel HashChain q=6", 6, 0},
+  [_SHC7] = {_SHC7, FAIL, "shc7", "Sentinel HashChain q=7", 7, 0},
+  [_SHC8] = {_SHC8, FAIL, "shc8", "Sentinel HashChain q=8", 8, 0},
   [_FHC1] = {_FHC1, OK,   "fhc1", "Fast HashChain q=1", 0, 0},
   [_FHC2] = {_FHC2, OK,   "fhc2", "Fast HashChain q=2", 2, 0},
   [_FHC3] = {_FHC3, OK,   "fhc3", "Fast HashChain q=3", 3, 0},
