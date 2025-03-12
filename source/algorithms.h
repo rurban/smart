@@ -254,6 +254,14 @@ enum algo_id {
   _MUSL2,  // musl memmem with horspool
   _SIMDKR, // SIMD generic Rabin-Karp variants (SSE2, AVX2 and NEON)
   _EPSM,   // SSE4 Exact Packed String Matching
+  _HC1,    // HashChain Q=1
+  _HC2,    // HashChain Q=2
+  _HC3,    // HashChain Q=3
+  _HC4,    // HashChain Q=4
+  _HC5,    // HashChain Q=5
+  _HC6,    // HashChain Q=6
+  _HC7,    // HashChain Q=7
+  _HC8,    // HashChain Q=8
 } ALGO_POS;
 
 struct algo {
@@ -541,6 +549,14 @@ const struct algo ALGOS[] = {
   [_MUSL2] = {_MUSL2, FAIL, "musl2", "musl memmem with horspool", 0, 0},
   [_SIMDKR] = {_SIMDKR, FAIL, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
   [_EPSM] = {_EPSM, X64_ONLY + RNDCRASH, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
+  [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},
+  [_HC2] = {_HC2, OK, "hc2", "HashChain q=2", 2, 0},
+  [_HC3] = {_HC3, OK, "hc3", "HashChain q=3", 3, 0}, // maxlen 4194304
+  [_HC4] = {_HC4, FAIL, "hc4", "HashChain q=4", 4, 0},
+  [_HC5] = {_HC5, FAIL, "hc5", "HashChain q=5", 5, 0},
+  [_HC6] = {_HC6, FAIL, "hc6", "HashChain q=6", 6, 0},
+  [_HC7] = {_HC7, FAIL, "hc7", "HashChain q=7", 7, 0},
+  [_HC8] = {_HC8, FAIL, "hc8", "HashChain q=8", 8, 0},
     // clang-format on
 };
 

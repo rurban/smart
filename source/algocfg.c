@@ -343,6 +343,14 @@ const struct algocfg ALGOCFGS[] = {
   [_MUSL1] = {_MUSL1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, //7s, upto d=820 ok
   [_MUSL2] = {_MUSL2, FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_EPSM]  = {_EPSM,  GOOD, FAIL, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
+  [_HC1]  =  {_HC1,   GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_HC2]  =  {_HC2,   GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},
+  [_HC3]  =  {_HC3,   GOOD, ASAN, VFY_PASS, 3, 4194304, 0, 0, 0, 0}, // maxlen
+  [_HC4]  =  {_HC4,   FAIL, ASAN, VFY_PASS, 4, 0, 0, 0, 0, 0},
+  [_HC5]  =  {_HC5,   FAIL, ASAN, VFY_PASS, 5, 0, 0, 0, 0, 0},
+  [_HC6]  =  {_HC6,   FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0},
+  [_HC7]  =  {_HC7,   FAIL, ASAN, VFY_PASS, 7, 0, 0, 0, 0, 0},
+  [_HC8]  =  {_HC8,   FAIL, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
     // clang-format on
 };
 
