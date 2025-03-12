@@ -262,6 +262,14 @@ enum algo_id {
   _HC6,    // HashChain Q=6
   _HC7,    // HashChain Q=7
   _HC8,    // HashChain Q=8
+  _LHC1,   // Linear HashChain Q=1
+  _LHC2,   // Linear HashChain Q=2
+  _LHC3,   // Linear HashChain Q=3
+  _LHC4,   // Linear HashChain Q=4
+  _LHC5,   // Linear HashChain Q=5
+  _LHC6,   // Linear HashChain Q=6
+  _LHC7,   // Linear HashChain Q=7
+  _LHC8,   // Linear HashChain Q=8
 } ALGO_POS;
 
 struct algo {
@@ -557,6 +565,14 @@ const struct algo ALGOS[] = {
   [_HC6] = {_HC6, FAIL, "hc6", "HashChain q=6", 6, 0},
   [_HC7] = {_HC7, FAIL, "hc7", "HashChain q=7", 7, 0},
   [_HC8] = {_HC8, FAIL, "hc8", "HashChain q=8", 8, 0},
+  [_LHC1] = {_LHC1, OK,   "lhc1", "Linear HashChain q=1", 0, 0},
+  [_LHC2] = {_LHC2, OK,   "lhc2", "Linear HashChain q=2", 2, 0},
+  [_LHC3] = {_LHC3, OK,   "lhc3", "Linear HashChain q=3", 3, 0},
+  [_LHC4] = {_LHC4, FAIL, "lhc4", "Linear HashChain q=4", 4, 0},
+  [_LHC5] = {_LHC5, FAIL, "lhc5", "Linear HashChain q=5", 5, 0},
+  [_LHC6] = {_LHC6, FAIL, "lhc6", "Linear HashChain q=6", 6, 0},
+  [_LHC7] = {_LHC7, FAIL, "lhc7", "Linear HashChain q=7", 7, 0},
+  [_LHC8] = {_LHC8, FAIL, "lhc8", "Linear HashChain q=8", 8, 0},
     // clang-format on
 };
 

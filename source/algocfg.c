@@ -351,6 +351,14 @@ const struct algocfg ALGOCFGS[] = {
   [_HC6]  =  {_HC6,   FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0},
   [_HC7]  =  {_HC7,   FAIL, ASAN, VFY_PASS, 7, 0, 0, 0, 0, 0},
   [_HC8]  =  {_HC8,   FAIL, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
+  [_LHC1] =  {_HC1,   GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_LHC2] =  {_LHC2,  GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},
+  [_LHC3] =  {_LHC3,  GOOD, ASAN, VFY_PASS, 3, 0, 0, 0, 0, 0},
+  [_LHC4] =  {_LHC4,  FAIL, ASAN, VFY_PASS, 4, 0, 0, 0, 0, 0},
+  [_LHC5] =  {_LHC5,  FAIL, ASAN, VFY_PASS, 5, 0, 0, 0, 0, 0},
+  [_LHC6] =  {_LHC6,  FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0},
+  [_LHC7] =  {_LHC7,  FAIL, ASAN, VFY_PASS, 7, 0, 0, 0, 0, 0},
+  [_LHC8] =  {_LHC8,  FAIL, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
     // clang-format on
 };
 
