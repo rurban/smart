@@ -29,32 +29,39 @@
 #endif
 
 #if !defined __AVR__ && !defined CBMC
-TIMER *_timer;
-double *run_time, // searching time
-    *pre_time;    // preprocessing time
+TIMER *_pre_timer,
+      *_run_timer;
+double *pre_time, // sum preprocessing time
+       *run_time; // sum searching time
 double m_run_time, m_pre_time;
 
 #define BEGIN_PREPROCESSING                                                    \
   {                                                                            \
-    timer_start(_timer);                                                       \
-    start = clock();                                                           \
-  }
-#define BEGIN_SEARCHING                                                        \
-  {                                                                            \
-    timer_start(_timer);                                                       \
-    start = clock();                                                           \
+    /* if we have nested PREPROCESSING, halt SEARCH, as with musl1 */          \
+    if (_run_timer->start)                                                     \
+      timer_stop(_run_timer);                                                  \
+    timer_start(_pre_timer);                                                   \
+    /*start = clock();*/                                                       \
   }
 #define END_PREPROCESSING                                                      \
   {                                                                            \
-    timer_stop(_timer);                                                        \
-    end = clock();                                                             \
-    (*pre_time) = timer_elapsed(_timer) * 1000;                                \
+    timer_stop(_pre_timer);                                                    \
+    /*end = clock();*/                                                         \
+    (*pre_time) += timer_elapsed(_pre_timer) * 1000;                           \
+    /* if we have nested PREPROCESSING, continue SEARCH */                     \
+    if (_run_timer->sum)                                                       \
+      timer_start(_run_timer);                                                 \
+  }
+#define BEGIN_SEARCHING                                                        \
+  {                                                                            \
+    timer_start(_run_timer);                                                   \
+    /*start = clock();*/                                                       \
   }
 #define END_SEARCHING                                                          \
   {                                                                            \
-    timer_stop(_timer);                                                        \
-    end = clock();                                                             \
-    (*run_time) = timer_elapsed(_timer) * 1000;                                \
+    timer_stop(_run_timer);                                                    \
+    /*end = clock();*/                                                         \
+    (*run_time) += timer_elapsed(_run_timer) * 1000;                           \
   }
 
 /* global variables used for computing preprocessing and searching times */
@@ -82,7 +89,8 @@ int main(int argc, char *argv[]) {
   int m, n;
   unsigned char *p = NULL, *t = NULL;
 #ifndef __AVR__
-  _timer = (TIMER *)malloc(sizeof(TIMER));
+  _pre_timer = (TIMER *)calloc(1, sizeof(TIMER));
+  _run_timer = (TIMER *)calloc(1, sizeof(TIMER));
 #endif
 
   if (argc > 1 && strncmp("shared", argv[1], 6) == 0) {

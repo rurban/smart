@@ -170,8 +170,6 @@ static void *musl_memmem(const void *h0, size_t k, const void *n0,
                          size_t l) __nonnull_all {
   const unsigned char *h = h0, *n = n0;
 
-  BEGIN_PREPROCESSING
-  END_PREPROCESSING
   /* Return immediately on empty needle */
   if (!l)
     return (void *)h;
@@ -198,9 +196,11 @@ static void *musl_memmem(const void *h0, size_t k, const void *n0,
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
+  BEGIN_PREPROCESSING
 #ifdef DEBUG
   const unsigned char *orig_y = y;
 #endif
+  END_PREPROCESSING
 
   BEGIN_SEARCHING
   /* Searching */

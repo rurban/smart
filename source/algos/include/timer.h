@@ -33,6 +33,7 @@
 typedef struct {
   double start;
   double end;
+  double sum;
 } TIMER;
 
 #if defined(__linux__) && !defined(__AVR__)
@@ -54,9 +55,9 @@ static inline double get_time(void) {
 
 static inline void timer_start(TIMER *t) { t->start = get_time(); }
 
-static inline void timer_stop(TIMER *t) { t->end = get_time(); }
+static inline void timer_stop(TIMER *t) { t->end = get_time(); t->sum += t->end - t->start; }
 
-static inline double timer_elapsed(TIMER *t) { return t->end - t->start; }
+static inline double timer_elapsed(TIMER *t) { return t->sum; }
 
 #endif // AVR
 #endif

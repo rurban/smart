@@ -31,7 +31,7 @@
 unsigned int MINLEN = 1,
              MAXLEN = 4200; // min length and max length of pattern size
 #include "output.h"
-#include "timer.h"
+#include "algos/include/timer.h"
 
 //#define XSIZE 4200       // maximal length of the pattern
 //#define SIGMA 256        // constant alphabet size
