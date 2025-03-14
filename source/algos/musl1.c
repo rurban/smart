@@ -14,6 +14,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
+struct prep_t {
+  size_t p, ms, mem0;
+  size_t byteset[32 / sizeof(size_t)];
+  size_t shift[256];
+};
+
 static char *twobyte_memmem(const unsigned char *h, size_t k,
                             const unsigned char *n) __nonnull_all {
   assert(h);
@@ -56,18 +62,19 @@ static char *fourbyte_memmem(const unsigned char *h, size_t k,
   ((a)[(size_t)(b) / (8 * sizeof *(a))] op(size_t) 1                           \
    << ((size_t)(b) % (8 * sizeof *(a))))
 
-static char *twoway_memmem(const unsigned char *h, const unsigned char *z,
-                           const unsigned char *n, size_t l) __nonnull_all {
-  size_t i, ip, jp, k, p, ms, p0, mem, mem0;
-  size_t byteset[32 / sizeof(size_t)] = {0};
-  size_t shift[256];
+// => ms, p, mem0, byteset, shift
+static void twoway_prep(const unsigned char *h, const unsigned char *z,
+                        const unsigned char *n, size_t l,
+                        struct prep_t *prep) __nonnull_all {
+  size_t i, ip, jp, k, p, ms, p0, mem0;
+  //size_t byteset[32 / sizeof(size_t)] = {0};
+  //size_t shift[256];
   assert(h);
   assert(n);
 
-  BEGIN_PREPROCESSING
   /* Computing length of needle and fill shift table */
   for (i = 0; i < l; i++)
-    BITOP(byteset, n[i], |=), shift[n[i]] = i + 1;
+    BITOP(prep->byteset, n[i], |=), prep->shift[n[i]] = i + 1;
 
   /* Compute maximal suffix */
   ip = -1;
@@ -123,8 +130,19 @@ static char *twoway_memmem(const unsigned char *h, const unsigned char *z,
     p = MAX(ms, l - ms - 1) + 1;
   } else
     mem0 = l - p;
+  prep->ms = ms;
+  prep->p = p;
+  prep->mem0 = mem0;
+}
+
+static char *twoway_memmem(const unsigned char *h, const unsigned char *z,
+                           const unsigned char *n, size_t l,
+                           struct prep_t *prep) __nonnull_all {
+  size_t k, ms, mem;
+  ms = prep->ms;
+  assert(h);
+  assert(n);
   mem = 0;
-  END_PREPROCESSING
 
   /* Search loop */
   for (;;) {
@@ -133,8 +151,8 @@ static char *twoway_memmem(const unsigned char *h, const unsigned char *z,
       return 0;
 
     /* Check last byte first; advance by shift on mismatch */
-    if (BITOP(byteset, h[l - 1], &)) {
-      k = l - shift[h[l - 1]];
+    if (BITOP(prep->byteset, h[l - 1], &)) {
+      k = l - prep->shift[h[l - 1]];
       if (k) {
         if (k < mem)
           k = mem;
@@ -161,13 +179,13 @@ static char *twoway_memmem(const unsigned char *h, const unsigned char *z,
       ;
     if (k <= mem)
       return (char *)h;
-    h += p;
-    mem = mem0;
+    h += prep->p;
+    mem = prep->mem0;
   }
 }
 
-static void *musl_memmem(const void *h0, size_t k, const void *n0,
-                         size_t l) __nonnull_all {
+static void *musl_memmem(const void *h0, size_t k, const void *n0, size_t l,
+                         struct prep_t *prep) __nonnull_all {
   const unsigned char *h = h0, *n = n0;
 
   /* Return immediately on empty needle */
@@ -192,21 +210,27 @@ static void *musl_memmem(const void *h0, size_t k, const void *n0,
   if (l == 4)
     return fourbyte_memmem(h, k, n);
 
-  return twoway_memmem(h, h + k, n, l);
+  return twoway_memmem(h, h + k, n, l, prep);
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_PREPROCESSING
+  struct prep_t prep;
 #ifdef DEBUG
   const unsigned char *orig_y = y;
 #endif
+  if (m > 4) {
+    const unsigned char *h = memchr(y, *x, n);
+    memset(prep.byteset, 0, sizeof(prep.byteset));
+    twoway_prep(h, h + n, x, m, &prep);
+  }
   END_PREPROCESSING
 
   BEGIN_SEARCHING
   /* Searching */
   int count = 0;
   unsigned char *p;
-  while ((p = musl_memmem((char *)y, n, (char *)x, m))) {
+  while ((p = musl_memmem((char *)y, n, (char *)x, m, &prep))) {
     OUTPUT(p - orig_y);
     n -= (p + 1) - y;
     y = p + 1; // can be optimized

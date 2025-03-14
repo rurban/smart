@@ -6,7 +6,7 @@ make -s
 
 ./select -backup -all
 
-(sleep 2s; ./kill-tests.sh)&
+#(sleep 2s; ./kill-tests.sh)&
 ./smart -text all -all -txt
 
 ./select -restore
