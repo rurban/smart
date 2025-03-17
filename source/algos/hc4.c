@@ -52,7 +52,7 @@ unsigned int preprocessing(const unsigned char *x, int m, unsigned int *B) {
     for (int i = 0; i < ASIZE; i++) B[i] = 0;
 
     // 1. Calculate all the chain hashes, ending with processing the entire pattern so H has the cumulative value.
-    unsigned int H;
+    unsigned int H = 0;
     int last_chain = m < Q2 ? m - END_FIRST_QGRAM : Q;
     for (int chain_no = last_chain; chain_no >= 1; chain_no--)
     {
