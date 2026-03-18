@@ -5,6 +5,13 @@ source/algos/hc6.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-un
 source/algos/hc6.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
       |                  ^
+source/algos/lhc5.c: In function ‘preprocessing’:
+source/algos/lhc5.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc5.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
+      |                  ^
 source/algos/hc8.c: In function ‘preprocessing’:
 source/algos/hc8.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
    77 |     return H; // Return the hash value for processing the last q-gram.
@@ -12,12 +19,68 @@ source/algos/hc8.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-un
 source/algos/hc8.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
       |                  ^
+source/algos/lhc8.c: In function ‘preprocessing’:
+source/algos/lhc8.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc8.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
+      |                  ^
 source/algos/hc5.c: In function ‘preprocessing’:
 source/algos/hc5.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
    77 |     return H; // Return the hash value for processing the last q-gram.
       |            ^
 source/algos/hc5.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
+      |                  ^
+source/algos/lhc2.c: In function ‘preprocessing’:
+source/algos/lhc2.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc2.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
+      |                  ^
+source/algos/shc5.c: In function ‘preprocessing’:
+source/algos/shc5.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc5.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/shc3.c: In function ‘preprocessing’:
+source/algos/shc3.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc3.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/lhc1.c: In function ‘preprocessing’:
+source/algos/lhc1.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc1.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
+      |                  ^
+source/algos/lhc7.c: In function ‘preprocessing’:
+source/algos/lhc7.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc7.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
+      |                  ^
+source/algos/shc7.c: In function ‘preprocessing’:
+source/algos/shc7.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc7.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/lhc4.c: In function ‘preprocessing’:
+source/algos/lhc4.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc4.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
       |                  ^
 source/algos/hc2.c: In function ‘preprocessing’:
 source/algos/hc2.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
@@ -33,11 +96,46 @@ source/algos/hc4.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-un
 source/algos/hc4.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
       |                  ^
+source/algos/shc1.c: In function ‘preprocessing’:
+source/algos/shc1.c:78:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   78 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc1.c:56:18: note: ‘H’ was declared here
+   56 |     unsigned int H;
+      |                  ^
 source/algos/hc7.c: In function ‘preprocessing’:
 source/algos/hc7.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
    77 |     return H; // Return the hash value for processing the last q-gram.
       |            ^
 source/algos/hc7.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/lhc3.c: In function ‘preprocessing’:
+source/algos/lhc3.c:107:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  107 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc3.c:85:18: note: ‘H’ was declared here
+   85 |     unsigned int H;
+      |                  ^
+source/algos/shc6.c: In function ‘preprocessing’:
+source/algos/shc6.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc6.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/shc4.c: In function ‘preprocessing’:
+source/algos/shc4.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc4.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
+source/algos/shc2.c: In function ‘preprocessing’:
+source/algos/shc2.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc2.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
       |                  ^
 source/algos/hc1.c: In function ‘preprocessing’:
@@ -47,10 +145,24 @@ source/algos/hc1.c:78:12: warning: ‘H’ may be used uninitialized [-Wmaybe-un
 source/algos/hc1.c:56:18: note: ‘H’ was declared here
    56 |     unsigned int H;
       |                  ^
+source/algos/shc8.c: In function ‘preprocessing’:
+source/algos/shc8.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+   77 |     return H; // Return the hash value for processing the last q-gram.
+      |            ^
+source/algos/shc8.c:55:18: note: ‘H’ was declared here
+   55 |     unsigned int H;
+      |                  ^
 source/algos/hc3.c: In function ‘preprocessing’:
 source/algos/hc3.c:77:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
    77 |     return H; // Return the hash value for processing the last q-gram.
       |            ^
 source/algos/hc3.c:55:18: note: ‘H’ was declared here
    55 |     unsigned int H;
+      |                  ^
+source/algos/lhc6.c: In function ‘preprocessing’:
+source/algos/lhc6.c:106:12: warning: ‘H’ may be used uninitialized [-Wmaybe-uninitialized]
+  106 |     return H; // Return 32-bit hash value for processing the entire pattern.
+      |            ^
+source/algos/lhc6.c:84:18: note: ‘H’ was declared here
+   84 |     unsigned int H;
       |                  ^

@@ -3,6 +3,7 @@ set -x
 #make -s clean
 make algocfg
 make -s
+./build.sh
 
 ./select -backup -all
 
