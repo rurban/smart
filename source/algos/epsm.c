@@ -262,9 +262,9 @@ int search16(unsigned char *pattern, int patlen, unsigned char *x,
 
   //NOLINTNEXTLINE(clang-analyzer-unix.Malloc)
   for (i = 1; (int)i < tmppatlen - 7; i++) {
-    // FIXME: unaligned access, wordwise stepper please
-    ptr64 = (uint64_t *)(&pattern[i]);
-    crc = _mm_crc32_u64(seed, *ptr64);
+    uint64_t word;
+    memcpy(&word, &pattern[i], sizeof(word));
+    crc = _mm_crc32_u64(seed, word);
     filter = (unsigned int)(crc & mask);
 
     if (flist[filter] == 0) {
@@ -329,7 +329,8 @@ int search16(unsigned char *pattern, int patlen, unsigned char *x,
       charPtr = (unsigned char *)ptr64;
       t = flist[filter];
       while (t) {
-        if (memcmp(pattern, charPtr - t->pos, patlen) == 0)
+        if ((unsigned)t->pos <= (unsigned)(charPtr - x) &&
+            memcmp(pattern, charPtr - t->pos, patlen) == 0)
           count++;
         t = t->next;
       }
@@ -401,7 +402,7 @@ int search(unsigned char *pattern, int patlen, unsigned char *x, int textlen) {
   i = (patlen - 1) / 16; // i points the first 16-byte block that P may end in
   i++;
   text += i;
-  for (k = 0; k < (i * 16 + 8) - patlen + 1; k++)
+  for (k = 0; k < (i * 16 + 8) - patlen + 1 && k + patlen <= textlen; k++)
     if (0 == memcmp(pattern, x + k, patlen))
       count++;
   END_PREPROCESSING
