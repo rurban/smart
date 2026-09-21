@@ -37,9 +37,11 @@
  * catalogued as a 2008 research prototype and never fully debugged or
  * published in peer-reviewed form.  Külekci's later EPSM (SSE4 exact
  * packed string matching) is a separate, more developed algorithm.
- * Constraints: requires m < XSIZE
+ *
+ * Constraints: requires m > 1 && m < XSIZE
  */
 
+#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 

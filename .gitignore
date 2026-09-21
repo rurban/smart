@@ -13,6 +13,7 @@
 /compilesm-fuzz
 /smart-fuzz
 /test-fuzz
+/fuzz.sh
 algorithms.lst
 /data/rand128/rand128.txt
 /data/rand16/rand16.txt
@@ -26,7 +27,8 @@ algorithms.lst
 /data/fuzz
 /results/
 /bin/
-/compile_commands.json
+compile_commands.json
+compile_commands.events.json
 /sanitizer.log
 /rb.sh
 /lb.sh

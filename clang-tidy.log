@@ -1,15 +1,690 @@
-source/algocfg.c:383:5: warning: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-  383 |     fprintf(stderr, "Usage: ./algocfg [algo] [cfg [value]]\n");
-      |     ^~~~~~~
-source/algocfg.c:383:5: note: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
-  383 |     fprintf(stderr, "Usage: ./algocfg [algo] [cfg [value]]\n");
-      |     ^~~~~~~
-source/algocfg.c:460:7: warning: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-  460 |       fprintf(stderr, "Usage: ./algocfg algo cfg [value]\n");
-      |       ^~~~~~~
-source/algocfg.c:460:7: note: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
-  460 |       fprintf(stderr, "Usage: ./algocfg algo cfg [value]\n");
-      |       ^~~~~~~
+source/algos/ag.c:61:9: warning: Out of bound access to memory after the end of 'suff' [clang-analyzer-security.ArrayBound]
+   61 |     if (suff[i] == i + 1)
+      |         ^
+source/algos/ag.c:74:3: note: Assuming the condition is false
+   74 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/ag.c:74:3: note: Taking false branch
+   74 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/ag.c:75:3: note: Calling 'preBmGsAG'
+   75 |   preBmGsAG(x, m, bmGs, suff);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/algos/ag.c:57:15: note: Assuming 'i' is >= 'm'
+   57 |   for (i = 0; i < m; ++i)
+      |               ^~~~~
+source/algos/ag.c:57:3: note: Loop condition is false. Execution continues on line 59
+   57 |   for (i = 0; i < m; ++i)
+      |   ^
+source/algos/ag.c:60:19: note: Assuming 'i' is >= 0
+   60 |   for (i = m - 1; i >= 0; --i)
+      |                   ^~~~~~
+source/algos/ag.c:60:3: note: Loop condition is true.  Entering loop body
+   60 |   for (i = m - 1; i >= 0; --i)
+      |   ^
+source/algos/ag.c:61:9: note: Access of 'suff' at index 2147483647, while it holds only 4200 'int' elements
+   61 |     if (suff[i] == i + 1)
+      |         ^~~~~~~
+source/algos/ag.c:111:7: warning: Out of bound access to memory preceding 'skip' [clang-analyzer-security.ArrayBound]
+  111 |       skip[m - 1] = m;
+      |       ^~~~~~~~~~~
+source/algos/ag.c:74:3: note: Assuming the condition is false
+   74 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/ag.c:74:3: note: Taking false branch
+   74 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/ag.c:75:3: note: Calling 'preBmGsAG'
+   75 |   preBmGsAG(x, m, bmGs, suff);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/algos/ag.c:57:15: note: Assuming 'i' is >= 'm'
+   57 |   for (i = 0; i < m; ++i)
+      |               ^~~~~
+source/algos/ag.c:57:3: note: Loop condition is false. Execution continues on line 59
+   57 |   for (i = 0; i < m; ++i)
+      |   ^
+source/algos/ag.c:60:19: note: Assuming 'i' is < 0
+   60 |   for (i = m - 1; i >= 0; --i)
+      |                   ^~~~~~
+source/algos/ag.c:60:3: note: Loop condition is false. Execution continues on line 65
+   60 |   for (i = m - 1; i >= 0; --i)
+      |   ^
+source/algos/ag.c:65:15: note: Assuming the condition is false
+   65 |   for (i = 0; i <= m - 2; ++i)
+      |               ^~~~~~~~~~
+source/algos/ag.c:65:3: note: Loop condition is false. Execution continues on line 75
+   65 |   for (i = 0; i <= m - 2; ++i)
+      |   ^
+source/algos/ag.c:75:3: note: Returning from 'preBmGsAG'
+   75 |   preBmGsAG(x, m, bmGs, suff);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/algos/ag.c:79:3: note: Assuming the condition is false
+   79 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/ag.c:79:3: note: Taking false branch
+   79 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/ag.c:85:10: note: Assuming the condition is true
+   85 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/ag.c:85:3: note: Loop condition is true.  Entering loop body
+   85 |   while (j <= n - m) {
+      |   ^
+source/algos/ag.c:87:12: note: 'i' is < 0
+   87 |     while (i >= 0) {
+      |            ^
+source/algos/ag.c:87:5: note: Loop condition is false. Execution continues on line 109
+   87 |     while (i >= 0) {
+      |     ^
+source/algos/ag.c:109:9: note: 'i' is < 0
+  109 |     if (i < 0) {
+      |         ^
+source/algos/ag.c:109:5: note: Taking true branch
+  109 |     if (i < 0) {
+      |     ^
+source/algos/ag.c:111:7: note: Access of 'skip' at negative byte offset
+  111 |       skip[m - 1] = m;
+      |       ^~~~~~~~~~~
+source/algos/akc.c:307:19: warning: Out of bound access to memory preceding 's_clink' [clang-analyzer-security.ArrayBound]
+  307 |         next[p] = clink[m - k - 1];
+      |                   ^
+source/algos/akc.c:381:3: note: Assuming the condition is false
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/akc.c:381:3: note: Taking false branch
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
+  382 |   if (m > M_CUTOFF) {
+      |       ^~~~~~~~~~~~
+source/algos/akc.c:382:3: note: Taking false branch
+  382 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:409:3: note: Assuming the condition is false
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/akc.c:409:3: note: Taking false branch
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: 'k' is not equal to 0
+  422 |       if (k == 0) {
+      |           ^
+source/algos/akc.c:422:7: note: Taking false branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking true branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:456:7: note: Calling 'validateShift'
+  456 |       validateShift(m, clink, slink, ell, skip);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/algos/akc.c:281:7: note: 'm' is <= M_CUTOFF
+  281 |   if (m > M_CUTOFF) {
+      |       ^
+source/algos/akc.c:281:3: note: Taking false branch
+  281 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:290:7: note: Assuming the condition is true
+  290 |   if (skip[ell] < m) {
+      |       ^~~~~~~~~~~~~
+source/algos/akc.c:290:3: note: Taking true branch
+  290 |   if (skip[ell] < m) {
+      |   ^
+source/algos/akc.c:295:9: note: Assuming the condition is false
+  295 |     if (skip[ell] + k >= m)
+      |         ^~~~~~~~~~~~~~~~~~
+source/algos/akc.c:295:5: note: Taking false branch
+  295 |     if (skip[ell] + k >= m)
+      |     ^
+source/algos/akc.c:299:9: note: Assuming the condition is false
+  299 |     if (skip[ell] + k >= m)
+      |         ^~~~~~~~~~~~~~~~~~
+source/algos/akc.c:299:5: note: Taking false branch
+  299 |     if (skip[ell] + k >= m)
+      |     ^
+source/algos/akc.c:302:5: note: Loop condition is true.  Entering loop body
+  302 |     while (skip[ell] + k < m) {
+      |     ^
+source/algos/akc.c:306:11: note: Assuming the condition is true
+  306 |       if (skip[j] == 1)
+      |           ^~~~~~~~~~~~
+source/algos/akc.c:306:7: note: Taking true branch
+  306 |       if (skip[j] == 1)
+      |       ^
+source/algos/akc.c:307:19: note: Access of 's_clink' at negative byte offset -4
+  307 |         next[p] = clink[m - k - 1];
+      |                   ^~~~~~~~~~~~~~~~
+source/algos/akc.c:309:19: warning: Out of bound access to memory preceding 's_slink' [clang-analyzer-security.ArrayBound]
+  309 |         next[p] = slink[m - k - 1];
+      |                   ^
+source/algos/akc.c:381:3: note: Assuming the condition is false
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/akc.c:381:3: note: Taking false branch
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
+  382 |   if (m > M_CUTOFF) {
+      |       ^~~~~~~~~~~~
+source/algos/akc.c:382:3: note: Taking false branch
+  382 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:409:3: note: Assuming the condition is false
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/akc.c:409:3: note: Taking false branch
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: 'k' is not equal to 0
+  422 |       if (k == 0) {
+      |           ^
+source/algos/akc.c:422:7: note: Taking false branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking true branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:456:7: note: Calling 'validateShift'
+  456 |       validateShift(m, clink, slink, ell, skip);
+      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source/algos/akc.c:281:7: note: 'm' is <= M_CUTOFF
+  281 |   if (m > M_CUTOFF) {
+      |       ^
+source/algos/akc.c:281:3: note: Taking false branch
+  281 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:290:7: note: Assuming the condition is true
+  290 |   if (skip[ell] < m) {
+      |       ^~~~~~~~~~~~~
+source/algos/akc.c:290:3: note: Taking true branch
+  290 |   if (skip[ell] < m) {
+      |   ^
+source/algos/akc.c:295:9: note: Assuming the condition is false
+  295 |     if (skip[ell] + k >= m)
+      |         ^~~~~~~~~~~~~~~~~~
+source/algos/akc.c:295:5: note: Taking false branch
+  295 |     if (skip[ell] + k >= m)
+      |     ^
+source/algos/akc.c:299:9: note: Assuming the condition is false
+  299 |     if (skip[ell] + k >= m)
+      |         ^~~~~~~~~~~~~~~~~~
+source/algos/akc.c:299:5: note: Taking false branch
+  299 |     if (skip[ell] + k >= m)
+      |     ^
+source/algos/akc.c:302:5: note: Loop condition is true.  Entering loop body
+  302 |     while (skip[ell] + k < m) {
+      |     ^
+source/algos/akc.c:306:11: note: Assuming the condition is false
+  306 |       if (skip[j] == 1)
+      |           ^~~~~~~~~~~~
+source/algos/akc.c:306:7: note: Taking false branch
+  306 |       if (skip[j] == 1)
+      |       ^
+source/algos/akc.c:309:19: note: Access of 's_slink' at negative byte offset -4
+  309 |         next[p] = slink[m - k - 1];
+      |                   ^~~~~~~~~~~~~~~~
+source/algos/akc.c:453:23: warning: Out of bound access to memory after the end of 's_pref' [clang-analyzer-security.ArrayBound]
+  453 |           skip[ell] = pref[i + 1];
+      |                       ^~~~~~~~~~~
+source/algos/akc.c:381:3: note: Assuming the condition is false
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/akc.c:381:3: note: Taking false branch
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
+  382 |   if (m > M_CUTOFF) {
+      |       ^~~~~~~~~~~~
+source/algos/akc.c:382:3: note: Taking false branch
+  382 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:409:3: note: Assuming the condition is false
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/akc.c:409:3: note: Taking false branch
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: 'k' is not equal to 0
+  422 |       if (k == 0) {
+      |           ^
+source/algos/akc.c:422:7: note: Taking false branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking true branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: Assuming 'k' is equal to 0
+  422 |       if (k == 0) {
+      |           ^~~~~~
+source/algos/akc.c:422:7: note: Taking true branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:425:13: note: Assuming 'i' is >= 0
+  425 |         if (i < 0)
+      |             ^~~~~
+source/algos/akc.c:425:9: note: Taking false branch
+  425 |         if (i < 0)
+      |         ^
+source/algos/akc.c:428:13: note: Assuming the condition is false
+  428 |         k = MIN(skip[ell], i + 1);
+      |             ^
+source/algos/akc.c:28:20: note: expanded from macro 'MIN'
+   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
+      |                    ^~~~~~~~~
+source/algos/akc.c:428:13: note: '?' condition is false
+  428 |         k = MIN(skip[ell], i + 1);
+      |             ^
+source/algos/akc.c:28:20: note: expanded from macro 'MIN'
+   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:430:11: note: Assuming the condition is true
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking true branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: 'k' is not equal to 0
+  422 |       if (k == 0) {
+      |           ^
+source/algos/akc.c:422:7: note: Taking false branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking false branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:452:13: note: Assuming the condition is true
+  452 |         if (skip[ell] == -1) {
+      |             ^~~~~~~~~~~~~~~
+source/algos/akc.c:452:9: note: Taking true branch
+  452 |         if (skip[ell] == -1) {
+      |         ^
+source/algos/akc.c:453:23: note: Access of 's_pref' at index 2147483647, while it holds only 33 'int' elements
+  453 |           skip[ell] = pref[i + 1];
+      |                       ^~~~~~~~~~~
+source/algos/akc.c:453:23: warning: Out of bound access to memory preceding 's_pref' [clang-analyzer-security.ArrayBound]
+  453 |           skip[ell] = pref[i + 1];
+      |                       ^~~~~~~~~~~
+source/algos/akc.c:381:3: note: Assuming the condition is false
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/akc.c:381:3: note: Taking false branch
+  381 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
+  382 |   if (m > M_CUTOFF) {
+      |       ^~~~~~~~~~~~
+source/algos/akc.c:382:3: note: Taking false branch
+  382 |   if (m > M_CUTOFF) {
+      |   ^
+source/algos/akc.c:409:3: note: Assuming the condition is false
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/akc.c:409:3: note: Taking false branch
+  409 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: 'k' is not equal to 0
+  422 |       if (k == 0) {
+      |           ^
+source/algos/akc.c:422:7: note: Taking false branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking true branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:417:10: note: Assuming the condition is true
+  417 |   while (j <= n - m) {
+      |          ^~~~~~~~~~
+source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
+  417 |   while (j <= n - m) {
+      |   ^
+source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
+  421 |     while (i >= 0) {
+      |     ^
+source/algos/akc.c:422:11: note: Assuming 'k' is equal to 0
+  422 |       if (k == 0) {
+      |           ^~~~~~
+source/algos/akc.c:422:7: note: Taking true branch
+  422 |       if (k == 0) {
+      |       ^
+source/algos/akc.c:425:13: note: Assuming 'i' is >= 0
+  425 |         if (i < 0)
+      |             ^~~~~
+source/algos/akc.c:425:9: note: Taking false branch
+  425 |         if (i < 0)
+      |         ^
+source/algos/akc.c:428:13: note: Assuming the condition is false
+  428 |         k = MIN(skip[ell], i + 1);
+      |             ^
+source/algos/akc.c:28:20: note: expanded from macro 'MIN'
+   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
+      |                    ^~~~~~~~~
+source/algos/akc.c:428:13: note: '?' condition is false
+  428 |         k = MIN(skip[ell], i + 1);
+      |             ^
+source/algos/akc.c:28:20: note: expanded from macro 'MIN'
+   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:430:11: note: Assuming the condition is false
+  430 |       if (x[i] == y[i + j]) {
+      |           ^~~~~~~~~~~~~~~~
+source/algos/akc.c:430:7: note: Taking false branch
+  430 |       if (x[i] == y[i + j]) {
+      |       ^
+source/algos/akc.c:434:9: note:  Execution continues on line 436
+  434 |         break;
+      |         ^
+source/algos/akc.c:436:9: note: 'i' is >= 0
+  436 |     if (i < 0) {
+      |         ^
+source/algos/akc.c:436:5: note: Taking false branch
+  436 |     if (i < 0) {
+      |     ^
+source/algos/akc.c:443:19: note: '?' condition is false
+  443 |       skip[ell] = MAX(0, k - 1);
+      |                   ^
+source/algos/akc.c:29:20: note: expanded from macro 'MAX'
+   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
+      |                    ^
+source/algos/akc.c:448:7: note: Taking false branch
+  448 |       if (i == m - 1) {
+      |       ^
+source/algos/akc.c:452:13: note: Assuming the condition is true
+  452 |         if (skip[ell] == -1) {
+      |             ^~~~~~~~~~~~~~~
+source/algos/akc.c:452:9: note: Taking true branch
+  452 |         if (skip[ell] == -1) {
+      |         ^
+source/algos/akc.c:453:23: note: Access of 's_pref' at negative byte offset -8589934592
+  453 |           skip[ell] = pref[i + 1];
+      |                       ^~~~~~~~~~~
+source/algos/bfs.c:40:7: warning: Out of bound access to memory around 'temp' [clang-analyzer-security.ArrayBound]
+   40 |       temp[last] = i;
+      |       ^~~~~~~~~~
+source/algos/bfs.c:33:15: note: Assuming 'i' is > 'm'
+   33 |   for (i = 0; i <= m; i++)
+      |               ^~~~~~
+source/algos/bfs.c:33:3: note: Loop condition is false. Execution continues on line 36
+   33 |   for (i = 0; i <= m; i++)
+      |   ^
+source/algos/bfs.c:36:15: note: 'i' is > 'm'
+   36 |   for (i = 0; i <= m; i++)
+      |               ^
+source/algos/bfs.c:36:3: note: Loop condition is false. Execution continues on line 38
+   36 |   for (i = 0; i <= m; i++)
+      |   ^
+source/algos/bfs.c:38:19: note: Assuming 'i' is >= 0
+   38 |   for (i = m - 2; i >= 0; i--)
+      |                   ^~~~~~
+source/algos/bfs.c:38:3: note: Loop condition is true.  Entering loop body
+   38 |   for (i = m - 2; i >= 0; i--)
+      |   ^
+source/algos/bfs.c:39:9: note: Assuming index is less than the number of 'unsigned char' elements in the region
+   39 |     if (x[i] == x[last]) {
+      |         ^~~~
+source/algos/bfs.c:39:17: note: Assuming index is less than the number of 'unsigned char' elements in the region
+   39 |     if (x[i] == x[last]) {
+      |                 ^~~~~~~
+source/algos/bfs.c:39:9: note: Assuming the condition is true
+   39 |     if (x[i] == x[last]) {
+      |         ^~~~~~~~~~~~~~~
+source/algos/bfs.c:39:5: note: Taking true branch
+   39 |     if (x[i] == x[last]) {
+      |     ^
+source/algos/bfs.c:40:7: note: Access of 'temp' at a negative or overflowing index, while it holds only 4200 'int' elements
+   40 |       temp[last] = i;
+      |       ^~~~~~~~~~
+source/algos/bm.c:61:9: warning: Out of bound access to memory after the end of 'suff' [clang-analyzer-security.ArrayBound]
+   61 |     if (suff[i] == i + 1)
+      |         ^
+source/algos/bm.c:73:3: note: Assuming the condition is false
+   73 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/bm.c:73:3: note: Taking false branch
+   73 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/bm.c:74:3: note: Calling 'preBmGs'
+   74 |   preBmGs(x, m, bmGs);
+      |   ^~~~~~~~~~~~~~~~~~~
+source/algos/bm.c:57:15: note: Assuming 'i' is >= 'm'
+   57 |   for (i = 0; i < m; ++i)
+      |               ^~~~~
+source/algos/bm.c:57:3: note: Loop condition is false. Execution continues on line 59
+   57 |   for (i = 0; i < m; ++i)
+      |   ^
+source/algos/bm.c:60:19: note: Assuming 'i' is >= 0
+   60 |   for (i = m - 1; i >= 0; --i)
+      |                   ^~~~~~
+source/algos/bm.c:60:3: note: Loop condition is true.  Entering loop body
+   60 |   for (i = m - 1; i >= 0; --i)
+      |   ^
+source/algos/bm.c:61:9: note: Access of 'suff' at index 2147483647, while it holds only 4200 'int' elements
+   61 |     if (suff[i] == i + 1)
+      |         ^~~~~~~
 source/algos/bom.c:61:16: warning: Out of bound access to memory preceding 'L' [clang-analyzer-security.ArrayBound]
    61 |   cell->next = L[p];
       |                ^
@@ -484,6 +1159,12 @@ source/algos/ebom.c:58:3: note: Access of 'S' at index 2147483647, while it hold
 source/algos/epsm.c:56:13: warning: unknown pragma ignored [clang-diagnostic-unknown-pragmas]
    56 | #pragma GCC optimize("O3")
       |             ^
+source/algos/epsm.c:315:5: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+  315 |     memcpy(&word, &pattern[i], sizeof(word));
+      |     ^~~~~~
+source/algos/epsm.c:315:5: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
+  315 |     memcpy(&word, &pattern[i], sizeof(word));
+      |     ^~~~~~
 source/algos/fbom.c:52:3: warning: Out of bound access to memory around 'S' [clang-analyzer-security.ArrayBound]
    52 |   S[m] = m + 1;
       |   ^~~~
@@ -756,12 +1437,6 @@ source/algos/gg.c:159:14: note: Left side of '&&' is true
 source/algos/gg.c:159:34: note: Access of 'h' at negative byte offset
   159 |       while (i < m && last < j + h[i] && x[h[i]] == y[j + h[i]])
       |                                  ^~~~
-source/algos/graspm.c:103:9: warning: Value stored to 'pos' is never read [clang-analyzer-deadcode.DeadStores]
-  103 |         pos = pos->next;
-      |         ^     ~~~~~~~~~
-source/algos/graspm.c:103:9: note: Value stored to 'pos' is never read
-  103 |         pos = pos->next;
-      |         ^     ~~~~~~~~~
 source/algos/ildm1.c:65:3: warning: Out of bound access to memory preceding 's_xR' [clang-analyzer-security.ArrayBound]
    65 |   xR[m] = '\0';
       |   ^~~~~
@@ -3099,12 +3774,18 @@ source/algos/sfbom.c:47:3: note: Loop condition is false. Execution continues on
 source/algos/sfbom.c:50:3: note: Access of 'S' at a negative or overflowing index, while it holds only 4200 'int' elements
    50 |   S[m] = m + 1;
       |   ^~~~
-source/algos/ssef.c:147:2: error: expected '}' [clang-diagnostic-error]
-  147 | }
-      |  ^
-source/algos/ssef.c:52:62: note: to match this '{'
-   52 | int search(unsigned char *x, int m, unsigned char *y, int n) {
-      |                                                              ^
+source/algos/ssecp.c:68:3: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+   68 |   memcpy(buf, p, len);
+      |   ^~~~~~
+source/algos/ssecp.c:68:3: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
+   68 |   memcpy(buf, p, len);
+      |   ^~~~~~
+source/algos/ssecp.c:279:5: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
+  279 |     memcpy(needle_buf, &x[mu], (size_t)needle_length);
+      |     ^~~~~~
+source/algos/ssecp.c:279:5: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
+  279 |     memcpy(needle_buf, &x[mu], (size_t)needle_length);
+      |     ^~~~~~
 source/algos/tbm.c:62:9: warning: Out of bound access to memory after the end of 'suff' [clang-analyzer-security.ArrayBound]
    62 |     if (suff[i] == i + 1)
       |         ^
@@ -3207,6 +3888,124 @@ source/algos/tvsbs-w2.c:51:3: warning: Call to function 'memcpy' is insecure as 
 source/algos/tvsbs-w2.c:51:3: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
    51 |   memcpy(y, _y, n);
       |   ^~~~~~
+source/algos/tvsbs-w2.c:71:20: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
+   71 |     if (firstch == y[s1] || firstch == y[s2]) {
+      |                    ^~~~~
+source/algos/tvsbs-w2.c:46:7: note: Assuming 'm' is < XSIZE
+   46 |   if (m >= XSIZE)
+      |       ^~~~~~~~~~
+source/algos/tvsbs-w2.c:46:3: note: Taking false branch
+   46 |   if (m >= XSIZE)
+      |   ^
+source/algos/tvsbs-w2.c:49:3: note: Assuming the condition is false
+   49 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |         ^~~~~~~~~~~~~~~~~
+source/algos/tvsbs-w2.c:49:3: note: Taking false branch
+   49 |   BEGIN_PREPROCESSING
+      |   ^
+source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
+   41 |     if (_run_timer->start)                                                     \
+      |     ^
+source/algos/tvsbs-w2.c:53:15: note: Assuming 'i' is < 'm'
+   53 |   for (i = 0; i < m; i++)
+      |               ^~~~~
+source/algos/tvsbs-w2.c:53:3: note: Loop condition is true.  Entering loop body
+   53 |   for (i = 0; i < m; i++)
+      |   ^
+source/algos/tvsbs-w2.c:53:15: note: Assuming 'i' is >= 'm'
+   53 |   for (i = 0; i < m; i++)
+      |               ^~~~~
+source/algos/tvsbs-w2.c:53:3: note: Loop condition is false. Execution continues on line 55
+   53 |   for (i = 0; i < m; i++)
+      |   ^
+source/algos/tvsbs-w2.c:63:3: note: Assuming the condition is false
+   63 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |         ^~~~~~~~~~~~~~~
+source/algos/tvsbs-w2.c:63:3: note: Taking false branch
+   63 |   END_PREPROCESSING
+      |   ^
+source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
+   52 |     if (_run_timer->sum)                                                       \
+      |     ^
+source/algos/tvsbs-w2.c:66:3: note: Loop condition is true.  Entering loop body
+   66 |   for (i = 0; i < m; i++)
+      |   ^
+source/algos/tvsbs-w2.c:66:3: note: Loop condition is false. Execution continues on line 68
+source/algos/tvsbs-w2.c:70:10: note: 's1' is <= 's2'
+   70 |   while (s1 <= s2) {
+      |          ^~
+source/algos/tvsbs-w2.c:70:3: note: Loop condition is true.  Entering loop body
+   70 |   while (s1 <= s2) {
+      |   ^
+source/algos/tvsbs-w2.c:71:9: note: Assuming the condition is true
+   71 |     if (firstch == y[s1] || firstch == y[s2]) {
+      |         ^~~~~~~~~~~~~~~~
+source/algos/tvsbs-w2.c:71:26: note: Left side of '||' is true
+   71 |     if (firstch == y[s1] || firstch == y[s2]) {
+      |                          ^
+source/algos/tvsbs-w2.c:72:11: note: Assuming the condition is true
+   72 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1]) {
+      |           ^~~~~~~~~~~~~~~~~~~~~
+source/algos/tvsbs-w2.c:72:33: note: Left side of '||' is true
+   72 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1]) {
+      |                                 ^
+source/algos/tvsbs-w2.c:74:16: note: 'i' is < 'm'
+   74 |         while (i < m && x[i] == y[s1 + i])
+      |                ^
+source/algos/tvsbs-w2.c:74:16: note: Left side of '&&' is true
+source/algos/tvsbs-w2.c:74:9: note: Loop condition is false. Execution continues on line 76
+   74 |         while (i < m && x[i] == y[s1 + i])
+      |         ^
+source/algos/tvsbs-w2.c:76:13: note: 'i' is not equal to 'm'
+   76 |         if (i == m)
+      |             ^
+source/algos/tvsbs-w2.c:76:9: note: Taking false branch
+   76 |         if (i == m)
+      |         ^
+source/algos/tvsbs-w2.c:79:16: note: 'i' is < 'm'
+   79 |         while (i < m && x[i] == y[s2 + i])
+      |                ^
+source/algos/tvsbs-w2.c:79:16: note: Left side of '&&' is true
+source/algos/tvsbs-w2.c:79:9: note: Loop condition is true.  Entering loop body
+   79 |         while (i < m && x[i] == y[s2 + i])
+      |         ^
+source/algos/tvsbs-w2.c:79:16: note: 'i' is >= 'm'
+   79 |         while (i < m && x[i] == y[s2 + i])
+      |                ^
+source/algos/tvsbs-w2.c:79:22: note: Left side of '&&' is false
+   79 |         while (i < m && x[i] == y[s2 + i])
+      |                      ^
+source/algos/tvsbs-w2.c:81:13: note: 'i' is equal to 'm'
+   81 |         if (i == m && s1 < s2)
+      |             ^
+source/algos/tvsbs-w2.c:81:13: note: Left side of '&&' is true
+source/algos/tvsbs-w2.c:81:23: note: Assuming 's1' is >= 's2'
+   81 |         if (i == m && s1 < s2)
+      |                       ^~~~~~~
+source/algos/tvsbs-w2.c:81:9: note: Taking false branch
+   81 |         if (i == m && s1 < s2)
+      |         ^
+source/algos/tvsbs-w2.c:86:9: note: 's2' is < 2
+   86 |     if (s2 >= 2)
+      |         ^~
+source/algos/tvsbs-w2.c:86:5: note: Taking false branch
+   86 |     if (s2 >= 2)
+      |     ^
+source/algos/tvsbs-w2.c:70:10: note: Assuming 's1' is <= 's2'
+   70 |   while (s1 <= s2) {
+      |          ^~~~~~~~
+source/algos/tvsbs-w2.c:70:3: note: Loop condition is true.  Entering loop body
+   70 |   while (s1 <= s2) {
+      |   ^
+source/algos/tvsbs-w2.c:71:20: note: Access of the heap area at negative byte offset
+   71 |     if (firstch == y[s1] || firstch == y[s2]) {
+      |                    ^~~~~
 source/algos/tvsbs-w2.c:71:40: warning: Out of bound access to memory after the end of the heap area [clang-analyzer-security.ArrayBound]
    71 |     if (firstch == y[s1] || firstch == y[s2]) {
       |                                        ^~~~~
@@ -3322,655 +4121,6 @@ source/algos/tvsbs-w2.c:71:26: note: Left side of '||' is true
 source/algos/tvsbs-w2.c:72:21: note: Access of the heap area at negative byte offset -1
    72 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1]) {
       |                     ^~~~~~~~~~~
-source/algos/tvsbs-w2.c:86:17: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
-   86 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
-source/algos/tvsbs-w2.c:46:7: note: Assuming 'm' is < XSIZE
-   46 |   if (m >= XSIZE)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w2.c:46:3: note: Taking false branch
-   46 |   if (m >= XSIZE)
-      |   ^
-source/algos/tvsbs-w2.c:49:3: note: Assuming the condition is false
-   49 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w2.c:49:3: note: Taking false branch
-   49 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/tvsbs-w2.c:53:15: note: Assuming 'i' is < 'm'
-   53 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w2.c:53:3: note: Loop condition is true.  Entering loop body
-   53 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w2.c:53:15: note: Assuming 'i' is >= 'm'
-   53 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w2.c:53:3: note: Loop condition is false. Execution continues on line 55
-   53 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w2.c:63:3: note: Assuming the condition is false
-   63 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/tvsbs-w2.c:63:3: note: Taking false branch
-   63 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/tvsbs-w2.c:66:3: note: Loop condition is true.  Entering loop body
-   66 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w2.c:66:3: note: Loop condition is false. Execution continues on line 68
-source/algos/tvsbs-w2.c:70:10: note: 's1' is <= 's2'
-   70 |   while (s1 <= s2) {
-      |          ^~
-source/algos/tvsbs-w2.c:70:3: note: Loop condition is true.  Entering loop body
-   70 |   while (s1 <= s2) {
-      |   ^
-source/algos/tvsbs-w2.c:71:9: note: Assuming the condition is true
-   71 |     if (firstch == y[s1] || firstch == y[s2]) {
-      |         ^~~~~~~~~~~~~~~~
-source/algos/tvsbs-w2.c:71:26: note: Left side of '||' is true
-   71 |     if (firstch == y[s1] || firstch == y[s2]) {
-      |                          ^
-source/algos/tvsbs-w2.c:72:11: note: Assuming the condition is true
-   72 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1]) {
-      |           ^~~~~~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w2.c:72:33: note: Left side of '||' is true
-   72 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1]) {
-      |                                 ^
-source/algos/tvsbs-w2.c:74:16: note: 'i' is < 'm'
-   74 |         while (i < m && x[i] == y[s1 + i])
-      |                ^
-source/algos/tvsbs-w2.c:74:16: note: Left side of '&&' is true
-source/algos/tvsbs-w2.c:74:9: note: Loop condition is false. Execution continues on line 76
-   74 |         while (i < m && x[i] == y[s1 + i])
-      |         ^
-source/algos/tvsbs-w2.c:76:13: note: 'i' is not equal to 'm'
-   76 |         if (i == m)
-      |             ^
-source/algos/tvsbs-w2.c:76:9: note: Taking false branch
-   76 |         if (i == m)
-      |         ^
-source/algos/tvsbs-w2.c:79:16: note: 'i' is < 'm'
-   79 |         while (i < m && x[i] == y[s2 + i])
-      |                ^
-source/algos/tvsbs-w2.c:79:16: note: Left side of '&&' is true
-source/algos/tvsbs-w2.c:79:9: note: Loop condition is true.  Entering loop body
-   79 |         while (i < m && x[i] == y[s2 + i])
-      |         ^
-source/algos/tvsbs-w2.c:79:16: note: 'i' is >= 'm'
-   79 |         while (i < m && x[i] == y[s2 + i])
-      |                ^
-source/algos/tvsbs-w2.c:79:22: note: Left side of '&&' is false
-   79 |         while (i < m && x[i] == y[s2 + i])
-      |                      ^
-source/algos/tvsbs-w2.c:81:13: note: 'i' is equal to 'm'
-   81 |         if (i == m && s1 < s2)
-      |             ^
-source/algos/tvsbs-w2.c:81:13: note: Left side of '&&' is true
-source/algos/tvsbs-w2.c:81:23: note: Assuming 's1' is >= 's2'
-   81 |         if (i == m && s1 < s2)
-      |                       ^~~~~~~
-source/algos/tvsbs-w2.c:81:9: note: Taking false branch
-   81 |         if (i == m && s1 < s2)
-      |         ^
-source/algos/tvsbs-w2.c:86:17: note: Access of the heap area at negative byte offset -1
-   86 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
-source/algos/tvsbs-w4.c:59:3: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-   59 |   memcpy(y, _y, n);
-      |   ^~~~~~
-source/algos/tvsbs-w4.c:59:3: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
-   59 |   memcpy(y, _y, n);
-      |   ^~~~~~
-source/algos/tvsbs-w4.c:88:40: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
-   88 |     if (firstch == y[s1] || firstch == y[s2] || firstch == y[s3] ||
-      |                                        ^~~~~
-source/algos/tvsbs-w4.c:50:7: note: Assuming the condition is false
-   50 |   if (n < m + 2)
-      |       ^~~~~~~~~
-source/algos/tvsbs-w4.c:50:3: note: Taking false branch
-   50 |   if (n < m + 2)
-      |   ^
-source/algos/tvsbs-w4.c:52:7: note: Assuming 'm' is >= 2
-   52 |   if (m < 2)
-      |       ^~~~~
-source/algos/tvsbs-w4.c:52:3: note: Taking false branch
-   52 |   if (m < 2)
-      |   ^
-source/algos/tvsbs-w4.c:54:7: note: Assuming 'm' is < XSIZE
-   54 |   if (m >= XSIZE)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w4.c:54:3: note: Taking false branch
-   54 |   if (m >= XSIZE)
-      |   ^
-source/algos/tvsbs-w4.c:57:3: note: Assuming the condition is false
-   57 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:57:3: note: Taking false branch
-   57 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/tvsbs-w4.c:61:15: note: 'i' is < 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is true.  Entering loop body
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:61:15: note: 'i' is < 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is true.  Entering loop body
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:61:15: note: Assuming 'i' is >= 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is false. Execution continues on line 63
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:70:3: note: Assuming the condition is false
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:70:3: note: Taking false branch
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w4.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w4.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is false. Execution continues on line 75
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:80:7: note: Assuming the condition is false
-   80 |   if (s2 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w4.c:80:3: note: Taking false branch
-   80 |   if (s2 > n - m)
-      |   ^
-source/algos/tvsbs-w4.c:87:10: note: Assuming 's1' is > 's2'
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |          ^~~~~~~~
-source/algos/tvsbs-w4.c:87:10: note: Left side of '||' is false
-source/algos/tvsbs-w4.c:87:22: note: Assuming 's3' is <= 's4'
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |                      ^~~~~~~~
-source/algos/tvsbs-w4.c:87:3: note: Loop condition is true.  Entering loop body
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |   ^
-source/algos/tvsbs-w4.c:88:9: note: Assuming the condition is false
-   88 |     if (firstch == y[s1] || firstch == y[s2] || firstch == y[s3] ||
-      |         ^~~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:88:9: note: Left side of '||' is false
-source/algos/tvsbs-w4.c:88:40: note: Access of the heap area at negative byte offset
-   88 |     if (firstch == y[s1] || firstch == y[s2] || firstch == y[s3] ||
-      |                                        ^~~~~
-source/algos/tvsbs-w4.c:111:17: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
-  111 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
-source/algos/tvsbs-w4.c:50:7: note: Assuming the condition is false
-   50 |   if (n < m + 2)
-      |       ^~~~~~~~~
-source/algos/tvsbs-w4.c:50:3: note: Taking false branch
-   50 |   if (n < m + 2)
-      |   ^
-source/algos/tvsbs-w4.c:52:7: note: Assuming 'm' is >= 2
-   52 |   if (m < 2)
-      |       ^~~~~
-source/algos/tvsbs-w4.c:52:3: note: Taking false branch
-   52 |   if (m < 2)
-      |   ^
-source/algos/tvsbs-w4.c:54:7: note: Assuming 'm' is < XSIZE
-   54 |   if (m >= XSIZE)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w4.c:54:3: note: Taking false branch
-   54 |   if (m >= XSIZE)
-      |   ^
-source/algos/tvsbs-w4.c:57:3: note: Assuming the condition is false
-   57 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:57:3: note: Taking false branch
-   57 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/tvsbs-w4.c:61:15: note: 'i' is < 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is true.  Entering loop body
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:61:15: note: 'i' is < 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is true.  Entering loop body
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:61:15: note: Assuming 'i' is >= 'm'
-   61 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w4.c:61:3: note: Loop condition is false. Execution continues on line 63
-   61 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:70:3: note: Assuming the condition is false
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:70:3: note: Taking false branch
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w4.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w4.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w4.c:73:3: note: Loop condition is false. Execution continues on line 75
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w4.c:80:7: note: Assuming the condition is false
-   80 |   if (s2 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w4.c:80:3: note: Taking false branch
-   80 |   if (s2 > n - m)
-      |   ^
-source/algos/tvsbs-w4.c:87:10: note: Assuming 's1' is > 's2'
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |          ^~~~~~~~
-source/algos/tvsbs-w4.c:87:10: note: Left side of '||' is false
-source/algos/tvsbs-w4.c:87:22: note: Assuming 's3' is <= 's4'
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |                      ^~~~~~~~
-source/algos/tvsbs-w4.c:87:3: note: Loop condition is true.  Entering loop body
-   87 |   while (s1 <= s2 || s3 <= s4) {
-      |   ^
-source/algos/tvsbs-w4.c:88:9: note: Assuming the condition is true
-   88 |     if (firstch == y[s1] || firstch == y[s2] || firstch == y[s3] ||
-      |         ^~~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:88:26: note: Left side of '||' is true
-   88 |     if (firstch == y[s1] || firstch == y[s2] || firstch == y[s3] ||
-      |                          ^
-source/algos/tvsbs-w4.c:90:11: note: Assuming the condition is true
-   90 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1] ||
-      |           ^~~~~~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w4.c:90:33: note: Left side of '||' is true
-   90 |       if (lastch == y[s1 + mm1] || lastch == y[s2 + mm1] ||
-      |                                 ^
-source/algos/tvsbs-w4.c:92:13: note: 's1' is >= 'l2'
-   92 |         if (s1 < l2 && !memcmp(x, y + s1, m)) {
-      |             ^~
-source/algos/tvsbs-w4.c:92:21: note: Left side of '&&' is false
-   92 |         if (s1 < l2 && !memcmp(x, y + s1, m)) {
-      |                     ^
-source/algos/tvsbs-w4.c:96:13: note: 's2' is <= 'l1'
-   96 |         if (s2 > l1 && !memcmp(x, y + s2, m)) {
-      |             ^~
-source/algos/tvsbs-w4.c:96:21: note: Left side of '&&' is false
-   96 |         if (s2 > l1 && !memcmp(x, y + s2, m)) {
-      |                     ^
-source/algos/tvsbs-w4.c:100:13: note: Assuming 's3' is >= 'l4'
-  100 |         if (s3 < l4 && !memcmp(x, y + s3, m)) {
-      |             ^~~~~~~
-source/algos/tvsbs-w4.c:100:21: note: Left side of '&&' is false
-  100 |         if (s3 < l4 && !memcmp(x, y + s3, m)) {
-      |                     ^
-source/algos/tvsbs-w4.c:104:13: note: Assuming 's4' is <= 'l3'
-  104 |         if (s4 > l3 && !memcmp(x, y + s4, m)) {
-      |             ^~~~~~~
-source/algos/tvsbs-w4.c:104:21: note: Left side of '&&' is false
-  104 |         if (s4 > l3 && !memcmp(x, y + s4, m)) {
-      |                     ^
-source/algos/tvsbs-w4.c:111:17: note: Access of the heap area at negative byte offset
-  111 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
-source/algos/tvsbs-w8.c:61:3: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-   61 |   memcpy(y, _y, n);
-      |   ^~~~~~
-source/algos/tvsbs-w8.c:61:3: note: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11
-   61 |   memcpy(y, _y, n);
-      |   ^~~~~~
-source/algos/tvsbs-w8.c:101:35: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |                                   ^~~~~~~~~
-source/algos/tvsbs-w8.c:46:7: note: Assuming the condition is false
-   46 |   if (n < m + 2)
-      |       ^~~~~~~~~
-source/algos/tvsbs-w8.c:46:3: note: Taking false branch
-   46 |   if (n < m + 2)
-      |   ^
-source/algos/tvsbs-w8.c:48:7: note: Assuming 'm' is >= 2
-   48 |   if (m < 2)
-      |       ^~~~~
-source/algos/tvsbs-w8.c:48:3: note: Taking false branch
-   48 |   if (m < 2)
-      |   ^
-source/algos/tvsbs-w8.c:50:7: note: Assuming 'm' is < XSIZE
-   50 |   if (m >= XSIZE)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:50:3: note: Taking false branch
-   50 |   if (m >= XSIZE)
-      |   ^
-source/algos/tvsbs-w8.c:59:3: note: Assuming the condition is false
-   59 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:59:3: note: Taking false branch
-   59 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/tvsbs-w8.c:63:15: note: 'i' is < 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is true.  Entering loop body
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:63:15: note: 'i' is < 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is true.  Entering loop body
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:63:15: note: Assuming 'i' is >= 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is false. Execution continues on line 65
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:70:3: note: Assuming the condition is false
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:70:3: note: Taking false branch
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w8.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:74:16: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |                ^~~~~~~~~~~~
-source/algos/tvsbs-w8.c:74:5: note: Assuming index is less than the number of 'unsigned char' elements in the heap area
-   74 |     y[n + i] = y[n + m + i] = x[i];
-      |     ^~~~~~~~
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is false. Execution continues on line 75
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:84:7: note: Assuming the condition is false
-   84 |   if (s2 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:84:3: note: Taking false branch
-   84 |   if (s2 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:86:7: note: Assuming the condition is false
-   86 |   if (s4 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:86:3: note: Taking false branch
-   86 |   if (s4 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:88:7: note: Assuming the condition is false
-   88 |   if (s6 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:88:3: note: Taking false branch
-   88 |   if (s6 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:98:10: note: Assuming 's1' is > 's2'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |          ^~~~~~~~
-source/algos/tvsbs-w8.c:98:10: note: Left side of '||' is false
-source/algos/tvsbs-w8.c:98:22: note: Assuming 's3' is <= 's4'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |                      ^~~~~~~~
-source/algos/tvsbs-w8.c:98:31: note: Left side of '||' is true
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |                               ^
-source/algos/tvsbs-w8.c:101:12: note: Assuming the condition is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-source/algos/tvsbs-w8.c:101:35: note: Access of the heap area at negative byte offset
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |                                   ^~~~~~~~~
-source/algos/tvsbs-w8.c:140:17: warning: Out of bound access to memory preceding the heap area [clang-analyzer-security.ArrayBound]
-  140 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
-source/algos/tvsbs-w8.c:46:7: note: Assuming the condition is false
-   46 |   if (n < m + 2)
-      |       ^~~~~~~~~
-source/algos/tvsbs-w8.c:46:3: note: Taking false branch
-   46 |   if (n < m + 2)
-      |   ^
-source/algos/tvsbs-w8.c:48:7: note: Assuming 'm' is >= 2
-   48 |   if (m < 2)
-      |       ^~~~~
-source/algos/tvsbs-w8.c:48:3: note: Taking false branch
-   48 |   if (m < 2)
-      |   ^
-source/algos/tvsbs-w8.c:50:7: note: Assuming 'm' is < XSIZE
-   50 |   if (m >= XSIZE)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:50:3: note: Taking false branch
-   50 |   if (m >= XSIZE)
-      |   ^
-source/algos/tvsbs-w8.c:59:3: note: Assuming the condition is false
-   59 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:59:3: note: Taking false branch
-   59 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/tvsbs-w8.c:63:15: note: 'i' is < 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is true.  Entering loop body
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:63:15: note: 'i' is < 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is true.  Entering loop body
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:63:15: note: Assuming 'i' is >= 'm'
-   63 |   for (i = 0; i < m; i++)
-      |               ^~~~~
-source/algos/tvsbs-w8.c:63:3: note: Loop condition is false. Execution continues on line 65
-   63 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:70:3: note: Assuming the condition is false
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:70:3: note: Taking false branch
-   70 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is true.  Entering loop body
-   73 |   for (i = 0; i < m; i++)
-      |   ^
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is true.  Entering loop body
-source/algos/tvsbs-w8.c:73:3: note: Loop condition is false. Execution continues on line 75
-source/algos/tvsbs-w8.c:84:7: note: Assuming the condition is false
-   84 |   if (s2 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:84:3: note: Taking false branch
-   84 |   if (s2 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:86:7: note: Assuming the condition is false
-   86 |   if (s4 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:86:3: note: Taking false branch
-   86 |   if (s4 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:88:7: note: Assuming the condition is false
-   88 |   if (s6 > n - m)
-      |       ^~~~~~~~~~
-source/algos/tvsbs-w8.c:88:3: note: Taking false branch
-   88 |   if (s6 > n - m)
-      |   ^
-source/algos/tvsbs-w8.c:98:10: note: Assuming 's1' is > 's2'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |          ^~~~~~~~
-source/algos/tvsbs-w8.c:98:10: note: Left side of '||' is false
-source/algos/tvsbs-w8.c:98:22: note: Assuming 's3' is > 's4'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |                      ^~~~~~~~
-source/algos/tvsbs-w8.c:98:10: note: Left side of '||' is false
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |          ^
-source/algos/tvsbs-w8.c:98:34: note: Assuming 's5' is > 's6'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |                                  ^~~~~~~~
-source/algos/tvsbs-w8.c:98:10: note: Left side of '||' is false
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |          ^
-source/algos/tvsbs-w8.c:98:46: note: Assuming 's7' is <= 's8'
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |                                              ^~~~~~~~
-source/algos/tvsbs-w8.c:98:3: note: Loop condition is true.  Entering loop body
-   98 |   while (s1 <= s2 || s3 <= s4 || s5 <= s6 || s7 <= s8) {
-      |   ^
-source/algos/tvsbs-w8.c:101:12: note: Assuming the condition is true
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:27: note: Left side of '||' is true
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |                           ^
-source/algos/tvsbs-w8.c:101:12: note: Assuming the condition is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-source/algos/tvsbs-w8.c:101:30: note: Assuming the condition is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |                              ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:101:48: note: Assuming the condition is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |                                                ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:102:12: note: Assuming the condition is false
-  102 |            c == y[s4 + i] || c == y[s5 + i] || c == y[s6 + i] ||
-      |            ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:102:30: note: Assuming the condition is false
-  102 |            c == y[s4 + i] || c == y[s5 + i] || c == y[s6 + i] ||
-      |                              ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:102:48: note: Assuming the condition is false
-  102 |            c == y[s4 + i] || c == y[s5 + i] || c == y[s6 + i] ||
-      |                                                ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:103:12: note: Assuming the condition is false
-  103 |            c == y[s7 + i] || c == y[s8 + i])
-      |            ^~~~~~~~~~~~~~
-source/algos/tvsbs-w8.c:101:12: note: Left side of '||' is false
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |            ^
-source/algos/tvsbs-w8.c:101:5: note: Loop condition is false. Execution continues on line 105
-  101 |     while (c == y[s1 + i] || c == y[s2 + i] || c == y[s3 + i] ||
-      |     ^
-source/algos/tvsbs-w8.c:105:9: note: 'i' is < 'm'
-  105 |     if (i >= m) {
-      |         ^
-source/algos/tvsbs-w8.c:105:5: note: Taking false branch
-  105 |     if (i >= m) {
-      |     ^
-source/algos/tvsbs-w8.c:140:17: note: Access of the heap area at negative byte offset -2
-  140 |     s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
-      |                 ^~~~~~~~~
 source/algos/ufndmq2.c:53:3: warning: Call to function 'memcpy' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'memcpy_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
    53 |   memcpy(y, _y, n);
       |   ^~~~~~
@@ -4125,8 +4275,8 @@ source/compilesm.c:157:9: note: Taking true branch
 source/compilesm.c:202:9: note: Null pointer passed to 1st parameter expecting 'nonnull'
   202 |         fclose(stream);
       |         ^      ~~~~~~
-source/function.h:302:30: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:30: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |                              ^
 source/smart.c:439:7: note: Assuming 'argc' is not equal to 1
   439 |   if (argc == 1) {
@@ -4367,58 +4517,58 @@ source/smart.c:715:5: note: Loop condition is true.  Entering loop body
 source/smart.c:721:17: note: Calling 'getText'
   721 |       if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:300:8: note: Assuming 'index' is non-null
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:8: note: Assuming 'index' is non-null
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |        ^~~~~
-source/function.h:300:3: note: Taking true branch
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:3: note: Taking true branch
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |   ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:5: note: Loop condition is true.  Entering loop body
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |     ^
-source/function.h:303:11: note: Assuming the condition is true
-  303 |       if (c == '#') {
+source/function.h:295:11: note: Assuming the condition is true
+  295 |       if (c == '#') {
       |           ^~~~~~~~
-source/function.h:303:7: note: Taking true branch
-  303 |       if (c == '#') {
+source/function.h:295:7: note: Taking true branch
+  295 |       if (c == '#') {
       |       ^
-source/function.h:308:21: note: Assuming this stream operation fails
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: Assuming this stream operation fails
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is true.  Entering loop body
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is true.  Entering loop body
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:308:16: note: Assuming the condition is false
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:16: note: Assuming the condition is false
+  300 |         while ((c = getc(index)) != '#')
       |                ^~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is false. Execution continues on line 310
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is false. Execution continues on line 302
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:311:13: note: 'verbose' is 1
-  311 |         if (verbose)
+source/function.h:303:13: note: 'verbose' is 1
+  303 |         if (verbose)
       |             ^~~~~~~
-source/function.h:311:9: note: Taking true branch
-  311 |         if (verbose)
+source/function.h:303:9: note: Taking true branch
+  303 |         if (verbose)
       |         ^
-source/function.h:314:14: note: Assuming 'input' is null
-  314 |         if ((input = fopen(filename, "r"))) {
+source/function.h:306:14: note: Assuming 'input' is null
+  306 |         if ((input = fopen(filename, "r"))) {
       |              ^~~~~
-source/function.h:314:9: note: Taking false branch
-  314 |         if ((input = fopen(filename, "r"))) {
+source/function.h:306:9: note: Taking false branch
+  306 |         if ((input = fopen(filename, "r"))) {
       |         ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:30: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:30: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |                              ^~~~~~~~~~~
-source/function.h:302:30: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:30: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |                              ^
 source/smart.c:439:7: note: Assuming 'argc' is not equal to 1
   439 |   if (argc == 1) {
@@ -4659,58 +4809,58 @@ source/smart.c:715:5: note: Loop condition is true.  Entering loop body
 source/smart.c:721:17: note: Calling 'getText'
   721 |       if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:300:8: note: Assuming 'index' is non-null
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:8: note: Assuming 'index' is non-null
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |        ^~~~~
-source/function.h:300:3: note: Taking true branch
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:3: note: Taking true branch
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |   ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:5: note: Loop condition is true.  Entering loop body
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |     ^
-source/function.h:303:11: note: Assuming the condition is true
-  303 |       if (c == '#') {
+source/function.h:295:11: note: Assuming the condition is true
+  295 |       if (c == '#') {
       |           ^~~~~~~~
-source/function.h:303:7: note: Taking true branch
-  303 |       if (c == '#') {
+source/function.h:295:7: note: Taking true branch
+  295 |       if (c == '#') {
       |       ^
-source/function.h:308:21: note: Assuming stream reaches end-of-file here
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: Assuming stream reaches end-of-file here
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is true.  Entering loop body
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is true.  Entering loop body
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:308:16: note: Assuming the condition is false
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:16: note: Assuming the condition is false
+  300 |         while ((c = getc(index)) != '#')
       |                ^~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is false. Execution continues on line 310
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is false. Execution continues on line 302
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:311:13: note: 'verbose' is 1
-  311 |         if (verbose)
+source/function.h:303:13: note: 'verbose' is 1
+  303 |         if (verbose)
       |             ^~~~~~~
-source/function.h:311:9: note: Taking true branch
-  311 |         if (verbose)
+source/function.h:303:9: note: Taking true branch
+  303 |         if (verbose)
       |         ^
-source/function.h:314:14: note: Assuming 'input' is null
-  314 |         if ((input = fopen(filename, "r"))) {
+source/function.h:306:14: note: Assuming 'input' is null
+  306 |         if ((input = fopen(filename, "r"))) {
       |              ^~~~~
-source/function.h:314:9: note: Taking false branch
-  314 |         if ((input = fopen(filename, "r"))) {
+source/function.h:306:9: note: Taking false branch
+  306 |         if ((input = fopen(filename, "r"))) {
       |         ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:30: note: Read function called when stream is in EOF state. Function has no effect
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:30: note: Read function called when stream is in EOF state. Function has no effect
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |                              ^~~~~~~~~~~
-source/function.h:308:21: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: warning: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior [clang-analyzer-unix.Stream]
+  300 |         while ((c = getc(index)) != '#')
       |                     ^
 source/smart.c:439:7: note: Assuming 'argc' is not equal to 1
   439 |   if (argc == 1) {
@@ -4951,36 +5101,36 @@ source/smart.c:715:5: note: Loop condition is true.  Entering loop body
 source/smart.c:721:17: note: Calling 'getText'
   721 |       if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:300:8: note: Assuming 'index' is non-null
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:8: note: Assuming 'index' is non-null
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |        ^~~~~
-source/function.h:300:3: note: Taking true branch
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:3: note: Taking true branch
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |   ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:5: note: Loop condition is true.  Entering loop body
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |     ^
-source/function.h:303:11: note: Assuming the condition is true
-  303 |       if (c == '#') {
+source/function.h:295:11: note: Assuming the condition is true
+  295 |       if (c == '#') {
       |           ^~~~~~~~
-source/function.h:303:7: note: Taking true branch
-  303 |       if (c == '#') {
+source/function.h:295:7: note: Taking true branch
+  295 |       if (c == '#') {
       |       ^
-source/function.h:308:21: note: Assuming this stream operation fails
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: Assuming this stream operation fails
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is true.  Entering loop body
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is true.  Entering loop body
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:308:21: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: File position of the stream might be 'indeterminate' after a failed operation. Can cause undefined behavior
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
-source/function.h:308:21: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: warning: Read function called when stream is in EOF state. Function has no effect [clang-analyzer-unix.Stream]
+  300 |         while ((c = getc(index)) != '#')
       |                     ^
 source/smart.c:439:7: note: Assuming 'argc' is not equal to 1
   439 |   if (argc == 1) {
@@ -5221,33 +5371,33 @@ source/smart.c:715:5: note: Loop condition is true.  Entering loop body
 source/smart.c:721:17: note: Calling 'getText'
   721 |       if (!(n = getText(T, fullpath, FREQ, TSIZE, verbose))) {
       |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/function.h:300:8: note: Assuming 'index' is non-null
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:8: note: Assuming 'index' is non-null
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |        ^~~~~
-source/function.h:300:3: note: Taking true branch
-  300 |   if ((index = fopen(indexfilename, "r"))) {
+source/function.h:292:3: note: Taking true branch
+  292 |   if ((index = fopen(indexfilename, "r"))) {
       |   ^
-source/function.h:302:12: note: 'i' is < 'TSIZE'
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: 'i' is < 'TSIZE'
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |            ^
-source/function.h:302:12: note: Left side of '&&' is true
-source/function.h:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (i < TSIZE && (c = getc(index)) != EOF) {
+source/function.h:294:12: note: Left side of '&&' is true
+source/function.h:294:5: note: Loop condition is true.  Entering loop body
+  294 |     while (i < TSIZE && (c = getc(index)) != EOF) {
       |     ^
-source/function.h:303:11: note: Assuming the condition is true
-  303 |       if (c == '#') {
+source/function.h:295:11: note: Assuming the condition is true
+  295 |       if (c == '#') {
       |           ^~~~~~~~
-source/function.h:303:7: note: Taking true branch
-  303 |       if (c == '#') {
+source/function.h:295:7: note: Taking true branch
+  295 |       if (c == '#') {
       |       ^
-source/function.h:308:21: note: Assuming stream reaches end-of-file here
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: Assuming stream reaches end-of-file here
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
-source/function.h:308:9: note: Loop condition is true.  Entering loop body
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:9: note: Loop condition is true.  Entering loop body
+  300 |         while ((c = getc(index)) != '#')
       |         ^
-source/function.h:308:21: note: Read function called when stream is in EOF state. Function has no effect
-  308 |         while ((c = getc(index)) != '#')
+source/function.h:300:21: note: Read function called when stream is in EOF state. Function has no effect
+  300 |         while ((c = getc(index)) != '#')
       |                     ^~~~~~~~~~~
 source/selectAlgo.c:164:13: warning: Opened stream never closed. Potential resource leak [clang-analyzer-unix.Stream]
   164 |         if (search_ALGO(ALGO_NAME, algo) >= 0)
@@ -5435,699 +5585,3 @@ source/selectAlgo.c:329:7: warning: Call to function 'fprintf' is insecure as it
 source/selectAlgo.c:329:7: note: Call to function 'fprintf' is insecure as it does not provide bounding of the memory buffer or security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
   329 |       fprintf(fp, "#%d #%s \n", execute[j], ALGO_NAME[j]);
       |       ^~~~~~~
-source/test.c:93:7: error: use of undeclared identifier 'is_printable' [clang-diagnostic-error]
-   93 |       is_printable = 0;
-      |       ^~~~~~~~~~~~
-source/textgen.c:78:7: warning: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-   78 |       fprintf(stderr, "Invalid sigma %d\n", sigma);
-      |       ^~~~~~~
-source/textgen.c:78:7: note: Call to function 'fprintf' is insecure as it does not provide security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'fprintf_s' in case of C11
-   78 |       fprintf(stderr, "Invalid sigma %d\n", sigma);
-      |       ^~~~~~~
-source/algos/ag.c:61:9: warning: Out of bound access to memory after the end of 'suff' [clang-analyzer-security.ArrayBound]
-   61 |     if (suff[i] == i + 1)
-      |         ^
-source/algos/ag.c:74:3: note: Assuming the condition is false
-   74 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/ag.c:74:3: note: Taking false branch
-   74 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/ag.c:75:3: note: Calling 'preBmGsAG'
-   75 |   preBmGsAG(x, m, bmGs, suff);
-      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/algos/ag.c:57:15: note: Assuming 'i' is >= 'm'
-   57 |   for (i = 0; i < m; ++i)
-      |               ^~~~~
-source/algos/ag.c:57:3: note: Loop condition is false. Execution continues on line 59
-   57 |   for (i = 0; i < m; ++i)
-      |   ^
-source/algos/ag.c:60:19: note: Assuming 'i' is >= 0
-   60 |   for (i = m - 1; i >= 0; --i)
-      |                   ^~~~~~
-source/algos/ag.c:60:3: note: Loop condition is true.  Entering loop body
-   60 |   for (i = m - 1; i >= 0; --i)
-      |   ^
-source/algos/ag.c:61:9: note: Access of 'suff' at index 2147483647, while it holds only 4200 'int' elements
-   61 |     if (suff[i] == i + 1)
-      |         ^~~~~~~
-source/algos/ag.c:111:7: warning: Out of bound access to memory preceding 'skip' [clang-analyzer-security.ArrayBound]
-  111 |       skip[m - 1] = m;
-      |       ^~~~~~~~~~~
-source/algos/ag.c:74:3: note: Assuming the condition is false
-   74 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/ag.c:74:3: note: Taking false branch
-   74 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/ag.c:75:3: note: Calling 'preBmGsAG'
-   75 |   preBmGsAG(x, m, bmGs, suff);
-      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/algos/ag.c:57:15: note: Assuming 'i' is >= 'm'
-   57 |   for (i = 0; i < m; ++i)
-      |               ^~~~~
-source/algos/ag.c:57:3: note: Loop condition is false. Execution continues on line 59
-   57 |   for (i = 0; i < m; ++i)
-      |   ^
-source/algos/ag.c:60:19: note: Assuming 'i' is < 0
-   60 |   for (i = m - 1; i >= 0; --i)
-      |                   ^~~~~~
-source/algos/ag.c:60:3: note: Loop condition is false. Execution continues on line 65
-   60 |   for (i = m - 1; i >= 0; --i)
-      |   ^
-source/algos/ag.c:65:15: note: Assuming the condition is false
-   65 |   for (i = 0; i <= m - 2; ++i)
-      |               ^~~~~~~~~~
-source/algos/ag.c:65:3: note: Loop condition is false. Execution continues on line 75
-   65 |   for (i = 0; i <= m - 2; ++i)
-      |   ^
-source/algos/ag.c:75:3: note: Returning from 'preBmGsAG'
-   75 |   preBmGsAG(x, m, bmGs, suff);
-      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/algos/ag.c:79:3: note: Assuming the condition is false
-   79 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/ag.c:79:3: note: Taking false branch
-   79 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/ag.c:85:10: note: Assuming the condition is true
-   85 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/ag.c:85:3: note: Loop condition is true.  Entering loop body
-   85 |   while (j <= n - m) {
-      |   ^
-source/algos/ag.c:87:12: note: 'i' is < 0
-   87 |     while (i >= 0) {
-      |            ^
-source/algos/ag.c:87:5: note: Loop condition is false. Execution continues on line 109
-   87 |     while (i >= 0) {
-      |     ^
-source/algos/ag.c:109:9: note: 'i' is < 0
-  109 |     if (i < 0) {
-      |         ^
-source/algos/ag.c:109:5: note: Taking true branch
-  109 |     if (i < 0) {
-      |     ^
-source/algos/ag.c:111:7: note: Access of 'skip' at negative byte offset
-  111 |       skip[m - 1] = m;
-      |       ^~~~~~~~~~~
-source/algos/akc.c:307:19: warning: Out of bound access to memory preceding 's_clink' [clang-analyzer-security.ArrayBound]
-  307 |         next[p] = clink[m - k - 1];
-      |                   ^
-source/algos/akc.c:381:3: note: Assuming the condition is false
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/akc.c:381:3: note: Taking false branch
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
-  382 |   if (m > M_CUTOFF) {
-      |       ^~~~~~~~~~~~
-source/algos/akc.c:382:3: note: Taking false branch
-  382 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:409:3: note: Assuming the condition is false
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/akc.c:409:3: note: Taking false branch
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: 'k' is not equal to 0
-  422 |       if (k == 0) {
-      |           ^
-source/algos/akc.c:422:7: note: Taking false branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking true branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:456:7: note: Calling 'validateShift'
-  456 |       validateShift(m, clink, slink, ell, skip);
-      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/algos/akc.c:281:7: note: 'm' is <= M_CUTOFF
-  281 |   if (m > M_CUTOFF) {
-      |       ^
-source/algos/akc.c:281:3: note: Taking false branch
-  281 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:290:7: note: Assuming the condition is true
-  290 |   if (skip[ell] < m) {
-      |       ^~~~~~~~~~~~~
-source/algos/akc.c:290:3: note: Taking true branch
-  290 |   if (skip[ell] < m) {
-      |   ^
-source/algos/akc.c:295:9: note: Assuming the condition is false
-  295 |     if (skip[ell] + k >= m)
-      |         ^~~~~~~~~~~~~~~~~~
-source/algos/akc.c:295:5: note: Taking false branch
-  295 |     if (skip[ell] + k >= m)
-      |     ^
-source/algos/akc.c:299:9: note: Assuming the condition is false
-  299 |     if (skip[ell] + k >= m)
-      |         ^~~~~~~~~~~~~~~~~~
-source/algos/akc.c:299:5: note: Taking false branch
-  299 |     if (skip[ell] + k >= m)
-      |     ^
-source/algos/akc.c:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (skip[ell] + k < m) {
-      |     ^
-source/algos/akc.c:306:11: note: Assuming the condition is true
-  306 |       if (skip[j] == 1)
-      |           ^~~~~~~~~~~~
-source/algos/akc.c:306:7: note: Taking true branch
-  306 |       if (skip[j] == 1)
-      |       ^
-source/algos/akc.c:307:19: note: Access of 's_clink' at negative byte offset -4
-  307 |         next[p] = clink[m - k - 1];
-      |                   ^~~~~~~~~~~~~~~~
-source/algos/akc.c:309:19: warning: Out of bound access to memory preceding 's_slink' [clang-analyzer-security.ArrayBound]
-  309 |         next[p] = slink[m - k - 1];
-      |                   ^
-source/algos/akc.c:381:3: note: Assuming the condition is false
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/akc.c:381:3: note: Taking false branch
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
-  382 |   if (m > M_CUTOFF) {
-      |       ^~~~~~~~~~~~
-source/algos/akc.c:382:3: note: Taking false branch
-  382 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:409:3: note: Assuming the condition is false
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/akc.c:409:3: note: Taking false branch
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: 'k' is not equal to 0
-  422 |       if (k == 0) {
-      |           ^
-source/algos/akc.c:422:7: note: Taking false branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking true branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:456:7: note: Calling 'validateShift'
-  456 |       validateShift(m, clink, slink, ell, skip);
-      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-source/algos/akc.c:281:7: note: 'm' is <= M_CUTOFF
-  281 |   if (m > M_CUTOFF) {
-      |       ^
-source/algos/akc.c:281:3: note: Taking false branch
-  281 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:290:7: note: Assuming the condition is true
-  290 |   if (skip[ell] < m) {
-      |       ^~~~~~~~~~~~~
-source/algos/akc.c:290:3: note: Taking true branch
-  290 |   if (skip[ell] < m) {
-      |   ^
-source/algos/akc.c:295:9: note: Assuming the condition is false
-  295 |     if (skip[ell] + k >= m)
-      |         ^~~~~~~~~~~~~~~~~~
-source/algos/akc.c:295:5: note: Taking false branch
-  295 |     if (skip[ell] + k >= m)
-      |     ^
-source/algos/akc.c:299:9: note: Assuming the condition is false
-  299 |     if (skip[ell] + k >= m)
-      |         ^~~~~~~~~~~~~~~~~~
-source/algos/akc.c:299:5: note: Taking false branch
-  299 |     if (skip[ell] + k >= m)
-      |     ^
-source/algos/akc.c:302:5: note: Loop condition is true.  Entering loop body
-  302 |     while (skip[ell] + k < m) {
-      |     ^
-source/algos/akc.c:306:11: note: Assuming the condition is false
-  306 |       if (skip[j] == 1)
-      |           ^~~~~~~~~~~~
-source/algos/akc.c:306:7: note: Taking false branch
-  306 |       if (skip[j] == 1)
-      |       ^
-source/algos/akc.c:309:19: note: Access of 's_slink' at negative byte offset -4
-  309 |         next[p] = slink[m - k - 1];
-      |                   ^~~~~~~~~~~~~~~~
-source/algos/akc.c:453:23: warning: Out of bound access to memory after the end of 's_pref' [clang-analyzer-security.ArrayBound]
-  453 |           skip[ell] = pref[i + 1];
-      |                       ^~~~~~~~~~~
-source/algos/akc.c:381:3: note: Assuming the condition is false
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/akc.c:381:3: note: Taking false branch
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
-  382 |   if (m > M_CUTOFF) {
-      |       ^~~~~~~~~~~~
-source/algos/akc.c:382:3: note: Taking false branch
-  382 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:409:3: note: Assuming the condition is false
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/akc.c:409:3: note: Taking false branch
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: 'k' is not equal to 0
-  422 |       if (k == 0) {
-      |           ^
-source/algos/akc.c:422:7: note: Taking false branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking true branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: Assuming 'k' is equal to 0
-  422 |       if (k == 0) {
-      |           ^~~~~~
-source/algos/akc.c:422:7: note: Taking true branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:425:13: note: Assuming 'i' is >= 0
-  425 |         if (i < 0)
-      |             ^~~~~
-source/algos/akc.c:425:9: note: Taking false branch
-  425 |         if (i < 0)
-      |         ^
-source/algos/akc.c:428:13: note: Assuming the condition is false
-  428 |         k = MIN(skip[ell], i + 1);
-      |             ^
-source/algos/akc.c:28:20: note: expanded from macro 'MIN'
-   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
-      |                    ^~~~~~~~~
-source/algos/akc.c:428:13: note: '?' condition is false
-  428 |         k = MIN(skip[ell], i + 1);
-      |             ^
-source/algos/akc.c:28:20: note: expanded from macro 'MIN'
-   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:430:11: note: Assuming the condition is true
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking true branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: 'k' is not equal to 0
-  422 |       if (k == 0) {
-      |           ^
-source/algos/akc.c:422:7: note: Taking false branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking false branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:452:13: note: Assuming the condition is true
-  452 |         if (skip[ell] == -1) {
-      |             ^~~~~~~~~~~~~~~
-source/algos/akc.c:452:9: note: Taking true branch
-  452 |         if (skip[ell] == -1) {
-      |         ^
-source/algos/akc.c:453:23: note: Access of 's_pref' at index 2147483647, while it holds only 33 'int' elements
-  453 |           skip[ell] = pref[i + 1];
-      |                       ^~~~~~~~~~~
-source/algos/akc.c:453:23: warning: Out of bound access to memory preceding 's_pref' [clang-analyzer-security.ArrayBound]
-  453 |           skip[ell] = pref[i + 1];
-      |                       ^~~~~~~~~~~
-source/algos/akc.c:381:3: note: Assuming the condition is false
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/akc.c:381:3: note: Taking false branch
-  381 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/akc.c:382:7: note: Assuming 'm' is <= M_CUTOFF
-  382 |   if (m > M_CUTOFF) {
-      |       ^~~~~~~~~~~~
-source/algos/akc.c:382:3: note: Taking false branch
-  382 |   if (m > M_CUTOFF) {
-      |   ^
-source/algos/akc.c:409:3: note: Assuming the condition is false
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:9: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |         ^~~~~~~~~~~~~~~
-source/algos/akc.c:409:3: note: Taking false branch
-  409 |   END_PREPROCESSING
-      |   ^
-source/algos/include/main.h:52:5: note: expanded from macro 'END_PREPROCESSING'
-   52 |     if (_run_timer->sum)                                                       \
-      |     ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: 'k' is not equal to 0
-  422 |       if (k == 0) {
-      |           ^
-source/algos/akc.c:422:7: note: Taking false branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking true branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:417:10: note: Assuming the condition is true
-  417 |   while (j <= n - m) {
-      |          ^~~~~~~~~~
-source/algos/akc.c:417:3: note: Loop condition is true.  Entering loop body
-  417 |   while (j <= n - m) {
-      |   ^
-source/algos/akc.c:421:5: note: Loop condition is true.  Entering loop body
-  421 |     while (i >= 0) {
-      |     ^
-source/algos/akc.c:422:11: note: Assuming 'k' is equal to 0
-  422 |       if (k == 0) {
-      |           ^~~~~~
-source/algos/akc.c:422:7: note: Taking true branch
-  422 |       if (k == 0) {
-      |       ^
-source/algos/akc.c:425:13: note: Assuming 'i' is >= 0
-  425 |         if (i < 0)
-      |             ^~~~~
-source/algos/akc.c:425:9: note: Taking false branch
-  425 |         if (i < 0)
-      |         ^
-source/algos/akc.c:428:13: note: Assuming the condition is false
-  428 |         k = MIN(skip[ell], i + 1);
-      |             ^
-source/algos/akc.c:28:20: note: expanded from macro 'MIN'
-   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
-      |                    ^~~~~~~~~
-source/algos/akc.c:428:13: note: '?' condition is false
-  428 |         k = MIN(skip[ell], i + 1);
-      |             ^
-source/algos/akc.c:28:20: note: expanded from macro 'MIN'
-   28 | #define MIN(a, b) ((a) < (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:430:11: note: Assuming the condition is false
-  430 |       if (x[i] == y[i + j]) {
-      |           ^~~~~~~~~~~~~~~~
-source/algos/akc.c:430:7: note: Taking false branch
-  430 |       if (x[i] == y[i + j]) {
-      |       ^
-source/algos/akc.c:434:9: note:  Execution continues on line 436
-  434 |         break;
-      |         ^
-source/algos/akc.c:436:9: note: 'i' is >= 0
-  436 |     if (i < 0) {
-      |         ^
-source/algos/akc.c:436:5: note: Taking false branch
-  436 |     if (i < 0) {
-      |     ^
-source/algos/akc.c:443:19: note: '?' condition is false
-  443 |       skip[ell] = MAX(0, k - 1);
-      |                   ^
-source/algos/akc.c:29:20: note: expanded from macro 'MAX'
-   29 | #define MAX(a, b) ((a) > (b) ? (a) : (b))
-      |                    ^
-source/algos/akc.c:448:7: note: Taking false branch
-  448 |       if (i == m - 1) {
-      |       ^
-source/algos/akc.c:452:13: note: Assuming the condition is true
-  452 |         if (skip[ell] == -1) {
-      |             ^~~~~~~~~~~~~~~
-source/algos/akc.c:452:9: note: Taking true branch
-  452 |         if (skip[ell] == -1) {
-      |         ^
-source/algos/akc.c:453:23: note: Access of 's_pref' at negative byte offset -8589934592
-  453 |           skip[ell] = pref[i + 1];
-      |                       ^~~~~~~~~~~
-source/algos/bfs.c:40:7: warning: Out of bound access to memory around 'temp' [clang-analyzer-security.ArrayBound]
-   40 |       temp[last] = i;
-      |       ^~~~~~~~~~
-source/algos/bfs.c:33:15: note: Assuming 'i' is > 'm'
-   33 |   for (i = 0; i <= m; i++)
-      |               ^~~~~~
-source/algos/bfs.c:33:3: note: Loop condition is false. Execution continues on line 36
-   33 |   for (i = 0; i <= m; i++)
-      |   ^
-source/algos/bfs.c:36:15: note: 'i' is > 'm'
-   36 |   for (i = 0; i <= m; i++)
-      |               ^
-source/algos/bfs.c:36:3: note: Loop condition is false. Execution continues on line 38
-   36 |   for (i = 0; i <= m; i++)
-      |   ^
-source/algos/bfs.c:38:19: note: Assuming 'i' is >= 0
-   38 |   for (i = m - 2; i >= 0; i--)
-      |                   ^~~~~~
-source/algos/bfs.c:38:3: note: Loop condition is true.  Entering loop body
-   38 |   for (i = m - 2; i >= 0; i--)
-      |   ^
-source/algos/bfs.c:39:9: note: Assuming index is less than the number of 'unsigned char' elements in the region
-   39 |     if (x[i] == x[last]) {
-      |         ^~~~
-source/algos/bfs.c:39:17: note: Assuming index is less than the number of 'unsigned char' elements in the region
-   39 |     if (x[i] == x[last]) {
-      |                 ^~~~~~~
-source/algos/bfs.c:39:9: note: Assuming the condition is true
-   39 |     if (x[i] == x[last]) {
-      |         ^~~~~~~~~~~~~~~
-source/algos/bfs.c:39:5: note: Taking true branch
-   39 |     if (x[i] == x[last]) {
-      |     ^
-source/algos/bfs.c:40:7: note: Access of 'temp' at a negative or overflowing index, while it holds only 4200 'int' elements
-   40 |       temp[last] = i;
-      |       ^~~~~~~~~~
-source/algos/bm.c:61:9: warning: Out of bound access to memory after the end of 'suff' [clang-analyzer-security.ArrayBound]
-   61 |     if (suff[i] == i + 1)
-      |         ^
-source/algos/bm.c:73:3: note: Assuming the condition is false
-   73 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:9: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |         ^~~~~~~~~~~~~~~~~
-source/algos/bm.c:73:3: note: Taking false branch
-   73 |   BEGIN_PREPROCESSING
-      |   ^
-source/algos/include/main.h:41:5: note: expanded from macro 'BEGIN_PREPROCESSING'
-   41 |     if (_run_timer->start)                                                     \
-      |     ^
-source/algos/bm.c:74:3: note: Calling 'preBmGs'
-   74 |   preBmGs(x, m, bmGs);
-      |   ^~~~~~~~~~~~~~~~~~~
-source/algos/bm.c:57:15: note: Assuming 'i' is >= 'm'
-   57 |   for (i = 0; i < m; ++i)
-      |               ^~~~~
-source/algos/bm.c:57:3: note: Loop condition is false. Execution continues on line 59
-   57 |   for (i = 0; i < m; ++i)
-      |   ^
-source/algos/bm.c:60:19: note: Assuming 'i' is >= 0
-   60 |   for (i = m - 1; i >= 0; --i)
-      |                   ^~~~~~
-source/algos/bm.c:60:3: note: Loop condition is true.  Entering loop body
-   60 |   for (i = m - 1; i >= 0; --i)
-      |   ^
-source/algos/bm.c:61:9: note: Access of 'suff' at index 2147483647, while it holds only 4200 'int' elements
-   61 |     if (suff[i] == i + 1)
-      |         ^~~~~~~

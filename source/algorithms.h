@@ -327,7 +327,7 @@ const struct algo ALGOS[] = {
   [_GG] = {_GG, OK, "gg", "Galil-Giancarlo", 0, 0},
   [_Raita] = {_Raita, OK, "raita", "Raita", 2, 0},
   [_SMOA] = {_SMOA, OK, "smoa", "String Matching on Ordered Alphabets", 0, 0},
-  [_RColussi] = {_RColussi, RNDCRASH, "rcolussi", "Reverse Colussi", 0, 0}, // random fails
+  [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0}, // random fails
   [_Skip] = {_Skip, OK, "skip", "Skip Search", 0, 0},
   [_KMPSkip] = {_KMPSkip, OK, "kmpskip", "KMP Skip Search", 0, 0},
   [_ASkip] = {_ASkip, OK, "askip", "Alpha Skip Search", 0, 0},
@@ -355,7 +355,7 @@ const struct algo ALGOS[] = {
   [_TSW] = {_TSW, OK, "tsw", "Two-Sliding-Window", 0, 0}, // m < n - 3
   [_BMH2] = {_BMH2, 0, "bmh2", "Boyer-Moore-Horspool with q-grams (BMH2)", 2, MISSING},
   [_BMH4] = {_BMH4, 0, "bmh4", "Boyer-Moore-Horspool with q-grams (BMH4)", 4, MISSING},
-  [_GRASPm] = {_GRASPm, OK, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0},
+  [_GRASPm] = {_GRASPm, 0, "graspm", "Genomic Rapid Algorithm for String Pattern-match", 2, 0},
   [_SSEF] = {_SSEF, X64_ONLY, "ssef", "SSEF (K=7)", 32, 0},
   // Algorithms based on automata
   [_AUT] = {_AUT, OK, "aut", "Automaton Matcher", 0, 0},
@@ -411,7 +411,7 @@ const struct algo ALGOS[] = {
   [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
   [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
   [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
-  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0},
+  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 2, 0},
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
   [_BNDMq4] = {_BNDMq4, OK, "bndmq4", "bndm with q-grams", 4, 0},
