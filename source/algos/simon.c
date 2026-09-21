@@ -106,7 +106,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   }
   if (m > M_CUTOFF) {
     //unsigned cells = 0;
-    for (unsigned i = 0; i < XSIZE; i++) {
+    /* only L[0..m-1] were initialized (memset in preSimon covers m
+       entries); sweeping further reads uninitialized stack slots and
+       frees garbage pointers */
+    for (unsigned i = 0; i < (unsigned)m; i++) {
       if (L[i]) {
         List t = L[i];
         while (t) {

@@ -25,6 +25,7 @@
 #include "include/log2.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include "include/search_large.h"
 
 #ifdef __SSE4_2__
 #include <nmmintrin.h>
@@ -53,6 +54,22 @@
 
 const int max_needle = 8;
 
+/* pcmpestri only compares `len` bytes, but the 16-byte register load
+   itself can read up to 15 bytes past the compared range. When len <= 16
+   copy through a zero-padded local buffer so the load stays in bounds
+   (the pattern allocation only has PAD_16(m+1) bytes of slack); when
+   len > 16 the operand must stay memory-backed because the instruction
+   reads bytes 16..len-1 from the operand address, and those loads are in
+   bounds by construction (head + 15 < m). */
+static inline __m128i load_sse_padded(const unsigned char *p, unsigned int len) {
+  if (len > 16)
+    return _mm_loadu_si128((const __m128i *)p);
+  unsigned char buf[16] = {0};
+  memcpy(buf, p, len);
+  return _mm_loadu_si128((const __m128i *)buf);
+}
+
+
 // pattern up to length max_needle using raw intel sse4.2 instructions: should
 // max_needle be longer?
 int search_rawsse(unsigned char *x, int m, unsigned char *y, int n) {
@@ -80,7 +97,9 @@ int search_rawsse(unsigned char *x, int m, unsigned char *y, int n) {
 
   n -= steps_size; // remainder under 16 bytes
   if (n >= m) {
-    __m128i haystack_reg = _mm_loadu_si128((__m128i *)y);
+    /* fewer than 16 bytes may remain: the plain 16-byte load over-reads
+       the text allocation (which only has PAD_16(n+m+1) bytes) */
+    __m128i haystack_reg = load_sse_padded(y, (unsigned int)n);
     __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, n,
                                     _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
     step = n - m + 1;
@@ -203,14 +222,19 @@ void compute(unsigned char *x, int m, int *mu, int *pi) {
 // algorithm is not exactly like paper- allow overflow anchor match.
 // TODO: double up loops to avoid the one comparison for the length
 
+
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   if (m <= max_needle) // raw SSE instructions for short patterns
     return search_rawsse(x, m, y, n);
 
   int mu, pi, count = 0;
   compute(x, m, &mu, &pi);
-  if (mu <= 0)
-    return search_small(x, m, y, n);
+  /* compute() can return a degenerate factorization (garbage or non-positive
+     period from the maxSuf locals on some patterns; the asserts below are
+     stripped under -DNDEBUG). A zero period makes the shift-by-pi loop below
+     spin forever on periodic input, so fall back to an exact search. */
+  if (mu <= 0 || pi <= 0)
+    return (m < 32) ? search_small(x, m, y, n) : search_large(x, m, y, n);
 
   // safety - remove?
   assert(mu > 0);
@@ -223,13 +247,16 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     needle_reg = _mm_loadu_si128((__m128i *)&x[mu]);
     needle_length = 16;
   } else {
-    needle_reg = _mm_loadu_si128((__m128i *)&x[m - 16]);
-    // mask out leading bytes
-#define CLR(M) (n > (M - 1)) ? 0xFF : (0xFF << (M - n))
-    __m128i mask = _mm_set_epi8(CLR(16), CLR(15), CLR(14), CLR(13), CLR(12),
-                                CLR(11), CLR(10), CLR(9), CLR(8), CLR(7),
-                                CLR(6), CLR(5), CLR(4), CLR(3), 0, 0);
-    needle_reg = _mm_and_si128(needle_reg, mask);
+    /* pcmpestri with an explicit needle length only ever compares from
+       byte 0 of the register, so loading x[m-16] and masking (the old
+       code masked with the TEXT length n, i.e. never) left the needle
+       bytes at the wrong offset and silently missed occurrences -- and
+       loading straight from x[mu] would over-read the pattern
+       allocation for some m. Copy the needle suffix into a zero-padded
+       local buffer instead: always the right bytes, always in bounds. */
+    unsigned char needle_buf[16] = {0};
+    memcpy(needle_buf, &x[mu], (size_t)needle_length);
+    needle_reg = _mm_loadu_si128((__m128i *)needle_buf);
   }
 
 loop: // optimize further !
@@ -272,10 +299,10 @@ loop: // optimize further !
     // compare remainder as above; or after shift by period with head =
     // max(mu,m-pi) this is memcmp with index of first mismatch.
     while (head < m) {
-      __m128i b0 = _mm_loadu_si128((__m128i *)&x[head]),
-              b1 = _mm_loadu_si128((__m128i *)&y[head]);
-
       unsigned int b = m - head;
+
+      __m128i b0 = load_sse_padded(&x[head], b),
+              b1 = load_sse_padded(&y[head], b);
 
       unsigned int idx = _mm_cmpestri(b0, b, b1, b,
                                       _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH |
@@ -304,10 +331,10 @@ loop: // optimize further !
     // loop2:
     //  now compare prefix up to mu: this is just memcmp.
     while (head0 < mu) {
-      __m128i b0 = _mm_loadu_si128((__m128i *)&x[head0]),
-              b1 = _mm_loadu_si128((__m128i *)&y[head0]);
-
       unsigned int b = mu - head0;
+
+      __m128i b0 = load_sse_padded(&x[head0], b),
+              b1 = load_sse_padded(&y[head0], b);
 
       unsigned int idx = _mm_cmpestri(b0, b, b1, b,
                                       _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH |
@@ -344,5 +371,5 @@ loop: // optimize further !
     goto loop1;
   }
 
-  return ++count;
+  return count;
 }
