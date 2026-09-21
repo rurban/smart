@@ -122,10 +122,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
  * the pattern
  */
 
-void verify_large(unsigned char *y, int j, /*int n,*/ unsigned char *x, int m,
+void verify_large(unsigned char *y, int j, int n, unsigned char *x, int m,
                   int q, int u, uint32_t D, uint32_t mm, int *count,
                   int p_len) {
-  int s, c, mq, v, z, i;
+  int s, c, mq, v, z, i, k;
 
   D = (D & mm) ^ mm;
   mq = m / q - 1;
@@ -136,10 +136,12 @@ void verify_large(unsigned char *y, int j, /*int n,*/ unsigned char *x, int m,
     z = s % v - mq;
     c -= (s / v + z * q);
     i = j + c;
-    if (!memcmp(x, y + i, p_len)) {
-      OUTPUT(i);
-      // printf("%d\n",i);
-    }
+    k = 0;
+    if (i >= 0 && i <= n - p_len)
+      while (k < p_len && x[k] == y[i + k])
+        k++;
+    if (k == p_len)
+      OUTPUTP(i);
     D &= ~(1U << s);
   }
 }
@@ -192,7 +194,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
     D = (D << 1) | (B[y[j]] & ~masq);
     D = (D << 1) | (B[y[j + q]] & ~masq);
     if ((D & mm) != mm)
-      verify_large(y, j + uq1, /*n,*/ x, m, q, u, D, mm, &count, p_len);
+      verify_large(y, j + uq1, n, x, m, q, u, D, mm, &count, p_len);
     D &= ~mm;
     j += uq;
   }
