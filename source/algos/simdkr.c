@@ -30,11 +30,30 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * Constraints: requires m>=2
+ *
+ * Fixed two bugs, present identically in all three SIMD variants
+ * (AVX2, SSE2, NEON):
+ * 1. Each search iteration reads a fixed-width block (64 bytes for
+ *    AVX2, 16 for SSE2/NEON) starting at the current offset, without
+ *    checking that the whole block is inside the text; the driver's
+ *    buffer only guarantees m+1 bytes of slack past n, so this
+ *    overran the allocation by dozens of bytes on any text shorter
+ *    than roughly block_width+m -- reproduced with x='aba' m=3 in a
+ *    10-byte text, reading up to index 65 of a 16-byte allocation and
+ *    returning 29 garbage matches instead of 4. Only take the SIMD
+ *    block path while every byte it reads is guaranteed to be actual
+ *    text; scalar-scan the (always short) remainder exactly.
+ * 2. m=1 reached memcmp(..., m - 2) with m - 2 = -1, which as the
+ *    function's unsigned size_t parameter becomes SIZE_MAX -- an
+ *    immediate heap-buffer-overflow read, guarded only by an
+ *    assert(m > 1) stripped under -DNDEBUG. search() had no m<2
+ *    fallback despite MIN_M declaring 2; added one.
  */
 
 #define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
 
 #if defined __AVX2__
 
@@ -55,7 +74,18 @@ static FORCE_INLINE int avx2_strstr_generic(const unsigned char *s, int n,
   END_PREPROCESSING
 
   BEGIN_SEARCHING
-  for (int i = 0; i < n; i += 64) {
+  int i = 0;
+  /* Each iteration reads s[i..i+63] and s[i+m-1..i+m-1+63]; the driver's
+     text buffer only guarantees m+1 bytes of slack past n (see main.h),
+     nowhere near the 64+m needed here, so an unconditional block read
+     overruns the allocation for any text shorter than roughly 64+m
+     bytes -- reproduced with x='aba' m=3 in a 10-byte text reading up
+     to index 65 of a 16-byte allocation, returning 29 garbage matches.
+     Only take the fast block path while every byte it reads is
+     guaranteed to be actual text; fall back to an exact byte-at-a-time
+     scan for the remainder (this only affects the final <64+m bytes of
+     any real, large search, where the SIMD win is negligible anyway). */
+  for (; i + m - 1 + 63 < n; i += 64) {
 
     const __m256i block_first1 = _mm256_loadu_si256((const __m256i *)(s + i));
     const __m256i block_last1 =
@@ -86,11 +116,19 @@ static FORCE_INLINE int avx2_strstr_generic(const unsigned char *s, int n,
       mask = mask & (mask - 1); // clear_leftmost_set
     }
   }
+  for (; i <= n - m; i++) {
+    if (s[i] == needle[0] && s[i + m - 1] == needle[m - 1] &&
+        memcmp(s + i + 1, needle + 1, m - 2) == 0) {
+      OUTPUT(i);
+    }
+  }
   END_SEARCHING
   return count;
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
+  if (m < 2)
+    return search_small(x, m, y, n);
   return avx2_strstr_generic(y, n, x, m);
 }
 
@@ -118,7 +156,13 @@ static FORCE_INLINE int sse2_strstr_generic(const unsigned char *s, int n,
   END_PREPROCESSING
 
   BEGIN_SEARCHING
-  for (int i = 0; i < n; i += 16) {
+  int i = 0;
+  /* same bug class as avx2_strstr_generic above: each iteration reads
+     s[i..i+15] and s[i+m-1..i+m-1+15], overrunning the driver's text
+     buffer (which only guarantees m+1 bytes past n) for texts shorter
+     than roughly 16+m bytes. Take the block path only while every byte
+     it reads is guaranteed to be actual text; scalar-scan the tail. */
+  for (; i + m - 1 + 15 < n; i += 16) {
     // first byte (extended)
     const __m128i block_first = _mm_loadu_si128((const __m128i *)(s + i));
     // last byte
@@ -139,11 +183,19 @@ static FORCE_INLINE int sse2_strstr_generic(const unsigned char *s, int n,
       mask = mask & (mask - 1); // clear_leftmost_set
     }
   }
+  for (; i <= n - m; i++) {
+    if (s[i] == needle[0] && s[i + m - 1] == needle[m - 1] &&
+        memcmp(s + i + 1, needle + 1, m - 2) == 0) {
+      OUTPUT(i);
+    }
+  }
   END_SEARCHING
   return count;
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
+  if (m < 2)
+    return search_small(x, m, y, n);
   return sse2_strstr_generic(y, n, x, m);
 }
 
@@ -212,7 +264,13 @@ static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
   END_PREPROCESSING
 
   BEGIN_SEARCHING
-  for (int i = 0; i < n; i += 16) {
+  int i = 0;
+  /* same bug class as avx2_strstr_generic above: each iteration reads
+     s[i..i+15] and s[i+m-1..i+m-1+15], overrunning the driver's text
+     buffer (which only guarantees m+1 bytes past n) for texts shorter
+     than roughly 16+m bytes. Take the block path only while every byte
+     it reads is guaranteed to be actual text; scalar-scan the tail. */
+  for (; i + m - 1 + 15 < n; i += 16) {
 
     const uint8x16_t block_first = vld1q_u8(s + i);
     const uint8x16_t block_last = vld1q_u8(s + i + m - 1);
@@ -245,11 +303,19 @@ static FORCE_INLINE int neon_strstr_generic(const unsigned char *needle, int m,
       }
     }
   }
+  for (; i <= n - m; i++) {
+    if (s[i] == needle[0] && s[i + m - 1] == needle[m - 1] &&
+        memcmp(s + i + 1, needle + 1, m - 2) == 0) {
+      OUTPUT(i);
+    }
+  }
   END_SEARCHING
   return count;
 }
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
+  if (m < 2)
+    return search_small(x, m, y, n);
   return neon_strstr_generic(x, m, y, n);
 }
 
