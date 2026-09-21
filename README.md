@@ -19,15 +19,14 @@ To compile the source just download (or clone) this repository and run the file 
 ## Constraints
 Several algorithms are constraint in a **minimal** or **maximal pattern length m**. Then fallbacks are used, which are skipped in the timing benchmarks.
 
-The Multiple Sliding Windows implementations require the paper's `m < n / k`
-precondition; see [the implementation note](docs/multi-sliding-windows-bug.md).
-
 The **NUL character** is allowed in the pattern and the text (i.e. the **memmem()** API). Only the new
 strstr() reference algos libc and musl are skipped then.
 
 The original tests ensured a **terminating NUL** (i.e. strstr(), not memmem()), but this was fixed, as
 it was unrealistic.
 Only this colussi implementation violated this, but the original paper had the missing check included.
+
+Many algorithm implementations got constraint and memory-overflow fixes, some also added optimizations.
 
 ## Formal verification
 Most algos could be formally verified by Reini with the model checker **[CBMC](http://www.cprover.org/cbmc/)**.
@@ -50,9 +49,9 @@ According to our experimental results in 2010 (until KBNDM), we conclude
 that the following algorithms are the most efficient in the following situations.
 MUSL1 and EPSM added later as the current best.
 
+* SIMDKR best stable overall, for x86_64 SSE4.2, AVX2 and arm NEON optimizations.
 * MUSL1 memmem(): short patterns.
-* EPSM: The best SSE4 algo (fixed: was unsafe, see git log for
-  source/algos/epsm.c).
+* EPSM: A good SSE2 algo, but unsafe.
 * SA: very short patterns and very small alphabets.
 * TVSBS: very short patterns and small alphabets, and long patterns and large alphabets.
 * FJS: very short patterns and large and very large alphabets.
@@ -70,7 +69,7 @@ And some implementations didn't free their temp. buffers.
 
 ## Benchmarks
 
-* [Best](https://rurban.github.io/smart/results/best20/)
+* [Best](https://rurban.github.io/smart/results/best25/)
 * [All](https://rurban.github.io/smart/results/all/)
 
 ## Reference
@@ -81,7 +80,7 @@ And some implementations didn't free their temp. buffers.
 
 If you work with SMART, please cite:
 ```BibTeX
-@INPROCEEDINGS( PSC2016-9,
+@INPROCEEDINGS( PSC2016-9, 
  author = "Simone Faro and Thierry Lecroq and Stefano Borz\`i and Simone Di Mauro and Alessandro Maggio",
  title = "The String Matching Algorithms Research Tool",
  booktitle = "Proceedings of the Prague Stringology Conference 2016",
