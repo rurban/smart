@@ -54,32 +54,24 @@ void to_hex(unsigned char c, unsigned char *str) {
 
 ATTRIBUTE_MALLOC
 char *printable(const char *s, int n, int *is_printable) {
-  unsigned sz = (n + 1) * 4;
+  /* worst case: every byte becomes a 4-char "\xNN" escape, plus NUL */
+  unsigned sz = ((unsigned)n * 4) + 1;
   char *ret = calloc(sz, 1);
   *is_printable = 1;
-  for (int i=0; i < n; i++) {
+  unsigned pos = 0;
+  for (int i = 0; i < n; i++) {
     unsigned char c = (unsigned char)s[i];
     if (!isgraph(c) || c == '\'' || c == ' ' || c == '"') {
       unsigned char hex[5];
       to_hex(c, hex);
       *is_printable = 0;
-      if (strlen(ret) + n + 4 > sz) {
-        sz = strlen(ret) + n + 4;
-        char *tmp = realloc(ret, sz);
-        if (tmp)
-          ret = tmp;
-        else
-          abort();
-      }
-      strncat(ret, (char*)hex, sz);
+      memcpy(ret + pos, hex, 4);
+      pos += 4;
     } else {
-      char tmp[2];
-      tmp[0] = s[n];
-      tmp[1] = '\0';
-      strcat(ret, tmp);
+      ret[pos++] = (char)c;
     }
-    n--;
   }
+  ret[pos] = '\0';
   return ret;
 }
 

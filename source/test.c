@@ -594,11 +594,13 @@ int main(int argc, char *argv[]) {
     if (!attempt(&rip, count, P, 6, T, 10, algoname, verbose, alpha))
       goto free_shm1;
   }
-  // 21) search for "aba" in "abababbbbb"
-  strcpy((char *)P, "aba");
-  strcpy((char *)T, "ababababab");
-  if (!attempt(&rip, count, P, 3, T, 10, algoname, verbose, alpha))
-    goto free_shm1;
+  if (!minlen || minlen < 3) {
+    // 21) search for "aba" in "abababbbbb"
+    strcpy((char *)P, "aba");
+    strcpy((char *)T, "ababababab");
+    if (!attempt(&rip, count, P, 3, T, 10, algoname, verbose, alpha))
+      goto free_shm1;
+  }
 
   // 22) dont find m=1024 in n=2048 at pos 16
   for (h = 0; h < YSIZE; h++)
