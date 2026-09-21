@@ -140,7 +140,7 @@ verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
 check: all
-	@-cp source/algorithms.lst source/algorithms.lst.bak
+	@-cp algorithms.lst algorithms.lst.bak
 	$(DRV) ./$(SELECTBIN) -all
 	$(DRV) ./$(SELECTBIN) -which | grep br
 	-cp $(BINDIR)/br $(BINDIR)/br1

@@ -81,8 +81,10 @@ void printManual() {
 
 int hexquote(char *out, unsigned char *P, const int m) {
   // hexquote P and T
-  int is_printable = 1;
+  if (!out)
+    return 0;
   int pos = 0;
+  int is_printable = 1;
   for (int i = 0; i < m; i++) {
     if (isalnum(P[i])) {
       out[pos++] = P[i];
@@ -106,27 +108,36 @@ int execute(char *algoname, unsigned char *P, int m, unsigned char *T, int n,
   // hexquote P and T
   char *cmd1 = malloc((4 * m) + 1);
   char *cmd2 = malloc((4 * n) + 1);
+  if (!cmd1 || !cmd2) {
+    free(cmd1);
+    free(cmd2);
+    return 0;
+  }
   int is_printable1 = hexquote(cmd1, P, m);
   int is_printable2 = hexquote(cmd2, T, n);
   size_t sz = 20 + 8 /*the 2 numbers (max 4 digit)*/ + strlen(BINDIR) + strlen(algoname) + m + n;
   if (is_printable1 && is_printable2) {
     command = malloc(sz + 1);
-    snprintf(command, sz, "%s/%s %s %d %s %d", BINDIR, algoname, P, m, T, n);
+    if (command)
+      snprintf(command, sz, "%s/%s %s %d %s %d", BINDIR, algoname, P, m, T, n);
   }
   else if (is_printable1 && !is_printable2) {
     sz += 3 + strlen(cmd2);
     command = malloc(sz + 1);
-    snprintf(command, sz, "%s/%s %s %d $'%s' %d", BINDIR, algoname, P, m, cmd2, n);
+    if (command)
+      snprintf(command, sz, "%s/%s %s %d $'%s' %d", BINDIR, algoname, P, m, cmd2, n);
   }
   else if (!is_printable1 && is_printable2) {
     sz += 3 + strlen(cmd1);
     command = malloc(sz + 1);
-    snprintf(command, sz, "%s/%s $'%s' %d %s %d", BINDIR, algoname, cmd1, m, T, n);
+    if (command)
+      snprintf(command, sz, "%s/%s $'%s' %d %s %d", BINDIR, algoname, cmd1, m, T, n);
   }
   else {
     sz += 6 + strlen(cmd1) + strlen(cmd2);
     command = malloc(sz + 1);
-    snprintf(command, sz, "%s/%s $'%s' %d $'%s' %d", BINDIR, algoname, cmd1, m, cmd2, n);
+    if (command)
+      snprintf(command, sz, "%s/%s $'%s' %d $'%s' %d", BINDIR, algoname, cmd1, m, cmd2, n);
   }
   free(cmd1);
   free(cmd2);
@@ -289,7 +300,7 @@ int main(int argc, char *argv[]) {
       n = ftell(ft);
       fseek(ft, 0L, SEEK_SET);
       if (n > TSIZE) {
-        fprintf(stderr, "%s too large: %u > %u\n", t_file, n, TSIZE);
+        fprintf(stderr, "%s too large: %u > %u\n", t_file, (unsigned)n, (unsigned)TSIZE);
         exit(1);
       }
       if (!fread(T, n, 1, ft))
@@ -613,8 +624,17 @@ int main(int argc, char *argv[]) {
     const int VOLTE = 50;
     unsigned char **setP =
         (unsigned char **)malloc(sizeof(unsigned char *) * VOLTE);
-    for (int i = 0; i < VOLTE; i++)
+    if (!setP)
+      goto free_shm1;
+    for (int i = 0; i < VOLTE; i++) {
       setP[i] = (unsigned char *)malloc(sizeof(unsigned char) * (XSIZE + 1));
+      if (!setP[i]) {
+        for (int j = 0; j < i; j++)
+          free(setP[j]);
+        free(setP);
+        goto free_shm1;
+      }
+    }
     memcpy (T, orig_T, TSIZE);
     if (!m) {
       PATT_SIZE = PATT_LARGE_SIZE; // the set of pattern lengths (max 4096)

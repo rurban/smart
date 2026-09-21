@@ -72,9 +72,11 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   __m128i *lastchunk = &T.data16[n / 16];
   unsigned int filter;
   unsigned char *f;
-  if (m > M_CUTOFF)
+  if (m > M_CUTOFF) {
     f = malloc(m);
-  else
+    if (!f)
+      return 0;
+  } else
     f = s_f;
 
   last = (m / 16) - 1;
@@ -92,6 +94,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
              f[j + 15] * 32768;
     if (flist[filter] == 0) {
       flist[filter] = (LIST *)malloc(sizeof(LIST));
+      if (!flist[filter])
+        return 0;
       flist[filter]->next = NULL;
       flist[filter]->pos = i;
     } else {
@@ -99,6 +103,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       while (t->next != NULL)
         t = t->next;
       t->next = (LIST *)malloc(sizeof(LIST));
+      if (!t->next)
+        return 0;
       t = t->next;
       t->next = NULL;
       t->pos = i;

@@ -283,8 +283,10 @@ int outputXML(double TIME[NumAlgo][NumPatt], int alpha, char *filename,
 }
 
 void appendFilesContent(char *source, FILE *target) {
-  char c;
+  int c;
   FILE *fp = fopen(source, "r");
+  if (!fp)
+    return;
   while ((c = getc(fp)) != EOF)
     putc(c, target);
   fclose(fp);

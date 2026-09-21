@@ -94,8 +94,12 @@ int isInt(char *s) {
 
 ATTRIBUTE_MALLOC
 char *str2lower(const char *s) {
+  if (!s)
+    return NULL;
   int n = strlen(s) - 1;
-  char *ret = calloc(n + 1, 1);
+  char *ret = calloc(n + 2, 1);
+  if (!ret)
+    return NULL;
   while (n >= 0) {
     if (s[n] >= 'A' && s[n] <= 'Z')
       ret[n] = s[n] - 'A' + 'a';
@@ -108,8 +112,12 @@ char *str2lower(const char *s) {
 
 ATTRIBUTE_MALLOC
 char *str2upper(const char *s) {
+  if (!s)
+    return NULL;
   int n = strlen(s) - 1;
   char *ret = calloc(n + 2, 1);
+  if (!ret)
+    return NULL;
   while (n >= 0) {
     if (s[n] >= 'a' && s[n] <= 'z')
       ret[n] = s[n] - 'a' + 'A';
@@ -130,6 +138,8 @@ int file_exists(const char* f) {
 }
 
 int search_ALGO(const char *ALGO_NAME[], char *algo) {
+  if (!algo)
+    return -1;
   unsigned int i;
   char *low = str2lower(algo);
   for (i = 0; i < NumAlgo; i++)
@@ -142,6 +152,8 @@ int search_ALGO(const char *ALGO_NAME[], char *algo) {
 }
 
 void getAlgo(const char *ALGO_NAME[], int EXECUTE[]) {
+  if (!EXECUTE)
+    return;
   DIR *d;
   struct dirent *dir;
 
@@ -188,25 +200,26 @@ void getAlgo(const char *ALGO_NAME[], int EXECUTE[]) {
     if (!fp)
       return;
   }
-  char *n;
-  char c;
+  int c;
   int execute;
   int i = 0;
-  while ((c = getc(fp)) != EOF)
+  while ((c = getc(fp)) != EOF) {
     if (c == '#') {
       execute = (getc(fp) - '0');
       getc(fp);
       getc(fp);
-      n = (char *)malloc(sizeof(char) * 20);
+      char n[20];
       unsigned int j = 0;
-      while ((c = getc(fp)) != ' ' && c != EOF && c != '\n')
-        n[j++] = c;
+      while ((c = getc(fp)) != ' ' && c != EOF && c != '\n') {
+        if (j < sizeof(n) - 1)
+          n[j++] = c;
+      }
       n[j] = '\0';
       i = search_ALGO(ALGO_NAME, n);
       if (i >= 0 && i < (int)NumAlgo && !strcmp(ALGOS[i].name, n))
         EXECUTE[i] = execute;
-      free(n);
     }
+  }
   fclose(fp);
 }
 
@@ -264,6 +277,8 @@ void textStats(unsigned char *T, int n, int FREQ[SIGMA]) {
       maxfreq = j;
   median = (n % 2) ? (n + 1) / 2 : n / 2;
   sorted = malloc(n);
+  if (!sorted)
+    return;
   memcpy(sorted, T, n);
   qsort(sorted, n, 1, u8_cmp);
   printf("\t%d characters [%d-%d], median: %d, alpha: %d, highest freq: %d\n",

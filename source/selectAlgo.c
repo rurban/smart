@@ -58,6 +58,8 @@ int main(int argc, const char *argv[]) {
   unsigned int i, j;
   int desc = 0;
   int *execute = malloc(sizeof(int) * (NumAlgo + 10));
+  if (!execute)
+    return 1;
   unsigned int numalgo = NumAlgo;
 
   getAlgo(ALGO_NAME, execute);

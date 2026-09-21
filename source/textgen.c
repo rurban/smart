@@ -78,6 +78,10 @@ int main(void) {
       fprintf(stderr, "Invalid sigma %d\n", sigma);
       exit(1);
     }
+    if (!stream) {
+      perror("fopen");
+      exit(1);
+    }
     printf("\tGenerating random text over %.3d chars ...........[000%%]",
            sigma);
     for (int i = 0; i < 5000000; i++) {

@@ -141,10 +141,15 @@ int main(int argc, char *argv[]) {
     // for SSE code, esp. ssecp for int128 mu
 #define PAD_16(x) (((x) + 15) & ~15)
     p = (unsigned char *)calloc(PAD_16(m + 1), 1);
+    t = (unsigned char *)calloc(PAD_16(n + m + 1), 1);
+    if (!p || !t) {
+      free(p);
+      free(t);
+      return 1;
+    }
     memcpy((char *)p, argv[1], m);
     // we always guarantee zero-termination (+1)
     // and boyer-moore requires space at the end of t. (+m: tunbm)
-    t = (unsigned char *)calloc(PAD_16(n + m + 1), 1);
     memcpy((char *)t, argv[3], n);
     /*
     if (m > (int)lp)

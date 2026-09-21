@@ -168,8 +168,17 @@ int run_setting(char *filename, unsigned char *T, int n, int alpha, int *FREQ,
       STDTIME[5000];
   unsigned char **setP =
       (unsigned char **)malloc(sizeof(unsigned char *) * VOLTE);
-  for (i = 0; i < VOLTE; i++)
+  if (!setP)
+    return 1;
+  for (i = 0; i < VOLTE; i++) {
     setP[i] = (unsigned char *)malloc(sizeof(unsigned char) * (XSIZE + 1));
+    if (!setP[i]) {
+      for (j = 0; j < i; j++)
+        free(setP[j]);
+      free(setP);
+      return 1;
+    }
+  }
   unsigned char *P = NULL;
   FILE *stream = NULL;
   int SIMPLE = (strcmp((char *)simplePattern, "") ? 1 : 0);

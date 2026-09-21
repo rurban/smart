@@ -119,6 +119,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     tposition = (int *)calloc(size, sizeof(int));
     tsuffix = (int *)calloc(size, sizeof(int));
     tterminal = (unsigned char *)calloc(size, sizeof(unsigned char));
+    if (!mpNext || !ttrans || !tshift || !tlength || !tposition || !tsuffix || !tterminal) {
+      free(mpNext); free(ttrans); free(tshift); free(tlength); free(tposition); free(tsuffix); free(tterminal);
+      return 0;
+    }
   } else {
     mpNext = s_mpNext;
     ttrans = s_ttrans;
