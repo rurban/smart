@@ -51,7 +51,8 @@ that the following algorithms are the most efficient in the following situations
 MUSL1 and EPSM added later as the current best.
 
 * MUSL1 memmem(): short patterns.
-* EPSM: The best SSE2 algo, but unsafe.
+* EPSM: The best SSE4 algo (fixed: was unsafe, see git log for
+  source/algos/epsm.c).
 * SA: very short patterns and very small alphabets.
 * TVSBS: very short patterns and small alphabets, and long patterns and large alphabets.
 * FJS: very short patterns and large and very large alphabets.
