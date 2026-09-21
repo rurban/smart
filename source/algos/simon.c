@@ -26,7 +26,7 @@
 // TODO prove the bounded size (2)
 static struct _cell s_cells[2 * M_CUTOFF];
 
-int getTransitionSimon(unsigned char *x, int m, int p, List L[], char c) {
+int getTransitionSimon(unsigned char *x, int m, int p, List L[], unsigned char c) {
   List cell;
 
   if (p < m - 1 && x[p + 1] == c)

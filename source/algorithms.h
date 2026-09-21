@@ -448,7 +448,7 @@ const struct algo ALGOS[] = {
   // _BQL = {_BQL,  OK, "bql", "BNDMq Long", 8, MISSING},
   [_FS_W1] = {_FS_W1, OK, "fs-w1", "Multiple Sliding Windows", 0, 0},
   [_FS_W2] = {_FS_W2, OK, "fs-w2", "Multiple Sliding Windows", 0, 0},
-  [_FS_W4] = {_FS_W4, FAIL, "fs-w4", "Multiple Sliding Windows", 6, 0}, // n>=6
+  [_FS_W4] = {_FS_W4, OK, "fs-w4", "Multiple Sliding Windows", 6, 0}, // n>=6
   [_FS_W6] = {_FS_W6, OK, "fs-w6", "Multiple Sliding Windows", 8, 0}, // n>=8, needs m space at the end of T
   [_FS_W8] = {_FS_W8, OK, "fs-w8", "Multiple Sliding Windows", 10, 0}, // needs m space at the end of T
   [_FSBNDM_W1] =
@@ -468,27 +468,27 @@ const struct algo ALGOS[] = {
   [_FSBNDMQ31] =
         {_FSBNDMQ31, OK, "fsbndmq31", "fsbndm with q-grams and lookahead", 3, 0}, // m: 3..31
   [_FSBNDMQ32] =
-        {_FSBNDMQ32, FAIL, "fsbndmq32", "fsbndm with q-grams and lookahead", 3, 0}, // m: 3..30
+        {_FSBNDMQ32, OK, "fsbndmq32", "fsbndm with q-grams and lookahead", 3, 0}, // m: 3..30
   [_FSBNDMQ41] =
         {_FSBNDMQ41, OK, "fsbndmq41", "fsbndm with q-grams and lookahead", 4, 0}, // m: 4..31
   [_FSBNDMQ42] =
-        {_FSBNDMQ42, FAIL, "fsbndmq42", "fsbndm with q-grams and lookahead", 4, 0}, // m: 4..30
+        {_FSBNDMQ42, OK, "fsbndmq42", "fsbndm with q-grams and lookahead", 4, 0}, // m: 4..30
   [_FSBNDMQ43] =
-        {_FSBNDMQ43, FAIL, "fsbndmq43", "fsbndm with q-grams and lookahead", 4, 0}, // m: 4..29
+        {_FSBNDMQ43, OK, "fsbndmq43", "fsbndm with q-grams and lookahead", 4, 0}, // m: 4..29
   [_FSBNDMQ61] =
         {_FSBNDMQ61, OK, "fsbndmq61", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..31
   [_FSBNDMQ62] =
-        {_FSBNDMQ62, FAIL, "fsbndmq62", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..30
+        {_FSBNDMQ62, OK, "fsbndmq62", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..30
   [_FSBNDMQ64] =
-        {_FSBNDMQ64, FAIL, "fsbndmq64", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..28
+        {_FSBNDMQ64, OK, "fsbndmq64", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..28
   [_FSBNDMQ81] =
         {_FSBNDMQ81, OK, "fsbndmq81", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..31
   [_FSBNDMQ82] =
-        {_FSBNDMQ82, FAIL, "fsbndmq82", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..30
+        {_FSBNDMQ82, OK, "fsbndmq82", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..30
   [_FSBNDMQ84] =
-        {_FSBNDMQ84, FAIL, "fsbndmq84", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..28
+        {_FSBNDMQ84, OK, "fsbndmq84", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..28
   [_FSBNDMQ86] =
-        {_FSBNDMQ86, FAIL, "fsbndmq86", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..26
+        {_FSBNDMQ86, OK, "fsbndmq86", "fsbndm with q-grams and lookahead", 8, 0}, // m: 8..26
   [_IOM] = {_IOM, OK, "iom", "Improved Occurrence Heuristic", 0, 0},
   [_JOM] = {_JOM, OK, "jom", "Jumping Occurrence Matcher", 2, 0}, // fixed for n<100
   [_LWFR2] = {_LWFR2, OK, "lwfr2", "Weak Factor Recognizer, Linear Version", 2, 0},
@@ -514,8 +514,8 @@ const struct algo ALGOS[] = {
   [_QF72] = {_QF72, OK, "qf72", "Q-gram Filtering q=7 s=2", 8, 0},
   [_QF82] = {_QF82, OK, "qf82", "Q-gram Filtering q=8 s=2", 9, 0},
   [_QLQS] = {_QLQS, OK, "qlqs", "Quantum Leap Quick Search", 0, 0},
-  [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0}, // m: 2..32
-  [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0}, // m: 4..?
+  [_SBNDM_W2] = {_SBNDM_W2, OK, "sbndm-w2", "SBNDM with lookahead", 2, 0}, // m: 2..32
+  [_SBNDM_W4] = {_SBNDM_W4, OK, "sbndm-w4", "SBNDM with lookahead", 4, 0}, // m: 4..?
   [_SBNDM_W6] = {_SBNDM_W6, OK, "sbndm-w6", "SBNDM with lookahead", 6, 0}, // m: 6..32
   [_SSM] = {_SSM, OK, "ssm", "SSM", 0, 0},
   [_TSA] = {_TSA, OK, "tsa", "word-wise popcount", 2, 0}, // 2<=m<64
@@ -523,9 +523,9 @@ const struct algo ALGOS[] = {
   [_TSO5] = {_TSO5, OK, "tso5", "optimized word-wise popcount", 2, 0}, // 2<=m<64
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
   [_TVSBS_W2] = {_TVSBS_W2, FAIL, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
-  [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W4] = {_TVSBS_W4, OK, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_TVSBS_W6] = {_TVSBS_W6, OK, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
-  [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W8] = {_TVSBS_W8, OK, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_WFR] = {_WFR, OK, "wfr", "Weak Factor Recognizer", 0, 0},
   [_WFR2] = {_WFR2, OK, "wfr2", "Weak Factor Recognizer (m>=2)", 2, 0},
   [_WFR3] = {_WFR3, OK, "wfr3", "Weak Factor Recognizer (m>=3)", 3, 0},

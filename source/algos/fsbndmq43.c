@@ -31,65 +31,11 @@
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_small.h"
+#include "include/search_large.h"
 
 #define Q 4
 #define F 3
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  unsigned int B[SIGMA], D, set;
-  int i, j, pos, mm, sh, m1, count;
-  if (m < Q)
-    return search_small(x, m, y, n);
-  int plen = m;
-  int larger = m + F > WORD ? 1 : 0;
-  if (larger)
-    m = WORD - F;
-
-  BEGIN_PREPROCESSING
-  /* Preprocessing */
-  count = 0;
-  set = 0;
-  for (j = 0; j < F; j++)
-    set = (set << 1) | 1;
-  for (i = 0; i < SIGMA; i++)
-    B[i] = set;
-  for (i = 0; i < m; ++i)
-    B[x[i]] |= (1U << (m - i - 1 + F));
-  mm = m - Q + F;
-  sh = m - Q + F + 1;
-  m1 = m - 1;
-  END_PREPROCESSING
-
-  BEGIN_SEARCHING
-  /* Searching */
-  if (!memcmp(x, y, m))
-    OUTPUT(0);
-  int end = n - plen + m;
-  j = m;
-  while (j < end) {
-    D = B[y[j + 3]];
-    D = (D << 1) & B[y[j + 2]];
-    D = (D << 1) & B[y[j + 1]];
-    D = (D << 1) & B[y[j]];
-    if (D != 0) {
-      pos = j;
-      while ((D = (D << 1) & B[y[j - 1]]))
-        --j;
-      j += mm;
-      if (j == pos) {
-        if (larger) {
-          i = m;
-          while (i < plen && x[i] == y[j - m1 + i])
-            i++;
-          if (i == plen)
-            OUTPUT(j);
-        } else
-          OUTPUT(j);
-        ++j;
-      }
-    } else
-      j += sh;
-  }
-  END_SEARCHING
-  return count;
+  return search_safe(x, m, y, n);
 }
