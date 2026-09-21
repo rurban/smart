@@ -188,8 +188,8 @@ endif
 #	echo "--pointer-primitive-check"; fi)
 # cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
-FAIL_VERIFY := $(shell ./algocfg VFY_FAIL)
-TIMEOUT_VERIFY := $(shell ./algocfg VFY_TIMEOUT)
+FAIL_VERIFY    = $(shell ./algocfg VFY_FAIL)
+TIMEOUT_VERIFY = $(shell ./algocfg VFY_TIMEOUT)
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
 verify/verify.log: $(ALGOSRC) $(ALGOSINC) algocfg GNUmakefile

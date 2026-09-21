@@ -63,9 +63,8 @@ static char *fourbyte_memmem(const unsigned char *h, size_t k,
    << ((size_t)(b) % (8 * sizeof *(a))))
 
 // => ms, p, mem0, byteset, shift
-static void twoway_prep(const unsigned char *h, const unsigned char *z,
-                        const unsigned char *n, size_t l,
-                        struct prep_t *prep) __nonnull_all {
+static void twoway_prep(const unsigned char *h, const unsigned char *n,
+                        size_t l, struct prep_t *prep) __nonnull_all {
   size_t i, ip, jp, k, p, ms, p0, mem0;
   //size_t byteset[32 / sizeof(size_t)] = {0};
   //size_t shift[256];
@@ -222,7 +221,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   if (m > 4) {
     const unsigned char *h = memchr(y, *x, n);
     memset(prep.byteset, 0, sizeof(prep.byteset));
-    twoway_prep(h, h + n, x, m, &prep);
+    twoway_prep(h, x, m, &prep);
   }
   END_PREPROCESSING
 
