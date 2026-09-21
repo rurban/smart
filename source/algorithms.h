@@ -402,7 +402,7 @@ const struct algo ALGOS[] = {
   [_SVM4] = {_SVM4, OK, "svm4", "shift vector matching (version 4)", 0, 0},
   [_SBNDM2] = {_SBNDM2, OK, "sbndm2", "simplified bndm with loop-unrolling", 2, 0},
   [_SBNDM_BMH] = {_SBNDM_BMH, OK, "sbndm-bmh", "sbndm with horspool shift", 2, 0},
-  [_BMH_SBNDM] = {_BMH_SBNDM, FAIL, "bmh-sbndm", "Horspool with SBNDM test", 0, 0},
+  [_BMH_SBNDM] = {_BMH_SBNDM, OK, "bmh-sbndm", "Horspool with SBNDM test", 2, 0},
   [_FNDM] = {_FNDM, OK, "fndm", "forward nondeterministic dawg matching", 0, 0},
   [_BWW] = {_BWW, OK, "bww", "bit parallel wide window", 0, 0},
   [_FAOSO2] = {_FAOSO2, OK, "faoso2", "fast average optimal shift-or (u=2,m>2)", 3, 0},

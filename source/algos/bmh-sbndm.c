@@ -22,7 +22,27 @@
  * The Second Haifa Annual International Stringology Research Workshop of the
  * Israeli Science Foundation, (2005).
  *
- * Note: Broken! See sbndm-bmh instead
+ * Fixed two bugs in the preprocessing that computes the post-match
+ * "shift" (the safe distance to advance after a confirmed occurrence,
+ * analogous to a border/period of the pattern derived by re-feeding the
+ * pattern into its own BNDM automaton):
+ * 1. The "found a full self-match" signal was tested as
+ *    "D & (1U << (m - 1))" instead of "D & (1U << (WORD - 1))". The
+ *    automaton only ever sets bits in [WORD-m, WORD-1] (WORD=32), so for
+ *    m <= WORD/2 bit (m-1) falls entirely outside that range and the
+ *    check silently never fired -- shift stayed at its safe default of 1
+ *    (correct but slow). For m > WORD/2, bit (m-1) lands on an arbitrary
+ *    bit inside the valid range instead of the actual "full match" bit,
+ *    so the wrong condition fired.
+ * 2. The loop kept overwriting "shift" with every qualifying (self-
+ *    overlapping) candidate instead of stopping at the first, smallest
+ *    one. For a periodic pattern (e.g. "aaaa...a") every candidate
+ *    qualifies, so shift ended up being the *largest* offset checked
+ *    (up to m-2) instead of the pattern's actual minimal period (1),
+ *    which meant the post-match jump ("i += shift") sailed straight
+ *    over nearly all of the overlapping occurrences: m=32 "a"s in 64
+ *    "a"s reported 3 occurrences instead of 33. Break out as soon as
+ *    the first (smallest) qualifying shift is found.
  */
 
 #define MIN_M 2
@@ -58,8 +78,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   j = 1;
   shift = 1;
   for (i = m - 2; i > 0; i--, j++) {
-    if (D & (1U << (m - 1)))
+    if (D & (1U << (WORD - 1))) {
       shift = j;
+      break;
+    }
     D = (D << 1) & B[x[i]];
   }
   for (i = 0; i < m; i++)
@@ -125,7 +147,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   j = 1;
   // shift = 1;
   for (i = m - 2; i > 0; i--, j++) {
-    // if (D & (1U << (m - 1)))
+    // if (D & (1U << (WORD - 1)))
     //  shift = j;
     D = (D << 1) & B[x[i]];
   }
