@@ -570,7 +570,7 @@ const struct algo ALGOS[] = {
   [_MUSL] = {_MUSL, FAIL, "musl", "musl strstr Two-way string-matching", 0, 0}, // no \0
   [_LIBC1] = {_LIBC1, OK, "libc1", "memmem Two-way string-matching", 0, 0},
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem Two-way string-matching", 0, 0},
-  [_MUSL2] = {_MUSL2, FAIL, "musl2", "musl memmem with horspool", 0, 0},
+  [_MUSL2] = {_MUSL2, OK, "musl2", "musl memmem with horspool", 0, 0},
   [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
   [_EPSM] = {_EPSM, X64_ONLY, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
   [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},

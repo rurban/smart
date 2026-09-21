@@ -210,29 +210,33 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     return 0;
 
   BEGIN_PREPROCESSING
-  if (m > 4)
+  /* Plain Horspool (hor.c) steps by bmBc[T[s+m-1]] from the CURRENT
+     (unshifted) position s, even after reporting a match at s -- and
+     since a match means T[s+m-1] == x[m-1], that shift is always the
+     same constant bmBc[x[m-1]], safe because it is exactly what
+     Horspool itself would do at that position. The previous version
+     advanced to p+1 first and then looked up a shift keyed on a
+     *different*, further-ahead byte (y[m-1] after the +1, i.e.
+     text[p+m] instead of text[p+m-1]), compounding two skips that were
+     never proven safe together -- it missed half the occurrences of a
+     periodic pattern like "aaaaa" in a run of 'a's (8 found instead of
+     16). Precompute the single safe post-match advance instead. */
+  int adv = 1;
+  if (m > 4) {
     preBmBc(x, m, bmBc);
+    adv = bmBc[x[m - 1]];
+  }
   END_PREPROCESSING
 
   BEGIN_SEARCHING
   int count = 0;
   unsigned char *p;
-  if (m > 4) {
-    while ((p = musl_memmem((char *)y, n, (char *)x, m))) {
-      OUTPUT(p - orig_y);
-      n -= (p + 1) - y;
-      if (n < m)
-	break;
-      y += bmBc[y[m - 1]];
-    }
-  } else {
-    while ((p = musl_memmem((char *)y, n, (char *)x, m))) {
-      OUTPUT(p - orig_y);
-      n -= (p + 1) - y;
-      if (n < m)
-	break;
-      y = p + 1;
-    }
+  while ((p = musl_memmem((char *)y, n, (char *)x, m))) {
+    OUTPUT(p - orig_y);
+    n -= (p + adv) - y;
+    if (n < m)
+      break;
+    y = p + adv;
   }
   END_SEARCHING
   return count;

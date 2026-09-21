@@ -341,7 +341,7 @@ const struct algocfg ALGOCFGS[] = {
   [_LIBC1] = {_LIBC1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // esbmc fails
   [_MUSL]  = {_MUSL,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
   [_MUSL1] = {_MUSL1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, //7s, upto d=820 ok
-  [_MUSL2] = {_MUSL2, FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_MUSL2] = {_MUSL2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
   [_HC1]  =  {_HC1,   GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_HC2]  =  {_HC2,   GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},

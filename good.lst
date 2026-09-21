@@ -203,6 +203,7 @@ libc
 musl
 libc1
 musl1
+musl2
 simdkr
 epsm
 hc1
