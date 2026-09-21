@@ -41,7 +41,7 @@ void computeMinShift(unsigned char *x, int m) {
   }
 }
 
-void orderPattern(unsigned char *x, int m, int (*pcmp)(), pattern *pat) {
+void orderPattern(unsigned char *x, int m, int (*pcmp)(const void *, const void *), pattern *pat) {
   int i;
   for (i = 0; i < m; ++i) {
     pat[i].loc = i;
@@ -95,7 +95,9 @@ void preAdaptedGs(unsigned char *x, int m, int adaptedGs[], pattern *pat) {
   }
 }
 
-int maxShiftPcmp(pattern *pat1, pattern *pat2) {
+int maxShiftPcmp(const void *p1, const void *p2) {
+  const pattern *pat1 = (const pattern *)p1;
+  const pattern *pat2 = (const pattern *)p2;
   int dsh;
   dsh = minShift[pat2->loc] - minShift[pat1->loc];
   return (dsh ? dsh : (pat2->loc - pat1->loc));

@@ -40,7 +40,7 @@ void preQsBc(unsigned char *P, int m, int qbc[]) {
 }
 
 /* Construct an ordered pattern from a string. */
-void orderPattern(unsigned char *x, int m, int (*pcmp)(), pattern *pat) {
+void orderPattern(unsigned char *x, int m, int (*pcmp)(const void *, const void *), pattern *pat) {
   int i;
   for (i = 0; i < m; ++i) {
     pat[i].loc = i;
@@ -50,7 +50,9 @@ void orderPattern(unsigned char *x, int m, int (*pcmp)(), pattern *pat) {
 }
 
 /* Optimal Mismatch pattern comparison function. */
-int optimalPcmp(pattern *pat1, pattern *pat2) {
+int optimalPcmp(const void *p1, const void *p2) {
+  const pattern *pat1 = (const pattern *)p1;
+  const pattern *pat2 = (const pattern *)p2;
   float fx;
 
   fx = freq[pat1->c] - freq[pat2->c];
