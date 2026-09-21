@@ -127,7 +127,7 @@ static unsigned char *twoway_memmem(const unsigned char *h,
 //  return twoway_memmem(h, h + k, n, l);
 //}
 
-int search_large(unsigned char *x, int m, unsigned char *y, int n) {
+static inline int _search_large_safe(unsigned char *x, int m, unsigned char *y, int n, int count_only) {
   BEGIN_SEARCHING
 #ifdef DEBUG
   const unsigned char *orig_y = y;
@@ -135,10 +135,22 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
   int count = 0;
   unsigned char *p;
   while ((p = twoway_memmem(y, y + n, x, (size_t)m))) {
-    OUTPUT(p - orig_y);
+    if (!count_only) {
+      OUTPUT(p - orig_y);
+    } else {
+      count++;
+    }
     n -= (p + 1) - y;
-    y = p + 1; // can be optimized
+    y = p + 1;
   }
   END_SEARCHING
   return count;
+}
+
+int search_large(unsigned char *x, int m, unsigned char *y, int n) {
+  return _search_large_safe(x, m, y, n, 0);
+}
+
+int search_safe(unsigned char *x, int m, unsigned char *y, int n) {
+  return _search_large_safe(x, m, y, n, 1);
 }

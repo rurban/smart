@@ -117,6 +117,8 @@ fs-w6
 fs-w8
 fsbndm-w1
 fsbndm-w2
+fsbndm-w4
+fsbndm-w6
 fsbndmq20
 fsbndmq21
 fsbndmq31
@@ -154,6 +156,7 @@ tsa
 tso5
 tunedbm
 tvsbs-w2
+tvsbs-w6
 wfr
 wfr2
 wfr3

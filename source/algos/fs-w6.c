@@ -73,5 +73,5 @@ void Pre_GS(unsigned char *x, int m, int bm_gs[]) {
 }
 
 int search(unsigned char *P, int m, unsigned char *T, int n) {
-  return search_large(P, m, T, n);
+  return search_safe(P, m, T, n);
 }

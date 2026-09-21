@@ -42,5 +42,5 @@ void TVSBSpreBrBc(unsigned char *x, int m, int brBc[SIGMA][SIGMA]) {
 }
 
 int search(unsigned char *x, int m, unsigned char *_y, int n) {
-  return search_large(x, m, _y, n);
+  return search_safe(x, m, _y, n);
 }

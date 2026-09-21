@@ -449,16 +449,16 @@ const struct algo ALGOS[] = {
   [_FS_W1] = {_FS_W1, OK, "fs-w1", "Multiple Sliding Windows", 0, 0},
   [_FS_W2] = {_FS_W2, OK, "fs-w2", "Multiple Sliding Windows", 0, 0},
   [_FS_W4] = {_FS_W4, FAIL, "fs-w4", "Multiple Sliding Windows", 6, 0}, // n>=6
-  [_FS_W6] = {_FS_W6, RNDCRASH, "fs-w6", "Multiple Sliding Windows", 8, 0}, // n>=8, needs m space at the end of T
-  [_FS_W8] = {_FS_W8, RNDCRASH, "fs-w8", "Multiple Sliding Windows", 10, 0}, // needs m space at the end of T
+  [_FS_W6] = {_FS_W6, OK, "fs-w6", "Multiple Sliding Windows", 8, 0}, // n>=8, needs m space at the end of T
+  [_FS_W8] = {_FS_W8, OK, "fs-w8", "Multiple Sliding Windows", 10, 0}, // needs m space at the end of T
   [_FSBNDM_W1] =
         {_FSBNDM_W1, OK, "fsbndm-w1", "fsbndm with multiple sliding windows", 0, 0},
   [_FSBNDM_W2] = // n > m
         {_FSBNDM_W2, OK, "fsbndm-w2", "fsbndm with multiple sliding windows", 2, 0},
   [_FSBNDM_W4] =
-        {_FSBNDM_W4, RNDCRASH, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
+        {_FSBNDM_W4, OK, "fsbndm-w4", "fsbndm with multiple sliding windows", 8, 0},
   [_FSBNDM_W6] =
-        {_FSBNDM_W6, RNDCRASH, "fsbndm-w6", "fsbndm with multiple sliding windows", 6, 0},
+        {_FSBNDM_W6, OK, "fsbndm-w6", "fsbndm with multiple sliding windows", 6, 0},
   [_FSBNDM_W8] =
         {_FSBNDM_W8, OK, "fsbndm-w8", "fsbndm with multiple sliding windows", 11, 0},
   [_FSBNDMQ20] =
@@ -516,7 +516,7 @@ const struct algo ALGOS[] = {
   [_QLQS] = {_QLQS, OK, "qlqs", "Quantum Leap Quick Search", 0, 0},
   [_SBNDM_W2] = {_SBNDM_W2, FAIL, "sbndm-w2", "SBNDM with lookahead", 2, 0}, // m: 2..32
   [_SBNDM_W4] = {_SBNDM_W4, FAIL, "sbndm-w4", "SBNDM with lookahead", 4, 0}, // m: 4..?
-  [_SBNDM_W6] = {_SBNDM_W6, RNDCRASH, "sbndm-w6", "SBNDM with lookahead", 6, 0}, // m: 6..32
+  [_SBNDM_W6] = {_SBNDM_W6, OK, "sbndm-w6", "SBNDM with lookahead", 6, 0}, // m: 6..32
   [_SSM] = {_SSM, OK, "ssm", "SSM", 0, 0},
   [_TSA] = {_TSA, OK, "tsa", "word-wise popcount", 2, 0}, // 2<=m<64
   [_TSA_Q2] = {_TSA_Q2, FAIL, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
@@ -524,7 +524,7 @@ const struct algo ALGOS[] = {
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
   [_TVSBS_W2] = {_TVSBS_W2, FAIL, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
   [_TVSBS_W4] = {_TVSBS_W4, FAIL, "tvsbs-w4", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
-  [_TVSBS_W6] = {_TVSBS_W6, RNDCRASH, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
+  [_TVSBS_W6] = {_TVSBS_W6, OK, "tvsbs-w6", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_TVSBS_W8] = {_TVSBS_W8, FAIL, "tvsbs-w8", "TVSBS with Multiple Sliding Windows", 2, 0}, // n>=m+2
   [_WFR] = {_WFR, OK, "wfr", "Weak Factor Recognizer", 0, 0},
   [_WFR2] = {_WFR2, OK, "wfr2", "Weak Factor Recognizer (m>=2)", 2, 0},

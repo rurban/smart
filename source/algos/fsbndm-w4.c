@@ -54,5 +54,5 @@
 #include <assert.h>
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-  return search_large(x, m, y, n);
+  return search_safe(x, m, y, n);
 }

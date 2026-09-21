@@ -14,3 +14,7 @@ The unsafe window implementations now route every invocation through the safe
 fallback. The incomplete lockstep rewrites could not prove independent-window
 progress at an exhausted boundary; retaining a fast path would leave an
 input-dependent out-of-bounds read or non-terminating loop.
+
+The safe fallback path uses `search_safe` to bypass macro-expanded output side
+effects and timer lifecycle interactions that would otherwise disrupt lockstep
+or coordinated wrapper scans.
