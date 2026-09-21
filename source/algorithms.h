@@ -427,8 +427,8 @@ const struct algo ALGOS[] = {
   [_SABP] = {_SABP, OK, "sabp", "Small Alphabet Bit Parallel", 0, 0},
   [_DBWW] = {_DBWW, OK, "dbww", "Double BWW", 0, 0},
   [_DBWW2] = {_DBWW2, OK, "dbww2", "Double BWW", 0, 0},
-  [_KSA] = {_KSA, OK, "ksa", "Factorized Shift-And", 0, 0},
-  [_KBNDM] = {_KBNDM, OK, "kbndm", "Factorized BNDM", 0, 0},
+  [_KSA] = {_KSA, OK, "ksa", "Factorized Shift-And", 2, 0},
+  [_KBNDM] = {_KBNDM, OK, "kbndm", "Factorized BNDM", 2, 0},
   // new algorithms
   [_BSDM] = {_BSDM, OK, "bsdm", "Backward SNR DAWG Matching", 0, 0},
   [_BSDM2] = {_BSDM2, OK, "bsdm2", "Backward SNR DAWG Matching (m>=2)", 2, 0},

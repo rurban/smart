@@ -43,7 +43,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     return search_large(x, m, y, n);
   ;
   if (n / m < 2)
-    return -1;
+    return search_large(x, m, y, n);
 
   /* Preprocessing */
   BEGIN_PREPROCESSING

@@ -25,6 +25,7 @@
 
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_large.h"
 
 #ifdef __x86_64__
 #include <stdint.h>
@@ -119,7 +120,8 @@ int search2(unsigned char *pattern, int patlen, unsigned char *x,
   }
   // now we are at the beginning of the last 16-byte block, perform naive check
   for (j = 16 * (textlen / 16); j < (unsigned)textlen; j++)
-    cnt += ((x[j - 1] == firstch) && (x[j] == lastch));
+    if (j >= 1)
+      cnt += ((x[j - 1] == firstch) && (x[j] == lastch));
   END_SEARCHING
   return cnt;
 }
@@ -165,8 +167,9 @@ int search3(unsigned char *pattern, int patlen, unsigned char *x,
   }
   // now we are at the beginning of the last 16-byte block, perform naive check
   for (j = 16 * (textlen / 16); j < (unsigned)textlen; j++)
-    cnt += ((x[j - 2] == pattern[0]) && (x[j - 1] == pattern[1]) &&
-            (x[j] == pattern[2]));
+    if (j >= 2)
+      cnt += ((x[j - 2] == pattern[0]) && (x[j - 1] == pattern[1]) &&
+              (x[j] == pattern[2]));
   END_SEARCHING
 
   return cnt;
@@ -338,10 +341,13 @@ int search16(unsigned char *pattern, int patlen, unsigned char *x,
   charPtr = (unsigned char *)ptr64;
   charPtr += tmppatlen - 1; // the first position unchecked where P may end
 
-  while (charPtr < &x[textlen - 1]) {
-    if (0 == memcmp(pattern, charPtr - tmppatlen + 1, patlen))
-      count++;
-    charPtr++;
+  {
+    unsigned char *tail_limit = x + textlen - patlen + tmppatlen - 1;
+    while (charPtr <= tail_limit) {
+      if (0 == memcmp(pattern, charPtr - tmppatlen + 1, patlen))
+        count++;
+      charPtr++;
+    }
   }
   // free all sublists of flist's, and flist's itself
   for (unsigned i = 0; i < 2048; i++) {
@@ -358,6 +364,11 @@ int search16(unsigned char *pattern, int patlen, unsigned char *x,
 }
 
 int search(unsigned char *pattern, int patlen, unsigned char *x, int textlen) {
+  if (patlen > textlen)
+    return 0;
+  if (patlen >= 4 &&
+      (textlen < 48 || (patlen >= 16 && textlen < 2 * patlen)))
+    return search_large(pattern, patlen, x, textlen);
   if (patlen < 2)
     return search1(pattern, patlen, x, textlen);
   if (patlen == 2)
