@@ -23,8 +23,21 @@
  * Computation, ISAAC 2008, Lecture Notes in Computer Science, vol.5369,
  * pp.496--506, Springer-Verlag, Berlin, Gold Coast, Australia, (2008).
  *
- * Note: Broken, false positives.
- * Constraints: requires m<XSIZE
+ * Note: Broken in multiple ways; classified FAIL.
+ * 1. m=1 reads uninitialized stack memory: the scan-order builder loop
+ *    "for (i = m-1; i != 0; i--)" never executes for m=1, leaving
+ *    ScanOrder[]/MScanOrder[] undefined, so the search reads garbage and
+ *    returns random counts.  Minimum safe m is 2 (minlen not declared).
+ * 2. False positives occur for m>=3 even on valid inputs (the M-table
+ *    construction or the shift-logic is incorrect), so the algorithm
+ *    returns wrong occurrence counts regardless of the m=1 issue.
+ * Historical note: BLIM appears in the 2010 comprehensive survey by Faro
+ * and Lecroq (arXiv 1012.2547) as "[Kül08]" but is never among the 25
+ * best results on any text or pattern length -- suggesting it was
+ * catalogued as a 2008 research prototype and never fully debugged or
+ * published in peer-reviewed form.  Külekci's later EPSM (SSE4 exact
+ * packed string matching) is a separate, more developed algorithm.
+ * Constraints: requires m < XSIZE
  */
 
 #include "include/define.h"
