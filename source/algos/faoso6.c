@@ -65,7 +65,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   const int q = 6;
 
   u = 2;
-  if (m > 32 - u + 1)
+  /* The bit-parallel filter packs q=6 sub-streams into a 32-bit D/mm/masq
+     register, each needing floor(m/q)+1 bits plus a 1-bit separator; the
+     last bit position used is floor(m/q)*q + q - 1, which only stays
+     within [0,31] for m <= 29 (m=30 already needs bit 35 -- a real
+     undefined-behavior shift, reproduced by ASan/UBSan). 32-u+1=31 was
+     too high a threshold for q=6 specifically (it happens to work for
+     the q=2/q=4 siblings' narrower per-stream layout). */
+  if (m > 29)
     return search_large(x, m, y, n, q);
   if (m <= q)
     return search_small(x, m, y, n);
@@ -156,7 +163,10 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
 
   u = 2;
   p_len = m;
-  m = 32 - u + 1;
+  /* must match search()'s dispatch threshold: the largest window for
+     which q=6's bit-parallel filter fits in a 32-bit register (see
+     comment in search()) */
+  m = 29;
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
@@ -164,8 +174,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
   mq = m / q;
   h = mq;
   for (j = 0; j < q; ++j) {
-    if (h < 64)
-      masq |= (1UL << h);
+    masq |= (1UL << h);
     h += mq;
     ++h;
   }
@@ -175,8 +184,7 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n, int q) {
   h = mm = 0;
   for (j = 0; j < q; ++j) {
     for (i = 0; i < mq; ++i) {
-      if (h < 64)
-        B[x[i * q + j]] &= ~(1UL << h);
+      B[x[i * q + j]] &= ~(1UL << h);
       ++h;
     }
     mm |= (1UL << (h - 1));
