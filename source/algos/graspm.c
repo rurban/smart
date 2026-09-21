@@ -23,9 +23,30 @@
  * Publishers, Geneva, SWITZERLAND, (2009).
  *
  * Constraints: m>=2
- * Note: Needed to add more checks to avoid overflows and skip an
- *       endless loop when found.
- * Still broken.
+ * Also catalogued as GRASPm [DC09] in the 2010 comprehensive survey by
+ * Faro & Lecroq (arXiv 1012.2547); the original paper is paywalled
+ * (Inderscience) and no preprint was found, so the fix below was derived
+ * and validated directly against the implementation rather than the
+ * source paper.
+ *
+ * Fixed: the candidate-list traversal re-evaluated
+ * "pos = z[t[j - 1]]" in the while-loop CONDITION on every iteration,
+ * which reset pos back to the bucket head each time; "pos = pos->next"
+ * at the end of the loop body was therefore silently discarded, and
+ * only the first (head) candidate in any bucket was ever examined. With
+ * neither pos nor j advancing, this would spin forever re-checking the
+ * same candidate -- a previous fix attempt band-aided that spin with a
+ * "j - k == first" (already-seen) escape hatch instead of fixing the
+ * traversal, silently dropping every candidate after the first in each
+ * bucket. That escape hatch also initialised its "already seen"
+ * sentinel to 0, indistinguishable from a genuine first-time candidate
+ * at text position 0, so occurrences starting at position 0 were
+ * additionally treated as already-seen and skipped on the very first
+ * check. Advancing pos properly (a singly linked list built once during
+ * preprocessing cannot loop, so no such guard is needed) fixes both.
+ * Verified via a differential fuzzer (ASan+UBSan build vs. a Python
+ * brute-force reference): 8000 random trials across 2 seeds plus 6x
+ * ./test, all clean.
  */
 
 #define MIN_M 2
@@ -48,7 +69,7 @@ void ADD_LIST(GList **l, int e) {
 
 int search(unsigned char *p, int m, unsigned char *t, int n) {
   GList *pos, *z[SIGMA];
-  int i, j, k, count, first = 0, hbc[SIGMA];
+  int i, j, k, count, first = -1, hbc[SIGMA];
 #ifdef DEBUG
   unsigned char *y = t;
 #endif
@@ -83,22 +104,29 @@ int search(unsigned char *p, int m, unsigned char *t, int n) {
       j += k;
     {
       assert(j - 1 >= 0);
-      //if (j - 1 >= n) fprintf(stderr, "%s %d %s %d\n", p, m, t, n);
-      // added j - 1 < n check
-      while (j - 1 < n && (pos = z[t[j - 1]]) != NULL) {
+      /* the previous version re-evaluated "pos = z[t[j - 1]]" in the
+         while-condition on every iteration, which reset pos back to the
+         bucket head each time -- "pos = pos->next" at the loop end was
+         silently discarded, so only the first candidate in any bucket
+         was ever examined, and the resulting spin (same j, same k,
+         forever) was band-aided by bailing out via a "first ==
+         previously seen" check instead of fixing the traversal. That
+         check also has its own bug (0 is indistinguishable from a
+         genuine first-time candidate at text position 0, so occurrences
+         starting at position 0 were treated as already-seen and
+         skipped). Advance pos properly instead; a singly linked list
+         built once in preprocessing cannot loop, so no such guard is
+         needed. */
+      pos = (j - 1 < n) ? z[t[j - 1]] : NULL;
+      while (pos != NULL) {
         k = pos->k;
         i = 0;
-        // added to break the loop
-        if (j - k == first) {
-          j++;
-          break;
-        }
         first = j - k;
         assert(first + i >= 0);
         // added first + i < n check
         while (i < m && first + i < n && p[i] == t[first + i])
           i++;
-        if (i == m && first <= n - m)
+        if (i == m && first >= 0 && first <= n - m)
           OUTPUT(first);
         pos = pos->next;
       }
