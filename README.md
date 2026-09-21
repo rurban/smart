@@ -29,11 +29,6 @@ The original tests ensured a **terminating NUL** (i.e. strstr(), not memmem()), 
 it was unrealistic.
 Only this colussi implementation violated this, but the original paper had the missing check included.
 
-The Multiple Sliding Windows family (`fs-w*`, `fsbndm-w*`, `sbndm-w*`,
-`tvsbs-w*`) has a known unenforced precondition from its source paper
-(the *k*-windows split requires `m < n/k`) plus a separate backward-scan
-bound defect; see [docs/multi-sliding-windows-bug.md](docs/multi-sliding-windows-bug.md).
-
 ## Formal verification
 Most algos could be formally verified by Reini with the model checker **[CBMC](http://www.cprover.org/cbmc/)**.
 But since some algos use double-nested for loops, the depth is quadratic to the input length.
