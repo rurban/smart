@@ -1,6 +1,20 @@
-// Note: Does not support OUTPUT with the found pos yet, only the count
-// Note: Broken!
-// Constraints: requires m>=2, m<=64. requires T[n + 1] to be accessable.
+/* Note: Does not support OUTPUT with the found pos yet, only the count.
+   Note: Needed 4 fixes
+  1. Stack buffer overflow: HS() hash could reach 765 for high-byte
+     characters, indexing B[512] out of bounds on any binary/random
+     input.
+  2. Coverage gap: stride i += m left Q-1 text positions
+     between anchors unexamined for any Q > 1 (only worked by
+     coincidence for the Q=1 sibling tsa.c, where window width equals
+     stride).
+  3. Killed occurrence bit: the forward mask's exponent was
+     off by Q-1, always discarding the bit that signals a match
+     starting at the anchor's leftmost position (s=0, m, 2m, ...).
+  4. Design gap for m==Q: no verification loop runs at all in that
+     case, so a match would depend purely on lossy-hash luck — routed
+     to the exact search_small fallback instead.
+  Constraints: requires m>=2, m<=64. requires T[n + 1] to be accessable.
+*/
 
 #define MIN_M 2
 #define MAX_M 64
@@ -17,7 +31,7 @@
 #include <assert.h>
 
 #define Q 2
-#define HS(x, i) (x[i] << 1) + x[i + 1]
+#define HS(x, i) (((x[i] << 1) + x[i + 1]) & 511)
 
 // searching
 int search(unsigned char *P, int m, unsigned char *T, int n) {
@@ -30,7 +44,12 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
 
   if (m > 64)
     return search_large(P, m, T, n);
-  if (m < 2)
+  /* m == Q means the inner backward/forward refinement loop never runs
+     (j < m - Q + 1 == j < 1 is false immediately), so the match would
+     rely solely on the lossy HS hash (16 bits folded into 9) with no
+     verification at all -- any hash collision is an unconditional false
+     positive. Route to an exact matcher instead. */
+  if (m <= Q)
     return search_small(P, m, T, n);
 
   BEGIN_PREPROCESSING
@@ -53,14 +72,25 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
 
   BEGIN_SEARCHING
   T[n + 1] = 255; // sentinel
-  for (i = m - Q; i <= n - 1; i += m) {
+  /* each anchor i only ever accumulates bits for s in [i-(m-Q), i], a
+     window of width m-Q+1; striding by m (as the Q=1 sibling tsa.c
+     correctly does, where the window width m-Q+1 == m) leaves a gap of
+     Q-1 uncovered text positions between consecutive anchors for any
+     Q > 1, silently skipping real occurrences that start in the gap. */
+  for (i = m - Q; i <= n - 1; i += m - Q + 1) {
     assert(i + 1 <= n);
     D = B[HS(T, i)];
     j = 1;
     assert(i + j + 1 <= n);
+    /* the forward mask must account for the Q-gram width: without the
+       "- Q + 1" term, the highest occurrence bit (k = m - Q, an
+       occurrence starting at the anchor's leftmost valid position) gets
+       killed at j=1 before the mask ever reaches it, so occurrences at
+       s=0, s=m, s=2m, ... were silently missed (was "~0 << (m - j)"). */
     while ((j < m - Q + 1) &&
            (D &= (((B[HS(T, i - j)] + 1) << j) - 1) &
-                 ((B[HS(T, i + j)] >> j) | (~UINT64_C(0) << (m - j))))) {
+                 ((B[HS(T, i + j)] >> j) |
+                  (~UINT64_C(0) << (m - j - Q + 1))))) {
       j++;
       assert((j < m - Q + 1) || (i + j + 1 <= n));
     }

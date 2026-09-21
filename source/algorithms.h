@@ -519,7 +519,7 @@ const struct algo ALGOS[] = {
   [_SBNDM_W6] = {_SBNDM_W6, OK, "sbndm-w6", "SBNDM with lookahead", 6, 0}, // m: 6..32
   [_SSM] = {_SSM, OK, "ssm", "SSM", 0, 0},
   [_TSA] = {_TSA, OK, "tsa", "word-wise popcount", 2, 0}, // 2<=m<64
-  [_TSA_Q2] = {_TSA_Q2, FAIL, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
+  [_TSA_Q2] = {_TSA_Q2, OK, "tsa-q2", "word-wise popcount q=2", 2, 0}, // 2<=m<64
   [_TSO5] = {_TSO5, OK, "tso5", "optimized word-wise popcount", 2, 0}, // 2<=m<64
   [_TUNEDBM] = {_TUNEDBM, OK, "tunedbm", "Tuned Boyer-Moore", 0, 0},
   [_TVSBS_W2] = {_TVSBS_W2, FAIL, "tvsbs-w2", "TVSBS with Multiple Sliding Windows", 0, 0},
