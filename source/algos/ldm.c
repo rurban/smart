@@ -21,7 +21,16 @@
  * Theor. Comput. Sci., vol.332, n.1-3, pp.391--404, Elsevier Science Publishers
  * Ltd., Essex, UK, (2005).
  *
- * Broken for m=2, off-by-one
+ * The original paper is paywalled (Elsevier) and no preprint was found,
+ * so the fix below was derived and validated directly against the
+ * implementation rather than the source paper.
+ *
+ * Fixed: once a per-block forward extension ran out of text (iy >= n),
+ * the code left R unchanged instead of stopping, so a match found right
+ * at the end of the text (R == m) kept re-triggering OUTPUT on every
+ * later loop iteration with a stale R, reporting phantom occurrences
+ * past the true match position (e.g. 'babbbbb' in 'abababbbbb' reported
+ * 4 occurrences instead of 1). Break out once the text is exhausted.
  * Constraints: requires m>=2
  */
 
@@ -98,8 +107,14 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
       if (r == m)
         break;
       iy = k * m - 1 + r;
-      if (iy < n)
-        R = getSMA(R, y[iy]);
+      /* once the text is exhausted there is nothing left to extend the
+         match into; R would otherwise stay stale (still == m from the
+         match just output) and the loop kept re-triggering OUTPUT for
+         every subsequent r, reporting phantom occurrences past the end
+         of the text */
+      if (iy >= n)
+        break;
+      R = getSMA(R, y[iy]);
     }
   }
   for (k = (end - 1) * m; k <= n - m; ++k) {
