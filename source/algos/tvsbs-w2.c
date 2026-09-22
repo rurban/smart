@@ -83,7 +83,10 @@ int search(unsigned char *x, int m, unsigned char *_y, int n) {
       }
     }
     s1 += BrBcR[y[s1 + m]][y[s1 + mp1]];
-    s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
+    if (s2 >= 2)
+      s2 -= BrBcL[y[s2 - 1]][y[s2 - 2]];
+    else
+      s2 -= 1;
   }
   free(y);
   END_SEARCHING

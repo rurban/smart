@@ -170,6 +170,9 @@ sanitizer.log: $(ALLSRC)
 	-./sanitizer.sh 2>sanitizer.log
 tests.lst: $(ALLSRC)
 	for t in `cat algos.lst`; do ./test "$$t"; done | tee $@
+tests-asan.lst: $(ALLSRC)
+	+$(MAKE) ASAN=1
+	for t in `cat algos.lst`; do ./test-asan "$$t"; done | tee $@
 good.lst: algocfg
 	./algocfg good | tr ' ' '\n' >$@
 asan.lst: algocfg

@@ -19,6 +19,7 @@ smith
 gg
 raita
 smoa
+rcolussi
 skip
 kmpskip
 askip
@@ -36,6 +37,7 @@ hash3
 hash5
 hash8
 tsw
+graspm
 ssef
 aut
 rf
@@ -45,6 +47,7 @@ bom
 bom2
 dfdm
 ww
+ldm
 ildm1
 ildm2
 ebom
@@ -73,9 +76,12 @@ svm3
 svm4
 sbndm2
 sbndm-bmh
+bmh-sbndm
 fndm
 bww
 faoso2
+faoso4
+faoso6
 aoso2
 aoso4
 aoso6
@@ -153,58 +159,10 @@ qlqs
 sbndm-w6
 ssm
 tsa
+tsa-q2
 tso5
 tunedbm
 tvsbs-w2
-=================================================================
-==573256==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6d91afde009f at pc 0x60a4fe4bdcc3 bp 0x7fffded16610 sp 0x7fffded16600
-READ of size 1 at 0x6d91afde009f thread T0
-    #0 0x60a4fe4bdcc2 in search source/algos/tvsbs-w2.c:86
-    #1 0x60a4fe4be314 in main source/algos/include/main.h:127
-    #2 0x7161b0e2a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x7161b0e2a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x60a4fe4b95c4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0xb5c4) (BuildId: 8230d8a6420bec936918887d5f84307494f26f04)
-
-0x6d91afde009f is located 1 bytes before 30-byte region [0x6d91afde00a0,0x6d91afde00be)
-allocated by thread T0 here:
-    #0 0x7161b1b2b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x60a4fe4bcb74 in search source/algos/tvsbs-w2.c:50
-    #2 0x60a4fe4be314 in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w2.c:86 in search
-Shadow bytes around the buggy address:
-  0x6d91afddfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6d91afddfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6d91afddff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6d91afddff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6d91afde0000: fa fa 00 00 00 fa fa fa 00 00 00 fa fa fa 00 00
-=>0x6d91afde0080: 00 fa fa[fa]00 00 00 06 fa fa fa fa fa fa fa fa
-  0x6d91afde0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6d91afde0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6d91afde0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6d91afde0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6d91afde0300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==573256==ABORTING
-./bin/asan/tvsbs-w2 shared 260 10 383 10 139 822 919 failed => 256
 tvsbs-w6
 wfr
 wfr2
@@ -247,37 +205,45 @@ libc
 musl
 libc1
 musl1
+musl2
+simdkr
 epsm
-source/algos/epsm.c:267:11: runtime error: load of misaligned address 0x7b0a7d2e8001 for type 'uint64_t', which requires 8 byte alignment
-0x7b0a7d2e8001: note: pointer points here
- 00 00 00  4d 54 68 64 00 00 00 06  00 01 00 05 04 00 fe ee  00 ff 51 03 09 89 79 a0  00 ff 58 04 04
-              ^ 
-./bin/asan/epsm shared 93 44 383 4232 171 126 489 failed => 256
 hc1
 hc2
 hc3
+hc4
+hc5
+hc6
+hc7
+hc8
 lhc1
 lhc2
 lhc3
+lhc4
+lhc5
+lhc6
+lhc7
+lhc8
 shc1
 shc2
 shc3
+shc4
+shc5
+shc6
+shc7
+shc8
 fhc1
 fhc2
 fhc3
-rcolussi
-graspm
+fhc4
+fhc5
+fhc6
+fhc7
+fhc8
 simon
-ldm
-bmh-sbndm
-faoso4
-faoso6
 blim
 fs-w4
 fsbndm-w8
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-Aborted
-./bin/asan/fsbndm-w8 shared 174 32 383 64 577 560 519 failed => 34304
 fsbndmq32
 fsbndmq42
 fsbndmq43
@@ -288,140 +254,10 @@ fsbndmq84
 fsbndmq86
 sbndm-w2
 sbndm-w4
-source/algos/sbndm-w4.c:69:10: runtime error: shift exponent 43 is too large for 32-bit type 'unsigned int'
-./bin/asan/sbndm-w4 shared 244 44 383 4232 355 336 225 failed => 256
-tsa-q2
-tsa-q2: source/algos/tsa-q2.c:42: search: Assertion `HS(P, j) < 512' failed.
-Aborted
-./bin/asan/tsa-q2 shared 244 44 383 4232 355 336 225 failed => 34304
 tvsbs-w4
-=================================================================
-==577971==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x72f5467e009f at pc 0x570bb178c484 bp 0x7fff03fb03f0 sp 0x7fff03fb03e0
-READ of size 1 at 0x72f5467e009f thread T0
-    #0 0x570bb178c483 in search source/algos/tvsbs-w4.c:111
-    #1 0x570bb178d0cb in main source/algos/include/main.h:127
-    #2 0x76c54782a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x76c54782a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x570bb17875e4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w4+0xd5e4) (BuildId: dc78b489f7e17acd767c4a0e28d996245e6fb068)
-
-0x72f5467e009f is located 1 bytes before 24-byte region [0x72f5467e00a0,0x72f5467e00b8)
-allocated by thread T0 here:
-    #0 0x76c54852b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x570bb178ab0f in search source/algos/tvsbs-w4.c:58
-    #2 0x570bb178d0cb in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w4.c:111 in search
-Shadow bytes around the buggy address:
-  0x72f5467dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x72f5467dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x72f5467dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x72f5467dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x72f5467e0000: fa fa 00 00 00 fa fa fa 00 00 00 fa fa fa 00 00
-=>0x72f5467e0080: 00 fa fa[fa]00 00 00 fa fa fa fa fa fa fa fa fa
-  0x72f5467e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x72f5467e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x72f5467e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x72f5467e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x72f5467e0300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==577971==ABORTING
-./bin/asan/tvsbs-w4 shared 244 7 383 10 355 336 225 failed => 256
 tvsbs-w8
-=================================================================
-==577984==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x756a545e000f at pc 0x632322f8a8a1 bp 0x7ffe899c22d0 sp 0x7ffe899c22c0
-READ of size 1 at 0x756a545e000f thread T0
-    #0 0x632322f8a8a0 in search source/algos/tvsbs-w8.c:140
-    #1 0x632322f8c136 in main source/algos/include/main.h:127
-    #2 0x794a5562a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x794a5562a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x632322f855e4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0xf5e4) (BuildId: 081d3e3158fc43e5304e802699b57f7c8b6a53c3)
-
-0x756a545e000f is located 1 bytes before 16-byte region [0x756a545e0010,0x756a545e0020)
-allocated by thread T0 here:
-    #0 0x794a5632b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x632322f88b3b in search source/algos/tvsbs-w8.c:60
-    #2 0x632322f8c136 in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w8.c:140 in search
-Shadow bytes around the buggy address:
-  0x756a545dfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x756a545dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x756a545dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x756a545dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x756a545dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x756a545e0000: fa[fa]00 00 fa fa fa fa fa fa fa fa fa fa fa fa
-  0x756a545e0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x756a545e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x756a545e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x756a545e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x756a545e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==577984==ABORTING
-./bin/asan/tvsbs-w8 shared 244 3 383 10 355 336 225 failed => 256
 ssecp
-musl2
-simdkr
-hc4
-hc5
-hc6
-hc7
-hc8
-lhc4
-lhc5
-lhc6
-lhc7
-lhc8
-shc4
-shc5
-shc6
-shc7
-shc8
-fhc4
-fhc5
-fhc6
-fhc7
-fhc8
-graspm
 fsbndm-w8
-fsbndm-w8: source/algos/fsbndm-w8.c:126: search: Assertion `s2 > 0' failed.
-Aborted
-./bin/asan/fsbndm-w8 shared 441 32 383 64 637 532 126 failed => 34304
 fsbndmq32
 fsbndmq42
 fsbndmq43
@@ -431,162 +267,6 @@ fsbndmq82
 fsbndmq84
 fsbndmq86
 sbndm-w4
-source/algos/sbndm-w4.c:69:10: runtime error: shift exponent 43 is too large for 32-bit type 'unsigned int'
-./bin/asan/sbndm-w4 shared 877 44 383 4232 326 724 686 failed => 256
 tvsbs-w2
-=================================================================
-==579393==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x71ff3fbe009f at pc 0x5b521952ecc3 bp 0x7fffad16eff0 sp 0x7fffad16efe0
-READ of size 1 at 0x71ff3fbe009f thread T0
-    #0 0x5b521952ecc2 in search source/algos/tvsbs-w2.c:86
-    #1 0x5b521952f314 in main source/algos/include/main.h:127
-    #2 0x75cf40c2a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x75cf40c2a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x5b521952a5c4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w2+0xb5c4) (BuildId: 8230d8a6420bec936918887d5f84307494f26f04)
-
-0x71ff3fbe009f is located 1 bytes before 30-byte region [0x71ff3fbe00a0,0x71ff3fbe00be)
-allocated by thread T0 here:
-    #0 0x75cf4192b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x5b521952db74 in search source/algos/tvsbs-w2.c:50
-    #2 0x5b521952f314 in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w2.c:86 in search
-Shadow bytes around the buggy address:
-  0x71ff3fbdfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x71ff3fbdfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x71ff3fbdff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x71ff3fbdff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x71ff3fbe0000: fa fa 00 00 00 fa fa fa 00 00 00 fa fa fa 00 00
-=>0x71ff3fbe0080: 00 fa fa[fa]00 00 00 06 fa fa fa fa fa fa fa fa
-  0x71ff3fbe0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x71ff3fbe0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x71ff3fbe0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x71ff3fbe0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x71ff3fbe0300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==579393==ABORTING
-./bin/asan/tvsbs-w2 shared 877 10 383 10 326 724 686 failed => 256
 tvsbs-w4
-=================================================================
-==579415==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x768adb9e009f at pc 0x5de6ac7b0484 bp 0x7ffd3be3b280 sp 0x7ffd3be3b270
-READ of size 1 at 0x768adb9e009f thread T0
-    #0 0x5de6ac7b0483 in search source/algos/tvsbs-w4.c:111
-    #1 0x5de6ac7b10cb in main source/algos/include/main.h:127
-    #2 0x7a5adca2a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x7a5adca2a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x5de6ac7ab5e4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w4+0xd5e4) (BuildId: dc78b489f7e17acd767c4a0e28d996245e6fb068)
-
-0x768adb9e009f is located 1 bytes before 24-byte region [0x768adb9e00a0,0x768adb9e00b8)
-allocated by thread T0 here:
-    #0 0x7a5add72b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x5de6ac7aeb0f in search source/algos/tvsbs-w4.c:58
-    #2 0x5de6ac7b10cb in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w4.c:111 in search
-Shadow bytes around the buggy address:
-  0x768adb9dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x768adb9dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x768adb9dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x768adb9dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x768adb9e0000: fa fa 00 00 00 fa fa fa 00 00 00 fa fa fa 00 00
-=>0x768adb9e0080: 00 fa fa[fa]00 00 00 fa fa fa fa fa fa fa fa fa
-  0x768adb9e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x768adb9e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x768adb9e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x768adb9e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x768adb9e0300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==579415==ABORTING
-./bin/asan/tvsbs-w4 shared 974 7 383 10 802 33 122 failed => 256
 tvsbs-w8
-=================================================================
-==579429==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6decfabe000f at pc 0x61a7057ea8a1 bp 0x7ffd979000e0 sp 0x7ffd979000d0
-READ of size 1 at 0x6decfabe000f thread T0
-    #0 0x61a7057ea8a0 in search source/algos/tvsbs-w8.c:140
-    #1 0x61a7057ec136 in main source/algos/include/main.h:127
-    #2 0x71ccfbc2a600 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:59
-    #3 0x71ccfbc2a717 in __libc_start_main_impl ../csu/libc-start.c:360
-    #4 0x61a7057e55e4 in _start (/home/rurban/Software/smart/bin/asan/tvsbs-w8+0xf5e4) (BuildId: 081d3e3158fc43e5304e802699b57f7c8b6a53c3)
-
-0x6decfabe000f is located 1 bytes before 16-byte region [0x6decfabe0010,0x6decfabe0020)
-allocated by thread T0 here:
-    #0 0x71ccfc92b60f in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:67
-    #1 0x61a7057e8b3b in search source/algos/tvsbs-w8.c:60
-    #2 0x61a7057ec136 in main source/algos/include/main.h:127
-
-SUMMARY: AddressSanitizer: heap-buffer-overflow source/algos/tvsbs-w8.c:140 in search
-Shadow bytes around the buggy address:
-  0x6decfabdfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6decfabdfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6decfabdfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6decfabdff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  0x6decfabdff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x6decfabe0000: fa[fa]00 00 fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6decfabe0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6decfabe0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6decfabe0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6decfabe0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-  0x6decfabe0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
-Shadow byte legend (one shadow byte represents 8 application bytes):
-  Addressable:           00
-  Partially addressable: 01 02 03 04 05 06 07 
-  Heap left redzone:       fa
-  Freed heap region:       fd
-  Stack left redzone:      f1
-  Stack mid redzone:       f2
-  Stack right redzone:     f3
-  Stack after return:      f5
-  Stack use after scope:   f8
-  Global redzone:          f9
-  Global init order:       f6
-  Poisoned by user:        f7
-  Container overflow:      fc
-  Array cookie:            ac
-  Intra object redzone:    bb
-  ASan internal:           fe
-  Left alloca redzone:     ca
-  Right alloca redzone:    cb
-==579429==ABORTING
-./bin/asan/tvsbs-w8 shared 741 3 383 10 602 301 607 failed => 256
-simdkr
-epsm
-source/algos/epsm.c:267:11: runtime error: load of misaligned address 0x7cc5288d4001 for type 'uint64_t', which requires 8 byte alignment
-0x7cc5288d4001: note: pointer points here
- 00 00 00  4d 54 68 64 00 00 00 06  00 01 00 05 04 00 fe ee  00 ff 51 03 09 89 79 a0  00 ff 58 04 04
-              ^ 
-./bin/asan/epsm shared 765 44 383 4232 958 909 71 failed => 256
