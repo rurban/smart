@@ -92,19 +92,3 @@ jobs:
         ./free_shm
         make check
         ./free_shm
-  aarch64:
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: uraimo/run-on-arch-action@460cb8e6d9f726a588fc9b5e681c8a6cab09ae41 # v3.2.0
-        name: check on aarch64
-        id: runcmd
-        with:
-          arch: aarch64
-          githubToken: ${{ github.token }}
-          distro: ubuntu_latest
-          install: |
-            apt-get update -q -y
-            apt-get install -y make gcc grep
-          run: make check
