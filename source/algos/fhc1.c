@@ -81,10 +81,18 @@ unsigned int preprocessing(const unsigned char *x, int m, unsigned int *B) {
  * Searches for a pattern x of length m in a text y of length n and reports the number of occurrences found.
  */
 int search(unsigned char *x, int m, unsigned char *y, int n) {
-    if (m < Q) return -1;  // have to be at least Q in length to search.
     unsigned int H, V, B[ASIZE];
 
-    /* Preprocessing */
+    if (m < Q) {
+        // Fallback to simple search for patterns shorter than Q
+        int count = 0;
+        for (int i = 0; i <= n - m; i++) {
+            int j = 0;
+            while (j < m && x[j] == y[i + j]) j++;
+            if (j == m) count++;
+        }
+        return count;
+    }
     BEGIN_PREPROCESSING
     const int MQ1 = m - Q + 1;
     const unsigned int Hm = preprocessing(x, m, B);
