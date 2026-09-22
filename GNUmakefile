@@ -82,18 +82,18 @@ ifeq ($(SANITIZE),1)
   TESTBIN = test-asan
   SMARTBIN = smart-asan
   SELECTBIN = select-asan
-  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-asan show textgen algocfg
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) algocfg compilesm-asan show textgen
 else
 ifeq ($(FUZZ),1)
   TESTBIN = test-fuzz
   SMARTBIN = smart-fuzz
   SELECTBIN = select
-  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm-fuzz show textgen algocfg
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) algocfg compilesm-fuzz show textgen
 else
   TESTBIN = test
   SMARTBIN = smart
   SELECTBIN = select
-  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) compilesm show textgen algocfg
+  HELPERS = $(SMARTBIN) $(TESTBIN) $(SELECTBIN) algocfg compilesm show textgen 
 endif
 endif
 TESTS := $(shell shuf -n 10 good.lst)
@@ -101,6 +101,9 @@ ifeq ($(TESTS),)
   TESTS = hor mp kmp musl1 tbm so ssm qf33 twfr3 fndm
 endif
 COMPILE = $(CC) -c $(CFLAGS)
+
+all: $(HELPERS) $(BINS) good.lst asan.lst
+.DEFAULT_GOAL := all
 
 DATA_RAND = data/rand2/rand2.txt data/rand4/rand4.txt data/rand8/rand8.txt \
   data/rand16/rand16.txt data/rand32/rand32.txt data/rand64/rand64.txt \
@@ -112,8 +115,6 @@ $(DATA_RAND): data/.textgen-stamp
 data/.textgen-stamp: textgen
 	$(DRV) ./textgen
 	@touch $@
-
-all: $(BINS) $(HELPERS) good.lst asan.lst
 
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC) GNUmakefile
 	@test -d $(BINDIR) || mkdir $(BINDIR)
@@ -202,8 +203,8 @@ endif
 #	echo "--pointer-primitive-check"; fi)
 # cbmc 5.12.1: --pointer-primitive-check
 # UNSATISFIABLE: passes, but needs more depth or builtins (nested loops => memset)
-FAIL_VERIFY    = $(shell ./algocfg VFY_FAIL)
-TIMEOUT_VERIFY = $(shell ./algocfg VFY_TIMEOUT)
+FAIL_VERIFY    = $(shell test -x ./algocfg && ./algocfg VFY_FAIL)
+TIMEOUT_VERIFY = $(shell test -x ./algocfg && ./algocfg VFY_TIMEOUT)
 NON_CBMC_SRC   = $(addsuffix .c, $(addprefix source/algos/,$(TIMEOUT_VERIFY)))
 verify: verify/verify.log
 verify/verify.log: $(ALGOSRC) $(ALGOSINC) algocfg GNUmakefile
