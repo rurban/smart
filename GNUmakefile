@@ -102,6 +102,17 @@ ifeq ($(TESTS),)
 endif
 COMPILE = $(CC) -c $(CFLAGS)
 
+DATA_RAND = data/rand2/rand2.txt data/rand4/rand4.txt data/rand8/rand8.txt \
+  data/rand16/rand16.txt data/rand32/rand32.txt data/rand64/rand64.txt \
+  data/rand128/rand128.txt data/rand256/rand256.txt
+
+# textgen writes all 8 files in a single run; the stamp avoids re-running
+# it once per missing file and lets this work under plain POSIX make.
+$(DATA_RAND): data/.textgen-stamp
+data/.textgen-stamp: textgen
+	$(DRV) ./textgen
+	@touch $@
+
 all: $(BINS) $(HELPERS) good.lst asan.lst
 
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC) GNUmakefile
@@ -139,7 +150,7 @@ verify/%.vfy-trace: source/algos/%.c $(ALGOSINC) algocfg GNUmakefile
 	fi
 
 .PHONY: check clean all lint verify check-verify verify-trace fmt cppcheck clang-tidy fuzz
-check: all
+check: all $(DATA_RAND)
 	@-cp algorithms.lst algorithms.lst.bak
 	$(DRV) ./$(SELECTBIN) -all
 	$(DRV) ./$(SELECTBIN) -which | grep br
@@ -228,7 +239,7 @@ verify/trace.log: algocfg $(addsuffix .c, $(addprefix source/algos/,$(FAIL_VERIF
             (echo $$cmd --trace $(CBMC_ARGS) " $$c FAILED"; \
 	     test $(( `./algocfg $$b VFY_FAIL` + `./algocfg $$b VFY_TIMEOUT` )) -gt 0 || exit 1); \
 	done | tee verify/trace.log
-fuzz: test-fuzz algocfg GNUmakefile
+fuzz: test-fuzz algocfg data/rand16/rand16.txt GNUmakefile
 	-@test -d data/fuzz || \
 	  (mkdir data/fuzz; \
 	   for m in `seq 2 2 32`; do \
