@@ -166,6 +166,20 @@ int outputTXT(double TIME[NumAlgo][NumPatt], int alpha, char *filename,
       free(upname);
     }
   }
+#if 0
+  // now fixed
+  // footnote: algorithms that only count occurrences, without match
+  // positions (see issue #11)
+  for (algo = 0; algo < NumAlgo; algo++)
+    if (EXECUTE[algo] &&
+        (!strcmp(ALGO_NAME[algo], "epsm") || !strcmp(ALGO_NAME[algo], "ssecp") ||
+         !strcmp(ALGO_NAME[algo], "tsa") || !strcmp(ALGO_NAME[algo], "tsa-q2") ||
+         !strcmp(ALGO_NAME[algo], "tso5"))) {
+      fprintf(fp, "# note: epsm, ssecp, tsa, tsa-q2 and tso5 count "
+                  "occurrences only; match positions are not recorded\n");
+      break;
+    }
+#endif
   fclose(fp);
 
   return 1;
@@ -607,6 +621,20 @@ int outputHTML2(double PRE_TIME[NumAlgo][NumPatt],
     fprintf(fp, "In addition the worst and best running times are reported "
                 "(below each time value). ");
   fprintf(fp, "Running times are in milliseconds.\n");
+#if 0
+  // footnote: algorithms that only count occurrences, without match
+  // positions (see issue #11)
+  for (algo = 0; algo < NumAlgo; algo++)
+    if (EXECUTE[algo] &&
+        (!strcmp(ALGO_NAME[algo], "epsm") || !strcmp(ALGO_NAME[algo], "ssecp") ||
+         !strcmp(ALGO_NAME[algo], "tsa") || !strcmp(ALGO_NAME[algo], "tsa-q2") ||
+         !strcmp(ALGO_NAME[algo], "tso5"))) {
+      fprintf(fp, "<br><span class=\"note\">note: epsm, ssecp, tsa, tsa-q2 "
+                  "and tso5 count occurrences only; match positions are not "
+                  "recorded.</span>");
+      break;
+    }
+#endif
   fprintf(
       fp,
       "<br><div class=\"controlHorizontalFloat\">\n"

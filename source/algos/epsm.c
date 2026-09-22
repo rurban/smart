@@ -63,8 +63,12 @@ int search1(unsigned char *pattern, int patlen, unsigned char *x,
   __m128i t0, a;
   VectorUnion template0;
   unsigned int j;
-  int cnt = 0;
+  int count = 0;
   (void)patlen;
+#ifdef DEBUG
+  const int m = patlen;
+  unsigned char *y = x; // alias so OUTPUT can print positions
+#endif
 
   BEGIN_PREPROCESSING
   for (j = 0; j < 16; j++) {
@@ -77,14 +81,24 @@ int search1(unsigned char *pattern, int patlen, unsigned char *x,
   while (text < tend) {
     a = _mm_cmpeq_epi8(t0, *text);
     j = _mm_movemask_epi8(a);
-    cnt += _mm_popcnt_u32(j);
+#ifdef DEBUG
+    // each set bit b marks a match starting at (text block origin) + b
+    while (j) {
+      int b = __builtin_ctz(j);
+      OUTPUT((int)((unsigned char *)text - y) + b);
+      j &= j - 1;
+    }
+#else
+    count += _mm_popcnt_u32(j);
+#endif
     text++;
   }
   // now we are at the beginning of the last 16-byte block, perform naive check
   for (j = 16 * (textlen / 16); j < (unsigned)textlen; j++)
-    cnt += (x[j] == pattern[0]);
+    if (x[j] == pattern[0])
+      OUTPUT(j);
   END_SEARCHING
-  return cnt;
+  return count;
 }
 
 int search2(unsigned char *pattern, int patlen, unsigned char *x,
@@ -95,9 +109,13 @@ int search2(unsigned char *pattern, int patlen, unsigned char *x,
   __m128i t0, t1, a, b;
   VectorUnion template0, template1;
   unsigned int j, k, carry = 0;
-  int cnt = 0;
+  int count = 0;
   unsigned char firstch = pattern[0], lastch = pattern[1];
   (void)patlen;
+#ifdef DEBUG
+  const int m = patlen;
+  unsigned char *y = x; // alias so OUTPUT can print positions
+#endif
 
   BEGIN_PREPROCESSING
   for (j = 0; j < 16; j++) {
@@ -114,16 +132,27 @@ int search2(unsigned char *pattern, int patlen, unsigned char *x,
     j = _mm_movemask_epi8(a);
     b = _mm_cmpeq_epi8(t1, *text);
     k = _mm_movemask_epi8(b);
-    cnt += _mm_popcnt_u32(((j << 1) | (carry >> 15)) & k);
+#ifdef DEBUG
+    // set bit q of the combined mask marks a match starting at
+    // (text block origin) + q - 1 (firstch at q-1, lastch at q)
+    unsigned int hits = ((j << 1) | (carry >> 15)) & k;
+    while (hits) {
+      int q = __builtin_ctz(hits);
+      OUTPUT((int)((unsigned char *)text - y) + q - 1);
+      hits &= hits - 1;
+    }
+#else
+    count += _mm_popcnt_u32(((j << 1) | (carry >> 15)) & k);
+#endif
     carry = j & 0x00008000;
     text++;
   }
   // now we are at the beginning of the last 16-byte block, perform naive check
   for (j = 16 * (textlen / 16); j < (unsigned)textlen; j++)
-    if (j >= 1)
-      cnt += ((x[j - 1] == firstch) && (x[j] == lastch));
+    if (j >= 1 && (x[j - 1] == firstch) && (x[j] == lastch))
+      OUTPUT(j - 1);
   END_SEARCHING
-  return cnt;
+  return count;
 }
 
 int search3(unsigned char *pattern, int patlen, unsigned char *x,
@@ -134,8 +163,12 @@ int search3(unsigned char *pattern, int patlen, unsigned char *x,
   __m128i t0, t1, t2, a, b, c;
   VectorUnion template0, template1, template2;
   unsigned int j, k, l, carry0 = 0, carry1 = 0;
-  int cnt = 0;
+  int count = 0;
   (void)patlen;
+#ifdef DEBUG
+  const int m = patlen;
+  unsigned char *y = x; // alias so OUTPUT can print positions
+#endif
 
   BEGIN_PREPROCESSING
   for (j = 0; j < 16; j++) {
@@ -159,20 +192,32 @@ int search3(unsigned char *pattern, int patlen, unsigned char *x,
     c = _mm_cmpeq_epi8(t2, *text);
     l = _mm_movemask_epi8(c);
 
-    cnt += _mm_popcnt_u32(((j << 2) | (carry0 >> 14)) &
-                          ((k << 1) | (carry1 >> 15)) & l);
+#ifdef DEBUG
+    // set bit q of the combined mask marks a match starting at
+    // (text block origin) + q - 2 (pattern[0] at q-2, pattern[2] at q)
+    unsigned int hits = ((j << 2) | (carry0 >> 14)) &
+                        ((k << 1) | (carry1 >> 15)) & l;
+    while (hits) {
+      int q = __builtin_ctz(hits);
+      OUTPUT((int)((unsigned char *)text - y) + q - 2);
+      hits &= hits - 1;
+    }
+#else
+    count += _mm_popcnt_u32(((j << 2) | (carry0 >> 14)) &
+                            ((k << 1) | (carry1 >> 15)) & l);
+#endif
     carry0 = j & 0x0000C000;
     carry1 = k & 0x00008000;
     text++;
   }
   // now we are at the beginning of the last 16-byte block, perform naive check
   for (j = 16 * (textlen / 16); j < (unsigned)textlen; j++)
-    if (j >= 2)
-      cnt += ((x[j - 2] == pattern[0]) && (x[j - 1] == pattern[1]) &&
-              (x[j] == pattern[2]));
+    if (j >= 2 && (x[j - 2] == pattern[0]) && (x[j - 1] == pattern[1]) &&
+        (x[j] == pattern[2]))
+      OUTPUT(j - 2);
   END_SEARCHING
 
-  return cnt;
+  return count;
 }
 
 int search4(unsigned char *pattern, int patlen, unsigned char *x, int textlen) {
@@ -185,6 +230,10 @@ int search4(unsigned char *pattern, int patlen, unsigned char *x, int textlen) {
   int i, count = 0;
   VectorUnion P, Z;
   __m128i a, b, p, z;
+#ifdef DEBUG
+  const int m = patlen;
+  unsigned char *y = x; // alias so OUTPUT can print positions
+#endif
 
   BEGIN_PREPROCESSING
   Z.ui[0] = Z.ui[1] = Z.ui[2] = Z.ui[3] = 0;

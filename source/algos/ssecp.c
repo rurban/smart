@@ -76,7 +76,8 @@ int search_rawsse(unsigned char *x, int m, unsigned char *y, int n) {
   if (m > max_needle)
     return -1;
 
-  int occurences = 0;
+  int count = 0;
+  unsigned char *cur = y; // walking pointer; y stays the origin for OUTPUT
   __m128i needle_reg = _mm_loadu_si128((__m128i *)x);
 
   int step = 16 - m + 1; // experiment with aligned text blocks: step = 8.
@@ -84,31 +85,50 @@ int search_rawsse(unsigned char *x, int m, unsigned char *y, int n) {
 
   int number_of_steps = (n + step - 16) / step;
   int steps_size = number_of_steps * step;
-  unsigned char *steps_end = y + steps_size;
+  unsigned char *steps_end = cur + steps_size;
 
-  while (y != steps_end) { // full 16 bytes
-    __m128i haystack_reg = _mm_loadu_si128((__m128i *)y);
+  while (cur != steps_end) { // full 16 bytes
+    __m128i haystack_reg = _mm_loadu_si128((__m128i *)cur);
     __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, 16,
                                     _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
     uint32_t mask = _mm_extract_epi32(mask_reg, 0);
-    occurences += _mm_popcnt_u32(mask & result_mask);
-    y += step;
+#ifdef DEBUG
+    // each set bit b marks a match starting at (cur - y) + b
+    uint32_t hits = mask & result_mask;
+    while (hits) {
+      int b = __builtin_ctz(hits);
+      OUTPUT((int)(cur - y) + b);
+      hits &= hits - 1;
+    }
+#else
+    count += _mm_popcnt_u32(mask & result_mask);
+#endif
+    cur += step;
   }
 
   n -= steps_size; // remainder under 16 bytes
   if (n >= m) {
     /* fewer than 16 bytes may remain: the plain 16-byte load over-reads
        the text allocation (which only has PAD_16(n+m+1) bytes) */
-    __m128i haystack_reg = load_sse_padded(y, (unsigned int)n);
+    __m128i haystack_reg = load_sse_padded(cur, (unsigned int)n);
     __m128i mask_reg = _mm_cmpestrm(needle_reg, m, haystack_reg, n,
                                     _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
     step = n - m + 1;
     result_mask = (1U << step) - 1;
     uint32_t mask = _mm_extract_epi32(mask_reg, 0);
-    occurences += _mm_popcnt_u32(mask & result_mask);
+#ifdef DEBUG
+    uint32_t hits = mask & result_mask;
+    while (hits) {
+      int b = __builtin_ctz(hits);
+      OUTPUT((int)(cur - y) + b);
+      hits &= hits - 1;
+    }
+#else
+    count += _mm_popcnt_u32(mask & result_mask);
+#endif
   }
 
-  return occurences;
+  return count;
 }
 
 /* copied from tw.c */
@@ -228,6 +248,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     return search_rawsse(x, m, y, n);
 
   int mu, pi, count = 0;
+  unsigned char *cur = y; // walking pointer; y stays the origin for OUTPUT
   compute(x, m, &mu, &pi);
   /* compute() can return a degenerate factorization (garbage or non-positive
      period from the maxSuf locals on some patterns; the asserts below are
@@ -262,7 +283,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
 loop: // optimize further !
   while (n >= m) {
     // search for first part immediately after critical factorization to anchor
-    __m128i haystack_reg = _mm_loadu_si128((__m128i *)&y[mu]);
+    __m128i haystack_reg = _mm_loadu_si128((__m128i *)&cur[mu]);
 
     int haystack_length = n - mu;
     if (haystack_length > 16)
@@ -273,13 +294,13 @@ loop: // optimize further !
                      _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED);
     if (!_mm_cmpestrc(needle_reg, needle_length, haystack_reg, haystack_length,
                       _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ORDERED)) {
-      y += haystack_length;
+      cur += haystack_length;
       n -= haystack_length;
 
       goto loop;
     }
 
-    y += idx;
+    cur += idx;
     n -= idx;
     if (n < m) // anchor at idx; break loop;
       break;
@@ -302,7 +323,7 @@ loop: // optimize further !
       unsigned int b = m - head;
 
       __m128i b0 = load_sse_padded(&x[head], b),
-              b1 = load_sse_padded(&y[head], b);
+              b1 = load_sse_padded(&cur[head], b);
 
       unsigned int idx = _mm_cmpestri(b0, b, b1, b,
                                       _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH |
@@ -313,7 +334,7 @@ loop: // optimize further !
         // mismatch
         head += idx + 1;
         int step = head - mu;
-        y += step;
+        cur += step;
         n -= step;
 
         goto loop; // continue main loop
@@ -334,7 +355,7 @@ loop: // optimize further !
       unsigned int b = mu - head0;
 
       __m128i b0 = load_sse_padded(&x[head0], b),
-              b1 = load_sse_padded(&y[head0], b);
+              b1 = load_sse_padded(&cur[head0], b);
 
       unsigned int idx = _mm_cmpestri(b0, b, b1, b,
                                       _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_EACH |
@@ -356,11 +377,15 @@ loop: // optimize further !
     }
 
     // first part match as well: got an OCCURRENCE !
+#ifdef DEBUG
+    OUTPUT((int)(cur - y));
+#else
     count++;
+#endif
 
   loop3:
     // shift by pi
-    y += pi;
+    cur += pi;
     n -= pi;
     head = m - pi;
     if (head < mu) { // odd: can do better probably

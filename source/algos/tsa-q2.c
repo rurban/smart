@@ -1,4 +1,5 @@
-/* Note: Does not support OUTPUT with the found pos yet, only the count.
+/* Reports found positions in DEBUG builds (OUTPUT per surviving bit k
+   of D: occurrence starts at anchor i - k); release builds count only.
    Note: Needed 4 fixes
   1. Stack buffer overflow: HS() hash could reach 765 for high-byte
      characters, indexing B[512] out of bounds on any binary/random
@@ -25,8 +26,6 @@
 
 #include <inttypes.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
@@ -35,6 +34,9 @@
 
 // searching
 int search(unsigned char *P, int m, unsigned char *T, int n) {
+#ifdef DEBUG
+  unsigned char *y = T; // alias so OUTPUT can print positions
+#endif
 #ifndef HAVE_POPCOUNT
   unsigned char PopCount[65536];
 #endif
@@ -92,10 +94,17 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
                  ((B[HS(T, i + j)] >> j) |
                   (~UINT64_C(0) << (m - j - Q + 1))))) {
       j++;
-      assert((j < m - Q + 1) || (i + j + 1 <= n));
     }
 
-    // TODO: OUTPUT
+    // each surviving bit k of D marks an occurrence starting at i - k
+#ifdef DEBUG
+    uint64_t M = D & ((UINT64_C(1) << (m - Q + 1)) - 1);
+    while (M) {
+      int k = __builtin_ctzll(M);
+      OUTPUT(i - k);
+      M &= M - 1;
+    }
+#else
 #ifdef HAVE_POPCOUNT64
     count += POPCOUNT64(D);
 #else
@@ -108,6 +117,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
           count += POPCOUNT16((D >> 48) & 0xffff);
       }
     }
+#endif
 #endif
   }
   END_SEARCHING

@@ -1,4 +1,5 @@
-// Note: Does not support OUTPUT with the found pos yet, only the count
+// Reports found positions in DEBUG builds (OUTPUT per surviving bit k
+// of D: occurrence starts at anchor i - k); release builds count only.
 // Constraints: requires 2<=m<=64
 
 #define MIN_M 2
@@ -10,13 +11,14 @@
 
 #include <inttypes.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
 // searching
 int search(unsigned char *P, int m, unsigned char *T, int n) {
+#ifdef DEBUG
+  unsigned char *y = T; // alias so OUTPUT can print positions
+#endif
 #ifndef HAVE_POPCOUNT
   unsigned char PopCount[65536];
 #endif
@@ -53,7 +55,14 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
       j++;
     }
 
-    // TODO: OUTPUT
+    // each surviving bit k of D marks an occurrence starting at i - k
+#ifdef DEBUG
+    while (D) {
+      int k = __builtin_ctzll(D);
+      OUTPUT(i - k);
+      D &= D - 1;
+    }
+#else
 #ifdef HAVE_POPCOUNT64
     count += POPCOUNT64(D);
 #else
@@ -66,6 +75,7 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
           count += POPCOUNT16((D >> 48) & 0xffff);
       }
     }
+#endif
 #endif
   }
   END_SEARCHING

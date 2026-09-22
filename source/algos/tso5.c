@@ -10,13 +10,14 @@
 
 #include <inttypes.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
 // searching
 int search(unsigned char *P, int m, unsigned char *T, int n) {
+#ifdef DEBUG
+  unsigned char *y = T; // alias so OUTPUT can print positions
+#endif
 #ifndef HAVE_POPCOUNT
   unsigned char PopCount[65536];
 #endif
@@ -71,21 +72,34 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
         //assert(j < m && i + j < n);
       }
 
-      // TODO: OUTPUT
+      // each zero bit k of D (within the m-bit mask) marks an occurrence
+      // starting at i - k
+#ifdef DEBUG
+      uint64_t M = ~D & mask;
+      while (M) {
+        int k = __builtin_ctzll(M);
+        int pos = i - k;
+        if (pos <= n - m)
+          OUTPUT(pos);
+        M &= M - 1;
+      }
+#else
 #ifdef HAVE_POPCOUNTLL
-      count += POPCOUNT64(~D);
+      count += POPCOUNT64(~D & mask);
 #else
       if (D != ~UINT64_C(0)) {
-        count += POPCOUNT16((~D) & 0xffff);
+        uint64_t M = ~D & mask;
+        count += POPCOUNT16(M & 0xffff);
         if (sizeof(D) > 2) {
-          count += POPCOUNT16(((~D) >> 16) & 0xffff);
+          count += POPCOUNT16((M >> 16) & 0xffff);
           if (sizeof(D) > 4) {
-            count += POPCOUNT16(((~D) >> 32) & 0xffff);
+            count += POPCOUNT16((M >> 32) & 0xffff);
             if (sizeof(D) > 6)
-              count += POPCOUNT16(((~D) >> 48) & 0xffff);
+              count += POPCOUNT16((M >> 48) & 0xffff);
           }
         }
       }
+#endif
 #endif
     }
   }
