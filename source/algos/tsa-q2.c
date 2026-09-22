@@ -83,7 +83,6 @@ int search(unsigned char *P, int m, unsigned char *T, int n) {
     assert(i + 1 <= n);
     D = B[HS(T, i)];
     j = 1;
-    assert(i + j + 1 <= n);
     /* the forward mask must account for the Q-gram width: without the
        "- Q + 1" term, the highest occurrence bit (k = m - Q, an
        occurrence starting at the anchor's leftmost valid position) gets
