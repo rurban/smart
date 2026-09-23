@@ -6,7 +6,7 @@ make -s
 ./build.sh
 
 # best ranked algos for englishText. only those with all sizes
-./select -backup -none simdkr epsm libc shc2 fhc2 qf33 qf34 lhc2 twfr2 qf28 lwfr2 fsbndmq42 libc1 qf26 bsdm3 twfrq2 fsbndmq41 qf43 qf24 hc2 fsbndmq32 twfrq3 fsbndmq31 qf62 sbndm2
+./select -backup -none simdkr epsm libc musl shc2 qf33 qf34 lhc2 twfr2 qf28 lwfr2 fsbndmq42 libc1 qf26 tvsbs twfrq2 fsbndmq41 qf43 qf24 fhc2 fsbndmq32 twfrq3 fsbndmq31 qf62 sbndm2
 # was tvsbs fjs hash8 so sbndm sbndm2 sbndm-bmh fndm sbndmq8 ufndmq2 dbww dbww2 fs-w2 lwfr5 qf43 sbndm-w2 tsa wfr2 twfrq2 twfrq4 wom libc1 musl1 simdkr epsm fhc3
 
 ./smart -text all -all -txt
