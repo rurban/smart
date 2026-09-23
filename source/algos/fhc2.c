@@ -109,8 +109,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
         // We don't have to check position because we will hit the sentinel at the end of the text eventually.
         while (pos < n && !(V = B[(H = CHAIN_HASH(y, pos)) & TABLE_MASK])) pos += MQ1;
 
-        if (pos < n)
-        {
+        if (pos < n) {
             // We have a possible factor at pos - look at the chain of q-grams that precede it.
             const int end_second_qgram_pos = pos - m + Q2;
             while (pos >= end_second_qgram_pos)

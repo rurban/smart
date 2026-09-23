@@ -261,6 +261,9 @@ fuzz: test-fuzz algocfg data/rand16/rand16.txt GNUmakefile
 .PHONY: fuzz-repro
 fuzz-repro:
 	@for i in fuzz/*/default/crashes/id*; do \
+	  default=$$(dirname $$(dirname "$$i")); algo=$$(basename $$(dirname "$$default")); data="$$default/data.t"; \
+	  if [ "$$algo" = musl ]; then echo "SKIP $$i (strstr does not support NUL)"; continue; fi; \
+	  if [ ! -s "$$data" ]; then echo "SKIP $$i (empty reproduction text)"; continue; fi; \
 	  if ./fuzz-repro.sh "$$i"; then echo -e "\033[31;1;4mFAIL\033[0m not repro"; \
 	    rm -f "$$i"; else echo -e "\033[32;1;4mREPRO\033[0m"; fi; done
 
