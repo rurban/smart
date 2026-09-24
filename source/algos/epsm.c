@@ -52,7 +52,7 @@ typedef struct list {
   int pos;
 } LIST;
 
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC optimize("O3")
 #endif
 int search1(unsigned char *pattern, int patlen, unsigned char *x,
