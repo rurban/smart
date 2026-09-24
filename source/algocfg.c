@@ -151,6 +151,7 @@ const struct algocfg ALGOCFGS[] = {
   [_HASH5] = {_HASH5, GOOD, ASAN, VFY_PASS, 5, 0, 0, 0, 0, 0},
   [_HASH8] = {_HASH8, GOOD, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
   [_SM] = {_SM, GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},
+  [_SWM] = {_SWM, GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},
   [_TSW] = {_TSW, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // m < n - 3
   [_BMH2] = {_BMH2, GOOD, ASAN, VFY_FAIL, 2, 0, 0, 0, 0, 0},
   [_BMH4] = {_BMH4, GOOD, ASAN, VFY_FAIL, 4, 0, 0, 0, 0, 0},
