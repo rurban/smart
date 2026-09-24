@@ -32,6 +32,8 @@ ssabs
 tvsbs
 pbmh
 fjs
+2block
+scut
 hash3
 hash5
 hash8
@@ -201,6 +203,7 @@ bram3
 bram5
 bram7
 ft3
+hpbm
 libc
 musl
 libc1

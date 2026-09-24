@@ -44,7 +44,8 @@ enum algo_id {
   _TVSBS,    // Thathoo-Virmani-Sai-Balakrishnan-Sekar
   _PBMH,     // Boyer-Moore-Horspool using Probabilities
   _FJS,      // Franek-Jennings-Smyth
-  _BLOCK,    // 2-Block Boyer-Moore (missing)
+  _2BLOCK,   // 2-Block Boyer-Moore
+  _SCUT,     // SmartCUT Boyer-Moore
   _HASH3,    // Wu-Manber for Single Pattern Matching (q=3)
   _HASH5,    // Wu-Manber for Single Pattern Matching (q=5)
   _HASH8,    // Wu-Manber for Single Pattern Matching (q=8)
@@ -341,7 +342,8 @@ const struct algo ALGOS[] = {
   [_TVSBS] = {_TVSBS, OK, "tvsbs", "Thathoo-Virmani-Sai-Balakrishnan-Sekar", 0, 0},
   [_PBMH] = {_PBMH, OK, "pbmh", "Boyer-Moore-Horspool using Probabilities", 0, 0},
   [_FJS] = {_FJS, OK, "fjs", "Franek-Jennings-Smyth", 0, 0},
-  [_BLOCK] = {_BLOCK, 0, "block", "2-Block Boyer-Moore", 0, MISSING},
+  [_2BLOCK] = {_2BLOCK, OK, "2block", "2-Block Boyer-Moore", 0, 0},
+  [_SCUT] = {_SCUT, OK, "scut", "SmartCUT Boyer-Moore", 0, 0},
   [_HASH3] = {_HASH3, OK, "hash3", "Wu-Manber for Single Pattern Matching (q=3)", 3, 0},
   [_HASH5] = {_HASH5, OK, "hash5", "Wu-Manber for Single Pattern Matching (q=5)", 5, 0},
   [_HASH8] = {_HASH8, OK, "hash8", "Wu-Manber for Single Pattern Matching (q=8)", 8, 0},
