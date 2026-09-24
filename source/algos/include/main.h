@@ -28,7 +28,7 @@
 #include "shmids.h"
 #endif
 
-#if !defined __AVR__ && !defined CBMC
+#if !defined __AVR__ && !defined CBMC && !defined FUZZ
 TIMER *_pre_timer,
       *_run_timer;
 double *pre_time, // sum preprocessing time
@@ -66,7 +66,7 @@ double m_run_time, m_pre_time;
 
 /* global variables used for computing preprocessing and searching times */
 clock_t start, end;
-#else // AVR || CBMC
+#else // AVR || CBMC || FUZZ
 #define BEGIN_PREPROCESSING
 #define BEGIN_SEARCHING
 #define END_PREPROCESSING
