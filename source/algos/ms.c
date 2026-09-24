@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * contact the authors at: faro@dmi.unict.it, thierry.lecroq@univ-rouen.fr
- * download the tool at: http://www.dmi.unict.it/~faro/smart/
+ * download the tool at:  https://github.com/rurban/smart/
  *
  * This is an implementation of the Maximal Shift algorithm
  * in D. M. Sunday. A very fast substring search algorithm. Commun. ACM, vol.33,

@@ -7,8 +7,8 @@ Since 1970 more than **80 string matching algorithms** have been proposed, and m
 
 The smart tool provides also a corpus of **12 texts** on which the string matching algorithms can be tested. Texts in the corpus are of different types, including natural language texts, genome sequences, protein sequences, and random texts with a uniform distribution of characters.
 
-## [Download SMART](https://github.com/smart-tool/smart/releases)
-The release of smart will be available [here](https://github.com/smart-tool/smart/releases)
+## [Download SMART](https://github.com/rurban/smart/releases)
+The release of smart will be available [here](https://github.com/rurban/smart/releases)
 
 ## How to use?
 The documentation about smart is available [here](https://www.dmi.unict.it/faro/smart/howto.php)

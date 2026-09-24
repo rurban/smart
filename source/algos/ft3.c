@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * contact the authors at: faro@dmi.unict.it, thierry.lecroq@univ-rouen.fr
- * download the tool at: http://www.dmi.unict.it/~faro/smart/
+ * download the tool at:  https://github.com/rurban/smart/
  *
  * Fine tuned computation of the Boyer-Moore exact string matching algorithm.
  * In A fast implementation of the good-suffix array for the Boyer-Moore string

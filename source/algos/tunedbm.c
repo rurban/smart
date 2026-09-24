@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * contact the authors at: faro@dmi.unict.it, thierry.lecroq@univ-rouen.fr
- * download the tool at: http://www.dmi.unict.it/~faro/smart/
+ * download the tool at:  https://github.com/rurban/smart/
  *
  * This is an implementation of the Tuned Boyer Moore algorithm
  * in A. Hume and D. M. Sunday. Fast string searching. Softw. Pract. Exp.,
