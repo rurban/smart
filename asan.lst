@@ -37,7 +37,11 @@ scut
 hash3
 hash5
 hash8
+sm
+swm
 tsw
+bmh2
+bmh4
 ssef
 aut
 rf
@@ -54,6 +58,8 @@ ebom
 fbom
 sebom
 sfbom
+sbdm
+bsom
 skip2
 skip3
 skip4
@@ -209,6 +215,7 @@ libc1
 musl1
 musl2
 simdkr
+krsimd
 epsm
 hc1
 hc2

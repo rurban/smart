@@ -19,7 +19,7 @@ make -s
 # rand64-256: faoso4 faoso6 bxs3 ft3 dbww dbww2 sbndm-w6 tsa sbndm-w4 tso5 musl1 skip4 qf26 qf28 qf34 qf43 qf44 qf53 wfr4 wfrq4 wfrq5
 # french-8: simdkr musl1 epsm bsdm3 fsbndmq31 qf28 bxs3 qf26 qf34 ufndmq4 bxs2 ebom sbndmq2 fsbndmq42 libc1 sbndm2 fsbndmq20 fsbndmq41 qf33 twfr2 ufndmq2
 
-./select -backup -none qf34 qf43 tsa epsm hc4 lhc3 lhc7 fhc3 sbndmq2 bxs2 fs-w8 fsbndm-w6 fsbndmq20 lwfr4 wfrq3 twfr3 twfrq4 simdkr musl1 tvsbs
+./select -backup -none qf34 qf43 tsa epsm hc4 lhc3 lhc7 fhc3 sbndmq2 bxs2 fs-w8 fsbndm-w6 fsbndmq20 lwfr4 wfrq3 twfr3 twfrq4 simdkr krsimd musl1 tvsbs fsbndmq41
 #was: tvsbs fjs hash8 so sbndm sbndm2 sbndm-bmh fndm sbndmq8 ufndmq2 dbww dbww2 fs-w2 lwfr5 qf43 qf62 sbndm-w2 tsa wfr2 twfrq2 twfrq4 wom libc1 musl1 simdkr epsm
 
 ./smart -text all -all -txt
