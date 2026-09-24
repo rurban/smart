@@ -23,14 +23,15 @@
  * Computation, ISAAC 2008, Lecture Notes in Computer Science, vol.5369,
  * pp.496--506, Springer-Verlag, Berlin, Gold Coast, Australia, (2008).
  *
- * Note: Broken in multiple ways; classified FAIL.
+ * Correctness fixes applied to the imported implementation:
  * 1. m=1 formerly read uninitialized stack memory: the scan-order builder loop
- *    "for (i = m-1; i != 0; i--)" never executes for m=1, leaving
- *    ScanOrder[]/MScanOrder[] undefined.  A dedicated single-byte scan below
- *    handles m=1 before those arrays are read.
- * 2. False positives occur for m>=3 even on valid inputs (the M-table
- *    construction or the shift-logic is incorrect), so the algorithm
- *    returns wrong occurrence counts regardless of the m=1 issue.
+ *    did not execute, leaving ScanOrder[]/MScanOrder[] undefined.  A dedicated
+ *    single-byte scan below handles m=1 before those arrays are read.
+ * 2. The scan-order builder omitted offsets congruent to zero modulo m, leaving
+ *    one pattern byte unchecked in every lane and producing false positives.
+ *    It now covers all ws offsets.
+ * 3. Only complete W-lane windows use the mask matrix.  The remaining start
+ *    positions are checked directly, so BLIM never reads beyond the text.
  * Historical note: BLIM appears in the 2010 comprehensive survey by Faro
  * and Lecroq (arXiv 1012.2547) as "[Kül08]" but is never among the 25
  * best results on any text or pattern length -- suggesting it was
@@ -38,27 +39,30 @@
  * published in peer-reviewed form.  Külekci's later EPSM (SSE4 exact
  * packed string matching) is a separate, more developed algorithm.
  *
- * Constraints: requires 0 < m < XSIZE
+ * Requires m > 0.  The bit-parallel path supports m <= XSIZE; larger
+ * patterns use search_large.
  */
 
 #include "include/define.h"
 #include "include/main.h"
+#include "include/search_small.h"
+#include "include/search_large.h"
 
 int search(unsigned char *x, int m, unsigned char *y, int n) {
   int i, j, k, count;
-  const unsigned int wsize = WORD - 1 + m;
-  unsigned long tmp, F;
-  unsigned int ScanOrder[XSIZE];
-  unsigned int MScanOrder[XSIZE];
+  unsigned int tmp, F;
+  unsigned int ScanOrder[XSIZE + WORD - 1];
+  unsigned int MScanOrder[XSIZE + WORD - 1];
   unsigned int *so = ScanOrder;
   unsigned int *mso = MScanOrder;
   unsigned int shift[SIGMA];
-  unsigned long *M;
-  // TODO search_large if m > XSIZE
-  // m + 31 really
+  unsigned int *M;
 #define WSIZE_CUTOFF 63
-  unsigned long s_M[SIGMA * WSIZE_CUTOFF];
+  unsigned int s_M[SIGMA * WSIZE_CUTOFF];
+  const unsigned int wsize = WORD - 1 + m;
 
+  if (m < 1)
+    return 0;
   if (m == 1) {
     BEGIN_PREPROCESSING
     END_PREPROCESSING
@@ -70,15 +74,21 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
     END_SEARCHING
     return count;
   }
+  if (m > XSIZE)
+    return search_large(x, m, y, n);
+  if (n < (int)wsize) {
+    if (m < WORD)
+      return search_small(x, m, y, n);
+  }
 
   /* Preprocessing */
   BEGIN_PREPROCESSING
   if (wsize > WSIZE_CUTOFF)
-    M = (unsigned long *)malloc(sizeof(unsigned long) * SIGMA * wsize);
+    M = (unsigned int *)malloc(sizeof(unsigned int) * SIGMA * wsize);
   else
     M = s_M;
   //NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-  memset(M, 0xff, sizeof(unsigned long) * SIGMA * wsize);
+  memset(M, 0xff, sizeof(unsigned int) * SIGMA * wsize);
   for (i = 0; i < WORD; i++) {
     tmp = 1U << i;
     for (j = 0; j < m; j++) {
@@ -93,7 +103,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   for (i = 0; i < m; i++)
     shift[x[i]] = wsize - i;
 
-  for (i = m - 1; i != 0; i--) {
+  for (i = m - 1; i >= 0; i--) {
     k = i;
     while (k < (int)wsize) {
       *so = k;
@@ -109,22 +119,25 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   BEGIN_SEARCHING
   count = 0;
   i = 0;
-  F = M[MScanOrder[0] + y[i + ScanOrder[0]]] &
-      M[MScanOrder[1] + y[i + ScanOrder[1]]];
-  while (i < n) {
-    for (j = 2; F && j < (int)wsize; j++) {
+  while (i <= n - (int)wsize) {
+    F = M[MScanOrder[0] + y[i + ScanOrder[0]]] &
+        M[MScanOrder[1] + y[i + ScanOrder[1]]];
+    for (j = 2; F && j < (int)wsize; j++)
       F &= M[MScanOrder[j] + y[i + ScanOrder[j]]];
-    }
     if (F) {
       for (j = 0; j < WORD; j++)
         if (F & (1U << j))
-          if (i + j <= n - m)
-            OUTPUT(i + j);
+          OUTPUT(i + j);
+    }
+    if (i + (int)wsize >= n) {
+      i += WORD;
+      break;
     }
     i += shift[y[i + wsize]];
-    F = M[MScanOrder[0] + y[i + ScanOrder[0]]] &
-        M[MScanOrder[1] + y[i + ScanOrder[1]]];
   }
+  for (; i <= n - m; i++)
+    if (memcmp(x, &y[i], m) == 0)
+      OUTPUT(i);
   if (wsize > WSIZE_CUTOFF)
     free(M);
   END_SEARCHING

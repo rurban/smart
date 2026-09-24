@@ -411,7 +411,7 @@ const struct algo ALGOS[] = {
   [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
   [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
   [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
-  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0},
+  [_BLIM] = {_BLIM, OK, "blim", "bit-parallel length invariant matcher", 0, 0}, // fixed
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
   [_BNDMq4] = {_BNDMq4, OK, "bndmq4", "bndm with q-grams", 4, 0},
@@ -571,8 +571,8 @@ const struct algo ALGOS[] = {
   [_LIBC1] = {_LIBC1, OK, "libc1", "memmem Two-way string-matching", 0, 0},
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem Two-way string-matching", 0, 0},
   [_MUSL2] = {_MUSL2, OK, "musl2", "musl memmem with horspool", 0, 0},
-  [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0},
-  [_EPSM] = {_EPSM, X64_ONLY, "epsm", "SSE4 Exact Packed String Matching", 0, 0},
+  [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0}, // improved
+  [_EPSM] = {_EPSM, X64_ONLY, "epsm", "SSE4 Exact Packed String Matching", 0, 0}, // custom fixes
   [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},
   [_HC2] = {_HC2, OK, "hc2", "HashChain q=2", 2, 0},
   [_HC3] = {_HC3, OK, "hc3", "HashChain q=3", 3, 0}, // maxlen 4194304
