@@ -24,10 +24,10 @@
  * pp.496--506, Springer-Verlag, Berlin, Gold Coast, Australia, (2008).
  *
  * Note: Broken in multiple ways; classified FAIL.
- * 1. m=1 reads uninitialized stack memory: the scan-order builder loop
+ * 1. m=1 formerly read uninitialized stack memory: the scan-order builder loop
  *    "for (i = m-1; i != 0; i--)" never executes for m=1, leaving
- *    ScanOrder[]/MScanOrder[] undefined, so the search reads garbage and
- *    returns random counts.  Minimum safe m is 2 (minlen not declared).
+ *    ScanOrder[]/MScanOrder[] undefined.  A dedicated single-byte scan below
+ *    handles m=1 before those arrays are read.
  * 2. False positives occur for m>=3 even on valid inputs (the M-table
  *    construction or the shift-logic is incorrect), so the algorithm
  *    returns wrong occurrence counts regardless of the m=1 issue.
@@ -38,10 +38,9 @@
  * published in peer-reviewed form.  Külekci's later EPSM (SSE4 exact
  * packed string matching) is a separate, more developed algorithm.
  *
- * Constraints: requires m > 1 && m < XSIZE
+ * Constraints: requires 0 < m < XSIZE
  */
 
-#define MIN_M 2
 #include "include/define.h"
 #include "include/main.h"
 
@@ -59,6 +58,18 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
   // m + 31 really
 #define WSIZE_CUTOFF 63
   unsigned long s_M[SIGMA * WSIZE_CUTOFF];
+
+  if (m == 1) {
+    BEGIN_PREPROCESSING
+    END_PREPROCESSING
+    BEGIN_SEARCHING
+    count = 0;
+    for (i = 0; i < n; i++)
+      if (x[0] == y[i])
+        OUTPUT(i);
+    END_SEARCHING
+    return count;
+  }
 
   /* Preprocessing */
   BEGIN_PREPROCESSING

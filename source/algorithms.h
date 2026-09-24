@@ -411,7 +411,7 @@ const struct algo ALGOS[] = {
   [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
   [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
   [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
-  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 2, 0},
+  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0},
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
   [_BNDMq4] = {_BNDMq4, OK, "bndmq4", "bndm with q-grams", 4, 0},
