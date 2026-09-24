@@ -399,6 +399,11 @@ int main(int argc, char **argv) {
         if (ALGOCFGS[i].id == i && ALGOCFGS[i].good == value)
           printf("%s ", ALGOS[i].name);
       printf("\n");
+    } else if (strcmp(cfg, "fail") == 0) {
+      for (unsigned i = 0; i < NumAlgo; i++)
+        if (ALGOCFGS[i].id == i && ALGOCFGS[i].good == FAIL)
+          printf("%s ", ALGOS[i].name);
+      printf("\n");
     } else if (strcmp(cfg, "asan") == 0) {
       int value = (argc == 3) ? atoi(argv[2]) : 1;
       for (unsigned i = 0; i < NumAlgo; i++)
