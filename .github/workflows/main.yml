@@ -18,10 +18,11 @@ jobs:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - run: ./build.sh dotest && make check
   sanitizer:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - run: sudo apt install -y --no-install-recommends libomp5 libomp-21-dev
     - name: Fix kernel mmap rnd bits for -fsanitize=address
       run: |
         # https://github.com/actions/runner-images/issues/9491

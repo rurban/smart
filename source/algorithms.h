@@ -564,7 +564,7 @@ const struct algo ALGOS[] = {
   [_BRAM7] = {_BRAM7, OK, "bram7", "bram7", 7, 0},
   // state of the art:
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
-  [_HPBM] = {_HPBM, 0, "hpbm", "Parallel Boyer-Moore", 0, MISSING},
+  [_HPBM] = {_HPBM, OK, "hpbm", "Parallel Boyer-Moore", 0, 0},
   [_SSECP] = {_SSECP, FAIL, "ssecp", "SSE Crochemore-Perrin", 0, 0},
   [_LIBC] = {_LIBC, FAIL, "libc", "strstr Two-way string-matching", 0, 0}, // no \0
   [_MUSL] = {_MUSL, FAIL, "musl", "musl strstr Two-way string-matching", 0, 0}, // no \0

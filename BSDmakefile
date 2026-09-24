@@ -36,6 +36,8 @@ TESTS != (shuf -n 6 good.lst)
 
 all: ${BINS} ${HELPERS}
 
+${BINDIR}/hpbm: CFLAGS += -fopenmp
+
 ${BINDIR}/%: source/algos/%.c $(wildcard source/algos/include/*.h)
 	@test -d ${BINDIR} || mkdir ${BINDIR}
 	${CC} ${CFLAGS} $< -o $@

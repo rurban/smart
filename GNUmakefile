@@ -116,6 +116,8 @@ data/.textgen-stamp: textgen
 	$(DRV) ./textgen
 	@touch $@
 
+$(BINDIR)/hpbm: CFLAGS += -fopenmp
+
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC) GNUmakefile
 	@test -d $(BINDIR) || mkdir $(BINDIR)
 	$(CC) $(CFLAGS) $< -o $@
