@@ -83,7 +83,7 @@ enum algo_id {
   _SKIP8, // Skip Search with lookahead
   // Algorithms based on bit-parallelism
   _SO, // Shift-Or
-  // _SOG,    // Parallel Shift-Or
+  // Shift-Or with q-grams: _UFNDMq2, _UFNDMq4, _UFNDMq6, _UFNDMq8
   _SA,   // Shift-And
   _BNDM, // BNDM for Long patterns
   // BM_BNDM
@@ -145,7 +145,7 @@ enum algo_id {
   _BXS4,  // BXS with q-grams limit
   _BXS6,  // BXS with q-grams limit
   _BXS8,  // BXS with q-grams limit
-  // _BQL,    // BNDMq Long (see BXS)
+  _BQL,    // BNDMq Long
   _FS_W1,     // Multiple Sliding Windows
   _FS_W2,     // Multiple Sliding Windows
   _FS_W4,     // Multiple Sliding Windows
@@ -385,7 +385,7 @@ const struct algo ALGOS[] = {
   [_SKIP8] = {_SKIP8, OK, "skip8", "Skip Search with lookahead", 8, 0},
   // Algorithms based on bit-parallelism
   [_SO] = {_SO, OK, "so", "Shift-Or", 0, 0},
-  //[_SOG] = {_SOG, OK, "sog", "Parallel Shift-Or", 0, MISSING},
+  // Shift-Or with q-grams: ufndmq2, ufndmq4, ufndmq6, ufndmq8
   [_SA] = {_SA, OK, "sa", "Shift-And", 0, 0},
   [_BNDM] = {_BNDM, OK, "bndm", "BNDM for Long patterns", 0, 0},
   [_BNDML] = {_BNDML, OK, "bndml", "BNDM for Long patterns", 0, 0},
@@ -445,7 +445,7 @@ const struct algo ALGOS[] = {
   [_BXS4] = {_BXS4, OK, "bxs4", "BXS with q-grams limit", 4, 0},
   [_BXS6] = {_BXS6, OK, "bxs6", "BXS with q-grams limit", 6, 0},
   [_BXS8] = {_BXS8, OK, "bxs8", "BXS with q-grams limit", 8, 0},
-  // _BQL = {_BQL,  OK, "bql", "BNDMq Long", 8, MISSING},
+  [_BQL] = {_BQL, OK, "bql", "BNDMq Long q=7 s=2", 8, 0}, // new
   [_FS_W1] = {_FS_W1, OK, "fs-w1", "Multiple Sliding Windows", 0, 0},
   [_FS_W2] = {_FS_W2, OK, "fs-w2", "Multiple Sliding Windows", 0, 0},
   [_FS_W4] = {_FS_W4, OK, "fs-w4", "Multiple Sliding Windows", 6, 0}, // n>=6

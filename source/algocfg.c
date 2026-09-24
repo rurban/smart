@@ -236,6 +236,7 @@ const struct algocfg ALGOCFGS[] = {
   [_BXS4] = {_BXS4, GOOD, ASAN, VFY_PASS, 4, 0, 0, 0, 0, 0},
   [_BXS6] = {_BXS6, GOOD, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0},
   [_BXS8] = {_BXS8, GOOD, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0},
+  [_BQL] = {_BQL, GOOD, ASAN, VFY_PASS, 8, 0, 0, 0, 0, 0}, // new
   [_FS_W1] = {_FS_W1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_FS_W2] = {_FS_W2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_FS_W4] = {_FS_W4, FAIL, ASAN, VFY_PASS, 6, 0, 0, 0, 0, 0}, // m>=6
