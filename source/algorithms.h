@@ -49,7 +49,7 @@ enum algo_id {
   _HASH3,    // Wu-Manber for Single Pattern Matching (q=3)
   _HASH5,    // Wu-Manber for Single Pattern Matching (q=5)
   _HASH8,    // Wu-Manber for Single Pattern Matching (q=8)
-  //_SM,    // Wu-Manber
+  _SM,       // Wu-Manber
   //_SWM,   // Simplified Wu-Manber
   _TSW,    // Two-Sliding-Window
   _BMH2,   // Boyer-Moore-Horspool with q-grams (missing)
@@ -347,7 +347,7 @@ const struct algo ALGOS[] = {
   [_HASH3] = {_HASH3, OK, "hash3", "Wu-Manber for Single Pattern Matching (q=3)", 3, 0},
   [_HASH5] = {_HASH5, OK, "hash5", "Wu-Manber for Single Pattern Matching (q=5)", 5, 0},
   [_HASH8] = {_HASH8, OK, "hash8", "Wu-Manber for Single Pattern Matching (q=8)", 8, 0},
-  //[_WM] = {_WM, 0, "wm", "Wu-Manber", 0, MISSING},
+  [_SM] = {_SM, OK, "sm", "Wu-Manber", 2, 0},
   // S. Wu and U. Manber, Agrep - A Fast Approximate Pattern-Matching Tool, In
   // Proceedings of USENIX Technical Conference,(1992), pp. 153–162
   //[_SWM] = {_SWM, 0, "swm", "Simplified Wu-Manber", 0, MISSING},
