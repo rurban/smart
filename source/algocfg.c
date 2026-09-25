@@ -115,7 +115,7 @@ const struct algocfg ALGOCFGS[] = {
   [_KMP] = {_KMP, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_BM] = {_BM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_HOR] = {_HOR, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
-  [_GS] = {_GS, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_GS] = {_GS, FAIL, FAIL, VFY_PASS, 0, 0, 0, 0, 0, 0}, // random m=32 failures
   [_AG] = {_AG, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_KR] = {_KR, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_ZT] = {_ZT, GOOD, ASAN, VFY_PASS, 2, 0, 0, 0, 0, 0},

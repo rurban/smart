@@ -62,6 +62,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n) {
           OUTPUT(first);
       }
       i = i + 1;
+      if (i >= n)
+        break;
       D = (D << 1) | B[y[i]];
     }
     i = i + m;
@@ -109,6 +111,8 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
           count++;
       }
       i = i + 1;
+      if (i >= n)
+        break;
       D = (D << 1) | B[y[i]];
     }
     i += 32;
