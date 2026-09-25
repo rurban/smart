@@ -87,7 +87,7 @@ enum algo_id {
   // Shift-Or with q-grams: _UFNDMq2, _UFNDMq4, _UFNDMq6, _UFNDMq8
   _SA,   // Shift-And
   _BNDM, // BNDM for Long patterns
-  // BM_BNDM
+  _BM_BNDM, // Boyer-Moore BNDM
   // Turbo_BNDM
   _BNDML,     // BNDM for Long patterns
   _SBNDM,     // Simplified BNDM
@@ -391,6 +391,7 @@ const struct algo ALGOS[] = {
   // Shift-Or with q-grams: ufndmq2, ufndmq4, ufndmq6, ufndmq8
   [_SA] = {_SA, OK, "sa", "Shift-And", 0, 0},
   [_BNDM] = {_BNDM, OK, "bndm", "BNDM for Long patterns", 0, 0},
+  [_BM_BNDM] = {_BM_BNDM, OK, "bmbndm", "Boyer-Moore BNDM", 0, 0},
   [_BNDML] = {_BNDML, OK, "bndml", "BNDM for Long patterns", 0, 0},
   [_SBNDM] = {_SBNDM, OK, "sbndm", "Simplified BNDM", 2, 0},
   [_TNDM] = {_TNDM, OK, "tndm", "Two-Way Nondeterministic DAWG Matching", 0, 0},
