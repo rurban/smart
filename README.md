@@ -3,7 +3,7 @@
 
 In the last **40 years of research** in computer science string matching was one of the most extensively studied problem, mainly due to its direct applications to such diverse areas as text, image and signal processing, speech analysis and recognition, data compression, information retrieval, computational biology and chemistry. Moreover String matching algorithms are also basic components used in implementations of practical softwares existing under most operating systems.
 
-Since 1970 more than **80 string matching algorithms** have been proposed, and more than 50% of them in the last ten years. The smart tool provides a comprehensive collection of most string matching algorithms (222 as of now), implemented in C programming language, and helps researcher to perform experimental results and compare them from a practical point of view. Smart provides a practical and standard platform for testing string matching algorithms and sharing results with the community.
+Since 1970 more than **80 string matching algorithms** have been proposed, and more than 50% of them in the last ten years. The smart tool provides a comprehensive collection of all string matching algorithms (272 as of now), implemented in the C programming language, and helps researcher to perform experimental results and compare them from a practical point of view. Smart provides a practical and standard platform for testing string matching algorithms and sharing results with the community.
 
 The smart tool provides also a corpus of **12 texts** on which the string matching algorithms can be tested. Texts in the corpus are of different types, including natural language texts, genome sequences, protein sequences, and random texts with a uniform distribution of characters.
 
@@ -52,6 +52,8 @@ MUSL1 and EPSM added later as the current best.
 * SIMDKR best stable overall, for x86_64 SSE4.2, AVX2 and arm NEON optimizations.
 * MUSL1 memmem(): short patterns.
 * EPSM: A good SSE2 algo, but unsafe.
+* HC4 and FHC3: best for texts >= 8
+* QF43: best for texts >= 16
 * SA: very short patterns and very small alphabets.
 * TVSBS: very short patterns and small alphabets, and long patterns and large alphabets.
 * FJS: very short patterns and large and very large alphabets.
