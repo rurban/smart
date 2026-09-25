@@ -186,6 +186,7 @@ const struct algocfg ALGOCFGS[] = {
   [_SA]    = {_SA, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_BNDM]  = {_BNDM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_BM_BNDM] = {_BM_BNDM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
+  [_Turbo_BNDM] = {_Turbo_BNDM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_BNDML] = {_BNDML, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_SBNDM] = {_SBNDM, GOOD, ASAN, VFY_PASS, 2, 32, 0, 0, 0, 0},
   [_TNDM]  = {_TNDM, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
