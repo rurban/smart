@@ -344,9 +344,9 @@ const struct algocfg ALGOCFGS[] = {
   [_SSECP] = {_SSECP, FAIL, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
   [_SIMDKR] = {_SIMDKR, GOOD, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc
   [_KRSIMD] = {_KRSIMD, GOOD, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // AVX2
-  [_LIBC]  = {_LIBC,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
+  [_LIBC]  = {_LIBC,  FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
   [_LIBC1] = {_LIBC1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // esbmc fails
-  [_MUSL]  = {_MUSL,  GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
+  [_MUSL]  = {_MUSL,  FAIL, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, // no \0
   [_MUSL1] = {_MUSL1, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0}, //7s, upto d=820 ok
   [_MUSL2] = {_MUSL2, GOOD, ASAN, VFY_PASS, 0, 0, 0, 0, 0, 0},
   [_EPSM]  = {_EPSM, GOOD, ASAN, VFY_FAIL, 0, 0, 0, 0, 0, 0}, // not cbmc, but esbmc

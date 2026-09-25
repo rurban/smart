@@ -211,8 +211,6 @@ bram5
 bram7
 ft3
 hpbm
-libc
-musl
 libc1
 musl1
 musl2

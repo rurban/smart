@@ -408,7 +408,8 @@ int main(int argc, char *argv[]) {
   fprintf(stderr, "%s\n", algoname);
 
   // fuzzer cases: NUL safety, NUL termination, loop termination
-  if (strcmp(algoname, "libc") || strcmp(algoname, "musl")) {
+  // libc and musl require NUL-terminated input without embedded NUL bytes.
+  if (strcmp(algoname, "libc") && strcmp(algoname, "musl")) {
     unsigned char fuzz_fsbndmq20_crashes_id_000000[] = {
       0x4d, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, 0x00, 0x01, 0x00,
       0x05, 0x04, 0x00, 0xfe, 0xee, 0x00, 0xff, 0x51, 0x03, 0x09, 0x89,

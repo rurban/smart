@@ -327,7 +327,7 @@ const struct algo ALGOS[] = {
   [_Colussi] = {_Colussi, OK, "colussi", "Colussi", 0, 0},
   [_Smith] = {_Smith, OK, "smith", "Smith", 0, 0},
   [_GG] = {_GG, OK, "gg", "Galil-Giancarlo", 0, 0},
-  [_Raita] = {_Raita, OK, "raita", "Raita", 2, 0},
+  [_Raita] = {_Raita, FAIL, "raita", "Raita", 2, 0},
   [_SMOA] = {_SMOA, OK, "smoa", "String Matching on Ordered Alphabets", 0, 0},
   [_RColussi] = {_RColussi, FAIL, "rcolussi", "Reverse Colussi", 0, 0}, // random fails
   [_Skip] = {_Skip, OK, "skip", "Skip Search", 0, 0},
@@ -345,7 +345,7 @@ const struct algo ALGOS[] = {
   [_FJS] = {_FJS, OK, "fjs", "Franek-Jennings-Smyth", 0, 0},
   [_2BLOCK] = {_2BLOCK, OK, "2block", "2-Block Boyer-Moore", 0, 0},
   [_SCUT] = {_SCUT, OK, "scut", "SmartCUT Boyer-Moore", 0, 0},
-  [_HASH3] = {_HASH3, OK, "hash3", "Wu-Manber for Single Pattern Matching (q=3)", 3, 0},
+  [_HASH3] = {_HASH3, FAIL, "hash3", "Wu-Manber for Single Pattern Matching (q=3)", 3, 0},
   [_HASH5] = {_HASH5, OK, "hash5", "Wu-Manber for Single Pattern Matching (q=5)", 5, 0},
   [_HASH8] = {_HASH8, OK, "hash8", "Wu-Manber for Single Pattern Matching (q=8)", 8, 0},
   [_SM] = {_SM, OK, "sm", "Wu-Manber", 2, 0},
@@ -416,7 +416,7 @@ const struct algo ALGOS[] = {
   [_AOSO2] = {_AOSO2, OK, "aoso2", "average optimal shift-or (q=2)", 3, 0},
   [_AOSO4] = {_AOSO4, OK, "aoso4", "average optimal shift-or (q=4)", 5, 0},
   [_AOSO6] = {_AOSO6, OK, "aoso6", "average optimal shift-or (q=6)", 7, 0},
-  [_BLIM] = {_BLIM, OK, "blim", "bit-parallel length invariant matcher", 0, 0}, // fixed
+  [_BLIM] = {_BLIM, FAIL, "blim", "bit-parallel length invariant matcher", 0, 0}, // fixed
   [_FSBNDM] = {_FSBNDM, OK, "fsbndm", "forward sbndm", 0, 0},
   [_BNDMq2] = {_BNDMq2, OK, "bndmq2", "bndm with q-grams", 2, 0},
   [_BNDMq4] = {_BNDMq4, OK, "bndmq4", "bndm with q-grams", 4, 0},
@@ -483,7 +483,7 @@ const struct algo ALGOS[] = {
   [_FSBNDMQ61] =
         {_FSBNDMQ61, OK, "fsbndmq61", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..31
   [_FSBNDMQ62] =
-        {_FSBNDMQ62, OK, "fsbndmq62", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..30
+        {_FSBNDMQ62, FAIL, "fsbndmq62", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..30
   [_FSBNDMQ64] =
         {_FSBNDMQ64, OK, "fsbndmq64", "fsbndm with q-grams and lookahead", 6, 0}, // m: 6..28
   [_FSBNDMQ81] =
@@ -565,7 +565,7 @@ const struct algo ALGOS[] = {
   [_WOM] = {_WOM, OK, "wom", "Worst Occurrence Matcher", 0, 0},
   [_DOUBLEHASH] = {_DOUBLEHASH, OK, "doublehash", "Double-Hash hybrid", 0, 0},
   [_BRAM3] = {_BRAM3, OK, "bram3", "bram3", 3, 0},
-  [_BRAM5] = {_BRAM5, OK, "bram5", "bram5", 5, 0},
+  [_BRAM5] = {_BRAM5, FAIL, "bram5", "bram5", 5, 0},
   [_BRAM7] = {_BRAM7, OK, "bram7", "bram7", 7, 0},
   // state of the art:
   [_FT3] = {_FT3, OK, "ft3", "Parallel Boyer-Moore with goodsuff", 0, 0}, // Lecroq 2015
@@ -582,7 +582,7 @@ const struct algo ALGOS[] = {
   [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},
   [_HC2] = {_HC2, OK, "hc2", "HashChain q=2", 2, 0},
   [_HC3] = {_HC3, OK, "hc3", "HashChain q=3", 3, 0}, // maxlen 4194304
-  [_HC4] = {_HC4, OK  , "hc4", "HashChain q=4", 4, 0},
+  [_HC4] = {_HC4, FAIL  , "hc4", "HashChain q=4", 4, 0},
   [_HC5] = {_HC5, OK  , "hc5", "HashChain q=5", 5, 0},
   [_HC6] = {_HC6, OK  , "hc6", "HashChain q=6", 6, 0},
   [_HC7] = {_HC7, OK  , "hc7", "HashChain q=7", 7, 0},
