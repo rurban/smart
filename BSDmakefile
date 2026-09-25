@@ -9,7 +9,11 @@ ARCH    != (${CC} -dumpmachine | cut -f1 -d-)
 BINDIR  = bin
 .if ${ARCH} != x86_64
   CFLAGS  ?= -O3 -Wall
+.if ${ARCH} == aarch64 || ${ARCH} == arm64
+  NON_SSE = "source/algos/ssef.c"
+.else
   NON_SSE = "source/algos/epsm.c|source/algos/ssecp.c|source/algos/ssef.c"
+.endif
   ALGOSRC = (grep -E -v "^(${NON_SSE})$$" source/algos/*.c)
 .else
   CFLAGS  ?= -O3 -march=native -mtune=native -Wall -Wfatal-errors

@@ -122,10 +122,15 @@ int main(int argc, char **argv) {
           filename[0] != '.' && filename[1] != '#') {
         filename[len - 2] = '\0';
         current++;
-#if !(defined __x86_64__ && defined __SSE__)
-        // skip SSE specific algos
+#if !(defined __x86_64__ && defined __SSE__) && !defined __ARM_NEON__
+        // skip algorithms without an available SIMD implementation
         if (!strcmp(filename, "epsm") || !strcmp(filename, "ssecp") ||
             !strcmp(filename, "ssef")) {
+          skipped(filename, current, n_algo);
+          continue;
+        }
+#elif defined __ARM_NEON__
+        if (!strcmp(filename, "ssef")) {
           skipped(filename, current, n_algo);
           continue;
         }

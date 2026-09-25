@@ -1,10 +1,16 @@
 #ifndef _ALGORITHMS_H
 #define _ALGORITHMS_H
 
-#ifdef __x86_64__
+#if defined(__x86_64__)
 #define X64_ONLY 1
 #else
 #define X64_ONLY 0
+#endif
+
+#if defined(__x86_64__) || defined(__ARM_NEON)
+#define SIMD128_ONLY 1
+#else
+#define SIMD128_ONLY 0
 #endif
 
 enum algo_id {
@@ -578,7 +584,8 @@ const struct algo ALGOS[] = {
   [_MUSL2] = {_MUSL2, OK, "musl2", "musl memmem with horspool", 0, 0},
   [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0}, // improved
   [_KRSIMD] = {_KRSIMD, OK, "krsimd", "Polynomial SIMD Rabin-Karp (AVX2)", 0, 0},
-  [_EPSM] = {_EPSM, X64_ONLY, "epsm", "SSE4 Exact Packed String Matching", 0, 0}, // custom fixes
+  [_EPSM] = {_EPSM, SIMD128_ONLY, "epsm",
+             "Exact Packed String Matching (SSE4/NEON)", 0, 0},
   [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},
   [_HC2] = {_HC2, OK, "hc2", "HashChain q=2", 2, 0},
   [_HC3] = {_HC3, OK, "hc3", "HashChain q=3", 3, 0}, // maxlen 4194304

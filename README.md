@@ -49,9 +49,9 @@ According to our experimental results in 2010 (until KBNDM), we conclude
 that the following algorithms are the most efficient in the following situations.
 MUSL1 and EPSM added later as the current best.
 
-* SIMDKR best stable overall, for x86_64 SSE4.2, AVX2 and arm NEON optimizations.
+* SIMDKR: best stable overall, with x86_64 SSE4.2, AVX2, and ARM NEON paths.
 * MUSL1 memmem(): short patterns.
-* EPSM: A good SSE2 algo, but unsafe.
+* EPSM: Exact Packed String Matching with SSE4 and ARM NEON paths.
 * HC4 and FHC3: best for texts >= 8
 * QF43: best for texts >= 16
 * SA: very short patterns and very small alphabets.

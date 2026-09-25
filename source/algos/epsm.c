@@ -26,6 +26,7 @@
 #include "include/define.h"
 #include "include/main.h"
 #include "include/search_large.h"
+#include "include/search_small.h"
 
 #ifdef __x86_64__
 #include <stdint.h>
@@ -522,5 +523,46 @@ int search(unsigned char *pattern, int patlen, unsigned char *x, int textlen) {
   }
   END_SEARCHING
   return count;
+}
+#elif defined __ARM_NEON
+/* NEON has no MPSADBW equivalent; filter candidates with the first and
+   last pattern bytes, then verify each candidate exactly. */
+#include <arm_neon.h>
+
+static int search_neon(unsigned char *x, int m, unsigned char *y, int n) {
+  if (m < 2)
+    return search_small(x, m, y, n);
+  if (m > n)
+    return 0;
+
+  BEGIN_PREPROCESSING
+  int count = 0;
+  const uint8x16_t first = vdupq_n_u8(x[0]);
+  const uint8x16_t last = vdupq_n_u8(x[m - 1]);
+  END_PREPROCESSING
+
+  BEGIN_SEARCHING
+  int i = 0;
+  const int limit = n - m;
+  for (; i + 15 <= limit; i += 16) {
+    uint8_t matches[16];
+    const uint8x16_t starts = vld1q_u8(y + i);
+    const uint8x16_t ends = vld1q_u8(y + i + m - 1);
+    vst1q_u8(matches, vandq_u8(vceqq_u8(first, starts),
+                               vceqq_u8(last, ends)));
+    for (int j = 0; j < 16; j++)
+      if (matches[j] && memcmp(x + 1, y + i + j + 1, m - 2) == 0)
+        OUTPUT(i + j);
+  }
+  for (; i <= limit; i++)
+    if (y[i] == x[0] && y[i + m - 1] == x[m - 1] &&
+        memcmp(x + 1, y + i + 1, m - 2) == 0)
+      OUTPUT(i);
+  END_SEARCHING
+  return count;
+}
+
+int search(unsigned char *x, int m, unsigned char *y, int n) {
+  return search_neon(x, m, y, n);
 }
 #endif

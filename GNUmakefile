@@ -17,6 +17,11 @@ SRCINC   := $(wildcard source/*.h)
 ifeq ($(ASAN),1)
   SANITIZE=1
 endif
+ifneq ($(filter aarch64 arm64,$(ARCH)),)
+  CFLAGS  := -O3 -Wall
+  NON_SSE = source/algos/ssef.c
+  ALGOSRC := $(filter-out $(NON_SSE),$(wildcard source/algos/*.c))
+else
 ifneq ($(ARCH),x86_64)
   CFLAGS  := -O3 -Wall
   NON_SSE = source/algos/epsm.c source/algos/ssecp.c source/algos/ssef.c
@@ -36,6 +41,7 @@ else
     CFLAGS = -Og -g -Isource/algos -fsanitize=address,undefined -fno-sanitize-recover=all -march=native -mtune=native -DFUZZ -DBINDIR=\"$(BINDIR)\"
   endif
   ALGOSRC := $(wildcard source/algos/*.c)
+endif
 endif
 ifneq ($(ASSERT),1)
   ifneq ($(SANITIZE),1)
