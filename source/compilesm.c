@@ -28,6 +28,14 @@
 #define SZNCAT(x) sizeof(x) - strlen(x) - 1
 #define SZNCPY(x) sizeof(x) - 1
 
+void skipped(const char *filename, const int current, const int n_algo) {
+  printf("\tSkipped %s.c .............", filename);
+  for (size_t i = 0; i < 15 - strlen(filename); i++)
+    printf(".");
+  printf("(%.3d/%.3d) [SKIP]\n", current, n_algo);
+  fflush(stdout);
+}
+
 //NOLINTBEGIN(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
 /*
@@ -118,19 +126,19 @@ int main(int argc, char **argv) {
         // skip SSE specific algos
         if (!strcmp(filename, "epsm") || !strcmp(filename, "ssecp") ||
             !strcmp(filename, "ssef")) {
-          printf("\tSkipped %s.c", filename);
+          skipped(filename, current, n_algo);
           continue;
         }
 #endif
 #if !defined __SSE2__ && !defined __ARM_NEON__
         if (!strcmp(filename, "simdkr")) {
-          printf("\tSkipped %s.c", filename);
+          skipped(filename, current, n_algo);
           continue;
         }
 #endif
 #if __MINGW64__
         if (!strcmp(filename, "libc1")) { // no memmem()
-          printf("\tSkipped %s.c", filename);
+          skipped(filename, current, n_algo);
           continue;
         }
 #endif
