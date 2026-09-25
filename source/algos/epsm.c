@@ -28,7 +28,52 @@
 #include "include/search_large.h"
 #include "include/search_small.h"
 
-#ifdef __x86_64__
+#if defined __AVX2__
+/* AVX2 has no MPSADBW equivalent. Filter 32 candidate starts with the first
+   and last pattern bytes, then confirm each candidate exactly. */
+#include <immintrin.h>
+
+static int search_avx2(unsigned char *x, int m, unsigned char *y, int n) {
+  if (m < 2)
+    return search_small(x, m, y, n);
+  if (m > n)
+    return 0;
+
+  BEGIN_PREPROCESSING
+  int count = 0;
+  const __m256i first = _mm256_set1_epi8((char)x[0]);
+  const __m256i last = _mm256_set1_epi8((char)x[m - 1]);
+  END_PREPROCESSING
+
+  BEGIN_SEARCHING
+  const int limit = n - m;
+  int i = 0;
+  for (; i + 31 <= limit; i += 32) {
+    const __m256i starts = _mm256_loadu_si256((const __m256i *)(y + i));
+    const __m256i ends =
+        _mm256_loadu_si256((const __m256i *)(y + i + m - 1));
+    unsigned int matches = (unsigned int)_mm256_movemask_epi8(
+        _mm256_and_si256(_mm256_cmpeq_epi8(first, starts),
+                         _mm256_cmpeq_epi8(last, ends)));
+    while (matches) {
+      const int j = __builtin_ctz(matches);
+      if (memcmp(x + 1, y + i + j + 1, m - 2) == 0)
+        OUTPUT(i + j);
+      matches &= matches - 1;
+    }
+  }
+  for (; i <= limit; i++)
+    if (y[i] == x[0] && y[i + m - 1] == x[m - 1] &&
+        memcmp(x + 1, y + i + 1, m - 2) == 0)
+      OUTPUT(i);
+  END_SEARCHING
+  return count;
+}
+
+int search(unsigned char *x, int m, unsigned char *y, int n) {
+  return search_avx2(x, m, y, n);
+}
+#elif defined __x86_64__
 #include <stdint.h>
 #include <inttypes.h>
 #include <memory.h>

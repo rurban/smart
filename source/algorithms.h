@@ -582,10 +582,9 @@ const struct algo ALGOS[] = {
   [_LIBC1] = {_LIBC1, OK, "libc1", "memmem Two-way string-matching", 0, 0},
   [_MUSL1] = {_MUSL1, OK, "musl1", "musl memmem Two-way string-matching", 0, 0},
   [_MUSL2] = {_MUSL2, OK, "musl2", "musl memmem with horspool", 0, 0},
-  [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants", 2, 0}, // improved
+  [_SIMDKR] = {_SIMDKR, OK, "simdkr", "SIMD generic Rabin-Karp variants (SSE4/AVX2/NEON)", 2, 0}, // improved
   [_KRSIMD] = {_KRSIMD, OK, "krsimd", "Polynomial SIMD Rabin-Karp (AVX2)", 0, 0},
-  [_EPSM] = {_EPSM, SIMD128_ONLY, "epsm",
-             "Exact Packed String Matching (SSE4/NEON)", 0, 0},
+  [_EPSM] = {_EPSM, SIMD128_ONLY, "epsm", "Exact Packed String Matching (SSE4/AVX2/NEON)", 0, 0},
   [_HC1] = {_HC1, OK, "hc1", "HashChain q=1", 0, 0},
   [_HC2] = {_HC2, OK, "hc2", "HashChain q=2", 2, 0},
   [_HC3] = {_HC3, OK, "hc3", "HashChain q=3", 3, 0}, // maxlen 4194304
