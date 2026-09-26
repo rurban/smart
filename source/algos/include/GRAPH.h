@@ -281,4 +281,4 @@ int TableGraph(int **trans, Graph g) {
     for (c = 0; c < g->edgeNumber; c++)
       trans[i][c] = getTarget(g, i, c);
   return 1;
-};
+}

@@ -20,7 +20,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#if __STDC_HOSTED__
 #include <sys/types.h>
+#endif
+
+#ifdef __SDCC
+/* SDCC's minimal libc routes printf/puts through a single required
+   putchar(); every other freestanding target here (avr-libc, newlib
+   with --specs=nosys.specs) already resolves this at link time on its
+   own. Stub it so linking succeeds without a real target UART/console
+   wired up; these binaries are meant to be linked into your own
+   firmware, which can override this with a real implementation. */
+int putchar(int c) { return c; }
+/* SDCC's libc has no exit() at all (there is no OS to return to on a
+   bare MCU); several algo headers (GRAPH.h, AUTOMATON.h) call it on
+   fatal errors. Halt instead. */
+void exit(int status) {
+  (void)status;
+  for (;;)
+    ;
+}
+#endif
 
 // some libcs (e.g. newlib, used by arm-none-eabi) redefine __nonnull/
 // __nonnull_all for their own internal prototypes when the headers above

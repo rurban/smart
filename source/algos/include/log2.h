@@ -43,10 +43,10 @@
                                   : 8 + leftbit[((x) >> 16) & 0xFF])           \
                  : ((x) & MSK0808 ? 16 + leftbit[((x) >> 8) & 0xFF]            \
                                   : 24 + leftbit[x & 0xFF]))
-#if _WORDSIZE == 32
-#define LOG2(x) (31 - FIRSTBIT(x))
-#else
+#if defined(__GNUC__)
 #define LOG2(x) (31 - __builtin_clz(x))
+#else
+#define LOG2(x) (31 - FIRSTBIT(x))
 #endif
 
 /* array giving position (1..7) of high-order 1-bit in byte: */

@@ -1,12 +1,22 @@
 CC      := gcc
 MACHINE := $(shell uname -m)
-ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
-# to detect mingw
-TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
-# GNU triples encode "no OS" as the 2nd component (e.g. arm-none-eabi);
-# together with ARCH==avr (avr-gcc's -dumpmachine is a bare "avr" with no
-# OS component at all) this identifies freestanding/bare-metal targets.
-TARGET_OS := $(shell $(CC) -dumpmachine | cut -f2 -d-)
+# sdcc isn't a GCC-compatible driver: it has no -dumpmachine (and would
+# print its --help text into ARCH/TARGET/TARGET_OS if asked), so detect
+# it by name and skip GNU-triple detection entirely for it.
+ifneq ($(findstring sdcc,$(CC)),)
+  ARCH      := stm8
+  TARGET    := sdcc
+  TARGET_OS := none
+else
+  ARCH    := $(shell $(CC) -dumpmachine | cut -f1 -d-)
+  # to detect mingw
+  TARGET  := $(shell $(CC) -dumpmachine | cut -f3 -d-)
+  # GNU triples encode "no OS" as the 2nd component (e.g. arm-none-eabi);
+  # together with ARCH==avr (avr-gcc's -dumpmachine is a bare "avr" with
+  # no OS component at all) this identifies freestanding/bare-metal
+  # targets.
+  TARGET_OS := $(shell $(CC) -dumpmachine | cut -f2 -d-)
+endif
 TIMEOUT_1m := timeout --preserve-status 1m
 TIMEOUT_4m := timeout 4m
 TIMEOUT_30s := timeout 30s
@@ -95,7 +105,49 @@ ifeq ($(FREESTANDING),1)
     MCPU ?= cortex-m0
     CFLAGS += -mcpu=$(MCPU) -mthumb --specs=nano.specs --specs=nosys.specs
   endif
-endif
+  ifeq ($(ARCH),stm8)
+    # SDCC isn't GCC: -Wall isn't a warning switch here, it's -W(a)ll,
+    # i.e. "pass the raw flag 'll' through to the assembler" (SDCC
+    # overloads -W<p|a|l><opts> for the preprocessor/assembler/linker),
+    # which breaks the assembler invocation; -O3/-ffreestanding are just
+    # silently ignored. Reset CFLAGS instead of inheriting them. -mstm8
+    # selects the STM8 backend (SDCC has no -mmcu/-mcpu style device
+    # selection); __STDC_HOSTED__ must be forced to 0 directly since
+    # -ffreestanding is a no-op here.
+    CFLAGS := -mstm8 -D__STDC_HOSTED__=0
+    # SDCC's minimal libc lacks memmem() (libc1), rejects variable-length
+    # arrays (lhc1..8), and crashes on __builtin_ffs (svm0, a GCC-only
+    # builtin). The rest are the same class of problem as NON_AVR above:
+    # SIGMA*SIGMA/DSIGMA-sized tables that don't fit an 8-bit MCU, except
+    # SDCC reports it as either a hard "Cannot allocate variable"/"array
+    # is negative" error, or (worse) a pathological multi-minute hang in
+    # its register allocator instead of AVR's immediate object-size error.
+    NON_STM8 = source/algos/ag.c source/algos/askip.c source/algos/bfs.c \
+      source/algos/blim.c source/algos/bm.c source/algos/bmh4.c \
+      source/algos/bom2.c source/algos/bql.c source/algos/br.c \
+      source/algos/bram3.c source/algos/bram5.c source/algos/bram7.c \
+      source/algos/bsdm2.c source/algos/bsdm3.c source/algos/bsdm4.c \
+      source/algos/bsdm5.c source/algos/bsdm6.c source/algos/bsdm7.c \
+      source/algos/bsdm8.c source/algos/colussi.c source/algos/dbww.c \
+      source/algos/dbww2.c source/algos/dfdm.c source/algos/ebom.c \
+      source/algos/fbom.c source/algos/fdm.c source/algos/ffs.c \
+      source/algos/ft3.c source/algos/gg.c source/algos/ildm1.c \
+      source/algos/ildm2.c source/algos/jom.c source/algos/kbndm.c \
+      source/algos/kmp.c source/algos/kmpskip.c source/algos/ksa.c \
+      source/algos/ldm.c source/algos/lhc1.c source/algos/lhc2.c \
+      source/algos/lhc3.c source/algos/lhc4.c source/algos/lhc5.c \
+      source/algos/lhc6.c source/algos/lhc7.c source/algos/lhc8.c \
+      source/algos/libc1.c source/algos/mp.c source/algos/qf53.c \
+      source/algos/qf72.c source/algos/rcolussi.c source/algos/rf.c \
+      source/algos/sbdm.c source/algos/sbndmq8.c source/algos/sebom.c \
+      source/algos/sfbom.c source/algos/skip4.c source/algos/skip7.c \
+      source/algos/skip8.c source/algos/svm0.c source/algos/tbm.c \
+      source/algos/trf.c source/algos/tsa.c source/algos/tsa-q2.c \
+      source/algos/tso5.c source/algos/tsw.c source/algos/tvsbs.c \
+      source/algos/tvsbs-w2.c source/algos/ww.c source/algos/zt.c
+    ALGOSRC := $(filter-out $(NON_STM8),$(ALGOSRC))
+  endif
+  endif
 
 ifneq ($(ASSERT),1)
   ifneq ($(SANITIZE),1)
