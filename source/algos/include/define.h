@@ -69,7 +69,7 @@
 #  define __nonnull_all
 #endif
 
-#if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC) || defined(__MSYS__))
+#if !(defined(_WIN32) || !__STDC_HOSTED__ || defined(CBMC) || defined(__MSYS__))
 #ifndef HAVE_SHM
 #define HAVE_SHM
 #endif

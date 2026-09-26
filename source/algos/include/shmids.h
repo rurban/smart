@@ -17,11 +17,12 @@
  * download the tool at:  https://github.com/rurban/smart/
  */
 
-#if !defined(_WIN32) && !defined(__AVR__)
+#if !defined(_WIN32) && __STDC_HOSTED__
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #else
 // TODO https://learn.microsoft.com/en-us/windows/win32/memory/creating-named-shared-memory
+// freestanding targets (AVR, arm-none-eabi, ...) have no SysV IPC either
 #define key_t int
 #define shmctl(a, b, c)
 #endif

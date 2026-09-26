@@ -22,13 +22,28 @@
 #include <string.h>
 #include <sys/types.h>
 
+// some libcs (e.g. newlib, used by arm-none-eabi) redefine __nonnull/
+// __nonnull_all for their own internal prototypes when the headers above
+// are pulled in, silently shadowing include/define.h's definitions; make
+// sure the project's own (possibly empty) definitions are what's actually
+// used from here on.
+#undef __nonnull
+#undef __nonnull_all
+#ifdef HAVE_NONNULL
+#define __nonnull(params) __attribute__ ((__nonnull__ params))
+#define __nonnull_all __attribute__ ((__nonnull__))
+#else
+#define __nonnull(params)
+#define __nonnull_all
+#endif
+
 #ifndef CBMC
 #include "timer.h"
 #define __CPROVER_loop_invariant(x)
 #include "shmids.h"
 #endif
 
-#if !defined __AVR__ && !defined CBMC && !defined FUZZ
+#if __STDC_HOSTED__ && !defined CBMC && !defined FUZZ
 TIMER *_pre_timer,
       *_run_timer;
 double *pre_time, // sum preprocessing time
@@ -66,7 +81,7 @@ double m_run_time, m_pre_time;
 
 /* global variables used for computing preprocessing and searching times */
 clock_t start, end;
-#else // AVR || CBMC || FUZZ
+#else // freestanding (AVR, arm-none-eabi, ...) || CBMC || FUZZ
 #define BEGIN_PREPROCESSING
 #define BEGIN_SEARCHING
 #define END_PREPROCESSING
@@ -88,7 +103,7 @@ static inline int search(unsigned char *p, int m, unsigned char *t, int n);
 int main(int argc, char *argv[]) {
   int m, n;
   unsigned char *p = NULL, *t = NULL;
-#ifndef __AVR__
+#if __STDC_HOSTED__
   _pre_timer = (TIMER *)calloc(1, sizeof(TIMER));
   _run_timer = (TIMER *)calloc(1, sizeof(TIMER));
 #endif
@@ -159,14 +174,14 @@ int main(int argc, char *argv[]) {
       fprintf(stderr, "Invalid 4nd arg n=%d, should be <= %u\n", n,
               (unsigned)lt);
     */
-#ifndef __AVR__
+#if __STDC_HOSTED__
     pre_time = &m_pre_time;
     run_time = &m_run_time;
 #endif
 
     int occ = search(p, m, t, n);
 
-#ifndef __AVR__
+#if __STDC_HOSTED__
     printf("pre_time: %f\nrun_time: %f\n", *pre_time, *run_time);
 #endif
     printf("found %d occurrences\n", occ);

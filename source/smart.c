@@ -16,7 +16,7 @@
  * contact the authors at: faro@dmi.unict.it and thierry.lecroq@univ-rouen.fr
  * download the tool at:  https://github.com/rurban/smart/
  */
-#if !(defined(_WIN32) || defined(__AVR__))
+#if !defined(_WIN32) && __STDC_HOSTED__
 #define HAVE_POSIX_SIGNALS
 #endif
 

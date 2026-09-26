@@ -627,7 +627,7 @@ const struct algo ALGOS[] = {
 #define NumAlgo ARRAY_SIZE(ALGOS)
 
 // also in define.h
-#if !(defined(_WIN32) || defined(__AVR__) || defined(CBMC))
+#if !(defined(_WIN32) || !__STDC_HOSTED__ || defined(CBMC))
 #ifndef HAVE_SHM
 #define HAVE_SHM
 #endif
