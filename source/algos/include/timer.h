@@ -36,11 +36,6 @@ typedef struct {
   double sum;
 } TIMER;
 
-#if defined(__linux__)
-#include <syscall.h>
-#define clock_gettime(id, ts) syscall(SYS_clock_gettime, (id), (ts))
-#endif
-
 static inline double get_time(void) {
 #if defined(_POSIX_MONOTONIC_CLOCK) && _POSIX_MONOTONIC_CLOCK >= 0
   struct timespec ts;
