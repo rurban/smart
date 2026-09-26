@@ -16,20 +16,23 @@
  * contact the authors at: faro@dmi.unict.it and thierry.lecroq@univ-rouen.fr
  * download the tool at:  https://github.com/rurban/smart/
  */
+#if !(defined(_WIN32) || defined(__AVR__))
+#define HAVE_POSIX_SIGNALS
+#endif
 
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef _WIN32
+#ifdef HAVE_POSIX_SIGNALS
 #include <signal.h>
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #endif
 #include <errno.h>
-#include <sys/stat.h>
 #include <time.h>
 
 #include "algos/include/define.h"
@@ -155,7 +158,7 @@ void generateCode(char *code) {
   sprintf(code, "EXP%u", t);
 }
 
-#if !defined(HAVE_SHM) || defined(_WIN32)
+#if !defined(HAVE_SHM) || !defined(HAVE_POSIX_SIGNALS)
 int execute(enum algo_id algo, unsigned char *P, int m, unsigned char *T,
             int n) {
   char command[100];

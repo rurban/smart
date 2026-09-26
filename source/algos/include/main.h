@@ -159,12 +159,16 @@ int main(int argc, char *argv[]) {
       fprintf(stderr, "Invalid 4nd arg n=%d, should be <= %u\n", n,
               (unsigned)lt);
     */
+#ifndef __AVR__
     pre_time = &m_pre_time;
     run_time = &m_run_time;
+#endif
 
     int occ = search(p, m, t, n);
 
+#ifndef __AVR__
     printf("pre_time: %f\nrun_time: %f\n", *pre_time, *run_time);
+#endif
     printf("found %d occurrences\n", occ);
     free(p);
     free(t);

@@ -43,6 +43,34 @@ else
   ALGOSRC := $(wildcard source/algos/*.c)
 endif
 endif
+ifeq ($(ARCH),avr)
+  # avr-gcc targets a bare-metal 8-bit MCU (avr-libc, no OS): default to a
+  # common Arduino-class device; override via MCU=<device> for others.
+  MCU ?= atmega328p
+  CFLAGS += -mmcu=$(MCU)
+  # algorithms whose preprocessing tables (typically SIGMA*SIGMA or DSIGMA
+  # sized) exceed avr-gcc's 32767-byte single-object limit, or whose
+  # combined locals overflow SRAM on any AVR device, or that require SSE
+  # intrinsics (simdkr): cannot be built for this target.
+  NON_AVR = source/algos/bfs.c source/algos/blim.c source/algos/bmh4.c \
+    source/algos/bom2.c source/algos/bql.c source/algos/br.c \
+    source/algos/bram3.c source/algos/bram5.c source/algos/bram7.c \
+    source/algos/bsdm4.c source/algos/bsdm6.c source/algos/bsdm7.c \
+    source/algos/bsdm8.c source/algos/colussi.c source/algos/dfdm.c \
+    source/algos/ebom.c source/algos/fbom.c source/algos/fdm.c \
+    source/algos/ffs.c source/algos/gg.c source/algos/ildm1.c \
+    source/algos/ildm2.c source/algos/jom.c source/algos/kbndm.c \
+    source/algos/ksa.c source/algos/ldm.c source/algos/ms.c \
+    source/algos/qf72.c source/algos/rcolussi.c source/algos/rf.c \
+    source/algos/sbdm.c source/algos/sebom.c source/algos/sfbom.c \
+    source/algos/simdkr.c source/algos/skip4.c source/algos/skip7.c \
+    source/algos/skip8.c source/algos/trf.c source/algos/tsw.c \
+    source/algos/tvsbs.c source/algos/tvsbs-w2.c source/algos/tvsbs-w4.c \
+    source/algos/tvsbs-w6.c source/algos/tvsbs-w8.c source/algos/ww.c \
+    source/algos/zt.c
+  ALGOSRC := $(filter-out $(NON_AVR),$(ALGOSRC))
+endif
+
 ifneq ($(ASSERT),1)
   ifneq ($(SANITIZE),1)
     ifneq ($(FUZZ),1)
@@ -108,7 +136,15 @@ ifeq ($(TESTS),)
 endif
 COMPILE = $(CC) -c $(CFLAGS)
 
+ifeq ($(ARCH),avr)
+# smart/test/select/algocfg/compilesm/show/textgen are host orchestration
+# tools (dirent.h, fork/exec, wall-clock timing): they cannot be built or
+# run on a freestanding avr-gcc target, so only the algorithm binaries and
+# not the good.lst/asan.lst helpers (which require running algocfg) apply.
+all: $(BINS)
+else
 all: $(HELPERS) $(BINS) good.lst asan.lst
+endif
 .DEFAULT_GOAL := all
 
 DATA_RAND = data/rand2/rand2.txt data/rand4/rand4.txt data/rand8/rand8.txt \
@@ -122,7 +158,9 @@ data/.textgen-stamp: textgen
 	$(DRV) ./textgen
 	@touch $@
 
+ifneq ($(ARCH),avr)
 $(BINDIR)/hpbm: CFLAGS += -fopenmp
+endif
 
 $(BINDIR)/%: source/algos/%.c $(ALGOSINC) GNUmakefile
 	@test -d $(BINDIR) || mkdir $(BINDIR)

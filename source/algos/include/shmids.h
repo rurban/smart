@@ -17,7 +17,7 @@
  * download the tool at:  https://github.com/rurban/smart/
  */
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__AVR__)
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #else
